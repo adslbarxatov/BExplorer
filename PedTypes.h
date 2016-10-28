@@ -9,11 +9,11 @@ union SD_PedTypes
 		uchar PT_BlockName[4];	// Название блока (PTP)
 		ulong PT_SubBlock1Size;	// Размер оставшегося субблока (0x02E0)
 
-		struct PT_Structure		// ped.dat file containment
+		// Содержимое файла ped.dat
+		struct PT_Structure
 			{
 			ulong PT_S_Bitmask;
-
-			float PT_S_2ndColumnDiv50;
+			float PT_S_2ndColumnDiv50;	// Столбцы файла
 			float PT_S_3rdColumnDiv50;
 			float PT_S_4thColumnDiv50;
 			float PT_S_5thColumn;

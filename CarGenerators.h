@@ -10,34 +10,33 @@ union SD_CarGenerators
 		ulong CG_SubBlock2Size;		// Размер следующей части блока
 		ulong CG_CountsBlockSize;	// Размер блока количеств авто
 		ulong CG_CarsCount;			// Количество генераторов
-		ulong CG_ActiveCarCount;
-		uchar CG_GeneratorCounter;
+		ulong CG_ActiveCarCount;	// Количество активных генераторов
+		uchar CG_GeneratorCounter;	// Состояние счётчика генерации
 		uchar CG_GenerateWhenCounterClosed;
 		uchar CG_Unused1[2];
 		ulong CG_SubBlock3Size;		// Размер следующей части блока
 
 		struct CG_Structure
 			{
-			__int32 CG_S_ModelID;		// Модель авто (-1 = случайная)
-			float CG_S_X;			// Положение
+			slong CG_S_ModelID;			// Модель авто (-1 = случайная)
+			float CG_S_X;				// Положение
 			float CG_S_Y;
 			float CG_S_Z;
-			float CG_S_Rotation;	// Поворот
-			__int16 CG_S_PrimaryColor;	// Цвета
-			__int16 CG_S_SecondaryColor;
-			uchar CG_S_ForceSpawn;	// Обязательная генерация
-			uchar CG_S_Alarm;		// Доступна ли сигнализация
-			uchar CG_S_Lock;		// Возможна ли блокировка
+			float CG_S_Rotation;		// Поворот
+			sint CG_S_PrimaryColor;		// Цвета
+			sint CG_S_SecondaryColor;
+			uchar CG_S_ForceSpawn;		// Обязательная генерация
+			uchar CG_S_Alarm;			// Вероятность срабатывания сигнализации
+			uchar CG_S_Lock;			// Вероятность блокировки
 			uchar CG_S_Unused1;
-			uint CG_S_MinDelay;
+			uint CG_S_MinDelay;			// Диапазон времени генерации
 			uint CG_S_MaxDelay;
-			ulong CG_S_GameTimerWhenGenerated;
-			long CG_S_CarIndex;
-			__int16 CG_S_AllowSpawn;	// Доступность (-1 - доступна, 0 - недоступна)
+			ulong CG_S_GameTimerWhenGenerated;	// Время игры в момент генерации
+			slong CG_S_CarIndex;
+			sint CG_S_AllowSpawn;		// Доступность (-1 - доступна, 0 - недоступна)
 			uchar CG_S_HasBeenStolen;	// Уже украдена или нет
 			uchar CG_S_Unused2;
 			} CG_S[SD_CG_S_Count];
-
 		} CG;
 
 	uchar CG_Raw [sizeof (struct CG_Formatted)];

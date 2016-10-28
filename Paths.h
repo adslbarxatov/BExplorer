@@ -13,7 +13,7 @@ union SD_Paths
 
 union SD_PathsDescription
 	{
-	uchar PHD_Unknown7[1];
+	uchar PHD_Unknown1[1];
 
 	uchar PHD_Raw[1];
 	};

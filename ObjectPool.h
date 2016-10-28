@@ -1,3 +1,5 @@
+// INCOMPLETED //
+
 union SD_ObjectPool
 	{
 	struct OP_Formatted

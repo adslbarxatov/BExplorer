@@ -34,9 +34,9 @@ union SD_DefaultParameters
 		float DP_TimeScale;			// 1.0
 		ulong DP_OldWeatherNumber;	// Старый номер погоды
 		ulong DP_NewWeatherNumber;	// Новый номер погоды
-		__int16 DP_StaticWeatherNumber;	// Текущая установленная погода (0 - 63, -1 = случайная)
+		sint DP_StaticWeatherNumber;	// Текущая установленная погода (0 - 63, -1 = случайная)
 		uint DP_Unused06;
-		float DP_WeatherInterpolation;
+		float DP_WeatherInterpolation;	// Статус перехода от старой погоды к новой (0.0 - 1.0)
 		ulong DP_CurrentWeatherNumber;	// Номер текущей погоды в списке (0 - 63)
 		float DP_CarCameraView;		// Положение камеры в авто (0 - 5)
 		float DP_FootCameraView;	// Положение камеры при ходьбе (0 - 5)

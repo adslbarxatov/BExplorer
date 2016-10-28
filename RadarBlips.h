@@ -9,11 +9,12 @@ union SD_RadarBlips
 		uchar RB_BlockName[4];		// Название блока (RDR)
 		ulong RB_SubBlock2Size;		// Размер оставшегося блока
 
+		// Структура метки
 		struct RB_Structure
 			{
 			ulong RB_S_Color;		// Цвет (0-6 - фиксированные цвета, остальное - RGB)
-			float RB_S_Unused1;		// 1.0
-			ulong RB_S_BlipType;	// 0 - none, 1 - car, 2 - char, 3 - object/pickup, 4 - coord, 5 - contact point
+			float RB_S_Unused1;
+			ulong RB_S_BlipType;	// Тип метки: 0 - none, 1 - car, 2 - char, 3 - object/pickup, 4 - coord, 5 - contact point
 			ulong RB_S_Entity;
 			float RB_S_RadarX;		// Положение точки на радаре (не для entity)
 			float RB_S_RadarY;
@@ -23,11 +24,11 @@ union SD_RadarBlips
 			uchar RB_S_Unused2[2];
 			uchar RB_S_Brightness;	// Яркость (1 - затемнить; для фиксированных цветов; не для спрайтов)
 			uchar RB_S_Unused3;
-			uchar RB_S_ShortRange;
+			uchar RB_S_ShortRange;	// Скрывать при выходе за границы радара
 			uchar RB_S_Unused4;
 			uint RB_S_Size;			// Размер
 			uint RB_S_ShowType;		// Способ отображения: 0 - скрыть всё; 1 - только на карте; 2 - только на радаре; 3 - показать всё
-			uint RB_S_SpriteNumber;			// Тип спрайта (если есть)
+			uint RB_S_SpriteNumber;	// Тип спрайта (если есть)
 			// 4 - Avery, 5 - Bikers (буква B), 6 - Cortez, 7 - Diaz, 8 - Kent Paul, 9 - Rosenberg, 10 - Phil, 11 - Bikers (пика),
 			// 12 - Boatyard, 13 - Malibu, 14 - Cubans, 15 - Film studio, 16 - Ammu-Nation, 17 - Haitians, 18 - Hardware store,
 			// 19 - Save house, 20 - Pole position, 21 - Ice cream, 22 - Kaufman cabs, 23 - Lovefist, 24 - Printworks,

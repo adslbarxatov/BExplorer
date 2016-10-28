@@ -7,28 +7,39 @@ union SD_Pickups
 		ulong PU_BlockSize;			// Размер блока (0x4498)
 		ulong PU_SubBlockSize;		// Размер субблока (0x4494)
 
-		struct PU_Structure
+		struct PU_Structure					// Структура отдельного объекта
 			{
-			float PU_S_X;			// Положение объекта
+			float PU_S_X;					// Положение объекта
 			float PU_S_Y;
 			float PU_S_Z;
-			float PU_S_CurrentAsset;		// Текущее состояние накопителя денег
+			float PU_S_CurrentAsset;		// Текущее состояние накопителя (для денег и патронов)
 			ulong PU_S_PickupObjectEntity;
 			ulong PU_S_PickupExtraObject;
-			ulong PU_S_MaxAsset;	// Максимальное количество выдаваемых патронов или денег
-			ulong PU_S_AssetTimer;
-			uint PU_S_AssetRate;
-			uint PU_S_ModelNumber;	// Номер модели, олицетворяющей pickup
+			ulong PU_S_MaxAsset;			// Максимальное значение накопителя (или сумма, взымаемая за покупку)
+			ulong PU_S_AssetTimer;			// Состояние таймера накопителя
+			uint PU_S_AssetRate;			// Частота обновления счётчика
+			uint PU_S_ModelNumber;			// Номер модели, олицетворяющей объект
 			uint PU_S_Unused1;
-			uchar PU_S_HelpMessage[8];
-			uchar PU_S_PickupType;
-			uchar PU_S_HaveBeenPickedUp;	// "Собран" ли объект
+			uchar PU_S_HelpMessage[8];		// Текст из gxt, отображаемый при сборе (попытке сбора) объекта
+			uchar PU_S_PickupType;			// Тип объекта
+			// 0 - не задан (объект отключён)
+			// 1 - повторно появляется через 5 с
+			// 2 - повторно появляется через 20 с при условии, что игрок на расстоянии не менее 15 м
+			// 3 - собирается один раз, не восстанавливается
+			// 4 - собирается один раз, не восстанавливается, исчезает через 20 с
+			// 5 - собирается один раз, не восстанавливается, исчезает через 120 с
+			// 6 - спрятанный пакет (обращается в 0 при сборе)
+			// 15 - повторно появляется через 30 с при условии, что игрок на расстоянии не менее 15 м
+			// 16 - денежный накопитель (не собирается, выдаёт деньги)
+			// 17 - недоступная собственность (не собирается)
+			// 18 - доступная собственность
+			uchar PU_S_HasBeenPickedUp;	// "Собран" ли объект
 			uchar PU_S_Unused2[4];
 			} PU_S[SD_PU_S_Count];
 
-		uint PU_CollectedIndex;
+		uint PU_CollectedIndex;				// Индексы собранных объектов, по порядку
 		uchar PU_Unused1[2];
-		uchar *PU_CollectedIndices[20];
+		uint PU_CollectedIndices[40];
 		} PU;
 
 	uchar PU_Raw [sizeof (struct PU_Formatted)];

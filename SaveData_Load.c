@@ -26,12 +26,14 @@
 	\
 	SD_LOAD_TO_VAR (Pointer, BytesCount, ErrorNumber)
 
-// Функция загрузки файла и создания структуры
+// Функция загрузки файла сохранения и создания структуры
+// • FilePath - путь к файлу
+// • SD - структура сохранения
 int SaveData_Load (char *FilePath, struct SaveData *SD)
 	{
 	// Переменные
 	FILE *FI;
-	int i;
+	unsigned int i;
 	ulong num;
 
 	// Попытка открытия файла
@@ -45,10 +47,10 @@ int SaveData_Load (char *FilePath, struct SaveData *SD)
 
 	// Script block
 	SD_LOAD_TO_VAR (SD->SD_SB.SB_Raw, sizeof (union SD_ScriptBlock), SD_LOAD_ERR_LoadSB)
-	SD->SD_SBA_Count = SD->SD_SB.SB.SB_ASubblockSize;
+	SD->SD_SBA_Count = SD->SD_SB.SB.SB_ASubblockSize / sizeof (union SD_ScriptBlockAUnit);
 
 	// Subblock A
-	SD_LOAD_TO_PTR (SD->SD_SBA, SD_ScriptBlockAUnit, SD->SD_SBA_Count, SD_LOAD_ERR_LoadSBA)
+	SD_LOAD_TO_PTR (SD->SD_SBA, SD_ScriptBlockAUnit, SD->SD_SBA_Count * sizeof (union SD_ScriptBlockAUnit), SD_LOAD_ERR_LoadSBA)
 
 	// Subblock B
 	SD_LOAD_TO_VAR (SD->SD_SBB.SBB_Raw, sizeof (union SD_ScriptBlockB), SD_LOAD_ERR_LoadSBB)
@@ -213,5 +215,5 @@ int SaveData_Load (char *FilePath, struct SaveData *SD)
 
 	// Успех
 	fclose (FI);
-	return SD_NO_ERRORS;
+	return SD_LOAD_SUCCESS;
 	}

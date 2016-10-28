@@ -7,9 +7,13 @@
 // Макросы
 #define SD_SAVE_FROM_VAR(ReadFrom,BytesCount)	wrotebytes += fwrite (ReadFrom, 1, BytesCount, FO);	\
 	for (i = 0; i < BytesCount; i++)	\
-		checksum += (uchar)ReadFrom[i];
+		{	\
+		checksum += (uchar)ReadFrom[i];	\
+		}
 
 // Функция сохранения файла
+// • FilePath - путь к файлу
+// • SD - структура сохранения
 int SaveData_Save (char *FilePath, struct SaveData *SD)
 	{
 	// Переменные
@@ -19,7 +23,7 @@ int SaveData_Save (char *FilePath, struct SaveData *SD)
 	// Контроль параметров
 	if (SD->SD_DP.DP.DP_BlockSize == 0)
 		{
-		return SD_SAVE_ERR_FileNotLoaded;
+		return SD_INTRPR_ERR_FileNotLoaded;
 		}
 
 	// Попытка создания файла
@@ -31,13 +35,14 @@ int SaveData_Save (char *FilePath, struct SaveData *SD)
 	// Запись
 	SD_SAVE_FROM_VAR (SD->SD_DP.DP_Raw, sizeof (union SD_DefaultParameters))
 	SD_SAVE_FROM_VAR (SD->SD_SB.SB_Raw, sizeof (union SD_ScriptBlock))
-	SD_SAVE_FROM_VAR (SD->SD_SBA->SBA_Variable_Raw, SD->SD_SBA_Count)
+	SD_SAVE_FROM_VAR (SD->SD_SBA->SBA_Variable_Raw, SD->SD_SBA_Count * sizeof (union SD_ScriptBlockAUnit))
 	SD_SAVE_FROM_VAR (SD->SD_SBB.SBB_Raw, sizeof (union SD_ScriptBlockB))
 	SD_SAVE_FROM_VAR (SD->SD_SC.SC_Raw, sizeof (union SD_ScriptPool))
 	SD_SAVE_FROM_VAR (SD->SD_SS->SS_Raw, SD->SD_SS_Count * sizeof (union SD_ScriptStructure))
 	SD_SAVE_FROM_VAR (SD->SD_PPL.PPL_Raw, sizeof (union SD_PedPlayer))
 	SD_SAVE_FROM_VAR (SD->SD_GR.GR_Raw, sizeof (union SD_Garages))
 	SD_SAVE_FROM_VAR (SD->SD_TS.TS_Raw, sizeof (union SD_TaxiShortcuts))
+
 	//////////////////////////////////////////////////////////////////
 	// Vehicles
 	SD_SAVE_FROM_VAR (SD->SD_VH.VH_Raw, sizeof (union SD_Vehicles))
@@ -60,6 +65,7 @@ int SaveData_Save (char *FilePath, struct SaveData *SD)
 			}
 		}
 	//////////////////////////////////////////////////////////////////
+
 	SD_SAVE_FROM_VAR (SD->SD_OP.OP_Raw, sizeof (union SD_ObjectPool))
 	SD_SAVE_FROM_VAR (SD->SD_OS->OS_Raw, SD->SD_OS_Count * sizeof (union SD_ObjectStructure))
 	SD_SAVE_FROM_VAR (SD->SD_PH.PH_Raw, sizeof (union SD_Paths))
@@ -98,5 +104,5 @@ int SaveData_Save (char *FilePath, struct SaveData *SD)
 
 	// Завершение
 	fclose (FO);
-	return SD_NO_ERRORS;
+	return SD_SAVE_SUCCESS;
 	}

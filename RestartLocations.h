@@ -1,5 +1,3 @@
-// COMPLETED
-
 #define SD_RL_H_Count	8
 #define SD_RL_P_Count	8
 
@@ -12,7 +10,8 @@ union SD_RestartLocations
 		uchar RL_BlockName[4];		// Название блока (RST)
 		ulong RL_SubBlock1Size;		// Размер оставшегося блока (0x011C)
 
-		struct RL_Hospital			// Зоны восстановления типа "госпиталь"
+		// Зоны возрождения типа "госпиталь"
+		struct RL_Hospital
 			{
 			float RL_H_X;			// Расположение
 			float RL_H_Y;
@@ -20,7 +19,8 @@ union SD_RestartLocations
 			float RL_H_Rotation;	// Поворот
 			} RL_H[SD_RL_H_Count];
 
-		struct RL_Police			// Зоны восстановления типа "полицейский участок"
+		// Зоны возрождения типа "полицейский участок"
+		struct RL_Police
 			{
 			float RL_P_X;			// Расположение
 			float RL_P_Y;
@@ -28,16 +28,16 @@ union SD_RestartLocations
 			float RL_P_Rotation;	// Поворот
 			} RL_P[SD_RL_P_Count];
 
-		uint RL_HospitalRPCount;	// Число госпиталей
-		uint RL_PoliceRPCount;		// Число полицейских участков
-		uchar RL_OverrideNextRestart;
+		uint RL_HospitalRPCount;		// Число госпиталей
+		uint RL_PoliceRPCount;			// Число полицейских участков
+		uchar RL_OverrideNextRestart;	// Переопределение зоны следующего возрождения
 		uchar RL_Unused1[3];
-		float RL_OverrideX;
+		float RL_OverrideX;				// Координаты переопределённой зоны
 		float RL_OverrideY;
 		float RL_OverrideZ;
-		float RL_OverrideRotation;
+		float RL_OverrideRotation;		// Угол поворота
 		uchar RL_Unused2[2];
-		uchar RL_OverrideHospitalLevel;
+		uchar RL_OverrideHospitalLevel;	// Уровни переопределения
 		uchar RL_OverridePoliceLevel;
 		} RL;
 

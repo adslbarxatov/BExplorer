@@ -1,13 +1,18 @@
 // Подключение заголовков
 #include <stdio.h>
+#include <stdlib.h>
 #include <malloc.h>
 #include <string.h>
 
-// Определение констант и макросов
-#define uchar unsigned char
-#define uint unsigned __int16
-#define ulong unsigned __int32
-#define BFileSize 0x31464
+// Определение типов и констант
+#define schar		__int8
+#define sint		__int16
+#define slong		__int32
+#define uchar		unsigned schar
+#define uint		unsigned sint
+#define ulong		unsigned slong
+
+#define BFileSize	0x31464
 
 // Подключение определений структур
 #include "DefaultParameters.h"

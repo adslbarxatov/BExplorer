@@ -1,4 +1,4 @@
-// Главная структура
+// Главная структура сохранения
 struct SaveData
 	{
 	// Default parameters
@@ -9,7 +9,7 @@ struct SaveData
 	union SD_ScriptBlockAUnit *SD_SBA;	ulong SD_SBA_Count;
 	union SD_ScriptBlockB SD_SBB;
 
-	// Ped pool
+	// Ped player
 	union SD_ScriptPool SD_SC;
 	union SD_ScriptStructure *SD_SS;	ulong SD_SS_Count;
 	union SD_PedPlayer SD_PPL;
@@ -17,10 +17,10 @@ struct SaveData
 	// Garages
 	union SD_Garages SD_GR;
 
-	// Wasted and busted
+	// Taxi shortcuts
 	union SD_TaxiShortcuts SD_TS;
 
-	// Vehicles block
+	// Vehicles
 	union SD_Vehicles SD_VH;
 	union SD_VehicleStructure *SD_VS;	ulong SD_VS_Count;
 
@@ -87,10 +87,14 @@ struct SaveData
 	ulong SD_CheckSum;
 	};
 
-// Функция загружает файл сохранения GTA VC (.b) и формирует
-// структуру SaveData, выполняя все необходимые проверки.
-// В случае ошибки возвращает пустой указатель на структуру и
-// один из следующих кодов ошибки:
+// Максимальная длина сообщений и команд
+#define SD_MaxStrSize	257
+
+//////////////////////////////////////////////////////////////////////
+// Следующая функция загружает файл сохранения GTA VC (.b) и формирует
+// структуру SaveData, выполняя все необходимые проверки. В случае
+// ошибки не заполняет структуру и возвращает один из следующих кодов
+// ошибок:
 //
 #define SD_LOAD_ERR_FileNotFound			-1	// Файл с указанным именем недоступен или отсутствует
 #define SD_LOAD_ERR_MemoryAllocationFailure	-2	// Ошибка выделения памяти под одну из структур
@@ -131,38 +135,117 @@ struct SaveData
 #define SD_LOAD_ERR_LoadCS	-134	// Ошибка загрузки структуры checksum: ~
 //
 // В случае успешного выполнения код ошибки
-#define SD_NO_ERRORS	0
+#define SD_LOAD_SUCCESS		1
 //
+// • FilePath - путь к файлу
+// • SD - структура сохранения
 int SaveData_Load (char *FilePath, struct SaveData *SD);
+//////////////////////////////////////////////////////////////////////
 
-// Максимальная длина сообщений и команд
-#define SD_MaxStrSize	257
-
+//////////////////////////////////////////////////////////////////////
 // Функция, отвечающая за вывод сообщений об ошибках
+// Возвращает текст ошибки
+// • Error - любой поддерживаемый код ошибки (любой из описанных в
+// этом файле)
 char *SaveData_ErrorPrompt (int Error);
+//////////////////////////////////////////////////////////////////////
 
-// Командный интерпретатор
-// Принимает загруженную структуру и команду для выполнения
-// Возвращает сообщение о результате выполнения команды или
-// сообщение об ошибке, вызываемое по одному из следующих кодов:
-#define SD_INTRPR_ERR_ValueOutOfRange		-1001
-#define SD_INTRPR_ERR_ModeNotSpecified		-1002
-#define SD_INTRPR_ERR_CommandIsTooLong		-1003
-#define SD_INTRPR_ERR_ValueIsIncorrect		-1004
-#define SD_INTRPR_ERR_ModeIsIncorrect		-1005
-#define SD_INTRPR_ERR_ValueRequired			-1006
-#define SD_INTRPR_ERR_AssetIsUnavailable	-1007
-#define SD_INTRPR_ERR_UnsupportedParameter	-1008
-#define SD_INTRPR_ERR_GeneratorIsUnavailable	-1009
+//////////////////////////////////////////////////////////////////////
+// Следующая функция - командный интерпретатор. Возвращает сообщение с
+// результатом выполнения команды или сообщение об ошибке, вызываемое
+// по одному из следующих кодов:
 //
-#define SD_INTRPR_ERR_StatsFileNotFound		-1101
-#define SD_INTRPR_ERR_StatsFileIsIncorrect	-1102
-#define SD_INTRPR_ERR_CannotCreateStatsFile	-1103
-#define SD_INTRPR_ERR_CGFileNotFound		-1104
-#define SD_INTRPR_ERR_CGFileIsIncorrect		-1105
-#define SD_INTRPR_ERR_CannotCreateCGFile	-1106
+#define SD_FIXED								0		// Результат успешной работы режима fix
 //
-char *SaveData_CommandInterpreter (struct SaveData *SD, char *cmd);
+#define SD_INTRPR_ERR_FileNotLoaded				-1001	// Файл не был загружен
+#define SD_INTRPR_ERR_ValueOutOfRange			-1002	// Значение параметра находится вне допустимых границ
+#define SD_INTRPR_ERR_ModeIsIncorrect			-1003	// Указан недопустимый режим
+#define SD_INTRPR_ERR_OpCodeIsIncorrect			-1004	// Указана недопустимая операция для данного режима
+#define SD_INTRPR_ERR_ParCodeIsIncorrect		-1005	// Указан недопустимый параметр для данных режима и операции
+//
+#define SD_INTRPR_ERR_StatsFileNotFound			-1101	// Указанный файл не найден или недоступен
+#define SD_INTRPR_ERR_StatsFileIsIncorrect		-1102	// Указанный файл не является допустимым или повреждён
+#define SD_INTRPR_ERR_CannotCreateStatsFile		-1103	// Не удаётся создать файл
+#define SD_INTRPR_ERR_CGFileNotFound			-1104
+#define SD_INTRPR_ERR_CGFileIsIncorrect			-1105
+#define SD_INTRPR_ERR_CannotCreateCGFile		-1106
+#define SD_INTRPR_ERR_GaragesFileNotFound		-1107
+#define SD_INTRPR_ERR_GaragesFileIsIncorrect	-1108
+#define SD_INTRPR_ERR_CannotCreateGaragesFile	-1109
+//
+// • SD - структура сохранения
+// • Mode - режим интерпретации
+//   0 - get (получить значение)
+//   1 - set (установить значение)
+//   2 - load (загрузить файл)
+//   3 - save (сохранить файл)
+//   4 - limits (получить допустимый диапазон значения)
+//   5 - fix (исправить файл сохранения)
+// • OpCode - код операции
+// • ParCode - код параметра
+// • Value - новое значение
+//
+//  OpCode для режимов 0, 1 и 4
+//   0-5 - год, месяц, день, час, минута и секунда сохранения
+//   6 - длина секунды в игре
+//   7, 8 - час и минута в игре
+//   9 - скорость течения времени в игре
+//   10 - текущая погода
+//   11 - текущий вид обзора камеры автомобиля
+//   100 - состояние CabsRadio
+//   200-209 - оружие игрока, зависит от ParCode:
+//     0 - тип оружия
+//     1 - количество патронов
+//   210 - текущая броня
+//   211 - максимальное число звёзд полиции
+//   212 - костюм игрока
+//   300-320 - гаражи, зависит от ParCode:
+//     0 - модель авто
+//     1 - флаги иммунитета
+//     2, 3 - основной и дополнительный цвета
+//     4 - текущее радио
+//     5 - вид мины
+//   400-407 - банды, зависит от ParCode:
+//     0 - модель авто
+//     1, 2 - модели членов банды
+//     3, 4 - типы оружия
+//   500 - текущее состояние денежного счёта
+//   501 - флаг бесконечного бега
+//   502 - флаг быстрой перезарядки оружия
+//   503 - флаг несгораемости
+//   504 - максимальное здоровье
+//   505 - максимальная броня
+//   506 - флаг бесконечного оружия
+//   1000-1335 - собираемые объекты, зависит от ParCode:
+//     0 - модель объекта (пока read-only)
+//     1-3 - координаты x, y и z (пока read-only)
+//     4 - тип объекта (пока read-only)
+//     5 - накопитель объекта
+//     6 - состояние "собран" (пока read-only)
+//   2000 - количество активных парковок
+//   2001-2185 - парковки, зависит от ParCode:
+//     0 - модель авто
+//     1-3 - координаты x, y и z
+//     4 - угол поворота, °
+//     5 - флаг разрешения генерации
+//     6, 7 - основной и дополнительный цвета
+//     8 - вероятность срабатывания сигнализации, %
+//     9 - вероятность блокировки, %
+//     10 - флаг обязательной генерации
+//  OpCode для режима 2
+//   1 - загрузка параметров гаражей
+//   2 - загрузка статистики
+//   3 - загрузка параметров парковок
+//  OpCode для режима 3
+//   0 - сохранение файла сохранения
+//   1 - сохранение параметров гаражей
+//   2 - сохранение статистики
+//   3 - сохранение параметров парковок
+//  OpCode для режима 5
+//   0 - обнуление структуры кранов
+//   1 - обнуление замен объектов
+char *SaveData_CommandInterpreter (struct SaveData *SD, uint Mode, uint OpCode, uint ParCode, char* Value);
+//////////////////////////////////////////////////////////////////////
 
 // Ограничения значений параметров
 #define SD_LIMIT_dpyea_B	1980	// dp-year
@@ -213,9 +296,10 @@ char *SaveData_CommandInterpreter (struct SaveData *SD, char *cmd);
 #define SD_LIMIT_grcol_T	99
 #define SD_LIMIT_grrad_B	0		// gr-radio
 #define SD_LIMIT_grrad_T	23
+#define SD_LIMIT_grbtp_B	0		// gr-bombtype
+#define SD_LIMIT_grbtp_T	5
 #define SD_LIMIT_puass_B	100		// pu-assetmax
 #define SD_LIMIT_puass_T	50000
-#define SD_LIMIT_LastAssetNumber	9
 #define SD_LIMIT_gdcmo_B	-1		// gd-carmodel (-1, 130 - 236)
 #define SD_LIMIT_gdcmo_T	SD_LIMIT_grcmo_T
 #define SD_LIMIT_gdpmo_B	9		// gd-pedmodel
@@ -224,12 +308,12 @@ char *SaveData_CommandInterpreter (struct SaveData *SD, char *cmd);
 #define SD_LIMIT_gdwnu_T	SD_LIMIT_plwnu_T
 #define SD_LIMIT_plcum_B	0.0f	// pl-currentmoney
 #define SD_LIMIT_plcum_T	99000000.0f
-#define SD_LIMIT_pliru_B	SD_LIMIT_sbcbr_B	// pl-infiniterun
-#define SD_LIMIT_pliru_T	SD_LIMIT_sbcbr_T
-#define SD_LIMIT_plfre_B	SD_LIMIT_sbcbr_B	// pl-fastreload
-#define SD_LIMIT_plfre_T	SD_LIMIT_sbcbr_T
-#define SD_LIMIT_plfpr_B	SD_LIMIT_sbcbr_B	// pl-fireproof
-#define SD_LIMIT_plfpr_T	SD_LIMIT_sbcbr_T
+#define SD_LIMIT_pliru_B	0		// pl-infiniterun
+#define SD_LIMIT_pliru_T	1
+#define SD_LIMIT_plfre_B	0		// pl-fastreload
+#define SD_LIMIT_plfre_T	1
+#define SD_LIMIT_plfpr_B	0		// pl-fireproof
+#define SD_LIMIT_plfpr_T	1
 #define SD_LIMIT_plmxh_B	100		// pl-maxhealth
 #define SD_LIMIT_plmxh_T	200
 #define SD_LIMIT_plmxa_B	SD_LIMIT_plmxh_B	// pl-maxarmor
@@ -243,7 +327,7 @@ char *SaveData_CommandInterpreter (struct SaveData *SD, char *cmd);
 #define SD_LIMIT_cgz_B		-20.0f			// cg-z
 #define SD_LIMIT_cgz_T		500.0f
 #define SD_LIMIT_cgrot_B	0.0f			// cg-rot
-#define SD_LIMIT_cgrot_T	359.9f
+#define SD_LIMIT_cgrot_T	360.0f
 #define SD_LIMIT_cgasp_B	-1				// cg-allowspawn
 #define SD_LIMIT_cgasp_T	0
 #define SD_LIMIT_cgcol_B	-1				// cg-color
@@ -252,24 +336,36 @@ char *SaveData_CommandInterpreter (struct SaveData *SD, char *cmd);
 #define SD_LIMIT_cgala_T	100
 #define SD_LIMIT_cgloc_B	SD_LIMIT_cgala_B	// cg-lock
 #define SD_LIMIT_cgloc_T	SD_LIMIT_cgala_T
-#define SD_LIMIT_cgfsp_B	SD_LIMIT_sbcbr_B	// cg-forcespawn
-#define SD_LIMIT_cgfsp_T	SD_LIMIT_sbcbr_T
-#define SD_LIMIT_stinb_B	SD_LIMIT_sbcbr_B	// st-infinitebullets
-#define SD_LIMIT_stinb_T	SD_LIMIT_sbcbr_T
+#define SD_LIMIT_cgfsp_B	0			// cg-forcespawn
+#define SD_LIMIT_cgfsp_T	1
+#define SD_LIMIT_stinb_B	0			// st-infinitebullets
+#define SD_LIMIT_stinb_T	1
+#define SD_LIMIT_pumod_B	258
+#define SD_LIMIT_pumod_T	650
+#define SD_LIMIT_pupic_B	0
+#define SD_LIMIT_pupic_T	1
+#define SD_LIMIT_putyp_B	0
+#define SD_LIMIT_putyp_T	18
 
-// Функция создаёт файл сохранения GTA VC (.b) на основе
-// ранее сформированной структуры
-// Возвращает 0 в случае успеха или одно из следующих значений
-// при возникновении ошибок при создании файла:
+//////////////////////////////////////////////////////////////////////
+// Следующая функция сохраняет файл сохранения GTA VC (.b) на основе
+// ранее сформированной структуры. Возвращает одно из следующих
+// значений при возникновении ошибок при создании файла:
 #define SD_SAVE_ERR_CannotCreateFile		-2001	// Не удаётся создать файл
-#define SD_SAVE_ERR_FileNotLoaded			-2002	// Файл не был загружен
+// Код ошибки в случае успеха
+#define SD_SAVE_SUCCESS		2
 //
+// • FilePath - путь к файлу
+// • SD - структура сохранения
 int SaveData_Save (char *FilePath, struct SaveData *SD);
+//////////////////////////////////////////////////////////////////////
 
-// Обработчики дополнительных файлов
+//////////////////////////////////////////////////////////////////////
+// Обработчики дополнительных файлов (см. CommandInterpreter)
 int SaveData_LoadStats (struct SaveData *SD, char *FilePath);
 int SaveData_SaveStats (struct SaveData *SD, char *FilePath);
 int SaveData_LoadCG (struct SaveData *SD, char *FilePath);
 int SaveData_SaveCG (struct SaveData *SD, char *FilePath);
 int SaveData_LoadGarages (struct SaveData *SD, char *FilePath);
 int SaveData_SaveGarages (struct SaveData *SD, char *FilePath);
+//////////////////////////////////////////////////////////////////////

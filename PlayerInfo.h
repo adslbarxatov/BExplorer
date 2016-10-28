@@ -7,7 +7,7 @@ union SD_PlayerInfo
 		ulong PL_BlockSize;			// Размер блока (0x0174)
 		ulong PL_SubBlockSize;		// Размер субблока (0x0170)
 		ulong PL_CurrentMoney;		// Текущая сумма наличных
-		uchar PL_WastedBustedStatus;
+		uchar PL_WastedBustedStatus;		// Состояние флага ареста/гибели
 		uchar PL_Unused1[10];
 		ulong PL_CurrentShowedMoney;		// Текущие отображаемые средства
 		ulong PL_CollectedHiddenPackages;	// Найденные спрятанные пакеты

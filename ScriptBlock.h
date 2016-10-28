@@ -27,14 +27,14 @@ union SD_ScriptBlockB
 		{
 		ulong SBB_BSubblockSize;			// Размер субблока Б
 		ulong SBB_OnMissionFlagAddress;		// Адрес флага нахождения в миссии
-		ulong SBB_LastMissionPassTimeMs;	// Время завершения последней миссии в миллисекундах (-1, если миссий не было)
+		slong SBB_LastMissionPassTimeMs;	// Время завершения последней миссии в миллисекундах (-1, если миссий не было)
 
 		struct SBB_Replacement
 			{
 			ulong SBB_R_Type;			// Тип замены: 0 - не объект, 1 - объект с прикреплённой трассой, 2 - здание
 			ulong SBB_R_ObjectHandle;	// Указатель на заменяемый объект
-			ulong SBB_R_NewMoledID;		// Модель, на которую выполняется замена
-			ulong SBB_R_OldModelID;		// Заменяемая модель
+			slong SBB_R_NewModelID;		// Модель, на которую выполняется замена (-1 - не задана)
+			slong SBB_R_OldModelID;		// Заменяемая модель (-1 - не задана)
 			} SBB_R[SD_SBB_R_Count];
 
 		struct SBB_InvisibleObject
@@ -44,13 +44,13 @@ union SD_ScriptBlockB
 			ulong SBB_IO_Handle;	// Указатель на объект
 			} SBB_IO[SD_SBB_IO_Count];
 
-		uchar SBB_InMissionScriptRunning;
-		uchar SBB_CabsRadio;		// Состояние Cauffman cabs radio
+		uchar SBB_InMissionScriptRunning;	// Флаг активности скрипта миссии
+		uchar SBB_CabsRadio;				// Состояние Cauffman cabs radio
 		uchar SBB_Unused01[2];
 
-		ulong SBB_SizeOfMain;		// Размер главного скрипта
-		ulong SBB_SizeOfLargestMission;	// Размер самой большой миссии
-		ulong SBB_MissionsCount;	// Число основных миссий
+		ulong SBB_SizeOfMain;				// Размер главного скрипта
+		ulong SBB_SizeOfLargestMission;		// Размер самой большой миссии
+		ulong SBB_MissionsCount;			// Число основных миссий
 		} SBB;
 
 	uchar SBB_Raw [sizeof (struct SBB_Formatted)];

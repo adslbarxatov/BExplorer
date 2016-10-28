@@ -29,7 +29,7 @@ union SD_Stats
 		ulong ST_UnusedGangWasted;
 		ulong ST_AmbulanceWasted;
 		ulong ST_FirefightersWasted;
-		ulong ST_CriminalsWasted;		// Убито бандитов
+		ulong ST_CriminalsWasted;
 		ulong ST_AdditionalPedsWasted;
 		ulong ST_ProstitutesWasted;
 		ulong ST_ReservedPedsWasted;
@@ -53,14 +53,14 @@ union SD_Stats
 		ulong ST_MaxInsaneJumpFlips;	// Максимальное число кувырков в "сумасшедшем прыжке"
 		ulong ST_MaxInsaneJumpRotation;	// Максимальный угол вращения "сумасшедшего прыжка"
 		ulong ST_MaxInsaneJumpRating;	// Рейтинг "сумасшедшего прыжка"
-		ulong ST_ToDoUniqueJumpsPassed;		// Выполнено уникальных прыжков
+		ulong ST_ToDoUniqueJumpsPassed;	// Выполнено уникальных прыжков
 		ulong ST_UniqueJumpsCount;		// Количество уникальных прыжков
 		ulong ST_MissionAttempts;		// Входов в миссии
 		ulong ST_TaxiPassengers;		// Доставленных пассажиров в такси
 		ulong ST_TaxiCash;				// Выручка в такси
 		uchar ST_Unused1[12];
 		ulong ST_PornLeafletsVisible;	// Видимость порнопостеров после миссии Dildo dodo
-		ulong ST_AllowSecondaryWeatherTable;
+		ulong ST_AllowSecondaryWeatherTable;	// Разрешение второго файла timecyc
 		float ST_DistanceOnFootM;		// Пройдено пешком, метров
 		float ST_DistanceOnCarM;		// Преодолено на машинах, метров
 		float ST_DistanceOnBikeM;		// Преодолено на байках, метров

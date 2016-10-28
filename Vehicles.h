@@ -8,12 +8,12 @@ union SD_Vehicles
 	{
 	struct VH_Formatted
 		{
-		ulong VH_BlockSize;	// Размер блока
-		ulong VH_SubBlockSize;	// Размер субблока
+		ulong VH_BlockSize;				// Размер блока
+		ulong VH_SubBlockSize;			// Размер субблока
 
 		ulong VH_GeneralVehiclesCount;	// Число основных машин
-		ulong VH_BoatsCount;	// Число лодок
-		ulong VH_BikesCount;	// Число мотоциклов
+		ulong VH_BoatsCount;			// Число лодок
+		ulong VH_BikesCount;			// Число мотоциклов
 		} VH;
 
 	uchar VH_Raw [sizeof (struct VH_Formatted)];
@@ -23,7 +23,7 @@ union SD_VehicleStructure
 	{
 	struct VS_Formatted
 		{
-		ulong VS_VehicleType;		// 0 - general, 1 - boat, 5 - bike
+		ulong VS_VehicleType;		// Тип транспорта: 0 - general, 1 - boat, 5 - bike
 		uint VS_VehicleID;
 		ulong VS_VehicleIndex;
 

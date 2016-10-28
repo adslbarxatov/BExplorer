@@ -17,21 +17,21 @@ union SD_ParticleDescription
 	struct PRD_Formatted
 		{
 		uchar PRD_Unused1[48];
-		float PRD_PositionX;	// Расположение
+		float PRD_PositionX;		// Расположение
 		float PRD_PositionY;
 		float PRD_PositionZ;
 		uchar PRD_Unused2[28];
-		ulong PRD_ParticleType1;
+		ulong PRD_ParticleType1;	// Типы эффекта
 		ulong PRD_ParticleType2;
-		uchar PRD_Visibility;
-		uchar PRD_Sparsity;
-		uint PRD_SparsityCounter;
+		uchar PRD_Visibility;		// Видимость
+		uchar PRD_Sparsity;			// Разреженность
+		uint PRD_SparsityCounter;	// Счётчик разреженности
 		uchar PRD_Unused3[4];
-		float PRD_StrengthX;
+		float PRD_StrengthX;		// Координаты усилия?
 		float PRD_StrengthY;
 		float PRD_StrengthZ;
 		uchar PRD_Unused4[4];
-		float PRD_Scale;
+		float PRD_Scale;			// Масштаб
 		uchar PRD_Unused5[8];
 		} PRD;
 
