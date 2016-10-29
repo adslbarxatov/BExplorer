@@ -1,17 +1,18 @@
+п»ї// Р‘Р»РѕРє СЃС‚Р°С‚РёСЃС‚РёРєРё РёРіСЂС‹
 union SD_Stats
 	{
 	struct ST_Formatted
 		{
-		ulong ST_BlockSize;				// Размер блока (0x258)
-		ulong ST_SubBlockSize;			// Размер субблока (0x253)
-		ulong ST_TotalPeopleWasted;		// Всего убито людей
-		ulong ST_PeopleWastedByOthers;	// Убито другими
-		ulong ST_CarsExploded;			// Взорвано машин
-		ulong ST_BoatsExploded;			// Взорвано лодок
-		ulong ST_TiresPopped;			// Пробито шин
-		ulong ST_BulletsFired;			// Использовано пуль
+		ulong ST_BlockSize;				// Р Р°Р·РјРµСЂ Р±Р»РѕРєР° (0x258)
+		ulong ST_SubBlockSize;			// Р Р°Р·РјРµСЂ СЃСѓР±Р±Р»РѕРєР° (0x253)
+		ulong ST_TotalPeopleWasted;		// Р’СЃРµРіРѕ СѓР±РёС‚Рѕ Р»СЋРґРµР№
+		ulong ST_PeopleWastedByOthers;	// РЈР±РёС‚Рѕ РґСЂСѓРіРёРјРё
+		ulong ST_CarsExploded;			// Р’Р·РѕСЂРІР°РЅРѕ РјР°С€РёРЅ
+		ulong ST_BoatsExploded;			// Р’Р·РѕСЂРІР°РЅРѕ Р»РѕРґРѕРє
+		ulong ST_TiresPopped;			// РџСЂРѕР±РёС‚Рѕ С€РёРЅ
+		ulong ST_BulletsFired;			// РСЃРїРѕР»СЊР·РѕРІР°РЅРѕ РїСѓР»СЊ
 
-		ulong ST_Player1Wasted;			// Убито людей (по группам)
+		ulong ST_Player1Wasted;			// РЈР±РёС‚Рѕ Р»СЋРґРµР№ (РїРѕ РіСЂСѓРїРїР°Рј)
 		ulong ST_Player2Wasted;
 		ulong ST_Player3Wasted;
 		ulong ST_Player4Wasted;
@@ -35,111 +36,111 @@ union SD_Stats
 		ulong ST_ReservedPedsWasted;
 		ulong ST_UnusedPedsWasted;
 
-		ulong ST_HelicoptersExploded;	// Взорвано вертолётов
-		float ST_ProgressMade;			// Прохождение игры
-		float ST_TotalProgress;			// Точка завершения игры
-		ulong ST_ExplosivesKgsUsed;		// Использовано килограммов взрывчатки
-		ulong ST_BulletsThatHit;		// Пули, попавшие в цель
-		ulong ST_HeadShotsCount;		// Количество попаданий в голову
-		ulong ST_WantedStarsGot;		// Полученные звёзды розыска
-		ulong ST_WantedStarsAvoided;	// Звёзды, которых удалось избежать
-		ulong ST_TimesBusted;			// Арестов
-		ulong ST_TimesWasted;			// Смертей
-		ulong ST_DaysPassedInGame;		// Дней в игре
-		ulong ST_SafehousesVisits;		// Сохранений
-		ulong ST_RespraysCount;			// Количество покрасок
-		float ST_MaxInsaneJumpDistance;	// Максимальная дистанция "сумасшедшего прыжка"
-		float ST_MaxInsaneJumpHeight;	// Максимальная высота "сумасшедшего прыжка"
-		ulong ST_MaxInsaneJumpFlips;	// Максимальное число кувырков в "сумасшедшем прыжке"
-		ulong ST_MaxInsaneJumpRotation;	// Максимальный угол вращения "сумасшедшего прыжка"
-		ulong ST_MaxInsaneJumpRating;	// Рейтинг "сумасшедшего прыжка"
-		ulong ST_ToDoUniqueJumpsPassed;	// Выполнено уникальных прыжков
-		ulong ST_UniqueJumpsCount;		// Количество уникальных прыжков
-		ulong ST_MissionAttempts;		// Входов в миссии
-		ulong ST_TaxiPassengers;		// Доставленных пассажиров в такси
-		ulong ST_TaxiCash;				// Выручка в такси
+		ulong ST_HelicoptersExploded;	// Р’Р·РѕСЂРІР°РЅРѕ РІРµСЂС‚РѕР»С‘С‚РѕРІ
+		float ST_ProgressMade;			// РџСЂРѕС…РѕР¶РґРµРЅРёРµ РёРіСЂС‹
+		float ST_TotalProgress;			// РўРѕС‡РєР° Р·Р°РІРµСЂС€РµРЅРёСЏ РёРіСЂС‹
+		ulong ST_ExplosivesKgsUsed;		// РСЃРїРѕР»СЊР·РѕРІР°РЅРѕ РєРёР»РѕРіСЂР°РјРјРѕРІ РІР·СЂС‹РІС‡Р°С‚РєРё
+		ulong ST_BulletsThatHit;		// РџСѓР»Рё, РїРѕРїР°РІС€РёРµ РІ С†РµР»СЊ
+		ulong ST_HeadShotsCount;		// РљРѕР»РёС‡РµСЃС‚РІРѕ РїРѕРїР°РґР°РЅРёР№ РІ РіРѕР»РѕРІСѓ
+		ulong ST_WantedStarsGot;		// РџРѕР»СѓС‡РµРЅРЅС‹Рµ Р·РІС‘Р·РґС‹ СЂРѕР·С‹СЃРєР°
+		ulong ST_WantedStarsAvoided;	// Р—РІС‘Р·РґС‹, РєРѕС‚РѕСЂС‹С… СѓРґР°Р»РѕСЃСЊ РёР·Р±РµР¶Р°С‚СЊ
+		ulong ST_TimesBusted;			// РђСЂРµСЃС‚РѕРІ
+		ulong ST_TimesWasted;			// РЎРјРµСЂС‚РµР№
+		ulong ST_DaysPassedInGame;		// Р”РЅРµР№ РІ РёРіСЂРµ
+		ulong ST_SafehousesVisits;		// РЎРѕС…СЂР°РЅРµРЅРёР№
+		ulong ST_RespraysCount;			// РљРѕР»РёС‡РµСЃС‚РІРѕ РїРѕРєСЂР°СЃРѕРє
+		float ST_MaxInsaneJumpDistance;	// РњР°РєСЃРёРјР°Р»СЊРЅР°СЏ РґРёСЃС‚Р°РЅС†РёСЏ "СЃСѓРјР°СЃС€РµРґС€РµРіРѕ РїСЂС‹Р¶РєР°"
+		float ST_MaxInsaneJumpHeight;	// РњР°РєСЃРёРјР°Р»СЊРЅР°СЏ РІС‹СЃРѕС‚Р° "СЃСѓРјР°СЃС€РµРґС€РµРіРѕ РїСЂС‹Р¶РєР°"
+		ulong ST_MaxInsaneJumpFlips;	// РњР°РєСЃРёРјР°Р»СЊРЅРѕРµ С‡РёСЃР»Рѕ РєСѓРІС‹СЂРєРѕРІ РІ "СЃСѓРјР°СЃС€РµРґС€РµРј РїСЂС‹Р¶РєРµ"
+		ulong ST_MaxInsaneJumpRotation;	// РњР°РєСЃРёРјР°Р»СЊРЅС‹Р№ СѓРіРѕР» РІСЂР°С‰РµРЅРёСЏ "СЃСѓРјР°СЃС€РµРґС€РµРіРѕ РїСЂС‹Р¶РєР°"
+		ulong ST_MaxInsaneJumpRating;	// Р РµР№С‚РёРЅРі "СЃСѓРјР°СЃС€РµРґС€РµРіРѕ РїСЂС‹Р¶РєР°"
+		ulong ST_ToDoUniqueJumpsPassed;	// Р’С‹РїРѕР»РЅРµРЅРѕ СѓРЅРёРєР°Р»СЊРЅС‹С… РїСЂС‹Р¶РєРѕРІ
+		ulong ST_UniqueJumpsCount;		// РљРѕР»РёС‡РµСЃС‚РІРѕ СѓРЅРёРєР°Р»СЊРЅС‹С… РїСЂС‹Р¶РєРѕРІ
+		ulong ST_MissionAttempts;		// Р’С…РѕРґРѕРІ РІ РјРёСЃСЃРёРё
+		ulong ST_TaxiPassengers;		// Р”РѕСЃС‚Р°РІР»РµРЅРЅС‹С… РїР°СЃСЃР°Р¶РёСЂРѕРІ РІ С‚Р°РєСЃРё
+		ulong ST_TaxiCash;				// Р’С‹СЂСѓС‡РєР° РІ С‚Р°РєСЃРё
 		uchar ST_Unused1[12];
-		ulong ST_PornLeafletsVisible;	// Видимость порнопостеров после миссии Dildo dodo
-		ulong ST_AllowSecondaryWeatherTable;	// Разрешение второго файла timecyc
-		float ST_DistanceOnFootM;		// Пройдено пешком, метров
-		float ST_DistanceOnCarM;		// Преодолено на машинах, метров
-		float ST_DistanceOnBikeM;		// Преодолено на байках, метров
-		float ST_DistanceOnBoatM;		// Преодолено на лодках, метров
-		float ST_DistanceOnGolfCartM;	// Преодолено на гольфкарте, метров
-		float ST_DistanceOnHelicopterM;	// Преодолено на вертолётах, метров
-		float ST_DistanceOnPlaneM;		// Преодолено на самолётах, метров
-		ulong ST_PeopleSavedInAmbulance;	// Спасено людей в медицинской миссии
-		ulong ST_CriminalsWastedInVigilante;	// Уничтожено людей в полицейской миссии
-		ulong ST_FiresExtinguished;		// Потушено пожаров
-		ulong ST_ToDoHighestVigilanteLevel;	// Наивысший уровень полицейской миссии
-		ulong ST_ToDoHighestAmbulanceLevel;	// Наивысший уровень медицинской миссии
-		ulong ST_ToDoHighestFirefighterLevel;	// Наивысший уровень пожарной миссии
-		ulong ST_PhotosTaken;			// Сделано фотографий
-		ulong ST_ToDoRampagesPassed;	// Пройдено буйств
-		ulong ST_RampagesCount;			// Всего буйств
-		ulong ST_MainMissionsCount;		// Количество главных миссий
-		ulong ST_FlightMs;				// Суммарное время полётов, в миллисекундах
-		ulong ST_TimesDrowned;			// Количество утоплений
-		ulong ST_SeagullsSniped;		// Убитые чайки
-		float ST_WeaponBudget;			// Бюджет оружия
-		float ST_FashionBudget;			// Бюджет одежды
-		float ST_LoanSharksVisits;		// Число визитов подпольных торговцев
-		float ST_ToDoStoresKnockedOff;		// Ограбленные магазины
-		float ST_MovieStunts;			// Киношные трюки
-		float ST_ToDoAsassinationContractsDone;	// Выполнено контрактов на убийство
-		float ST_PizzasDelivered;		// Доставлено пицц
-		float ST_GarbagePickupsMade;	// Вывезено мусора
-		float ST_IceCreamSold;			// Продано мороженного
-		float ST_TopShootingRangeScore;	// Максимальные очки в тире
-		float ST_ShootingAccuracy;		// Точностьстрельбы в тире
-		ulong ST_LongestWheelieTime;	// Максимальное время на заднем колесе
-		ulong ST_LongestStopieTime;		// Максимальное время на переднем колесе
-		ulong ST_Longest2WheelsTime;	// Максимальное время на двух колёсах
-		ulong ST_LongestWheelieDistance;	// Максимальная дистанция на заднем колесе
-		ulong ST_LongestStopieDistance;		// Максимальная дистанция на переднем колесе
-		float ST_Longest2WheelsDistance;	// Максимальная дистанция на двух колёсах
-		float ST_PropertyBudget;		// Бюджет недвижимости
-		float ST_AutoRepairBudget;		// Бюджет ремонта авто
-		ulong ST_PropertyDestroyed;		// Ущерб окружающему имуществу
-		ulong ST_ToDoOwnedPropertyCount;	// Количество приобретённых объектов недвижимости
-		ulong ST_BloodringKills;		// Убийств в Blood ring
-		ulong ST_ToDoLongestTimeInBlooding;	// Максимальное время в Blood ring
-		uchar ST_OwnedProperties[15];	// Флаги, указывающие приобретённые объекты недвижимости
-		float ST_HighestMediaAttention;	// Максимальное внимание СМИ
-		ulong ST_BikersRaceRecord;		// Рекорд миссии с гонкой байкеров
-		ulong ST_HilaryRaceRecord;		// Рекорд миссии с гонкой с Хилари
-		ulong ST_ToDoDirtringRecord;	// Минимальное время в миссии Dirtring
-		ulong ST_ToDoRCPlaneRecord;		// Минимальное время в миссии с RCPlane
-		ulong ST_ToDoRCCarRecord;		// Минимальное время в миссии с RCCar
-		ulong ST_ToDoRCHelicopterRecord;	// Минимальное время в миссии с RCHelicopter
-		ulong ST_ToDoSunshineTrack1Record;	// Минимальное время в трассе №1 Sunshine
-		ulong ST_ToDoSunshineTrack2Record;	// Минимальное время в трассе №2 Sunshine
-		ulong ST_ToDoSunshineTrack3Record;	// Минимальное время в трассе №3 Sunshine
-		ulong ST_ToDoSunshineTrack4Record;	// Минимальное время в трассе №4 Sunshine
-		ulong ST_ToDoSunshineTrack5Record;	// Минимальное время в трассе №5 Sunshine
-		ulong ST_ToDoSunshineTrack6Record;	// Минимальное время в трассе №6 Sunshine
-		ulong ST_ToDoDowntownChopperRecord;	// Минимальное время в миссии Downtown chopper
-		ulong ST_ToDoOceanBeachChopperRecord;	// Минимальное время в миссии Ocean beach chopper
-		ulong ST_ToDoVicePointChopperRecord;	// Минимальное время в миссии Vice point chopper
-		ulong ST_ToDoLittleHaitiChopperRecord;	// Минимальное время в миссии Little Haiti chopper
-		ulong ST_ToDoPCJPlaygroundRecord;	// Минимальное время в миссии PCJ playground
-		ulong ST_TrialByDirtRecord;		// Минимальное время в миссии Trial by dirt
-		ulong ST_TestTrackRecord;		// Минимальное время в миссии Test track
-		ulong ST_ToDoConeCrazyRecord;	// Минимальное время в миссии Cone crazy
-		ulong ST_ToDoHotringRecord;		// Минимальное время в миссии Hotring
-		ulong ST_HotringLapRecord;		// Минимальное время круга в миссии Hotring (в миллисекундах)
-		ulong ST_ToDoCheckpointCharlieRecord;	// Минимальное время в миссии Checkpoint Charlie
-		ulong ST_HighestScoreInShootist;	// Максимальные очки в Shootist
-		ulong ST_BestPercentageInShootist;	// Максимальная точность в Shootist
-		ulong ST_DrugDealsMade;			// Выполнено наркосделок
-		ulong ST_HighestScoreInBeachBall;	// Максимальные очки в пляжном футболе
+		ulong ST_PornLeafletsVisible;	// Р’РёРґРёРјРѕСЃС‚СЊ РїРѕСЂРЅРѕРїРѕСЃС‚РµСЂРѕРІ РїРѕСЃР»Рµ РјРёСЃСЃРёРё Dildo dodo
+		ulong ST_AllowSecondaryWeatherTable;	// Р Р°Р·СЂРµС€РµРЅРёРµ РІС‚РѕСЂРѕРіРѕ С„Р°Р№Р»Р° timecyc
+		float ST_DistanceOnFootM;		// РџСЂРѕР№РґРµРЅРѕ РїРµС€РєРѕРј, РјРµС‚СЂРѕРІ
+		float ST_DistanceOnCarM;		// РџСЂРµРѕРґРѕР»РµРЅРѕ РЅР° РјР°С€РёРЅР°С…, РјРµС‚СЂРѕРІ
+		float ST_DistanceOnBikeM;		// РџСЂРµРѕРґРѕР»РµРЅРѕ РЅР° Р±Р°Р№РєР°С…, РјРµС‚СЂРѕРІ
+		float ST_DistanceOnBoatM;		// РџСЂРµРѕРґРѕР»РµРЅРѕ РЅР° Р»РѕРґРєР°С…, РјРµС‚СЂРѕРІ
+		float ST_DistanceOnGolfCartM;	// РџСЂРµРѕРґРѕР»РµРЅРѕ РЅР° РіРѕР»СЊС„РєР°СЂС‚Рµ, РјРµС‚СЂРѕРІ
+		float ST_DistanceOnHelicopterM;	// РџСЂРµРѕРґРѕР»РµРЅРѕ РЅР° РІРµСЂС‚РѕР»С‘С‚Р°С…, РјРµС‚СЂРѕРІ
+		float ST_DistanceOnPlaneM;		// РџСЂРµРѕРґРѕР»РµРЅРѕ РЅР° СЃР°РјРѕР»С‘С‚Р°С…, РјРµС‚СЂРѕРІ
+		ulong ST_PeopleSavedInAmbulance;	// РЎРїР°СЃРµРЅРѕ Р»СЋРґРµР№ РІ РјРµРґРёС†РёРЅСЃРєРѕР№ РјРёСЃСЃРёРё
+		ulong ST_CriminalsWastedInVigilante;	// РЈРЅРёС‡С‚РѕР¶РµРЅРѕ Р»СЋРґРµР№ РІ РїРѕР»РёС†РµР№СЃРєРѕР№ РјРёСЃСЃРёРё
+		ulong ST_FiresExtinguished;		// РџРѕС‚СѓС€РµРЅРѕ РїРѕР¶Р°СЂРѕРІ
+		ulong ST_ToDoHighestVigilanteLevel;	// РќР°РёРІС‹СЃС€РёР№ СѓСЂРѕРІРµРЅСЊ РїРѕР»РёС†РµР№СЃРєРѕР№ РјРёСЃСЃРёРё
+		ulong ST_ToDoHighestAmbulanceLevel;	// РќР°РёРІС‹СЃС€РёР№ СѓСЂРѕРІРµРЅСЊ РјРµРґРёС†РёРЅСЃРєРѕР№ РјРёСЃСЃРёРё
+		ulong ST_ToDoHighestFirefighterLevel;	// РќР°РёРІС‹СЃС€РёР№ СѓСЂРѕРІРµРЅСЊ РїРѕР¶Р°СЂРЅРѕР№ РјРёСЃСЃРёРё
+		ulong ST_PhotosTaken;			// РЎРґРµР»Р°РЅРѕ С„РѕС‚РѕРіСЂР°С„РёР№
+		ulong ST_ToDoRampagesPassed;	// РџСЂРѕР№РґРµРЅРѕ Р±СѓР№СЃС‚РІ
+		ulong ST_RampagesCount;			// Р’СЃРµРіРѕ Р±СѓР№СЃС‚РІ
+		ulong ST_MainMissionsCount;		// РљРѕР»РёС‡РµСЃС‚РІРѕ РіР»Р°РІРЅС‹С… РјРёСЃСЃРёР№
+		ulong ST_FlightMs;				// РЎСѓРјРјР°СЂРЅРѕРµ РІСЂРµРјСЏ РїРѕР»С‘С‚РѕРІ, РІ РјРёР»Р»РёСЃРµРєСѓРЅРґР°С…
+		ulong ST_TimesDrowned;			// РљРѕР»РёС‡РµСЃС‚РІРѕ СѓС‚РѕРїР»РµРЅРёР№
+		ulong ST_SeagullsSniped;		// РЈР±РёС‚С‹Рµ С‡Р°Р№РєРё
+		float ST_WeaponBudget;			// Р‘СЋРґР¶РµС‚ РѕСЂСѓР¶РёСЏ
+		float ST_FashionBudget;			// Р‘СЋРґР¶РµС‚ РѕРґРµР¶РґС‹
+		float ST_LoanSharksVisits;		// Р§РёСЃР»Рѕ РІРёР·РёС‚РѕРІ РїРѕРґРїРѕР»СЊРЅС‹С… С‚РѕСЂРіРѕРІС†РµРІ
+		float ST_ToDoStoresKnockedOff;		// РћРіСЂР°Р±Р»РµРЅРЅС‹Рµ РјР°РіР°Р·РёРЅС‹
+		float ST_MovieStunts;			// РљРёРЅРѕС€РЅС‹Рµ С‚СЂСЋРєРё
+		float ST_ToDoAsassinationContractsDone;	// Р’С‹РїРѕР»РЅРµРЅРѕ РєРѕРЅС‚СЂР°РєС‚РѕРІ РЅР° СѓР±РёР№СЃС‚РІРѕ
+		float ST_PizzasDelivered;		// Р”РѕСЃС‚Р°РІР»РµРЅРѕ РїРёС†С†
+		float ST_GarbagePickupsMade;	// Р’С‹РІРµР·РµРЅРѕ РјСѓСЃРѕСЂР°
+		float ST_IceCreamSold;			// РџСЂРѕРґР°РЅРѕ РјРѕСЂРѕР¶РµРЅРЅРѕРіРѕ
+		float ST_TopShootingRangeScore;	// РњР°РєСЃРёРјР°Р»СЊРЅС‹Рµ РѕС‡РєРё РІ С‚РёСЂРµ
+		float ST_ShootingAccuracy;		// РўРѕС‡РЅРѕСЃС‚СЊСЃС‚СЂРµР»СЊР±С‹ РІ С‚РёСЂРµ
+		ulong ST_LongestWheelieTime;	// РњР°РєСЃРёРјР°Р»СЊРЅРѕРµ РІСЂРµРјСЏ РЅР° Р·Р°РґРЅРµРј РєРѕР»РµСЃРµ
+		ulong ST_LongestStopieTime;		// РњР°РєСЃРёРјР°Р»СЊРЅРѕРµ РІСЂРµРјСЏ РЅР° РїРµСЂРµРґРЅРµРј РєРѕР»РµСЃРµ
+		ulong ST_Longest2WheelsTime;	// РњР°РєСЃРёРјР°Р»СЊРЅРѕРµ РІСЂРµРјСЏ РЅР° РґРІСѓС… РєРѕР»С‘СЃР°С…
+		ulong ST_LongestWheelieDistance;	// РњР°РєСЃРёРјР°Р»СЊРЅР°СЏ РґРёСЃС‚Р°РЅС†РёСЏ РЅР° Р·Р°РґРЅРµРј РєРѕР»РµСЃРµ
+		ulong ST_LongestStopieDistance;		// РњР°РєСЃРёРјР°Р»СЊРЅР°СЏ РґРёСЃС‚Р°РЅС†РёСЏ РЅР° РїРµСЂРµРґРЅРµРј РєРѕР»РµСЃРµ
+		float ST_Longest2WheelsDistance;	// РњР°РєСЃРёРјР°Р»СЊРЅР°СЏ РґРёСЃС‚Р°РЅС†РёСЏ РЅР° РґРІСѓС… РєРѕР»С‘СЃР°С…
+		float ST_PropertyBudget;		// Р‘СЋРґР¶РµС‚ РЅРµРґРІРёР¶РёРјРѕСЃС‚Рё
+		float ST_AutoRepairBudget;		// Р‘СЋРґР¶РµС‚ СЂРµРјРѕРЅС‚Р° Р°РІС‚Рѕ
+		ulong ST_PropertyDestroyed;		// РЈС‰РµСЂР± РѕРєСЂСѓР¶Р°СЋС‰РµРјСѓ РёРјСѓС‰РµСЃС‚РІСѓ
+		ulong ST_ToDoOwnedPropertyCount;	// РљРѕР»РёС‡РµСЃС‚РІРѕ РїСЂРёРѕР±СЂРµС‚С‘РЅРЅС‹С… РѕР±СЉРµРєС‚РѕРІ РЅРµРґРІРёР¶РёРјРѕСЃС‚Рё
+		ulong ST_BloodringKills;		// РЈР±РёР№СЃС‚РІ РІ Blood ring
+		ulong ST_ToDoLongestTimeInBlooding;	// РњР°РєСЃРёРјР°Р»СЊРЅРѕРµ РІСЂРµРјСЏ РІ Blood ring
+		uchar ST_OwnedProperties[15];	// Р¤Р»Р°РіРё, СѓРєР°Р·С‹РІР°СЋС‰РёРµ РїСЂРёРѕР±СЂРµС‚С‘РЅРЅС‹Рµ РѕР±СЉРµРєС‚С‹ РЅРµРґРІРёР¶РёРјРѕСЃС‚Рё
+		float ST_HighestMediaAttention;	// РњР°РєСЃРёРјР°Р»СЊРЅРѕРµ РІРЅРёРјР°РЅРёРµ РЎРњР
+		ulong ST_BikersRaceRecord;		// Р РµРєРѕСЂРґ РјРёСЃСЃРёРё СЃ РіРѕРЅРєРѕР№ Р±Р°Р№РєРµСЂРѕРІ
+		ulong ST_HilaryRaceRecord;		// Р РµРєРѕСЂРґ РјРёСЃСЃРёРё СЃ РіРѕРЅРєРѕР№ СЃ РҐРёР»Р°СЂРё
+		ulong ST_ToDoDirtringRecord;	// РњРёРЅРёРјР°Р»СЊРЅРѕРµ РІСЂРµРјСЏ РІ РјРёСЃСЃРёРё Dirtring
+		ulong ST_ToDoRCPlaneRecord;		// РњРёРЅРёРјР°Р»СЊРЅРѕРµ РІСЂРµРјСЏ РІ РјРёСЃСЃРёРё СЃ RCPlane
+		ulong ST_ToDoRCCarRecord;		// РњРёРЅРёРјР°Р»СЊРЅРѕРµ РІСЂРµРјСЏ РІ РјРёСЃСЃРёРё СЃ RCCar
+		ulong ST_ToDoRCHelicopterRecord;	// РњРёРЅРёРјР°Р»СЊРЅРѕРµ РІСЂРµРјСЏ РІ РјРёСЃСЃРёРё СЃ RCHelicopter
+		ulong ST_ToDoSunshineTrack1Record;	// РњРёРЅРёРјР°Р»СЊРЅРѕРµ РІСЂРµРјСЏ РІ С‚СЂР°СЃСЃРµ в„–1 Sunshine
+		ulong ST_ToDoSunshineTrack2Record;	// РњРёРЅРёРјР°Р»СЊРЅРѕРµ РІСЂРµРјСЏ РІ С‚СЂР°СЃСЃРµ в„–2 Sunshine
+		ulong ST_ToDoSunshineTrack3Record;	// РњРёРЅРёРјР°Р»СЊРЅРѕРµ РІСЂРµРјСЏ РІ С‚СЂР°СЃСЃРµ в„–3 Sunshine
+		ulong ST_ToDoSunshineTrack4Record;	// РњРёРЅРёРјР°Р»СЊРЅРѕРµ РІСЂРµРјСЏ РІ С‚СЂР°СЃСЃРµ в„–4 Sunshine
+		ulong ST_ToDoSunshineTrack5Record;	// РњРёРЅРёРјР°Р»СЊРЅРѕРµ РІСЂРµРјСЏ РІ С‚СЂР°СЃСЃРµ в„–5 Sunshine
+		ulong ST_ToDoSunshineTrack6Record;	// РњРёРЅРёРјР°Р»СЊРЅРѕРµ РІСЂРµРјСЏ РІ С‚СЂР°СЃСЃРµ в„–6 Sunshine
+		ulong ST_ToDoDowntownChopperRecord;	// РњРёРЅРёРјР°Р»СЊРЅРѕРµ РІСЂРµРјСЏ РІ РјРёСЃСЃРёРё Downtown chopper
+		ulong ST_ToDoOceanBeachChopperRecord;	// РњРёРЅРёРјР°Р»СЊРЅРѕРµ РІСЂРµРјСЏ РІ РјРёСЃСЃРёРё Ocean beach chopper
+		ulong ST_ToDoVicePointChopperRecord;	// РњРёРЅРёРјР°Р»СЊРЅРѕРµ РІСЂРµРјСЏ РІ РјРёСЃСЃРёРё Vice point chopper
+		ulong ST_ToDoLittleHaitiChopperRecord;	// РњРёРЅРёРјР°Р»СЊРЅРѕРµ РІСЂРµРјСЏ РІ РјРёСЃСЃРёРё Little Haiti chopper
+		ulong ST_ToDoPCJPlaygroundRecord;	// РњРёРЅРёРјР°Р»СЊРЅРѕРµ РІСЂРµРјСЏ РІ РјРёСЃСЃРёРё PCJ playground
+		ulong ST_TrialByDirtRecord;		// РњРёРЅРёРјР°Р»СЊРЅРѕРµ РІСЂРµРјСЏ РІ РјРёСЃСЃРёРё Trial by dirt
+		ulong ST_TestTrackRecord;		// РњРёРЅРёРјР°Р»СЊРЅРѕРµ РІСЂРµРјСЏ РІ РјРёСЃСЃРёРё Test track
+		ulong ST_ToDoConeCrazyRecord;	// РњРёРЅРёРјР°Р»СЊРЅРѕРµ РІСЂРµРјСЏ РІ РјРёСЃСЃРёРё Cone crazy
+		ulong ST_ToDoHotringRecord;		// РњРёРЅРёРјР°Р»СЊРЅРѕРµ РІСЂРµРјСЏ РІ РјРёСЃСЃРёРё Hotring
+		ulong ST_HotringLapRecord;		// РњРёРЅРёРјР°Р»СЊРЅРѕРµ РІСЂРµРјСЏ РєСЂСѓРіР° РІ РјРёСЃСЃРёРё Hotring (РІ РјРёР»Р»РёСЃРµРєСѓРЅРґР°С…)
+		ulong ST_ToDoCheckpointCharlieRecord;	// РњРёРЅРёРјР°Р»СЊРЅРѕРµ РІСЂРµРјСЏ РІ РјРёСЃСЃРёРё Checkpoint Charlie
+		ulong ST_HighestScoreInShootist;	// РњР°РєСЃРёРјР°Р»СЊРЅС‹Рµ РѕС‡РєРё РІ Shootist
+		ulong ST_BestPercentageInShootist;	// РњР°РєСЃРёРјР°Р»СЊРЅР°СЏ С‚РѕС‡РЅРѕСЃС‚СЊ РІ Shootist
+		ulong ST_DrugDealsMade;			// Р’С‹РїРѕР»РЅРµРЅРѕ РЅР°СЂРєРѕСЃРґРµР»РѕРє
+		ulong ST_HighestScoreInBeachBall;	// РњР°РєСЃРёРјР°Р»СЊРЅС‹Рµ РѕС‡РєРё РІ РїР»СЏР¶РЅРѕРј С„СѓС‚Р±РѕР»Рµ
 		uchar ST_Unused2[4];
-		ulong ST_HotringBestResult;		// Лучший результат в Hotring
-		ulong ST_PedsKilledInGame;		// Убито людей во время игры (при сохранении всегда 0)
-		ulong ST_TotalPedsKilled;		// Всего убийств ???
-		uchar ST_LastPassedMissionGXTEntry[8];	// Последняя точка входа в базу текстовых строк
-		ulong ST_CheatRating;			// Счётчик читов
-		float ST_RadioListetingTimeMs[10];	// Время прослушивания радиостанций (для каждой)
+		ulong ST_HotringBestResult;		// Р›СѓС‡С€РёР№ СЂРµР·СѓР»СЊС‚Р°С‚ РІ Hotring
+		ulong ST_PedsKilledInGame;		// РЈР±РёС‚Рѕ Р»СЋРґРµР№ РІРѕ РІСЂРµРјСЏ РёРіСЂС‹ (РїСЂРё СЃРѕС…СЂР°РЅРµРЅРёРё РІСЃРµРіРґР° 0)
+		ulong ST_TotalPedsKilled;		// Р’СЃРµРіРѕ СѓР±РёР№СЃС‚РІ ???
+		uchar ST_LastPassedMissionGXTEntry[8];	// РџРѕСЃР»РµРґРЅСЏСЏ С‚РѕС‡РєР° РІС…РѕРґР° РІ Р±Р°Р·Сѓ С‚РµРєСЃС‚РѕРІС‹С… СЃС‚СЂРѕРє
+		ulong ST_CheatRating;			// РЎС‡С‘С‚С‡РёРє С‡РёС‚РѕРІ
+		float ST_RadioListetingTimeMs[10];	// Р’СЂРµРјСЏ РїСЂРѕСЃР»СѓС€РёРІР°РЅРёСЏ СЂР°РґРёРѕСЃС‚Р°РЅС†РёР№ (РґР»СЏ РєР°Р¶РґРѕР№)
 		uchar ST_Unused3;
 		} ST;
 

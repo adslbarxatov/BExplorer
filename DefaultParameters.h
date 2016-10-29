@@ -1,54 +1,55 @@
+п»ї// РћР±С‰РёРµ РїР°СЂР°РјРµС‚СЂС‹ СЃРѕС…СЂР°РЅРµРЅРёСЏ
 union SD_DefaultParameters
 	{
 	struct DP_Formatted
 		{
-		ulong DP_BlockSize;			// Размер блока (в сумме с SB, SBA, SBB)
-		wchar_t DP_SaveName[24];	// Название файла сохранения
-		uint DP_Year;				// Дата сохранения
+		ulong DP_BlockSize;			// Р Р°Р·РјРµСЂ Р±Р»РѕРєР° (РІ СЃСѓРјРјРµ СЃ SB, SBA, SBB)
+		wchar_t DP_SaveName[24];	// РќР°Р·РІР°РЅРёРµ С„Р°Р№Р»Р° СЃРѕС…СЂР°РЅРµРЅРёСЏ
+		uint DP_Year;				// Р”Р°С‚Р° СЃРѕС…СЂР°РЅРµРЅРёСЏ
 		uint DP_Month;
 		uint DP_DayOfWeek;
 		uint DP_Day;
-		uint DP_Hour;				// Время сохранения
+		uint DP_Hour;				// Р’СЂРµРјСЏ СЃРѕС…СЂР°РЅРµРЅРёСЏ
 		uint DP_Minute;
 		uint DP_Second;
 		uint DP_Millisecond;
-		ulong DP_Unused01;			// Неизвестно, всегда 12609
-		ulong DP_CurrentIsland;		// Номер текущего острова
-		float DP_CameraX;			// Позиция камеры игрока
+		ulong DP_FileSize_Sub99;	// (Р Р°Р·РјРµСЂ С„Р°Р№Р»Р° СЃРѕС…СЂР°РЅРµРЅРёСЏ) - 99
+		ulong DP_CurrentIsland;		// РќРѕРјРµСЂ С‚РµРєСѓС‰РµРіРѕ РѕСЃС‚СЂРѕРІР°
+		float DP_CameraX;			// РџРѕР·РёС†РёСЏ РєР°РјРµСЂС‹ РёРіСЂРѕРєР°
 		float DP_CameraY;
 		float DP_CameraZ;
-		ulong DP_IngameMinuteLengthMs;	// Длительность минуты в игре (норма - 1000 ms)
-		ulong DP_WeatherTimer;		// Таймер погоды
-		uchar DP_GameHour;			// Время в игре
+		ulong DP_IngameMinuteLengthMs;	// Р”Р»РёС‚РµР»СЊРЅРѕСЃС‚СЊ РјРёРЅСѓС‚С‹ РІ РёРіСЂРµ (РЅРѕСЂРјР° - 1000 ms)
+		ulong DP_WeatherTimer;		// РўР°Р№РјРµСЂ РїРѕРіРѕРґС‹
+		uchar DP_GameHour;			// Р’СЂРµРјСЏ РІ РёРіСЂРµ
 		uchar DP_Unused02[3];
 		uchar DP_GameMinute;
 		uchar DP_Unused03[3];
-		ulong DP_PadNumber;
-		ulong DP_GlobalTimer;		// Глобальный таймер
-		float DP_GameSpeed;			// Скорость игры (норма - 1.0)
-		float DP_FrameDelta;
+		ulong DP_PadNumber;			// РќРѕРјРµСЂ РґР¶РѕР№СЃС‚РёРєР° ???
+		ulong DP_GlobalTimer;		// Р“Р»РѕР±Р°Р»СЊРЅС‹Р№ С‚Р°Р№РјРµСЂ
+		float DP_GameSpeed;			// РЎРєРѕСЂРѕСЃС‚СЊ РёРіСЂС‹ (РЅРѕСЂРјР° - 1.0)
+		float DP_FrameDelta;		// РџР°СЂР°РјРµС‚СЂС‹ СЃРјРµРЅС‹ РєР°РґСЂРѕРІ
 		float DP_TimeStep;
 		ulong DP_TotalFramesCount;
-		float DP_TimeStep2;			// Всегда 1.0
+		float DP_TimeStep2;			// 1.0
 		float DP_FramesPerUpdate;	// 1.0
 		float DP_TimeScale;			// 1.0
-		ulong DP_OldWeatherNumber;	// Старый номер погоды
-		ulong DP_NewWeatherNumber;	// Новый номер погоды
-		sint DP_StaticWeatherNumber;	// Текущая установленная погода (0 - 63, -1 = случайная)
+		ulong DP_OldWeatherNumber;	// РЎС‚Р°СЂС‹Р№ РЅРѕРјРµСЂ РїРѕРіРѕРґС‹
+		ulong DP_NewWeatherNumber;	// РќРѕРІС‹Р№ РЅРѕРјРµСЂ РїРѕРіРѕРґС‹
+		sint DP_StaticWeatherNumber;	// РўРµРєСѓС‰Р°СЏ СѓСЃС‚Р°РЅРѕРІР»РµРЅРЅР°СЏ РїРѕРіРѕРґР° (0 - 63, -1 = СЃР»СѓС‡Р°Р№РЅР°СЏ)
 		uint DP_Unused06;
-		float DP_WeatherInterpolation;	// Статус перехода от старой погоды к новой (0.0 - 1.0)
-		ulong DP_CurrentWeatherNumber;	// Номер текущей погоды в списке (0 - 63)
-		float DP_CarCameraView;		// Положение камеры в авто (0 - 5)
-		float DP_FootCameraView;	// Положение камеры при ходьбе (0 - 5)
-		ulong DP_InteriorNumber;	// Номер интерьера (0 - 17)
-		uchar DP_TaxiBoost;			// Прыжки такси (0/1)
+		float DP_WeatherInterpolation;	// РЎС‚Р°С‚СѓСЃ РїРµСЂРµС…РѕРґР° РѕС‚ СЃС‚Р°СЂРѕР№ РїРѕРіРѕРґС‹ Рє РЅРѕРІРѕР№ (0.0 - 1.0)
+		ulong DP_CurrentWeatherNumber;	// РќРѕРјРµСЂ С‚РµРєСѓС‰РµР№ РїРѕРіРѕРґС‹ РІ СЃРїРёСЃРєРµ (0 - 63)
+		float DP_CarCameraView;		// РџРѕР»РѕР¶РµРЅРёРµ РєР°РјРµСЂС‹ РІ Р°РІС‚Рѕ (0 - 5)
+		float DP_FootCameraView;	// РџРѕР»РѕР¶РµРЅРёРµ РєР°РјРµСЂС‹ РїСЂРё С…РѕРґСЊР±Рµ (0 - 5)
+		ulong DP_InteriorNumber;	// РќРѕРјРµСЂ РёРЅС‚РµСЂСЊРµСЂР° (0 - 17)
+		uchar DP_TaxiBoost;			// Р Р°Р·СЂРµР¶РµРЅРёРµ РїСЂС‹Р¶РєРѕРІ С‚Р°РєСЃРё (0/1)
 		uchar DP_Unused07[3];
-		uchar DP_InvertLook;
+		uchar DP_InvertLook;		// РћР±СЂР°С‚РёС‚СЊ РІР·РіР»СЏРґ ???
 		uchar DP_Unused08[3];
-		ulong DP_ExtraSkyColor;		// Цвет неба в интерьере
-		ulong DP_IsExtraSkyActive;	// Активен/неактивен
-		float DP_SkyOverlay;		// Степень перехода к цвету интерьера (0.0 - 1.0)
-		ulong DP_Unused09[10];
+		ulong DP_ExtraSkyColor;		// Р¦РІРµС‚ РЅРµР±Р° РІ РёРЅС‚РµСЂСЊРµСЂРµ
+		ulong DP_IsExtraSkyActive;	// РђРєС‚РёРІРµРЅ/РЅРµР°РєС‚РёРІРµРЅ
+		float DP_SkyOverlay;		// РЎС‚РµРїРµРЅСЊ РїРµСЂРµС…РѕРґР° Рє С†РІРµС‚Сѓ РёРЅС‚РµСЂСЊРµСЂР° (0.0 - 1.0)
+		uchar DP_Unused09[40];
 		} DP;
 
 	uchar DP_Raw [sizeof (struct DP_Formatted)];

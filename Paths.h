@@ -1,16 +1,18 @@
-// INCOMPLETED
+﻿// INCOMPLETED
 
+// Общие параметры массива трасс
 union SD_Paths
 	{
 	struct PH_Formatted
 		{
-		ulong PH_BlockSize;		// ������ �����
-		ulong PH_SubBlockSize;	// ������ ��������
+		ulong PH_BlockSize;		// Размер блока
+		ulong PH_SubBlockSize;	// Размер субблока
 		} PH;
 
 	uchar PH_Raw [sizeof (struct PH_Formatted)];
 	};
 
+// Массив трасс
 union SD_PathsDescription
 	{
 	uchar PHD_Unknown1[1];

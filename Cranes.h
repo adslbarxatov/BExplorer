@@ -1,54 +1,57 @@
+п»ї// РљРѕР»РёС‡РµСЃС‚РІРѕ РѕРїРёСЃР°С‚РµР»РµР№ РїРѕСЂС‚РѕРІС‹С… РєСЂР°РЅРѕРІ
 #define SD_CR_S_Count	8
 
+// Р‘Р»РѕРє РїРѕСЂС‚РѕРІС‹С… РєСЂР°РЅРѕРІ
 union SD_Cranes
 	{
 	struct CR_Formatted
 		{
-		ulong CR_BlockSize;			// Размер блока (0x03EC)
-		ulong CR_SubBlockSize;		// Размер субблока (0x03E8)
-		ulong CR_CranesCount;		// Число кранов
-		ulong CR_CarsCollected;		// Не используется
+		ulong CR_BlockSize;			// Р Р°Р·РјРµСЂ Р±Р»РѕРєР° (0x03EC)
+		ulong CR_SubBlockSize;		// Р Р°Р·РјРµСЂ СЃСѓР±Р±Р»РѕРєР° (0x03E8)
+		ulong CR_CranesCount;		// Р§РёСЃР»Рѕ РєСЂР°РЅРѕРІ
+		ulong CR_CarsCollected;		// РќРµ РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ
 
+		// РћРїРёСЃР°С‚РµР»Рё РїРѕСЂС‚РѕРІС‹С… РєСЂР°РЅРѕРІ
 		struct CR_Structure
 			{
-			ulong CR_S_CraneObjectPointer;		// Объект-кран
-			ulong CR_S_MagnetObjectPointer;		// Объект-магнит
-			float CR_S_PickupZoneX1;			// Границы зоны захвата авто
+			ulong CR_S_CraneObjectPointer;		// РћР±СЉРµРєС‚-РєСЂР°РЅ
+			ulong CR_S_MagnetObjectPointer;		// РћР±СЉРµРєС‚-РјР°РіРЅРёС‚
+			float CR_S_PickupZoneX1;			// Р“СЂР°РЅРёС†С‹ Р·РѕРЅС‹ Р·Р°С…РІР°С‚Р° Р°РІС‚Рѕ
 			float CR_S_PickupZoneX2;
 			float CR_S_PickupZoneY1;
 			float CR_S_PickupZoneY2;
-			float CR_S_DropOffZoneX;			// Границы зоны сброса авто
+			float CR_S_DropOffZoneX;			// Р“СЂР°РЅРёС†С‹ Р·РѕРЅС‹ СЃР±СЂРѕСЃР° Р°РІС‚Рѕ
 			float CR_S_DropOffZoneY;
 			float CR_S_DropOffZoneZ;
 			float CR_S_DropOffAngle;
-			float CR_S_CraneArmPickupAngle;		// Угол поворота стрелы крана при захвате
-			float CR_S_CraneArmDropOffAngle;	// Угол поворота стрелы крана при сбросе
-			float CR_S_CraneArmPickupDistance;	// Расстояние от стрелы крана при захвате
-			float CR_S_CraneArmDropOffDistance;	// Расстояние от стрелы крана при сбросе
-			float CR_S_CraneArmPickupHeight;	// Высота стрелы крана при захвате
-			float CR_S_CraneArmDropOffHeight;	// Высота стрелы крана при сбросе
-			float CR_S_CraneArmCurrentAngle;	// Текущий угол поворота стрелы крана
-			float CR_S_CraneArmCurrentDistance;	// Текущее расстояние от стрелы крана
-			float CR_S_CraneArmCurrentHeight;	// Текущая высота стрелы крана
-			float CR_S_CraneHookInitialX;		// Исходные координаты крюка крана
+			float CR_S_CraneArmPickupAngle;		// РЈРіРѕР» РїРѕРІРѕСЂРѕС‚Р° СЃС‚СЂРµР»С‹ РєСЂР°РЅР° РїСЂРё Р·Р°С…РІР°С‚Рµ
+			float CR_S_CraneArmDropOffAngle;	// РЈРіРѕР» РїРѕРІРѕСЂРѕС‚Р° СЃС‚СЂРµР»С‹ РєСЂР°РЅР° РїСЂРё СЃР±СЂРѕСЃРµ
+			float CR_S_CraneArmPickupDistance;	// Р Р°СЃСЃС‚РѕСЏРЅРёРµ РѕС‚ СЃС‚СЂРµР»С‹ РєСЂР°РЅР° РїСЂРё Р·Р°С…РІР°С‚Рµ
+			float CR_S_CraneArmDropOffDistance;	// Р Р°СЃСЃС‚РѕСЏРЅРёРµ РѕС‚ СЃС‚СЂРµР»С‹ РєСЂР°РЅР° РїСЂРё СЃР±СЂРѕСЃРµ
+			float CR_S_CraneArmPickupHeight;	// Р’С‹СЃРѕС‚Р° СЃС‚СЂРµР»С‹ РєСЂР°РЅР° РїСЂРё Р·Р°С…РІР°С‚Рµ
+			float CR_S_CraneArmDropOffHeight;	// Р’С‹СЃРѕС‚Р° СЃС‚СЂРµР»С‹ РєСЂР°РЅР° РїСЂРё СЃР±СЂРѕСЃРµ
+			float CR_S_CraneArmCurrentAngle;	// РўРµРєСѓС‰РёР№ СѓРіРѕР» РїРѕРІРѕСЂРѕС‚Р° СЃС‚СЂРµР»С‹ РєСЂР°РЅР°
+			float CR_S_CraneArmCurrentDistance;	// РўРµРєСѓС‰РµРµ СЂР°СЃСЃС‚РѕСЏРЅРёРµ РѕС‚ СЃС‚СЂРµР»С‹ РєСЂР°РЅР°
+			float CR_S_CraneArmCurrentHeight;	// РўРµРєСѓС‰Р°СЏ РІС‹СЃРѕС‚Р° СЃС‚СЂРµР»С‹ РєСЂР°РЅР°
+			float CR_S_CraneHookInitialX;		// РСЃС…РѕРґРЅС‹Рµ РєРѕРѕСЂРґРёРЅР°С‚С‹ РєСЂСЋРєР° РєСЂР°РЅР°
 			float CR_S_CraneHookInitialY;
 			float CR_S_CraneHookInitialZ;
-			float CR_S_CraneHookCurrentX;		// Текущие координаты крюка крана
+			float CR_S_CraneHookCurrentX;		// РўРµРєСѓС‰РёРµ РєРѕРѕСЂРґРёРЅР°С‚С‹ РєСЂСЋРєР° РєСЂР°РЅР°
 			float CR_S_CraneHookCurrentY;
 			float CR_S_CraneHookCurrentZ;
 			uchar CR_S_Unused1[8];
-			uchar *CR_S_TargettedCar;
-			ulong CR_S_GameTimerOnLiftFinish;	// Время игры в момент завершения подъёма
-			uchar CR_S_CraneActivity;			// Действие крана
+			ulong CR_S_TargettedCarPointer;
+			ulong CR_S_GameTimerOnLiftFinish;	// Р’СЂРµРјСЏ РёРіСЂС‹ РІ РјРѕРјРµРЅС‚ Р·Р°РІРµСЂС€РµРЅРёСЏ РїРѕРґСЉС‘РјР°
+			uchar CR_S_CraneActivity;			// Р”РµР№СЃС‚РІРёРµ РєСЂР°РЅР°
 			// 0 - idle, 1 - active, 2 - inactive
-			uchar CR_S_CraneStatus;				// Состояние крана
+			uchar CR_S_CraneStatus;				// РЎРѕСЃС‚РѕСЏРЅРёРµ РєСЂР°РЅР°
 			// 0 - idle, 1 - move to pickup, 3 - upward from pickup, 2 - move to destination,
 			// 4 - move to drop off, 5 - move from drop off
-			uchar CR_S_CollectedCarsCount;		// Количество собранный машин
-			uchar CR_S_IsCrusherCrane;			// Флаг прессового крана
-			uchar CR_S_IsMilitaryCrane;			// Флаг военного крана
+			uchar CR_S_CollectedCarsCount;		// РљРѕР»РёС‡РµСЃС‚РІРѕ СЃРѕР±СЂР°РЅРЅС‹Р№ РјР°С€РёРЅ
+			uchar CR_S_IsCrusherCrane;			// Р¤Р»Р°Рі РїСЂРµСЃСЃРѕРІРѕРіРѕ РєСЂР°РЅР°
+			uchar CR_S_IsMilitaryCrane;			// Р¤Р»Р°Рі РІРѕРµРЅРЅРѕРіРѕ РєСЂР°РЅР°
 			uchar CR_S_Unused2;
-			uchar CR_S_IsNot_doc_crane_cab0;	// Флаг спецификации крана
+			uchar CR_S_IsNot_doc_crane_cab0;	// Р¤Р»Р°Рі СЃРїРµС†РёС„РёРєР°С†РёРё РєСЂР°РЅР°
 			uchar CR_S_Unused3;
 			} CR_S[SD_CR_S_Count];
 		} CR;

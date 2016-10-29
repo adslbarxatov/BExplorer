@@ -1,43 +1,47 @@
+п»ї// РљРѕР»РёС‡РµСЃС‚РІРѕ РѕРїРёСЃР°С‚РµР»РµР№ Р·РѕРЅ СЂРµСЃРїР°СѓРЅР° С‚РёРїР° "РіРѕСЃРїРёС‚Р°Р»СЊ"
 #define SD_RL_H_Count	8
+
+// РљРѕР»РёС‡РµСЃС‚РІРѕ РѕРїРёСЃР°С‚РµР»РµР№ Р·РѕРЅ СЂРµСЃРїР°СѓРЅР° С‚РёРїР° "РїРѕР»РёС†РµР№СЃРєРёР№ СѓС‡Р°СЃС‚РѕРє"
 #define SD_RL_P_Count	8
 
+// Р‘Р»РѕРє Р·РѕРЅ СЂРµСЃРїР°СѓРЅР°
 union SD_RestartLocations
 	{
 	struct RL_Formatted
 		{
-		ulong RL_BlockSize;			// Размер блока (0x0128)
-		ulong RL_SubBlockSize;		// Размер субблока (0x0124)
-		uchar RL_BlockName[4];		// Название блока (RST)
-		ulong RL_SubBlock1Size;		// Размер оставшегося блока (0x011C)
+		ulong RL_BlockSize;			// Р Р°Р·РјРµСЂ Р±Р»РѕРєР° (0x0128)
+		ulong RL_SubBlockSize;		// Р Р°Р·РјРµСЂ СЃСѓР±Р±Р»РѕРєР° (0x0124)
+		uchar RL_BlockName[4];		// РќР°Р·РІР°РЅРёРµ Р±Р»РѕРєР° (RST)
+		ulong RL_SubBlock1Size;		// Р Р°Р·РјРµСЂ РѕСЃС‚Р°РІС€РµРіРѕСЃСЏ Р±Р»РѕРєР° (0x011C)
 
-		// Зоны возрождения типа "госпиталь"
+		// Р—РѕРЅС‹ РІРѕР·СЂРѕР¶РґРµРЅРёСЏ С‚РёРїР° "РіРѕСЃРїРёС‚Р°Р»СЊ"
 		struct RL_Hospital
 			{
-			float RL_H_X;			// Расположение
+			float RL_H_X;			// Р Р°СЃРїРѕР»РѕР¶РµРЅРёРµ
 			float RL_H_Y;
 			float RL_H_Z;
-			float RL_H_Rotation;	// Поворот
+			float RL_H_Rotation;	// РџРѕРІРѕСЂРѕС‚
 			} RL_H[SD_RL_H_Count];
 
-		// Зоны возрождения типа "полицейский участок"
+		// Р—РѕРЅС‹ РІРѕР·СЂРѕР¶РґРµРЅРёСЏ С‚РёРїР° "РїРѕР»РёС†РµР№СЃРєРёР№ СѓС‡Р°СЃС‚РѕРє"
 		struct RL_Police
 			{
-			float RL_P_X;			// Расположение
+			float RL_P_X;			// Р Р°СЃРїРѕР»РѕР¶РµРЅРёРµ
 			float RL_P_Y;
 			float RL_P_Z;
-			float RL_P_Rotation;	// Поворот
+			float RL_P_Rotation;	// РџРѕРІРѕСЂРѕС‚
 			} RL_P[SD_RL_P_Count];
 
-		uint RL_HospitalRPCount;		// Число госпиталей
-		uint RL_PoliceRPCount;			// Число полицейских участков
-		uchar RL_OverrideNextRestart;	// Переопределение зоны следующего возрождения
+		uint RL_HospitalRPCount;		// Р§РёСЃР»Рѕ РіРѕСЃРїРёС‚Р°Р»РµР№
+		uint RL_PoliceRPCount;			// Р§РёСЃР»Рѕ РїРѕР»РёС†РµР№СЃРєРёС… СѓС‡Р°СЃС‚РєРѕРІ
+		uchar RL_OverrideNextRestart;	// РџРµСЂРµРѕРїСЂРµРґРµР»РµРЅРёРµ Р·РѕРЅС‹ СЃР»РµРґСѓСЋС‰РµРіРѕ РІРѕР·СЂРѕР¶РґРµРЅРёСЏ
 		uchar RL_Unused1[3];
-		float RL_OverrideX;				// Координаты переопределённой зоны
+		float RL_OverrideX;				// РљРѕРѕСЂРґРёРЅР°С‚С‹ РїРµСЂРµРѕРїСЂРµРґРµР»С‘РЅРЅРѕР№ Р·РѕРЅС‹
 		float RL_OverrideY;
 		float RL_OverrideZ;
-		float RL_OverrideRotation;		// Угол поворота
+		float RL_OverrideRotation;		// РЈРіРѕР» РїРѕРІРѕСЂРѕС‚Р°
 		uchar RL_Unused2[2];
-		uchar RL_OverrideHospitalLevel;	// Уровни переопределения
+		uchar RL_OverrideHospitalLevel;	// РЈСЂРѕРІРЅРё РїРµСЂРµРѕРїСЂРµРґРµР»РµРЅРёСЏ
 		uchar RL_OverridePoliceLevel;
 		} RL;
 

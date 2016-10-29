@@ -1,28 +1,30 @@
+п»ї// РћР±С‰РёРµ РїР°СЂР°РјРµС‚СЂС‹ РјР°СЃСЃРёРІР° Р°СѓРґРёРѕСЃРєСЂРёРїС‚РѕРІ
 union SD_AudioScripts
 	{
 	struct AU_Formatted
 		{
-		ulong AU_BlockSize;		// Размер блока
-		ulong AU_SubBlockSize;	// Размер субблока
-		uchar AU_BlockName[4];	// Имя блока (AUD)
-		ulong AU_SubBlock1Size;	// Размер оставшегося субблока
-		ulong AU_ScriptsCount;	// Количество скриптов
+		ulong AU_BlockSize;		// Р Р°Р·РјРµСЂ Р±Р»РѕРєР°
+		ulong AU_SubBlockSize;	// Р Р°Р·РјРµСЂ СЃСѓР±Р±Р»РѕРєР°
+		uchar AU_BlockName[4];	// РРјСЏ Р±Р»РѕРєР° (AUD)
+		ulong AU_SubBlock1Size;	// Р Р°Р·РјРµСЂ РѕСЃС‚Р°РІС€РµРіРѕСЃСЏ СЃСѓР±Р±Р»РѕРєР°
+		ulong AU_ScriptsCount;	// РљРѕР»РёС‡РµСЃС‚РІРѕ СЃРєСЂРёРїС‚РѕРІ
 		} AU;
 
 	uchar AU_Raw [sizeof (struct AU_Formatted)];
 	};
 
+// РњР°СЃСЃРёРІ Р°СѓРґРёРѕСЃРєСЂРёРїС‚РѕРІ
 union SD_AudioScriptStructure
 	{
 	struct AS_Formatted
 		{
 		uchar AS_Unused1[4];
-		uint AS_AudioNumber;	// Номер аудиоэффекта
+		uint AS_AudioNumber;	// РќРѕРјРµСЂ Р°СѓРґРёРѕСЌС„С„РµРєС‚Р°
 		// 0 - alarm, 2 - police cell open/close, 4 - garage gate open/close, 6 - 'No escape' snore, 11 - shooting range target,
 		// 36 - 'Alloy Wheels of Steel' bikes, 37 - 'Messing with the Man' bikes, 38 - 'Hog tied' bikes, 39 - unused bikes sound,
 		// 40-42 - Malibu club, 43-45 - Pole position, 46 - Church, 51 - Fountain
 		uchar AS_Unused2[2];
-		float AS_PositionX;		// Координаты эффекта
+		float AS_PositionX;		// РљРѕРѕСЂРґРёРЅР°С‚С‹ СЌС„С„РµРєС‚Р°
 		float AS_PositionY;
 		float AS_PositionZ;
 		uchar AS_Unused3[4];

@@ -1,17 +1,17 @@
-// Отключение предупреждений
+п»ї// РћС‚РєР»СЋС‡РµРЅРёРµ РїСЂРµРґСѓРїСЂРµР¶РґРµРЅРёР№
 #define _CRT_SECURE_NO_WARNINGS
 
-// Подключение общего заголовка
+// РџРѕРґРєР»СЋС‡РµРЅРёРµ РѕР±С‰РµРіРѕ Р·Р°РіРѕР»РѕРІРєР°
 #include "B_explorer.h"
 
-// Макросы
+// РњР°РєСЂРѕСЃС‹
 #define SD_LOAD_TO_VAR(WriteTo,BytesCount,ErrorNumber)		if (fread (WriteTo, 1, BytesCount, FI) != BytesCount)	\
 		{	\
 		fclose (FI);	\
 		\
 		SD = NULL;	\
 		return ErrorNumber;	\
-		}
+		}	
 
 #define SD_LOAD_TO_PTR(Pointer,StructName,BytesCount,ErrorNumber)	if (Pointer)	\
 		free (Pointer);	\
@@ -26,17 +26,18 @@
 	\
 	SD_LOAD_TO_VAR (Pointer, BytesCount, ErrorNumber)
 
-// Функция загрузки файла сохранения и создания структуры
-// • FilePath - путь к файлу
-// • SD - структура сохранения
+// Р¤СѓРЅРєС†РёСЏ Р·Р°РіСЂСѓР·РєРё С„Р°Р№Р»Р° СЃРѕС…СЂР°РЅРµРЅРёСЏ Рё СЃРѕР·РґР°РЅРёСЏ СЃС‚СЂСѓРєС‚СѓСЂС‹
+// вЂў FilePath - РїСѓС‚СЊ Рє С„Р°Р№Р»Сѓ
+// вЂў SD - СЃС‚СЂСѓРєС‚СѓСЂР° СЃРѕС…СЂР°РЅРµРЅРёСЏ
 int SaveData_Load (char *FilePath, struct SaveData *SD)
 	{
-	// Переменные
-	FILE *FI;
-	unsigned int i;
-	ulong num;
+	// РџРµСЂРµРјРµРЅРЅС‹Рµ
+	FILE *FI;					// Р”РµСЃРєСЂРёРїС‚РѕСЂ С„Р°Р№Р»Р°
+	uint i;						// РЎС‡С‘С‚С‡РёРє
+	ulong num;					// Р’СЃРїРѕРјРѕРіР°С‚РµР»СЊРЅР°СЏ РїРµСЂРµРјРµРЅРЅР°СЏ
+	ulong alignStart, alignEnd;	// Р“СЂР°РЅРёС†С‹ Р±Р»РѕРєР° РІС‹СЂР°РІРЅРёРІР°РЅРёСЏ
 
-	// Попытка открытия файла
+	// РџРѕРїС‹С‚РєР° РѕС‚РєСЂС‹С‚РёСЏ С„Р°Р№Р»Р°
 	if ((FI = fopen (FilePath, "rb")) == NULL)
 		{
 		return SD_LOAD_ERR_FileNotFound;
@@ -64,6 +65,10 @@ int SaveData_Load (char *FilePath, struct SaveData *SD)
 
 	// Ped player
 	SD_LOAD_TO_VAR (SD->SD_PPL.PPL_Raw, sizeof (union SD_PedPlayer), SD_LOAD_ERR_LoadPPL)
+	SD->SD_PPS_Count = SD->SD_PPL.PPL.PPL_NumberOfPlayers;
+
+	// Ped player structure
+	SD_LOAD_TO_PTR (SD->SD_PPS, SD_PedPlayerStructure, SD->SD_PPS_Count * sizeof (union SD_PedPlayerStructure), SD_LOAD_ERR_LoadPPS)
 
 	// Garages
 	SD_LOAD_TO_VAR (SD->SD_GR.GR_Raw, sizeof (union SD_Garages), SD_LOAD_ERR_LoadGR)
@@ -73,12 +78,14 @@ int SaveData_Load (char *FilePath, struct SaveData *SD)
 	
 	//////////////////////////////////////////////////////////////////
 	// Vehicles
-	SD_LOAD_TO_VAR (SD->SD_VH.VH_Raw, sizeof (union SD_Vehicles), SD_LOAD_ERR_LoadVS)
+	SD_LOAD_TO_VAR (SD->SD_VH.VH_Raw, sizeof (union SD_Vehicles), SD_LOAD_ERR_LoadVH)
 	SD->SD_VS_Count = SD->SD_VH.VH.VH_BikesCount + SD->SD_VH.VH.VH_BoatsCount + SD->SD_VH.VH.VH_GeneralVehiclesCount;
 	
 	// Vehicle structures
 	if (SD->SD_VS)
+		{
 		free (SD->SD_VS);
+		}
 
 	if ((SD->SD_VS = (union SD_VehicleStructure *)malloc (SD->SD_VS_Count * sizeof (union SD_VehicleStructure))) == NULL)
 		{
@@ -89,7 +96,7 @@ int SaveData_Load (char *FilePath, struct SaveData *SD)
 
 	for (i = 0; i < SD->SD_VS_Count; i++)
 		{
-		// Чтение типа авто
+		// Р§С‚РµРЅРёРµ С‚РёРїР° Р°РІС‚Рѕ
 		if (fread (&num, 1, sizeof (ulong), FI) != sizeof (ulong))
 			{
 			fclose (FI);
@@ -98,7 +105,7 @@ int SaveData_Load (char *FilePath, struct SaveData *SD)
 			}
 		SD->SD_VS[i].VS.VS_VehicleType = num;
 
-		// Чтение остальных параметров
+		// Р§С‚РµРЅРёРµ РѕСЃС‚Р°Р»СЊРЅС‹С… РїР°СЂР°РјРµС‚СЂРѕРІ
 		switch (num)
 			{
 			case 0:	// General
@@ -139,7 +146,7 @@ int SaveData_Load (char *FilePath, struct SaveData *SD)
 
 	// Paths block
 	SD_LOAD_TO_VAR (SD->SD_PH.PH_Raw, sizeof (union SD_Paths), SD_LOAD_ERR_LoadPH)
-	SD->SD_PHD_Count = SD->SD_PH.PH.PH_BlockSize - sizeof (ulong);	// По какой-то причине SubBlockSize этой структуры периодически врёт
+	SD->SD_PHD_Count = SD->SD_PH.PH.PH_BlockSize - sizeof (ulong);	// РџРѕ РєР°РєРѕР№-С‚Рѕ РїСЂРёС‡РёРЅРµ SubBlockSize СЌС‚РѕР№ СЃС‚СЂСѓРєС‚СѓСЂС‹ РїРµСЂРёРѕРґРёС‡РµСЃРєРё РІСЂС‘С‚
 	SD_LOAD_TO_PTR (SD->SD_PHD, SD_PathsDescription, SD->SD_PHD_Count, SD_LOAD_ERR_LoadPH)
 
 	// Cranes
@@ -169,8 +176,8 @@ int SaveData_Load (char *FilePath, struct SaveData *SD)
 	// Particles
 	SD_LOAD_TO_VAR (SD->SD_PR.PR_Raw, sizeof (union SD_Particles), SD_LOAD_ERR_LoadPR)
 	SD->SD_PRD_Count = SD->SD_PR.PR.PR_ParticlesCount + 1;
-	// Вслед за массивом структур идёт ещё один элемент такого же размера, как элемент массива, не являющийся описанием particle
-	// Пока неизвестно, что это
+	// Р’СЃР»РµРґ Р·Р° РјР°СЃСЃРёРІРѕРј СЃС‚СЂСѓРєС‚СѓСЂ РёРґС‘С‚ РµС‰С‘ РѕРґРёРЅ СЌР»РµРјРµРЅС‚ С‚Р°РєРѕРіРѕ Р¶Рµ СЂР°Р·РјРµСЂР°, РєР°Рє СЌР»РµРјРµРЅС‚ РјР°СЃСЃРёРІР°, РЅРµ СЏРІР»СЏСЋС‰РёР№СЃСЏ РѕРїРёСЃР°РЅРёРµРј particle
+	// РџРѕРєР° РЅРµРёР·РІРµСЃС‚РЅРѕ, С‡С‚Рѕ СЌС‚Рѕ
 
 	// Particles descriptions
 	SD_LOAD_TO_PTR (SD->SD_PRD, SD_ParticleDescription, SD->SD_PRD_Count * sizeof (union SD_ParticleDescription), SD_LOAD_ERR_LoadPRD)
@@ -200,8 +207,18 @@ int SaveData_Load (char *FilePath, struct SaveData *SD)
 	// Ped types
 	SD_LOAD_TO_VAR (SD->SD_PT.PT_Raw, sizeof (union SD_PedTypes), SD_LOAD_ERR_LoadPT)
 	
-	// Переход в конец файла
+	// РџРµСЂРµС…РѕРґ РІ РєРѕРЅРµС† С„Р°Р№Р»Р° Рё РєРѕРЅС‚СЂРѕР»СЊ СЂР°Р·РјРµСЂР° С„Р°Р№Р»Р°
+	alignStart = ftell (FI);
 	if (fseek (FI, BFileSize - sizeof (union SD_CheckSum), SEEK_SET))
+		{
+		fclose (FI);
+		
+		SD = NULL;
+		return SD_LOAD_ERR_LoadCS;
+		}
+	alignEnd = ftell (FI);
+
+	if (SD->SD_PT.PT.LastAlignBlockSize != (alignEnd - alignStart))
 		{
 		fclose (FI);
 		
@@ -213,7 +230,7 @@ int SaveData_Load (char *FilePath, struct SaveData *SD)
 	SD_LOAD_TO_VAR (SD->SD_CS.CS_Raw, sizeof (union SD_CheckSum), SD_LOAD_ERR_LoadCS)
 	SD->SD_CheckSum = SD->SD_CS.CS.CS_Sum;
 
-	// Успех
+	// РЈСЃРїРµС…
 	fclose (FI);
 	return SD_LOAD_SUCCESS;
 	}

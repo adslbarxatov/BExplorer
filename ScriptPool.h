@@ -1,40 +1,42 @@
-// INCOMPLETED //
+п»ї// INCOMPLETED //
 
+// РћР±С‰РёРµ РїР°СЂР°РјРµС‚СЂС‹ РјР°СЃСЃРёРІР° СЃРєСЂРёРїС‚РѕРІ
 union SD_ScriptPool
 	{
 	struct SC_Formatted
 		{
-		ulong SC_ScriptsCount;	// Количество скриптов
+		ulong SC_ScriptsCount;	// РљРѕР»РёС‡РµСЃС‚РІРѕ СЃРєСЂРёРїС‚РѕРІ
 		} SC;
 
 	uchar SC_Raw [sizeof (struct SC_Formatted)];
 	};
 
+// РњР°СЃСЃРёРІ СЃРєСЂРёРїС‚РѕРІ
 union SD_ScriptStructure
 	{
 	struct SS_Formatted
 		{
-		ulong SS_PointerToPrevScript;	// Указатель на предыдущий скрипт
-		ulong SS_PointerToNextScript;	// Указатель на следующий скрипт
-		uchar SS_ScriptName[8];			// Название скрипта
-		ulong SS_CurrentInstructionPointer;	// Указатель на выполняемую команду
-		ulong SS_ReturnStack[4];		// Стэк результатов
-		ulong SS_Unknown1[2];			// ???
-		ulong SS_StackCounter;			// Счётчик стека
-		ulong SS_LocalVariables[16];	// Локальные переменные
-		ulong SS_TimerA;				// Таймеры скриптов
+		ulong SS_PointerToPrevScript;	// РЈРєР°Р·Р°С‚РµР»СЊ РЅР° РїСЂРµРґС‹РґСѓС‰РёР№ СЃРєСЂРёРїС‚
+		ulong SS_PointerToNextScript;	// РЈРєР°Р·Р°С‚РµР»СЊ РЅР° СЃР»РµРґСѓСЋС‰РёР№ СЃРєСЂРёРїС‚
+		uchar SS_ScriptName[8];			// РќР°Р·РІР°РЅРёРµ СЃРєСЂРёРїС‚Р°
+		ulong SS_CurrentInstructionPointer;	// РЈРєР°Р·Р°С‚РµР»СЊ РЅР° РІС‹РїРѕР»РЅСЏРµРјСѓСЋ РєРѕРјР°РЅРґСѓ
+		ulong SS_ReturnStack[4];		// РЎС‚СЌРє СЂРµР·СѓР»СЊС‚Р°С‚РѕРІ
+		ulong SS_Unknown1[2];
+		ulong SS_StackCounter;			// РЎС‡С‘С‚С‡РёРє СЃС‚РµРєР°
+		ulong SS_LocalVariables[16];	// Р›РѕРєР°Р»СЊРЅС‹Рµ РїРµСЂРµРјРµРЅРЅС‹Рµ
+		ulong SS_TimerA;				// РўР°Р№РјРµСЂС‹ СЃРєСЂРёРїС‚РѕРІ
 		ulong SS_TimerB;
-		uchar SS_IsActive;				// Скрипт активен
-		uchar SS_IfStatementResult;		// Результат выполнения выражения If
-		uchar SS_MissionCleanup;		// Сброс перед выполнением миссии
-		uchar SS_SkipWakeTime;			// ???
-		ulong SS_WakeTime;				// Время приостановки работы скрипта, мс
-		uint SS_IfCheckResult;			// Результат проверки выражения If
-		uchar SS_NotFlag;				// Флаг "не"
-		uchar SS_DeathArrestState;		// Арест или смерть во время миссии
-		uchar SS_DeathArrestExecuted;	// Тест на арест или смерть
-		uchar SS_MissionFlag;			// Флаг миссии
-		uchar SS_Unknown2[2];			// ???
+		uchar SS_IsActive;				// РЎРєСЂРёРїС‚ Р°РєС‚РёРІРµРЅ
+		uchar SS_IfStatementResult;		// Р РµР·СѓР»СЊС‚Р°С‚ РІС‹РїРѕР»РЅРµРЅРёСЏ РІС‹СЂР°Р¶РµРЅРёСЏ If
+		uchar SS_MissionCleanup;		// РЎР±СЂРѕСЃ РїРµСЂРµРґ РІС‹РїРѕР»РЅРµРЅРёРµРј РјРёСЃСЃРёРё
+		uchar SS_SkipWakeTime;
+		ulong SS_WakeTime;				// Р’СЂРµРјСЏ РїСЂРёРѕСЃС‚Р°РЅРѕРІРєРё СЂР°Р±РѕС‚С‹ СЃРєСЂРёРїС‚Р°, РјСЃ
+		uint SS_IfCheckResult;			// Р РµР·СѓР»СЊС‚Р°С‚ РїСЂРѕРІРµСЂРєРё РІС‹СЂР°Р¶РµРЅРёСЏ If
+		uchar SS_NotFlag;				// Р¤Р»Р°Рі "РЅРµ"
+		uchar SS_DeathArrestState;		// РђСЂРµСЃС‚ РёР»Рё СЃРјРµСЂС‚СЊ РІРѕ РІСЂРµРјСЏ РјРёСЃСЃРёРё
+		uchar SS_DeathArrestExecuted;	// РўРµСЃС‚ РЅР° Р°СЂРµСЃС‚ РёР»Рё СЃРјРµСЂС‚СЊ
+		uchar SS_MissionFlag;			// Р¤Р»Р°Рі РјРёСЃСЃРёРё
+		uchar SS_Unknown2[2];
 		} SS;
 
 	uchar SS_Raw[1];

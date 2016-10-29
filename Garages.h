@@ -1,57 +1,61 @@
+п»ї// РљРѕР»РёС‡РµСЃС‚РІРѕ РѕРїРёСЃР°С‚РµР»РµР№ РјР°С€РёРЅ РІ РіР°СЂР°Р¶Р°С…
 #define SD_GR_GC_Count	48
+
+// РљРѕР»РёС‡РµСЃС‚РІРѕ РѕРїРёСЃР°С‚РµР»РµР№ РіР°СЂР°Р¶РµР№
 #define SD_GR_GS_Count	32
 
-// Структура машины в гараже
-// Вынесена из объединения из-за недоступности для функций GaragesInterchange
+// РЎС‚СЂСѓРєС‚СѓСЂР° РѕРїРёСЃР°С‚РµР»СЏ РјР°С€РёРЅС‹ РІ РіР°СЂР°Р¶Рµ
+// Р’С‹РЅРµСЃРµРЅР° РёР· РѕР±СЉРµРґРёРЅРµРЅРёСЏ РёР·-Р·Р° РЅРµРґРѕСЃС‚СѓРїРЅРѕСЃС‚Рё РґР»СЏ С„СѓРЅРєС†РёР№ GaragesInterchange
 struct GarageCars
 	{
-	ulong GR_GC_ModelID;		// Модель авто
-	float GR_GC_X;				// Положение авто в гараже
+	ulong GR_GC_ModelID;		// РњРѕРґРµР»СЊ Р°РІС‚Рѕ
+	float GR_GC_X;				// РџРѕР»РѕР¶РµРЅРёРµ Р°РІС‚Рѕ РІ РіР°СЂР°Р¶Рµ
 	float GR_GC_Y;
 	float GR_GC_Z;
-	float GR_GC_vX;				// Поворот авто
+	float GR_GC_vX;				// РџРѕРІРѕСЂРѕС‚ Р°РІС‚Рѕ
 	float GR_GC_vY;
 	float GR_GC_vZ;
-	ulong GR_GC_Immunity;		// Защита: b3 = damageproof, b2 = explosionproof, b1 = fireproof, b0 = bulletproof
-	uchar GR_GC_PrimaryColor;	// Цвета авто
+	ulong GR_GC_Immunity;		// Р—Р°С‰РёС‚Р°: b3 = damageproof, b2 = explosionproof, b1 = fireproof, b0 = bulletproof
+	uchar GR_GC_PrimaryColor;	// Р¦РІРµС‚Р° Р°РІС‚Рѕ
 	uchar GR_GC_SecondaryColor;
-	uchar GR_GC_RadioStation;	// Текущая радостанция (0 - 9, 10 - выключено)
-	uchar GR_GC_Variation1;		// Конструктивные особенности
+	uchar GR_GC_RadioStation;	// РўРµРєСѓС‰Р°СЏ СЂР°РґРѕСЃС‚Р°РЅС†РёСЏ (0 - 9, 10 - РІС‹РєР»СЋС‡РµРЅРѕ)
+	uchar GR_GC_Variation1;		// РљРѕРЅСЃС‚СЂСѓРєС‚РёРІРЅС‹Рµ РѕСЃРѕР±РµРЅРЅРѕСЃС‚Рё
 	uchar GR_GC_Variation2;
-	uchar GR_GC_BombType;		// Тип мины (0 - нет, 1 - часовая, 2 - на разгон, 3 - радиоуправляемая, 4 - активная 1, 5 - активная 2)
+	uchar GR_GC_BombType;		// РўРёРї РјРёРЅС‹ (0 - РЅРµС‚, 1 - С‡Р°СЃРѕРІР°СЏ, 2 - РЅР° СЂР°Р·РіРѕРЅ, 3 - СЂР°РґРёРѕСѓРїСЂР°РІР»СЏРµРјР°СЏ, 4 - Р°РєС‚РёРІРЅР°СЏ 1, 5 - Р°РєС‚РёРІРЅР°СЏ 2)
 	uchar GR_GC_Unused1[2];
 	};
 
+// Р‘Р»РѕРє РѕРїРёСЃР°С‚РµР»РµР№ РіР°СЂР°Р¶РµР№
 union SD_Garages
 	{
 	struct GR_Formatted
 		{
-		ulong GR_BlockSize;				// Размер блока (0x1EC8)
-		ulong GR_SubBlockSize;			// Размер субблока (0x1EC4)
-		ulong GR_NumberOfGarages;		// Число активных гаражей
-		ulong GR_FreeBombs;				// Бесплатная установка бомб, 0 или 1
-		ulong GR_FreeRespray;			// Бесплатная покраска, 0 или 1
+		ulong GR_BlockSize;				// Р Р°Р·РјРµСЂ Р±Р»РѕРєР° (0x1EC8)
+		ulong GR_SubBlockSize;			// Р Р°Р·РјРµСЂ СЃСѓР±Р±Р»РѕРєР° (0x1EC4)
+		ulong GR_NumberOfGarages;		// Р§РёСЃР»Рѕ Р°РєС‚РёРІРЅС‹С… РіР°СЂР°Р¶РµР№
+		ulong GR_FreeBombs;				// Р‘РµСЃРїР»Р°С‚РЅР°СЏ СѓСЃС‚Р°РЅРѕРІРєР° Р±РѕРјР±, 0 РёР»Рё 1
+		ulong GR_FreeRespray;			// Р‘РµСЃРїР»Р°С‚РЅР°СЏ РїРѕРєСЂР°СЃРєР°, 0 РёР»Рё 1
 		ulong GR_Unused1;
-		ulong GR_SecuricarsCollected;	// Не используется
-		ulong GR_PoliceCarsCollected;	// Не используется
-		ulong GR_SunGarage1Status;		// Автомобили Sunshine; 000001b = авто #1 получено, 100100b = получены авто #3 и #6
-		ulong GR_SunGarage2Status;		// ^ Гараж 2
-		ulong GR_SunGarage3Status;		// ^ Гараж 3
-		ulong GR_SunGarage4Status;		// ^ Гараж 4
-		ulong GR_GarageFullMsgLastShow;	// Время последнего отображения сообщения о полном гараже
+		ulong GR_SecuricarsCollected;	// РќРµ РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ
+		ulong GR_PoliceCarsCollected;	// РќРµ РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ
+		ulong GR_SunGarage1Status;		// РђРІС‚РѕРјРѕР±РёР»Рё Sunshine; 000001b = Р°РІС‚Рѕ #1 РїРѕР»СѓС‡РµРЅРѕ, 100100b = РїРѕР»СѓС‡РµРЅС‹ Р°РІС‚Рѕ #3 Рё #6
+		ulong GR_SunGarage2Status;		// ^ Р“Р°СЂР°Р¶ 2
+		ulong GR_SunGarage3Status;		// ^ Р“Р°СЂР°Р¶ 3
+		ulong GR_SunGarage4Status;		// ^ Р“Р°СЂР°Р¶ 4
+		ulong GR_GarageFullMsgLastShow;	// Р’СЂРµРјСЏ РїРѕСЃР»РµРґРЅРµРіРѕ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ СЃРѕРѕР±С‰РµРЅРёСЏ Рѕ РїРѕР»РЅРѕРј РіР°СЂР°Р¶Рµ
 
-		// Структура машин в гаражах
+		// РЎС‚СЂСѓРєС‚СѓСЂС‹ РјР°С€РёРЅ РІ РіР°СЂР°Р¶Р°С…
 		struct GarageCars GR_GC[SD_GR_GC_Count];
 
-		// Структура гаражей
+		// РЎС‚СЂСѓРєС‚СѓСЂР° РіР°СЂР°Р¶РµР№
 		struct GarageStructure
 			{
-			uchar GR_GS_Type;			// Тип гаража
-			// 2 - Гараж для установки мин с таймером
-			// 3 - Гараж для установки мин со взрывом при разгоне
-			// 4 - Гараж для установки мин на радиоуправлении
-			// 5 - Гараж для покраски
-			// 7 - Пожиратель любых машин без вознаграждения
+			uchar GR_GS_Type;			// РўРёРї РіР°СЂР°Р¶Р°
+			// 2 - Р“Р°СЂР°Р¶ РґР»СЏ СѓСЃС‚Р°РЅРѕРІРєРё РјРёРЅ СЃ С‚Р°Р№РјРµСЂРѕРј
+			// 3 - Р“Р°СЂР°Р¶ РґР»СЏ СѓСЃС‚Р°РЅРѕРІРєРё РјРёРЅ СЃРѕ РІР·СЂС‹РІРѕРј РїСЂРё СЂР°Р·РіРѕРЅРµ
+			// 4 - Р“Р°СЂР°Р¶ РґР»СЏ СѓСЃС‚Р°РЅРѕРІРєРё РјРёРЅ РЅР° СЂР°РґРёРѕСѓРїСЂР°РІР»РµРЅРёРё
+			// 5 - Р“Р°СЂР°Р¶ РґР»СЏ РїРѕРєСЂР°СЃРєРё
+			// 7 - РџРѕР¶РёСЂР°С‚РµР»СЊ Р»СЋР±С‹С… РјР°С€РёРЅ Р±РµР· РІРѕР·РЅР°РіСЂР°Р¶РґРµРЅРёСЏ
 			// 8-10 - Sunshine auto collection 1-3
 			// 16 - El Swanko Casa
 			// 17, 18 - Human Condo 1, 2
@@ -64,43 +68,43 @@ union SD_Garages
 			// 27-30 - Sunshine auto 1-4
 			// 31 - Versetti Estate
 			// 32 - unused save garage
-			uchar GR_GS_Status;				// Состояние: 0 - закрыт, 1 - открыт, 2 - закрывается, 3 - открывается
-			uchar GR_GS_MaxCarsInside;		// Максимум авто в гараже
+			uchar GR_GS_Status;				// РЎРѕСЃС‚РѕСЏРЅРёРµ: 0 - Р·Р°РєСЂС‹С‚, 1 - РѕС‚РєСЂС‹С‚, 2 - Р·Р°РєСЂС‹РІР°РµС‚СЃСЏ, 3 - РѕС‚РєСЂС‹РІР°РµС‚СЃСЏ
+			uchar GR_GS_MaxCarsInside;		// РњР°РєСЃРёРјСѓРј Р°РІС‚Рѕ РІ РіР°СЂР°Р¶Рµ
 			uchar GR_GS_Unused01;
-			uchar GR_GS_MissionKeepCar;		// Машина сохраняется для миссии
-			uchar GR_GS_IsDeactive;			// Гараж неактивен
-			uchar GR_GS_ResprayHappened;	// Флаг состоявшейся покраски
+			uchar GR_GS_MissionKeepCar;		// РњР°С€РёРЅР° СЃРѕС…СЂР°РЅСЏРµС‚СЃСЏ РґР»СЏ РјРёСЃСЃРёРё
+			uchar GR_GS_IsDeactive;			// Р“Р°СЂР°Р¶ РЅРµР°РєС‚РёРІРµРЅ
+			uchar GR_GS_ResprayHappened;	// Р¤Р»Р°Рі СЃРѕСЃС‚РѕСЏРІС€РµР№СЃСЏ РїРѕРєСЂР°СЃРєРё
 			uchar GR_GS_Unused02;
-			ulong GR_GS_TargetCarModel;		// Целевая модель авто
-			ulong GR_GS_DoorObjectPointer;	// Указатель на объект-дверь
-			ulong GR_GS_CrusherTopObjectPointer;	// Указатель на объект-пресс
+			ulong GR_GS_TargetCarModel;		// Р¦РµР»РµРІР°СЏ РјРѕРґРµР»СЊ Р°РІС‚Рѕ
+			ulong GR_GS_DoorObjectPointer;	// РЈРєР°Р·Р°С‚РµР»СЊ РЅР° РѕР±СЉРµРєС‚-РґРІРµСЂСЊ
+			ulong GR_GS_CrusherTopObjectPointer;	// РЈРєР°Р·Р°С‚РµР»СЊ РЅР° РѕР±СЉРµРєС‚-РїСЂРµСЃСЃ
 			uchar GR_GS_Unused1[5];
-			uchar GR_GS_SwingDoor;			// Вид двери: поворотная (1) или подъёмная (0)
-			uchar GR_GS_CameraFollow;		// Следование камеры (0) или вид снаружи (1)
+			uchar GR_GS_SwingDoor;			// Р’РёРґ РґРІРµСЂРё: РїРѕРІРѕСЂРѕС‚РЅР°СЏ (1) РёР»Рё РїРѕРґСЉС‘РјРЅР°СЏ (0)
+			uchar GR_GS_CameraFollow;		// РЎР»РµРґРѕРІР°РЅРёРµ РєР°РјРµСЂС‹ (0) РёР»Рё РІРёРґ СЃРЅР°СЂСѓР¶Рё (1)
 			uchar GR_GS_Unused2;
-			float GR_GS_EntranceBotLeft_X;	// Расположение внутреннего пространства
+			float GR_GS_EntranceBotLeft_X;	// Р Р°СЃРїРѕР»РѕР¶РµРЅРёРµ РІРЅСѓС‚СЂРµРЅРЅРµРіРѕ РїСЂРѕСЃС‚СЂР°РЅСЃС‚РІР°
 			float GR_GS_EntranceBotLeft_Y;
 			float GR_GS_EntranceBotLeft_Z;
-			float GR_GS_QuatRot_X;			// Поворот пространства
+			float GR_GS_QuatRot_X;			// РџРѕРІРѕСЂРѕС‚ РїСЂРѕСЃС‚СЂР°РЅСЃС‚РІР°
 			float GR_GS_QuatRot_Y;
 			float GR_GS_QuatRot_Z;
 			float GR_GS_QuatRot_W;
-			float GR_GS_CeilingZCoord;		// Высота подъёма двери
+			float GR_GS_CeilingZCoord;		// Р’С‹СЃРѕС‚Р° РїРѕРґСЉС‘РјР° РґРІРµСЂРё
 			uchar GR_GS_Unused3[8];
-			float GR_GS_LowerX;				// Размерные координаты
+			float GR_GS_LowerX;				// Р Р°Р·РјРµСЂРЅС‹Рµ РєРѕРѕСЂРґРёРЅР°С‚С‹
 			float GR_GS_UpperX;
 			float GR_GS_LowerY;
 			float GR_GS_UpperY;
-			float GR_GS_DoorCurrentHeight;	// Отстояние двери в закрытом и открытом состоянии от низа гаража
+			float GR_GS_DoorCurrentHeight;	// РћС‚СЃС‚РѕСЏРЅРёРµ РґРІРµСЂРё РІ Р·Р°РєСЂС‹С‚РѕРј Рё РѕС‚РєСЂС‹С‚РѕРј СЃРѕСЃС‚РѕСЏРЅРёРё РѕС‚ РЅРёР·Р° РіР°СЂР°Р¶Р°
 			float GR_GS_DoorMaxHeight;
-			float GR_GS_DoorX;				// Координаты двери
+			float GR_GS_DoorX;				// РљРѕРѕСЂРґРёРЅР°С‚С‹ РґРІРµСЂРё
 			float GR_GS_DoorY;
-			float GR_GS_CrusherTopX;		// Координаты пресса
+			float GR_GS_CrusherTopX;		// РљРѕРѕСЂРґРёРЅР°С‚С‹ РїСЂРµСЃСЃР°
 			float GR_GS_CrusherTopY;
-			float GR_GS_DoorZ;				// Координаты двери
-			float GR_GS_CrusherTopZ;		// Координаты пресса
-			ulong GR_GS_TimeToOpenDoor;		// Время до открытия двери
-			ulong GR_GS_TargettedCar;		// Связанная машина
+			float GR_GS_DoorZ;				// РљРѕРѕСЂРґРёРЅР°С‚С‹ РґРІРµСЂРё
+			float GR_GS_CrusherTopZ;		// РљРѕРѕСЂРґРёРЅР°С‚С‹ РїСЂРµСЃСЃР°
+			ulong GR_GS_TimeToOpenDoor;		// Р’СЂРµРјСЏ РґРѕ РѕС‚РєСЂС‹С‚РёСЏ РґРІРµСЂРё
+			ulong GR_GS_TargettedCar;		// РЎРІСЏР·Р°РЅРЅР°СЏ РјР°С€РёРЅР°
 			uchar GR_GS_Unused4[44];
 			} GR_GS[SD_GR_GS_Count];
 

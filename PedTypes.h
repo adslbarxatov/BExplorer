@@ -1,19 +1,21 @@
+п»ї// РљРѕР»РёС‡РµСЃС‚РІРѕ РѕРїРёСЃР°С‚РµР»РµР№ С‚РёРїРѕРІ РїРµСЂСЃРѕРЅР°Р¶РµР№
 #define SD_PT_S_Count	23
 
+// Р‘Р»РѕРє С‚РёРїРѕРІ РїРµСЂСЃРѕРЅР°Р¶РµР№
 union SD_PedTypes
 	{
 	struct PT_Formatted
 		{
-		ulong PT_BlockSize;		// Размер блока (0x02EC)
-		ulong PT_SubBlockSize;	// Размер субблока (0x02E8)
-		uchar PT_BlockName[4];	// Название блока (PTP)
-		ulong PT_SubBlock1Size;	// Размер оставшегося субблока (0x02E0)
+		ulong PT_BlockSize;		// Р Р°Р·РјРµСЂ Р±Р»РѕРєР° (0x02EC)
+		ulong PT_SubBlockSize;	// Р Р°Р·РјРµСЂ СЃСѓР±Р±Р»РѕРєР° (0x02E8)
+		uchar PT_BlockName[4];	// РќР°Р·РІР°РЅРёРµ Р±Р»РѕРєР° (PTP)
+		ulong PT_SubBlock1Size;	// Р Р°Р·РјРµСЂ РѕСЃС‚Р°РІС€РµРіРѕСЃСЏ СЃСѓР±Р±Р»РѕРєР° (0x02E0)
 
-		// Содержимое файла ped.dat
+		// РћРїРёСЃР°С‚РµР»Рё С‚РёРїРѕРІ РїРµСЂСЃРѕРЅР°Р¶РµР№ (СЃРѕРґРµСЂР¶РёРјРѕРµ С„Р°Р№Р»Р° ped.dat)
 		struct PT_Structure
 			{
 			ulong PT_S_Bitmask;
-			float PT_S_2ndColumnDiv50;	// Столбцы файла
+			float PT_S_2ndColumnDiv50;	// РЎС‚РѕР»Р±С†С‹ С„Р°Р№Р»Р°
 			float PT_S_3rdColumnDiv50;
 			float PT_S_4thColumnDiv50;
 			float PT_S_5thColumn;
@@ -22,7 +24,7 @@ union SD_PedTypes
 			ulong PT_S_AvoidFlags;
 			} PT_S[SD_PT_S_Count];
 
-		ulong PT_LastFloodBlockSize;
+		ulong LastAlignBlockSize;
 		} PT;
 
 	uchar PT_Raw [sizeof (struct PT_Formatted)];

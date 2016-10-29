@@ -1,24 +1,26 @@
+п»ї// РљРѕР»РёС‡РµСЃС‚РІРѕ РѕРїРёСЃР°С‚РµР»РµР№ Р±Р°РЅРґ
 #define SD_GD_S_Count	9
 
+// Р‘Р»РѕРє Р±Р°РЅРґ
 union SD_GangData
 	{
 	struct GD_Formatted
 		{
-		ulong GD_BlockSize;			// Размер блока (0x00E4)
-		ulong GD_SubBlockSize;		// Размер субблока (0x00E0)
-		uchar GD_BlockName[4];		// Название блока (GNG)
-		ulong GD_SubBlock1Size;		// Размер оставшегося блока (0x00D8)
+		ulong GD_BlockSize;			// Р Р°Р·РјРµСЂ Р±Р»РѕРєР° (0x00E4)
+		ulong GD_SubBlockSize;		// Р Р°Р·РјРµСЂ СЃСѓР±Р±Р»РѕРєР° (0x00E0)
+		uchar GD_BlockName[4];		// РќР°Р·РІР°РЅРёРµ Р±Р»РѕРєР° (GNG)
+		ulong GD_SubBlock1Size;		// Р Р°Р·РјРµСЂ РѕСЃС‚Р°РІС€РµРіРѕСЃСЏ Р±Р»РѕРєР° (0x00D8)
 
-		// Структура банды
+		// РћРїРёСЃР°С‚РµР»Рё Р±Р°РЅРґ
 		struct GD_Structure
 			{
-			slong GD_S_CarModel;		// Авто банды (-1 = нет авто)
-			ulong GD_S_PedModel1;		// Первый тип представителя банды
-			ulong GD_S_PedModel2;		// Второй тип представителя банды
-			schar GD_S_PedModelPreference;	// Приоритетный тип
+			slong GD_S_CarModel;		// РђРІС‚Рѕ Р±Р°РЅРґС‹ (-1 = РЅРµС‚ Р°РІС‚Рѕ)
+			ulong GD_S_PedModel1;		// РџРµСЂРІС‹Р№ С‚РёРї РїСЂРµРґСЃС‚Р°РІРёС‚РµР»СЏ Р±Р°РЅРґС‹
+			ulong GD_S_PedModel2;		// Р’С‚РѕСЂРѕР№ С‚РёРї РїСЂРµРґСЃС‚Р°РІРёС‚РµР»СЏ Р±Р°РЅРґС‹
+			schar GD_S_PedModelPreference;	// РџСЂРёРѕСЂРёС‚РµС‚РЅС‹Р№ С‚РёРї
 			uchar GD_S_Unused1[3];
-			ulong GD_S_WeaponNumber1;	// Оружие 1
-			ulong GD_S_WeaponNumber2;	// Оружие 2
+			ulong GD_S_WeaponNumber1;	// РћСЂСѓР¶РёРµ 1
+			ulong GD_S_WeaponNumber2;	// РћСЂСѓР¶РёРµ 2
 			} GD_S [SD_GD_S_Count];
 		} GD;
 

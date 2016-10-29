@@ -1,28 +1,29 @@
-// INCOMPLETED //
+п»ї// INCOMPLETED //
 
+// Р‘Р»РѕРє РёРЅС„РѕСЂРјР°С†РёРё Рѕ С‚РµРєСѓС‰РµРј РёРіСЂРѕРєРµ
 union SD_PlayerInfo
 	{
 	struct PL_Formatted
 		{
-		ulong PL_BlockSize;			// Размер блока (0x0174)
-		ulong PL_SubBlockSize;		// Размер субблока (0x0170)
-		ulong PL_CurrentMoney;		// Текущая сумма наличных
-		uchar PL_WastedBustedStatus;		// Состояние флага ареста/гибели
+		ulong PL_BlockSize;			// Р Р°Р·РјРµСЂ Р±Р»РѕРєР° (0x0174)
+		ulong PL_SubBlockSize;		// Р Р°Р·РјРµСЂ СЃСѓР±Р±Р»РѕРєР° (0x0170)
+		ulong PL_CurrentMoney;		// РўРµРєСѓС‰Р°СЏ СЃСѓРјРјР° РЅР°Р»РёС‡РЅС‹С…
+		uchar PL_WastedBustedStatus;		// РЎРѕСЃС‚РѕСЏРЅРёРµ С„Р»Р°РіР° Р°СЂРµСЃС‚Р°/РіРёР±РµР»Рё
 		uchar PL_Unused1[10];
-		ulong PL_CurrentShowedMoney;		// Текущие отображаемые средства
-		ulong PL_CollectedHiddenPackages;	// Найденные спрятанные пакеты
-		ulong PL_HiddenPackagesCount;		// Количество спрятанных пакетов
-		uchar PL_InfiniteRun;		// Флаг неуставания при беге
-		uchar PL_FastReload;		// Флаг быстрой перезарядки оружия
-		uchar PL_Fireproof;			// Флаг несгораемости
-		uchar PL_MaxHealth;			// Максимальная величина здоровья
-		uchar PL_MaxArmor;			// Максимальная величина брони
-		uchar PL_FreeBusted;		// Позволяет не терять деньги при аресте
-		uchar PL_FreeWasted;		// Позволяет не терять оружие и деньги при гибели
-		uchar PL_DriveByEnabled;	// Включает режим стрельбы из машины
+		ulong PL_CurrentShowedMoney;		// РўРµРєСѓС‰РёРµ РѕС‚РѕР±СЂР°Р¶Р°РµРјС‹Рµ СЃСЂРµРґСЃС‚РІР°
+		ulong PL_CollectedHiddenPackages;	// РќР°Р№РґРµРЅРЅС‹Рµ СЃРїСЂСЏС‚Р°РЅРЅС‹Рµ РїР°РєРµС‚С‹
+		ulong PL_HiddenPackagesCount;		// РљРѕР»РёС‡РµСЃС‚РІРѕ СЃРїСЂСЏС‚Р°РЅРЅС‹С… РїР°РєРµС‚РѕРІ
+		uchar PL_InfiniteRun;		// Р¤Р»Р°Рі РЅРµСѓСЃС‚Р°РІР°РЅРёСЏ РїСЂРё Р±РµРіРµ
+		uchar PL_FastReload;		// Р¤Р»Р°Рі Р±С‹СЃС‚СЂРѕР№ РїРµСЂРµР·Р°СЂСЏРґРєРё РѕСЂСѓР¶РёСЏ
+		uchar PL_Fireproof;			// Р¤Р»Р°Рі РЅРµСЃРіРѕСЂР°РµРјРѕСЃС‚Рё
+		uchar PL_MaxHealth;			// РњР°РєСЃРёРјР°Р»СЊРЅР°СЏ РІРµР»РёС‡РёРЅР° Р·РґРѕСЂРѕРІСЊСЏ
+		uchar PL_MaxArmor;			// РњР°РєСЃРёРјР°Р»СЊРЅР°СЏ РІРµР»РёС‡РёРЅР° Р±СЂРѕРЅРё
+		uchar PL_FreeBusted;		// РџРѕР·РІРѕР»СЏРµС‚ РЅРµ С‚РµСЂСЏС‚СЊ РґРµРЅСЊРіРё РїСЂРё Р°СЂРµСЃС‚Рµ
+		uchar PL_FreeWasted;		// РџРѕР·РІРѕР»СЏРµС‚ РЅРµ С‚РµСЂСЏС‚СЊ РѕСЂСѓР¶РёРµ Рё РґРµРЅСЊРіРё РїСЂРё РіРёР±РµР»Рё
+		uchar PL_DriveByEnabled;	// Р’РєР»СЋС‡Р°РµС‚ СЂРµР¶РёРј СЃС‚СЂРµР»СЊР±С‹ РёР· РјР°С€РёРЅС‹
 		uchar PL_Unknown1[73];
-		ulong PL_UF1UnitsCount;		// Число элементов в следующем массиве
-		float PL_UnknownFlow1[64];
+		ulong PL_UF1UnitsCount;		// Р§РёСЃР»Рѕ СЌР»РµРјРµРЅС‚РѕРІ РІ СЃР»РµРґСѓСЋС‰РµРј РјР°СЃСЃРёРІРµ
+		uchar PL_Unknown2[256];
 		} PL;
 
 	uchar PL_Raw [sizeof (struct PL_Formatted)];

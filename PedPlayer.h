@@ -1,48 +1,58 @@
-// INCOMPLETED //
+п»ї// INCOMPLETED //
 
-#define SD_PPL_WD_Count	10
+// РљРѕР»РёС‡РµСЃС‚РІРѕ РѕРїРёСЃР°РЅРёР№ РѕСЂСѓР¶РёСЏ РёРіСЂРѕРєР°
+#define SD_PPS_WD_Count	10
 
+// РћР±С‰РёРµ РїР°СЂР°РјРµС‚СЂС‹ РјР°СЃСЃРёРІР° РёРіСЂРѕРєРѕРІ
 union SD_PedPlayer
 	{
 	struct PPL_Formatted
 		{
-		ulong PPL_BlockSize;		// Размер блока (0x0708)
-		ulong PPL_SubBlock1Size;	// Размер субблока 1 (0x0703)
-		ulong PPL_NumberOfPlayers;	// Число игроков (1)
-
-		// По идее, дальнейшие данные нужно обрабатывать как массив. Но в нём сейчас всего 1 элемент
-		uchar PPL_Unused1[6];
-		ulong PPL_PlayerIndex;						// Номер игрока
-		uchar PPL_PlayerPedStructureDump1[52];		// Фрагмент дампа структуры игрока
-		float PPL_X;								// Положение игрока
-		float PPL_Y;
-		float PPL_Z;
-		uchar PPL_PlayerPedStructureDump2[788];		// Фрагмент дампа структуры игрока
-		float PPL_CurrentHealth;					// Текущее здоровье (не изменяется вне игры)
-		float PPL_CurrentArmor;						// Текущее состояние брони
-		uchar PPL_PlayerPedStructureDump3[172];		// Фрагмент дампа структуры игрока
-
-		// Структура описателя оружия
-		struct PPL_WeaponData
-			{
-			ulong PPL_WD_WeaponNumber;	// Номер оружия по порядку
-			uchar PPL_WD_Unused1[4];
-			ulong PPL_WD_HolderSize;	// Размер обоймы
-			ulong PPL_WD_BulletsCount;	// Число пуль
-			uchar PPL_WD_Unused2[8];
-			} PPL_WD[SD_PPL_WD_Count];
-
-		uchar PPL_PlayerPedStructureDump4[12];	// Фрагмент дампа структуры игрока
-		uchar PPL_SelectedWeapon;				// Текущее выьранное оружие
-		uchar PPL_PlayerPedStructureDump5[255];	// Фрагмент дампа структуры игрока
-		float PPL_MaxStamina;					// Максимальная устойчивость
-		uchar PPL_PlayerPedStructureDump6[28];	// Фрагмент дампа структуры игрока
-		slong PPL_TargettableObjects[4];		// Объекты, на которых работает автоприцел
-		uchar PPL_PlayerPedStructureDump7[164];	// Фрагмент дампа структуры игрока
-		ulong PPL_MaxWantedLevel;				// Максимальный уровень розыска (рекомендуется 4)
-		ulong PPL_MaxCriminalPoints;			// Максимальная величина интереса полиции (рекомендуется 1800)
-		uchar PPL_SuitName[22];					// Текущий костюм
+		ulong PPL_BlockSize;		// Р Р°Р·РјРµСЂ Р±Р»РѕРєР° (0x0708)
+		ulong PPL_SubBlock1Size;	// Р Р°Р·РјРµСЂ СЃСѓР±Р±Р»РѕРєР° 1 (0x0703)
+		ulong PPL_NumberOfPlayers;	// Р§РёСЃР»Рѕ РёРіСЂРѕРєРѕРІ (1)
 		} PPL;
 
 	uchar PPL_Raw [sizeof (struct PPL_Formatted)];
+	};
+
+// РњР°СЃСЃРёРІ РёРіСЂРѕРєРѕРІ
+union SD_PedPlayerStructure
+	{
+	struct PPS_Formatted
+		{
+		uchar PPS_Unused1[6];
+		ulong PPS_PlayerIndex;						// РќРѕРјРµСЂ РёРіСЂРѕРєР°
+		uchar PPS_Unknown1[52];
+		float PPS_X;								// РџРѕР»РѕР¶РµРЅРёРµ РёРіСЂРѕРєР°
+		float PPS_Y;
+		float PPS_Z;
+		uchar PPS_Unknown2[788];
+		float PPS_CurrentHealth;					// РўРµРєСѓС‰РµРµ Р·РґРѕСЂРѕРІСЊРµ (РЅРµ РёР·РјРµРЅСЏРµС‚СЃСЏ РІРЅРµ РёРіСЂС‹)
+		float PPS_CurrentArmor;						// РўРµРєСѓС‰РµРµ СЃРѕСЃС‚РѕСЏРЅРёРµ Р±СЂРѕРЅРё
+		uchar PPS_Unknown3[172];
+
+		// РЎС‚СЂСѓРєС‚СѓСЂР° РѕРїРёСЃР°С‚РµР»СЏ РѕСЂСѓР¶РёСЏ
+		struct PPS_WeaponData
+			{
+			ulong PPS_WD_WeaponNumber;	// РќРѕРјРµСЂ РѕСЂСѓР¶РёСЏ РїРѕ РїРѕСЂСЏРґРєСѓ
+			uchar PPS_WD_Unused1[4];
+			ulong PPS_WD_HolderSize;	// Р Р°Р·РјРµСЂ РѕР±РѕР№РјС‹
+			ulong PPS_WD_BulletsCount;	// Р§РёСЃР»Рѕ РїСѓР»СЊ
+			uchar PPS_WD_Unused2[8];
+			} PPS_WD[SD_PPS_WD_Count];
+
+		uchar PPS_PlayerPedStructureDump4[12];	// Р¤СЂР°РіРјРµРЅС‚ РґР°РјРїР° СЃС‚СЂСѓРєС‚СѓСЂС‹ РёРіСЂРѕРєР°
+		uchar PPS_SelectedWeapon;				// РўРµРєСѓС‰РµРµ РІС‹СЊСЂР°РЅРЅРѕРµ РѕСЂСѓР¶РёРµ
+		uchar PPS_PlayerPedStructureDump5[255];	// Р¤СЂР°РіРјРµРЅС‚ РґР°РјРїР° СЃС‚СЂСѓРєС‚СѓСЂС‹ РёРіСЂРѕРєР°
+		float PPS_MaxStamina;					// РњР°РєСЃРёРјР°Р»СЊРЅР°СЏ СѓСЃС‚РѕР№С‡РёРІРѕСЃС‚СЊ
+		uchar PPS_PlayerPedStructureDump6[28];	// Р¤СЂР°РіРјРµРЅС‚ РґР°РјРїР° СЃС‚СЂСѓРєС‚СѓСЂС‹ РёРіСЂРѕРєР°
+		slong PPS_TargettableObjects[4];		// РћР±СЉРµРєС‚С‹, РЅР° РєРѕС‚РѕСЂС‹С… СЂР°Р±РѕС‚Р°РµС‚ Р°РІС‚РѕРїСЂРёС†РµР»
+		uchar PPS_PlayerPedStructureDump7[164];	// Р¤СЂР°РіРјРµРЅС‚ РґР°РјРїР° СЃС‚СЂСѓРєС‚СѓСЂС‹ РёРіСЂРѕРєР°
+		ulong PPS_MaxWantedLevel;				// РњР°РєСЃРёРјР°Р»СЊРЅС‹Р№ СѓСЂРѕРІРµРЅСЊ СЂРѕР·С‹СЃРєР° (СЂРµРєРѕРјРµРЅРґСѓРµС‚СЃСЏ 4)
+		ulong PPS_MaxCriminalPoints;			// РњР°РєСЃРёРјР°Р»СЊРЅР°СЏ РІРµР»РёС‡РёРЅР° РёРЅС‚РµСЂРµСЃР° РїРѕР»РёС†РёРё (СЂРµРєРѕРјРµРЅРґСѓРµС‚СЃСЏ 1800)
+		uchar PPS_SuitName[22];					// РўРµРєСѓС‰РёР№ РєРѕСЃС‚СЋРј
+		} PPS;
+
+	uchar PPS_Raw [1];
 	};

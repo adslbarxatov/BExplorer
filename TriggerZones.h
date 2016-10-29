@@ -1,27 +1,29 @@
+п»ї// РљРѕР»РёС‡РµСЃС‚РІРѕ РѕРїРёСЃР°С‚РµР»РµР№ С‚СЂРёРіРіРµСЂ-Р·РѕРЅ
 #define SD_TZ_S_Count	96
 
+// Р‘Р»РѕРє С‚СЂРёРіРіРµСЂ-Р·РѕРЅ
 union SD_TriggerZones
 	{
 	struct TZ_Formatted
 		{
-		ulong TZ_BlockSize;			// Размер блока (0x1508)
-		ulong TZ_SubBlockSize;		// Размер субблока (0x1504)
-		ulong TZ_ZonesCount;		// Число зон
+		ulong TZ_BlockSize;			// Р Р°Р·РјРµСЂ Р±Р»РѕРєР° (0x1508)
+		ulong TZ_SubBlockSize;		// Р Р°Р·РјРµСЂ СЃСѓР±Р±Р»РѕРєР° (0x1504)
+		ulong TZ_ZonesCount;		// Р§РёСЃР»Рѕ Р·РѕРЅ
 
-		// Структура trigger-зоны
+		// РћРїРёСЃР°С‚РµР»Рё С‚СЂРёРіРіРµСЂ-Р·РѕРЅ
 		struct TZ_Structure
 			{
-			ulong TZ_S_Type;				// Тип зоны
-			float TZ_S_Timer;
-			float TZ_S_X1;					// Границы зоны
+			ulong TZ_S_Type;				// РўРёРї Р·РѕРЅС‹
+			float TZ_S_Timer;				// ???
+			float TZ_S_X1;					// Р“СЂР°РЅРёС†С‹ Р·РѕРЅС‹
 			float TZ_S_Y2;
 			float TZ_S_X2;
 			float TZ_S_Y1;
-			float TZ_S_PoliceSpawnA_X;		// Зона входа полиции
+			float TZ_S_PoliceSpawnA_X;		// Р—РѕРЅР° РІС…РѕРґР° РїРѕР»РёС†РёРё
 			float TZ_S_PoliceSpawnA_Y;
 			float TZ_S_PoliceSpawnB_X;
 			float TZ_S_PoliceSpawnB_Y;
-			float TZ_S_PoliceHeadingA_X;	// Зона расположения полиции
+			float TZ_S_PoliceHeadingA_X;	// Р—РѕРЅР° СЂР°СЃРїРѕР»РѕР¶РµРЅРёСЏ РїРѕР»РёС†РёРё
 			float TZ_S_PoliceHeadingA_Y;
 			float TZ_S_PoliceHeadingB_X;
 			float TZ_S_PoliceHeadingB_Y;

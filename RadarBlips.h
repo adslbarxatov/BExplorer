@@ -1,40 +1,41 @@
+п»ї// РљРѕР»РёС‡РµСЃС‚РІРѕ РѕРїРёСЃР°С‚РµР»РµР№ СЂР°РґР°СЂРЅС‹С… СѓРєР°Р·Р°С‚РµР»РµР№
 #define SD_RB_S_Count	75
 
+// Р‘Р»РѕРє СЂР°РґР°СЂРЅС‹С… СѓРєР°Р·Р°С‚РµР»РµР№
 union SD_RadarBlips
 	{
 	struct RB_Formatted
 		{
-		ulong RB_BlockSize;			// Размер блока (0x0E1C)
-		ulong RB_SubBlockSize;		// Размер субблока (0x0E18)
-		uchar RB_BlockName[4];		// Название блока (RDR)
-		ulong RB_SubBlock2Size;		// Размер оставшегося блока
+		ulong RB_BlockSize;			// Р Р°Р·РјРµСЂ Р±Р»РѕРєР° (0x0E1C)
+		ulong RB_SubBlockSize;		// Р Р°Р·РјРµСЂ СЃСѓР±Р±Р»РѕРєР° (0x0E18)
+		uchar RB_BlockName[4];		// РќР°Р·РІР°РЅРёРµ Р±Р»РѕРєР° (RDR)
+		ulong RB_SubBlock2Size;		// Р Р°Р·РјРµСЂ РѕСЃС‚Р°РІС€РµРіРѕСЃСЏ Р±Р»РѕРєР°
 
-		// Структура метки
+		// РћРїРёСЃР°С‚РµР»Рё СЂР°РґР°СЂРЅС‹С… СѓРєР°Р·Р°С‚РµР»РµР№
 		struct RB_Structure
 			{
-			ulong RB_S_Color;		// Цвет (0-6 - фиксированные цвета, остальное - RGB)
-			float RB_S_Unused1;
-			ulong RB_S_BlipType;	// Тип метки: 0 - none, 1 - car, 2 - char, 3 - object/pickup, 4 - coord, 5 - contact point
+			ulong RB_S_Color;		// Р¦РІРµС‚ (0-6 - С„РёРєСЃРёСЂРѕРІР°РЅРЅС‹Рµ С†РІРµС‚Р°, РѕСЃС‚Р°Р»СЊРЅРѕРµ - RGB)
+			uchar RB_S_Unused1[4];
+			ulong RB_S_BlipType;	// РўРёРї РјРµС‚РєРё: 0 - none, 1 - car, 2 - char, 3 - object/pickup, 4 - coord, 5 - contact point
 			ulong RB_S_Entity;
-			float RB_S_RadarX;		// Положение точки на радаре (не для entity)
+			float RB_S_RadarX;		// РџРѕР»РѕР¶РµРЅРёРµ С‚РѕС‡РєРё РЅР° СЂР°РґР°СЂРµ (РЅРµ РґР»СЏ entity)
 			float RB_S_RadarY;
-			float RB_S_MapX;		// Положение точки на карте (не для entity)
+			float RB_S_MapX;		// РџРѕР»РѕР¶РµРЅРёРµ С‚РѕС‡РєРё РЅР° РєР°СЂС‚Рµ (РЅРµ РґР»СЏ entity)
 			float RB_S_MapY;
 			float RB_S_MapZ;
 			uchar RB_S_Unused2[2];
-			uchar RB_S_Brightness;	// Яркость (1 - затемнить; для фиксированных цветов; не для спрайтов)
+			uchar RB_S_Brightness;	// РЇСЂРєРѕСЃС‚СЊ (1 - Р·Р°С‚РµРјРЅРёС‚СЊ; РґР»СЏ С„РёРєСЃРёСЂРѕРІР°РЅРЅС‹С… С†РІРµС‚РѕРІ; РЅРµ РґР»СЏ СЃРїСЂР°Р№С‚РѕРІ)
 			uchar RB_S_Unused3;
-			uchar RB_S_ShortRange;	// Скрывать при выходе за границы радара
+			uchar RB_S_ShortRange;	// РЎРєСЂС‹РІР°С‚СЊ РїСЂРё РІС‹С…РѕРґРµ Р·Р° РіСЂР°РЅРёС†С‹ СЂР°РґР°СЂР°
 			uchar RB_S_Unused4;
-			uint RB_S_Size;			// Размер
-			uint RB_S_ShowType;		// Способ отображения: 0 - скрыть всё; 1 - только на карте; 2 - только на радаре; 3 - показать всё
-			uint RB_S_SpriteNumber;	// Тип спрайта (если есть)
-			// 4 - Avery, 5 - Bikers (буква B), 6 - Cortez, 7 - Diaz, 8 - Kent Paul, 9 - Rosenberg, 10 - Phil, 11 - Bikers (пика),
+			uint RB_S_Size;			// Р Р°Р·РјРµСЂ
+			uint RB_S_ShowType;		// РЎРїРѕСЃРѕР± РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ: 0 - СЃРєСЂС‹С‚СЊ РІСЃС‘; 1 - С‚РѕР»СЊРєРѕ РЅР° РєР°СЂС‚Рµ; 2 - С‚РѕР»СЊРєРѕ РЅР° СЂР°РґР°СЂРµ; 3 - РїРѕРєР°Р·Р°С‚СЊ РІСЃС‘
+			uint RB_S_SpriteNumber;	// РўРёРї СЃРїСЂР°Р№С‚Р° (РµСЃР»Рё РµСЃС‚СЊ)
+			// 4 - Avery, 5 - Bikers (Р±СѓРєРІР° B), 6 - Cortez, 7 - Diaz, 8 - Kent Paul, 9 - Rosenberg, 10 - Phil, 11 - Bikers (РїРёРєР°),
 			// 12 - Boatyard, 13 - Malibu, 14 - Cubans, 15 - Film studio, 16 - Ammu-Nation, 17 - Haitians, 18 - Hardware store,
 			// 19 - Save house, 20 - Pole position, 21 - Ice cream, 22 - Kaufman cabs, 23 - Lovefist, 24 - Printworks,
 			// 26 - Sunshine auto, 27 - Pay'n'spray, 28 - Clothes shop, 29 - Versetti estate, 30 - Phone mission, 31 - 39 - radio stations
 			} RB_S[SD_RB_S_Count];
-
 		} RB;
 
 	uchar RB_Raw [sizeof (struct RB_Formatted)];

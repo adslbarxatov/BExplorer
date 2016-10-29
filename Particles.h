@@ -1,37 +1,39 @@
-// INCOMPLETED //
+п»ї// INCOMPLETED //
 
+// РћР±С‰РёРµ РїР°СЂР°РјРµС‚СЂС‹ РјР°СЃСЃРёРІР° СЌС„С„РµРєС‚РѕРІ Р°РЅРёРјР°С†РёРё
 union SD_Particles
 	{
 	struct PR_Formatted
 		{
-		ulong PR_BlockSize;			// Размер блока
-		ulong PR_SubBlockSize;		// Размер субблока
-		ulong PR_ParticlesCount;	// Число объектов
+		ulong PR_BlockSize;			// Р Р°Р·РјРµСЂ Р±Р»РѕРєР°
+		ulong PR_SubBlockSize;		// Р Р°Р·РјРµСЂ СЃСѓР±Р±Р»РѕРєР°
+		ulong PR_ParticlesCount;	// Р§РёСЃР»Рѕ РѕР±СЉРµРєС‚РѕРІ
 		} PR;
 
 	uchar PR_Raw [sizeof (struct PR_Formatted)];
 	};
 
+// РњР°СЃСЃРёРІ СЌС„С„РµРєС‚РѕРІ Р°РЅРёРјР°С†РёРё
 union SD_ParticleDescription
 	{
 	struct PRD_Formatted
 		{
 		uchar PRD_Unused1[48];
-		float PRD_PositionX;		// Расположение
+		float PRD_PositionX;		// Р Р°СЃРїРѕР»РѕР¶РµРЅРёРµ
 		float PRD_PositionY;
 		float PRD_PositionZ;
 		uchar PRD_Unused2[28];
-		ulong PRD_ParticleType1;	// Типы эффекта
+		ulong PRD_ParticleType1;	// РўРёРїС‹ СЌС„С„РµРєС‚Р°
 		ulong PRD_ParticleType2;
-		uchar PRD_Visibility;		// Видимость
-		uchar PRD_Sparsity;			// Разреженность
-		uint PRD_SparsityCounter;	// Счётчик разреженности
+		uchar PRD_Visibility;		// Р’РёРґРёРјРѕСЃС‚СЊ
+		uchar PRD_Sparsity;			// Р Р°Р·СЂРµР¶РµРЅРЅРѕСЃС‚СЊ
+		uint PRD_SparsityCounter;	// РЎС‡С‘С‚С‡РёРє СЂР°Р·СЂРµР¶РµРЅРЅРѕСЃС‚Рё
 		uchar PRD_Unused3[4];
-		float PRD_StrengthX;		// Координаты усилия?
+		float PRD_StrengthX;		// РљРѕРѕСЂРґРёРЅР°С‚С‹ СѓСЃРёР»РёСЏ?
 		float PRD_StrengthY;
 		float PRD_StrengthZ;
 		uchar PRD_Unused4[4];
-		float PRD_Scale;			// Масштаб
+		float PRD_Scale;			// РњР°СЃС€С‚Р°Р±
 		uchar PRD_Unused5[8];
 		} PRD;
 

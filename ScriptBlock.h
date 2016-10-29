@@ -1,56 +1,63 @@
+п»ї// РћР±С‰РёРµ РїР°СЂР°РјРµС‚СЂС‹ РјР°СЃСЃРёРІР° РїРµСЂРµРјРµРЅРЅС‹С…
 union SD_ScriptBlock
 	{
 	struct SB_Formatted
 		{
-		ulong SB_ScriptBlockSize;		// Размер блока
-		uchar SB_BlockName[4];			// Название блока (SCR)
-		ulong SB_ScriptSubBlockSize;	// Размер субблока
-		ulong SB_ASubblockSize;			// Размер субблока А
+		ulong SB_ScriptBlockSize;		// Р Р°Р·РјРµСЂ Р±Р»РѕРєР°
+		uchar SB_BlockName[4];			// РќР°Р·РІР°РЅРёРµ Р±Р»РѕРєР° (SCR)
+		ulong SB_ScriptSubBlockSize;	// Р Р°Р·РјРµСЂ СЃСѓР±Р±Р»РѕРєР°
+		ulong SB_ASubblockSize;			// Р Р°Р·РјРµСЂ СЃСѓР±Р±Р»РѕРєР° Рђ
 		} SB;
 
 	uchar SB_Raw [sizeof (struct SB_Formatted)];
 	};
 
+// РњР°СЃСЃРёРІ РїРµСЂРµРјРµРЅРЅС‹С…
 union SD_ScriptBlockAUnit
 	{
-	ulong SBA_Variable[1];			// Одна переменная из блока переменных
+	ulong SBA_Variable[1];			// РћРґРЅР° РїРµСЂРµРјРµРЅРЅР°СЏ РёР· Р±Р»РѕРєР° РїРµСЂРµРјРµРЅРЅС‹С…
 
-	uchar SBA_Variable_Raw[1];
+	uchar SBA_Raw[1];
 	};
 
+// РљРѕР»РёС‡РµСЃС‚РІРѕ РѕРїРёСЃР°РЅРёР№ Р·Р°РјРµС‰РµРЅРёР№ РѕР±СЉРµРєС‚РѕРІ
 #define SD_SBB_R_Count		25
+
+// РљРѕР»РёС‡РµСЃС‚РІРѕ РѕРїРёСЃР°РЅРёР№ РЅРµРІРёРґРёРјС‹С… РѕР±СЉРµРєС‚РѕРІ
 #define SD_SBB_IO_Count		20
 
+// РџСЂРѕРґРѕР»Р¶РµРЅРёРµ Р±Р»РѕРєР° РїРµСЂРµРјРµРЅРЅС‹С…
 union SD_ScriptBlockB
 	{
 	struct SBB_Formatted
 		{
-		ulong SBB_BSubblockSize;			// Размер субблока Б
-		ulong SBB_OnMissionFlagAddress;		// Адрес флага нахождения в миссии
-		slong SBB_LastMissionPassTimeMs;	// Время завершения последней миссии в миллисекундах (-1, если миссий не было)
+		ulong SBB_BSubblockSize;			// Р Р°Р·РјРµСЂ СЃСѓР±Р±Р»РѕРєР° Р‘
+		ulong SBB_OnMissionFlagAddress;		// РђРґСЂРµСЃ С„Р»Р°РіР° РЅР°С…РѕР¶РґРµРЅРёСЏ РІ РјРёСЃСЃРёРё
+		slong SBB_LastMissionPassTimeMs;	// Р’СЂРµРјСЏ Р·Р°РІРµСЂС€РµРЅРёСЏ РїРѕСЃР»РµРґРЅРµР№ РјРёСЃСЃРёРё РІ РјРёР»Р»РёСЃРµРєСѓРЅРґР°С… (-1, РµСЃР»Рё РјРёСЃСЃРёР№ РЅРµ Р±С‹Р»Рѕ)
 
+		// РЎС‚СЂСѓРєС‚СѓСЂР° РѕРїРёСЃР°РЅРёР№ Р·Р°РјРµС‰РµРЅРёР№ РѕР±СЉРµРєС‚РѕРІ
 		struct SBB_Replacement
 			{
-			ulong SBB_R_Type;			// Тип замены: 0 - не объект, 1 - объект с прикреплённой трассой, 2 - здание
-			ulong SBB_R_ObjectHandle;	// Указатель на заменяемый объект
-			slong SBB_R_NewModelID;		// Модель, на которую выполняется замена (-1 - не задана)
-			slong SBB_R_OldModelID;		// Заменяемая модель (-1 - не задана)
+			ulong SBB_R_Type;			// РўРёРї Р·Р°РјРµРЅС‹: 0 - РЅРµ РѕР±СЉРµРєС‚, 1 - РѕР±СЉРµРєС‚ СЃ РїСЂРёРєСЂРµРїР»С‘РЅРЅРѕР№ С‚СЂР°СЃСЃРѕР№, 2 - Р·РґР°РЅРёРµ
+			ulong SBB_R_ObjectHandle;	// РЈРєР°Р·Р°С‚РµР»СЊ РЅР° Р·Р°РјРµРЅСЏРµРјС‹Р№ РѕР±СЉРµРєС‚
+			slong SBB_R_NewModelID;		// РњРѕРґРµР»СЊ, РЅР° РєРѕС‚РѕСЂСѓСЋ РІС‹РїРѕР»РЅСЏРµС‚СЃСЏ Р·Р°РјРµРЅР° (-1 - РЅРµ Р·Р°РґР°РЅР°)
+			slong SBB_R_OldModelID;		// Р—Р°РјРµРЅСЏРµРјР°СЏ РјРѕРґРµР»СЊ (-1 - РЅРµ Р·Р°РґР°РЅР°)
 			} SBB_R[SD_SBB_R_Count];
 
+		// РЎС‚СЂСѓРєС‚СѓСЂР° РѕРїРёСЃР°РЅРёР№ РЅРµРІРёРґРёРјС‹С… РѕР±СЉРµРєС‚РѕРІ
 		struct SBB_InvisibleObject
 			{
-			ulong SBB_IO_Type;		// Тип объекта; 0 - не объект, 1 - объект с прикреплённой трассой, 2 - здание,
-									// 3 - загруженный динамический объект, 4 - выгруженный динамический объект
-			ulong SBB_IO_Handle;	// Указатель на объект
+			ulong SBB_IO_Type;		// РўРёРї РѕР±СЉРµРєС‚Р°; 0 - РЅРµ РѕР±СЉРµРєС‚, 1 - РѕР±СЉРµРєС‚ СЃ РїСЂРёРєСЂРµРїР»С‘РЅРЅРѕР№ С‚СЂР°СЃСЃРѕР№, 2 - Р·РґР°РЅРёРµ,
+									// 3 - Р·Р°РіСЂСѓР¶РµРЅРЅС‹Р№ РґРёРЅР°РјРёС‡РµСЃРєРёР№ РѕР±СЉРµРєС‚, 4 - РІС‹РіСЂСѓР¶РµРЅРЅС‹Р№ РґРёРЅР°РјРёС‡РµСЃРєРёР№ РѕР±СЉРµРєС‚
+			ulong SBB_IO_Handle;	// РЈРєР°Р·Р°С‚РµР»СЊ РЅР° РѕР±СЉРµРєС‚
 			} SBB_IO[SD_SBB_IO_Count];
 
-		uchar SBB_InMissionScriptRunning;	// Флаг активности скрипта миссии
-		uchar SBB_CabsRadio;				// Состояние Cauffman cabs radio
+		uchar SBB_InMissionScriptRunning;	// Р¤Р»Р°Рі Р°РєС‚РёРІРЅРѕСЃС‚Рё СЃРєСЂРёРїС‚Р° РјРёСЃСЃРёРё
+		uchar SBB_CabsRadio;				// РЎРѕСЃС‚РѕСЏРЅРёРµ Cauffman cabs radio
 		uchar SBB_Unused01[2];
-
-		ulong SBB_SizeOfMain;				// Размер главного скрипта
-		ulong SBB_SizeOfLargestMission;		// Размер самой большой миссии
-		ulong SBB_MissionsCount;			// Число основных миссий
+		ulong SBB_SizeOfMain;				// Р Р°Р·РјРµСЂ РіР»Р°РІРЅРѕРіРѕ СЃРєСЂРёРїС‚Р°
+		ulong SBB_SizeOfLargestMission;		// Р Р°Р·РјРµСЂ СЃР°РјРѕР№ Р±РѕР»СЊС€РѕР№ РјРёСЃСЃРёРё
+		ulong SBB_MissionsCount;			// Р§РёСЃР»Рѕ РѕСЃРЅРѕРІРЅС‹С… РјРёСЃСЃРёР№
 		} SBB;
 
 	uchar SBB_Raw [sizeof (struct SBB_Formatted)];

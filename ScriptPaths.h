@@ -1,18 +1,19 @@
+п»ї// Р‘Р»РѕРє РїР°СЂР°РјРµС‚СЂРѕРІ РїСѓС‚Рё РїРµСЂРµРјРµС‰РµРЅРёСЏ СЃРїРµС†РѕР±СЉРµРєС‚РѕРІ
 union SD_ScriptPath
 	{
 	struct SP_Formatted
 		{
-		ulong SP_BlockSize;		// Размер блока
-		ulong SP_SubBlockSize;	// Размер субблока
-		ulong SP_PointsCount;	// Количество точек трассы (яхта полковника, spath0.dat)
+		ulong SP_BlockSize;		// Р Р°Р·РјРµСЂ Р±Р»РѕРєР°
+		ulong SP_SubBlockSize;	// Р Р°Р·РјРµСЂ СЃСѓР±Р±Р»РѕРєР°
+		ulong SP_PointsCount;	// РљРѕР»РёС‡РµСЃС‚РІРѕ С‚РѕС‡РµРє С‚СЂР°СЃСЃС‹ (СЏС…С‚Р° РїРѕР»РєРѕРІРЅРёРєР°, spath0.dat)
 		
 		uchar SP_Unused1[4];
-		float SP_TotalDistance;				// Общая длина трассы
-		float SP_MoveSpeed;					// Скорость движения
-		float SP_ObjectPlacementDistance;	// Отступ объекта от трассы
-		float SP_ObjectOffset;				// Дистанция от начала трассы, на которой располагается объект
+		float SP_TotalDistance;				// РћР±С‰Р°СЏ РґР»РёРЅР° С‚СЂР°СЃСЃС‹
+		float SP_MoveSpeed;					// РЎРєРѕСЂРѕСЃС‚СЊ РґРІРёР¶РµРЅРёСЏ
+		float SP_ObjectPlacementDistance;	// РћС‚СЃС‚СѓРї РѕР±СЉРµРєС‚Р° РѕС‚ С‚СЂР°СЃСЃС‹
+		float SP_ObjectOffset;				// Р”РёСЃС‚Р°РЅС†РёСЏ РѕС‚ РЅР°С‡Р°Р»Р° С‚СЂР°СЃСЃС‹, РЅР° РєРѕС‚РѕСЂРѕР№ СЂР°СЃРїРѕР»Р°РіР°РµС‚СЃСЏ РѕР±СЉРµРєС‚
 		uchar SP_Unused2[4];
-		uchar SP_ObjectAttachments[128];	// Неизвестная структура
+		uchar SP_ObjectAttachments[128];	// РќРµРёР·РІРµСЃС‚РЅР°СЏ СЃС‚СЂСѓРєС‚СѓСЂР°
 		} SP;
 
 	uchar SP_Raw [sizeof (struct SP_Formatted)];

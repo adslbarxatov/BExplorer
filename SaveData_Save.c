@@ -1,45 +1,46 @@
-// Отключение предупреждений
+п»ї// РћС‚РєР»СЋС‡РµРЅРёРµ РїСЂРµРґСѓРїСЂРµР¶РґРµРЅРёР№
 #define _CRT_SECURE_NO_WARNINGS
 
-// Подключение общего заголовка
+// РџРѕРґРєР»СЋС‡РµРЅРёРµ РѕР±С‰РµРіРѕ Р·Р°РіРѕР»РѕРІРєР°
 #include "B_explorer.h"
 
-// Макросы
-#define SD_SAVE_FROM_VAR(ReadFrom,BytesCount)	wrotebytes += fwrite (ReadFrom, 1, BytesCount, FO);	\
+// РњР°РєСЂРѕСЃС‹
+#define SD_SAVE_FROM_VAR(ReadFrom,BytesCount)	fwrite (ReadFrom, 1, BytesCount, FO);	\
 	for (i = 0; i < BytesCount; i++)	\
 		{	\
 		checksum += (uchar)ReadFrom[i];	\
 		}
 
-// Функция сохранения файла
-// • FilePath - путь к файлу
-// • SD - структура сохранения
+// Р¤СѓРЅРєС†РёСЏ СЃРѕС…СЂР°РЅРµРЅРёСЏ С„Р°Р№Р»Р°
+// вЂў FilePath - РїСѓС‚СЊ Рє С„Р°Р№Р»Сѓ
+// вЂў SD - СЃС‚СЂСѓРєС‚СѓСЂР° СЃРѕС…СЂР°РЅРµРЅРёСЏ
 int SaveData_Save (char *FilePath, struct SaveData *SD)
 	{
-	// Переменные
+	// РџРµСЂРµРјРµРЅРЅС‹Рµ
 	FILE *FO;
-	ulong checksum = 0, i, wrotebytes = 0;
+	ulong checksum = 0, i;
 
-	// Контроль параметров
+	// РљРѕРЅС‚СЂРѕР»СЊ РїР°СЂР°РјРµС‚СЂРѕРІ
 	if (SD->SD_DP.DP.DP_BlockSize == 0)
 		{
 		return SD_INTRPR_ERR_FileNotLoaded;
 		}
 
-	// Попытка создания файла
+	// РџРѕРїС‹С‚РєР° СЃРѕР·РґР°РЅРёСЏ С„Р°Р№Р»Р°
 	if ((FO = fopen (FilePath, "wb")) == NULL)
 		{
 		return SD_SAVE_ERR_CannotCreateFile;
 		}
 
-	// Запись
+	// Р—Р°РїРёСЃСЊ
 	SD_SAVE_FROM_VAR (SD->SD_DP.DP_Raw, sizeof (union SD_DefaultParameters))
 	SD_SAVE_FROM_VAR (SD->SD_SB.SB_Raw, sizeof (union SD_ScriptBlock))
-	SD_SAVE_FROM_VAR (SD->SD_SBA->SBA_Variable_Raw, SD->SD_SBA_Count * sizeof (union SD_ScriptBlockAUnit))
+	SD_SAVE_FROM_VAR (SD->SD_SBA->SBA_Raw, SD->SD_SBA_Count * sizeof (union SD_ScriptBlockAUnit))
 	SD_SAVE_FROM_VAR (SD->SD_SBB.SBB_Raw, sizeof (union SD_ScriptBlockB))
 	SD_SAVE_FROM_VAR (SD->SD_SC.SC_Raw, sizeof (union SD_ScriptPool))
 	SD_SAVE_FROM_VAR (SD->SD_SS->SS_Raw, SD->SD_SS_Count * sizeof (union SD_ScriptStructure))
 	SD_SAVE_FROM_VAR (SD->SD_PPL.PPL_Raw, sizeof (union SD_PedPlayer))
+	SD_SAVE_FROM_VAR (SD->SD_PPS->PPS_Raw, SD->SD_PPS_Count * sizeof (union SD_PedPlayerStructure))
 	SD_SAVE_FROM_VAR (SD->SD_GR.GR_Raw, sizeof (union SD_Garages))
 	SD_SAVE_FROM_VAR (SD->SD_TS.TS_Raw, sizeof (union SD_TaxiShortcuts))
 
@@ -61,7 +62,7 @@ int SaveData_Save (char *FilePath, struct SaveData *SD)
 			case 5:	// Bike
 				SD_SAVE_FROM_VAR (SD->SD_VS[i].VS_Raw, SD_VS_BiS_Size)
 				break;
-			// Функция загрузки исключает другие варианты
+			// Р¤СѓРЅРєС†РёСЏ Р·Р°РіСЂСѓР·РєРё РёСЃРєР»СЋС‡Р°РµС‚ РґСЂСѓРіРёРµ РІР°СЂРёР°РЅС‚С‹
 			}
 		}
 	//////////////////////////////////////////////////////////////////
@@ -89,11 +90,8 @@ int SaveData_Save (char *FilePath, struct SaveData *SD)
 	SD_SAVE_FROM_VAR (SD->SD_SR.SR_Raw, sizeof (union SD_Streaming))
 	SD_SAVE_FROM_VAR (SD->SD_PT.PT_Raw, sizeof (union SD_PedTypes))
 
-	// Остаточный (padding) блок
-	SD->SD_CS.CS.CS_Sum = BFileSize - sizeof (union SD_CheckSum) - wrotebytes - sizeof (ulong);	// Получение размера остаточного блока
-	SD_SAVE_FROM_VAR (SD->SD_CS.CS_Raw, sizeof (union SD_CheckSum));	// Запись размера с помощью структуры CheckSum
-
-	for (i = 0; i < SD->SD_CS.CS.CS_Sum; i++)	// Запись блока
+	// РћСЃС‚Р°С‚РѕС‡РЅС‹Р№ (padding) Р±Р»РѕРє
+	for (i = 0; i < SD->SD_PT.PT.LastAlignBlockSize; i++)	// Р—Р°РїРёСЃСЊ Р±Р»РѕРєР° РІС‹СЂР°РІРЅРёРІР°РЅРёСЏ
 		{
 		fprintf (FO, "%c", 0);
 		}
@@ -102,7 +100,7 @@ int SaveData_Save (char *FilePath, struct SaveData *SD)
 	SD->SD_CheckSum = SD->SD_CS.CS.CS_Sum = checksum;
 	SD_SAVE_FROM_VAR (SD->SD_CS.CS_Raw, sizeof (union SD_CheckSum));
 
-	// Завершение
+	// Р—Р°РІРµСЂС€РµРЅРёРµ
 	fclose (FO);
 	return SD_SAVE_SUCCESS;
 	}

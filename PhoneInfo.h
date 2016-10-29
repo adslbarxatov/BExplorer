@@ -1,28 +1,31 @@
+п»ї// РљРѕР»РёС‡РµСЃС‚РІРѕ РѕРїРёСЃР°С‚РµР»РµР№ С‚РµР»РµС„РѕРЅРѕРІ-Р°РІС‚РѕРјР°С‚РѕРІ
 #define SD_PI_PS_Count	50
 
+// Р‘Р»РѕРє С‚РµР»РµС„РѕРЅРѕРІ-Р°РІС‚РѕРјР°С‚РѕРІ
 union SD_PhoneInfo
 	{
 	struct PI_Formatted
 		{
-		ulong PI_BlockSize;			// Размер блока (0x0A34)
-		ulong PI_SubBlockSize;		// Размер субблока (0x0A30)
-		ulong PI_PhonesCount;		// Количество телефонов
-		ulong PI_ActivePhonesCount;	// Количество активных телефонов
+		ulong PI_BlockSize;			// Р Р°Р·РјРµСЂ Р±Р»РѕРєР° (0x0A34)
+		ulong PI_SubBlockSize;		// Р Р°Р·РјРµСЂ СЃСѓР±Р±Р»РѕРєР° (0x0A30)
+		ulong PI_PhonesCount;		// РљРѕР»РёС‡РµСЃС‚РІРѕ С‚РµР»РµС„РѕРЅРѕРІ
+		ulong PI_ActivePhonesCount;	// РљРѕР»РёС‡РµСЃС‚РІРѕ Р°РєС‚РёРІРЅС‹С… С‚РµР»РµС„РѕРЅРѕРІ
 
+		// РћРїРёСЃР°С‚РµР»Рё С‚РµР»РµС„РѕРЅРѕРІ-Р°РІС‚РѕРјР°С‚РѕРІ
 		struct PI_PhoneStructure
 			{
-			float PI_PS_X;							//  Расположение
+			float PI_PS_X;							//  Р Р°СЃРїРѕР»РѕР¶РµРЅРёРµ
 			float PI_PS_Y;
 			float PI_PS_Z;
-			ulong PI_PS_PhoneMessagePointers[6];	// Сообщения gxt, закреплённые за телефоном
-			ulong PI_PS_GameTimerOnMsgEnd;			// Время игры при последнем обращении
-			ulong PI_PS_PhoneObjectIndex;			// Индекс объекта телефона
-			ulong PI_PS_Status;						// Состояние
-			// 3 - не звонит, 9 - звонит, остальные не используются
+			ulong PI_PS_PhoneMessagePointers[6];	// РЎРѕРѕР±С‰РµРЅРёСЏ gxt, Р·Р°РєСЂРµРїР»С‘РЅРЅС‹Рµ Р·Р° С‚РµР»РµС„РѕРЅРѕРј
+			ulong PI_PS_GameTimerOnMsgEnd;			// Р’СЂРµРјСЏ РёРіСЂС‹ РїСЂРё РїРѕСЃР»РµРґРЅРµРј РѕР±СЂР°С‰РµРЅРёРё
+			ulong PI_PS_PhoneObjectIndex;			// РРЅРґРµРєСЃ РѕР±СЉРµРєС‚Р° С‚РµР»РµС„РѕРЅР°
+			ulong PI_PS_Status;						// РЎРѕСЃС‚РѕСЏРЅРёРµ
+			// 3 - РЅРµ Р·РІРѕРЅРёС‚, 9 - Р·РІРѕРЅРёС‚, РѕСЃС‚Р°Р»СЊРЅС‹Рµ РЅРµ РёСЃРїРѕР»СЊР·СѓСЋС‚СЃСЏ
 			// 4 = ringing, message just once; 5 = ringing, message repeated, phone was never picked up;
 			// 6 = ringing, message repeated, phone was picked up before; 7 = no ringing, finished state of state 4;
 			// 8 = no ringing, finished state of states 5 and 6
-			uchar PI_PS_IsPlayerNearFrom;			// Флаг близости игрока (звонок слышен)
+			uchar PI_PS_IsPlayerNearFrom;			// Р¤Р»Р°Рі Р±Р»РёР·РѕСЃС‚Рё РёРіСЂРѕРєР° (Р·РІРѕРЅРѕРє СЃР»С‹С€РµРЅ)
 			uchar PI_PS_Unused1[3];
 			} PI_PS[SD_PI_PS_Count];
 		} PI;
