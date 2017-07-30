@@ -1,6 +1,6 @@
 **BExplorerTool**
 
-A tool based on API for work with GTA Vice City save files (\*.b).
+A tool based on BExplorer API for work with GTA Vice City save files (\*.b).
 Allows you to edit some parameters of GTAVCsf.
 
 #
@@ -16,4 +16,4 @@ You need to download two files – executable and library. Also you need to copy
 
 #
 
-Needs Windows XP and newer, Framework 4.0 and newer. Interface language: ru_ru
+Needs Windows XP and newer, Framework 2.0 and newer. Interface language: ru_ru
