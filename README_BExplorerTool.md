@@ -1,4 +1,4 @@
-**BExplorerTool**
+# BExplorerTool
 
 A tool based on BExplorer API for work with GTA Vice City save files (\*.b).
 Allows you to edit some parameters of GTAVCsf.
