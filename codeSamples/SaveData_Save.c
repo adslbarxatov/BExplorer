@@ -6,9 +6,9 @@
 
 // Макросы
 #define SD_SAVE_FROM_VAR(ReadFrom,BytesCount)	fwrite (ReadFrom, 1, BytesCount, FO);	\
-	for (i = 0; i < BytesCount; i++)	\
+	for (j = 0; j < BytesCount; j++)	\
 		{	\
-		checksum += (uchar)ReadFrom[i];	\
+		checksum += (uchar)ReadFrom[j];	\
 		}
 
 // Функция сохранения файла
@@ -18,7 +18,7 @@ int SaveData_Save (char *FilePath, struct SaveData *SD)
 	{
 	// Переменные
 	FILE *FO;
-	ulong checksum = 0, i;
+	ulong checksum = 0, i, j;
 
 	// Контроль параметров
 	if (SD->SD_DP.DP.DP_BlockSize == 0)
@@ -83,7 +83,18 @@ int SaveData_Save (char *FilePath, struct SaveData *SD)
 	SD_SAVE_FROM_VAR (SD->SD_PRD->PRD_Raw, SD->SD_PRD_Count * sizeof (union SD_ParticleDescription))
 	SD_SAVE_FROM_VAR (SD->SD_AU.AU_Raw, sizeof (union SD_AudioScripts))
 	SD_SAVE_FROM_VAR (SD->SD_AS->AS_Raw, SD->SD_AS_Count * sizeof (union SD_AudioScriptStructure))
-	SD_SAVE_FROM_VAR (SD->SD_SP.SP_Raw, sizeof (union SD_ScriptPath))
+	
+	SD_SAVE_FROM_VAR (SD->SD_SPH.SPH_Raw, sizeof (union SD_ScriptPathHeader))
+	for (i = 0; i < SP_PathsCount; i++)
+		{
+		SD_SAVE_FROM_VAR (SD->SD_SP[i].SP_Raw, sizeof (union SD_ScriptPath))
+
+		if (SD->SD_SP[i].SP.SP_PointsCount > 0)
+			{
+			SD_SAVE_FROM_VAR (SD->SD_SPN[i]->SPN_Raw, SD->SD_SP[i].SP.SP_PointsCount * sizeof (union SD_ScriptPathNodes))
+			}
+		}
+	
 	SD_SAVE_FROM_VAR (SD->SD_PL.PL_Raw, sizeof (union SD_PlayerInfo))
 	SD_SAVE_FROM_VAR (SD->SD_ST.ST_Raw, sizeof (union SD_Stats))
 	SD_SAVE_FROM_VAR (SD->SD_TZ.TZ_Raw, sizeof (union SD_TriggerZones))

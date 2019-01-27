@@ -83,9 +83,7 @@ int SaveData_Load (char *FilePath, struct SaveData *SD)
 	
 	// Vehicle structures
 	if (SD->SD_VS)
-		{
 		free (SD->SD_VS);
-		}
 
 	if ((SD->SD_VS = (union SD_VehicleStructure *)malloc (SD->SD_VS_Count * sizeof (union SD_VehicleStructure))) == NULL)
 		{
@@ -126,7 +124,7 @@ int SaveData_Load (char *FilePath, struct SaveData *SD)
 				return SD_LOAD_ERR_LoadVS;
 			}
 
-		if (fread ((SD->SD_VS->VS_Raw + sizeof (ulong)) + i * sizeof (union SD_VehicleStructure), 1, 
+		if (fread (SD->SD_VS->VS_Raw + i * sizeof (union SD_VehicleStructure) + sizeof (ulong), 1, 
 			num - sizeof (ulong), FI) != (num - sizeof (ulong)))
 			{
 			fclose (FI);
@@ -143,7 +141,7 @@ int SaveData_Load (char *FilePath, struct SaveData *SD)
 
 	// Objects structures
 	SD_LOAD_TO_PTR (SD->SD_OS, SD_ObjectStructure, SD->SD_OS_Count * sizeof (union SD_ObjectStructure), SD_LOAD_ERR_LoadOS)
-
+	
 	// Paths block
 	SD_LOAD_TO_VAR (SD->SD_PH.PH_Raw, sizeof (union SD_Paths), SD_LOAD_ERR_LoadPH)
 	SD->SD_PHD_Count = SD->SD_PH.PH.PH_BlockSize - sizeof (ulong);	// По какой-то причине SubBlockSize этой структуры периодически врёт
@@ -190,7 +188,17 @@ int SaveData_Load (char *FilePath, struct SaveData *SD)
 	SD_LOAD_TO_PTR (SD->SD_AS, SD_AudioScriptStructure, SD->SD_AS_Count * sizeof (union SD_AudioScriptStructure), SD_LOAD_ERR_LoadAS)
 
 	// Script path
-	SD_LOAD_TO_VAR (SD->SD_SP.SP_Raw, sizeof (union SD_ScriptPath), SD_LOAD_ERR_LoadSP)
+	SD_LOAD_TO_VAR (SD->SD_SPH.SPH_Raw, sizeof (union SD_ScriptPathHeader), SD_LOAD_ERR_LoadSP)
+	for (i = 0; i < SP_PathsCount; i++)
+		{
+		SD_LOAD_TO_VAR (SD->SD_SP[i].SP_Raw, sizeof (union SD_ScriptPath), SD_LOAD_ERR_LoadSP)
+
+		if (SD->SD_SP[i].SP.SP_PointsCount < 1)
+			continue;
+
+		SD_LOAD_TO_PTR (SD->SD_SPN[i], SD_ScriptPathNodes, SD->SD_SP[i].SP.SP_PointsCount * sizeof (union SD_ScriptPathNodes),
+			SD_LOAD_ERR_LoadSP)
+		}
 
 	// Player info
 	SD_LOAD_TO_VAR (SD->SD_PL.PL_Raw, sizeof (union SD_PlayerInfo), SD_LOAD_ERR_LoadPL)
