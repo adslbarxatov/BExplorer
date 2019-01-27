@@ -1,4 +1,6 @@
-﻿// Общие параметры массива переменных
+﻿// COMPLETED //
+
+// Общие параметры массива переменных
 union SD_ScriptBlock
 	{
 	struct SB_Formatted
@@ -53,11 +55,12 @@ union SD_ScriptBlockB
 			} SBB_IO[SD_SBB_IO_Count];
 
 		uchar SBB_InMissionScriptRunning;	// Флаг активности скрипта миссии
-		uchar SBB_CabsRadio;				// Состояние Cauffman cabs radio
+		uchar SBB_AllowCabsRadio;			// Состояние Cauffman cabs radio
 		uchar SBB_Unused01[2];
 		ulong SBB_SizeOfMain;				// Размер главного скрипта
 		ulong SBB_SizeOfLargestMission;		// Размер самой большой миссии
-		ulong SBB_MissionsCount;			// Число основных миссий
+		uint SBB_MissionsCount;				// Число основных миссий
+		uint SBB_ExclusiveMissionCount;		// Число дополнительных миссий
 		} SBB;
 
 	uchar SBB_Raw [sizeof (struct SBB_Formatted)];

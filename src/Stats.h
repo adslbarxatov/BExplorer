@@ -1,4 +1,6 @@
-﻿// Блок статистики игры
+﻿// COMPLETED //
+
+// Блок статистики игры
 union SD_Stats
 	{
 	struct ST_Formatted
@@ -59,7 +61,7 @@ union SD_Stats
 		ulong ST_MissionAttempts;		// Входов в миссии
 		ulong ST_TaxiPassengers;		// Доставленных пассажиров в такси
 		ulong ST_TaxiCash;				// Выручка в такси
-		uchar ST_Unused1[12];
+		uchar ST_Unused01[12];
 		ulong ST_PornLeafletsVisible;	// Видимость порнопостеров после миссии Dildo dodo
 		ulong ST_AllowSecondaryWeatherTable;	// Разрешение второго файла timecyc
 		float ST_DistanceOnFootM;		// Пройдено пешком, метров
@@ -134,14 +136,14 @@ union SD_Stats
 		ulong ST_BestPercentageInShootist;	// Максимальная точность в Shootist
 		ulong ST_DrugDealsMade;			// Выполнено наркосделок
 		ulong ST_HighestScoreInBeachBall;	// Максимальные очки в пляжном футболе
-		uchar ST_Unused2[4];
+		uchar ST_Unused02[4];
 		ulong ST_HotringBestResult;		// Лучший результат в Hotring
 		ulong ST_PedsKilledInGame;		// Убито людей во время игры (при сохранении всегда 0)
 		ulong ST_TotalPedsKilled;		// Всего убийств ???
 		uchar ST_LastPassedMissionGXTEntry[8];	// Последняя точка входа в базу текстовых строк
 		ulong ST_CheatRating;			// Счётчик читов
 		float ST_RadioListetingTimeMs[10];	// Время прослушивания радиостанций (для каждой)
-		uchar ST_Unused3;
+		uchar ST_Unused03;
 		} ST;
 
 	uchar ST_Raw [sizeof (struct ST_Formatted)];

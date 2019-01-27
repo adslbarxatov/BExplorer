@@ -1,7 +1,9 @@
-﻿// Количество описателей зон респауна типа "госпиталь"
+﻿// COMPLETED //
+
+// Количество описателей зон рестарта типа "госпиталь"
 #define SD_RL_H_Count	8
 
-// Количество описателей зон респауна типа "полицейский участок"
+// Количество описателей зон рестарта типа "полицейский участок"
 #define SD_RL_P_Count	8
 
 // Блок зон респауна
@@ -35,12 +37,12 @@ union SD_RestartLocations
 		uint RL_HospitalRPCount;		// Число госпиталей
 		uint RL_PoliceRPCount;			// Число полицейских участков
 		uchar RL_OverrideNextRestart;	// Переопределение зоны следующего возрождения
-		uchar RL_Unused1[3];
+		uchar RL_Unused01[3];
 		float RL_OverrideX;				// Координаты переопределённой зоны
 		float RL_OverrideY;
 		float RL_OverrideZ;
-		float RL_OverrideRotation;		// Угол поворота
-		uchar RL_Unused2[2];
+		float RL_OverrideRotation;		// Угол переопределённого поворота
+		uchar RL_Unused02[2];
 		uchar RL_OverrideHospitalLevel;	// Уровни переопределения
 		uchar RL_OverridePoliceLevel;
 		} RL;

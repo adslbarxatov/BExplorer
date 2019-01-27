@@ -1,4 +1,4 @@
-﻿// INCOMPLETED //
+﻿// COMPLETED //
 
 // Количество зон типа "navig"
 #define SD_ZB_Navig_Count		20
@@ -22,7 +22,7 @@ union SD_ZonesBuffer
 		uchar ZB_BlockName[4];		// Название блока (ZNS)
 		ulong ZB_SubBlock1Size;		// Размер оставшегося субблока (0x8BD8)
 		ulong ZB_CurrentLevel;		// Суперзона: 1 - beach, 2 - mainland
-		uchar ZB_Unused1[4];
+		uchar ZB_Unused01[4];
 
 		// Описатели зон типа "navig"
 		struct ZB_Zone
@@ -39,17 +39,50 @@ union SD_ZonesBuffer
 			uint ZB_Z_ZoneInfoIDNight;		// ???
 			uint ZB_Z_ZoneInfoIDDay;		// ???
 			slong ZB_Z_ChildZoneIndex;		// Связанные зоны
-			slong ZB_Z_ParentZoneIndex;
-			uchar ZB_Z_Unused1[4];
-			} ZB_NavigZones[SD_ZB_Navig_Count];	// navig.zon
+			slong ZB_Z_ParentZoneIndex;		// Принадлежность зоны
+			uchar ZB_Z_Unused01[4];
+			} ZB_NavigZones[SD_ZB_Navig_Count];	// Содержимое navig.zon
 
 		// Описатели зон типа "info"
-		struct ZB_Zone ZB_InfoZones[SD_ZB_Info_Count];	// info.zon
+		struct ZB_Zone ZB_InfoZones[SD_ZB_Info_Count];	// Содержимое info.zon
 
 		// Описатели зон типа "peds, cars, gangs"
 		struct ZB_ZoneInfo
 			{
-			uchar ZB_ZI_Unknown1[0x44];
+			uint ZB_ZI_InCarPedDensity;
+			uint ZB_ZI_CarClass0Density;	// Normal
+			uint ZB_ZI_CarClass0to1Density;	// Poorfamily
+			uint ZB_ZI_CarClass0to2Density;	// Richfamily
+			uint ZB_ZI_CarClass0to3Density;	// Executive
+			uint ZB_ZI_CarClass0to4Density;	// Worker
+			uint ZB_ZI_CarClass0to5Density;	// Big
+			uint ZB_ZI_CarClass0to6Density;	// Taxi
+			uint ZB_ZI_CarClass0to7Density;	// Moped
+			uint ZB_ZI_CarClass0to8Density;	// Motorbike
+			uint ZB_ZI_CarClass9Density;	// Leisureboat
+			uint ZB_ZI_CarClass9to10Density;// Workerboat
+			uint ZB_ZI_InCarCopAndGang0Density;
+			uint ZB_ZI_InCarCopAndGang0to1Density;
+			uint ZB_ZI_InCarCopAndGang0to2Density;
+			uint ZB_ZI_InCarCopAndGang0to3Density;
+			uint ZB_ZI_InCarCopAndGang0to4Density;
+			uint ZB_ZI_InCarCopAndGang0to5Density;
+			uint ZB_ZI_InCarCopAndGang0to6Density;
+			uint ZB_ZI_InCarCopAndGang0to7Density;
+			uint ZB_ZI_InCarCopAndGang0to8Density;
+			uint ZB_ZI_InCarCopDensity;
+			uint ZB_ZI_OnFootPedDestiny;
+			uint ZB_ZI_OnFootCopAndGang0Density;
+			uint ZB_ZI_OnFootCopAndGang0to1Density;
+			uint ZB_ZI_OnFootCopAndGang0to2Density;
+			uint ZB_ZI_OnFootCopAndGang0to3Density;
+			uint ZB_ZI_OnFootCopAndGang0to4Density;
+			uint ZB_ZI_OnFootCopAndGang0to5Density;
+			uint ZB_ZI_OnFootCopAndGang0to6Density;
+			uint ZB_ZI_OnFootCopAndGang0to7Density;
+			uint ZB_ZI_OnFootCopAndGang0to8Density;
+			uint ZB_ZI_OnFootCopDensity;
+			uint ZB_ZI_PedGroup;
 			} ZB_PedCarGangInfoZones[SD_ZB_PCG_Info_Count];
 
 		uint ZB_NavigZonesCount;			// Количество зон navig

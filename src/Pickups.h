@@ -1,4 +1,6 @@
-﻿// Количество описателей собираемых объектов
+﻿// COMPLETED //
+
+// Количество описателей собираемых объектов
 #define SD_PU_S_Count	336
 
 // Блок собираемых объектов
@@ -20,9 +22,9 @@ union SD_Pickups
 			ulong PU_S_PickupExtraObject;	// ???
 			ulong PU_S_MaxAsset;			// Максимальное значение накопителя (или сумма, взымаемая за покупку)
 			ulong PU_S_AssetTimer;			// Состояние таймера накопителя
-			uint PU_S_AssetRate;			// Частота обновления счётчика
+			uint PU_S_AssetRate;			// Величина накопителя
 			uint PU_S_ModelNumber;			// Номер модели, олицетворяющей объект
-			uint PU_S_Unused1;
+			uint PU_S_Unused01;
 			uchar PU_S_HelpMessage[8];		// Текст из gxt, отображаемый при сборе (попытке сбора) объекта
 			uchar PU_S_PickupType;			// Тип объекта
 			// 0 - не задан (объект отключён)
@@ -37,12 +39,12 @@ union SD_Pickups
 			// 17 - недоступная собственность (не собирается)
 			// 18 - доступная собственность
 			uchar PU_S_HasBeenPickedUp;	// "Собран" ли объект
-			uchar PU_S_Unused2[4];
+			uchar PU_S_Unused02[4];
 			} PU_S[SD_PU_S_Count];
 
-		uint PU_CollectedIndex;				// Индексы собранных объектов, по порядку
-		uchar PU_Unused1[2];
-		uint PU_CollectedIndices[40];
+		uint PU_CollectedIndex;				// Индекс последнего собранного объекта из списка ниже (0 - 19)
+		uchar PU_Unused01[2];
+		ulong PU_CollectedIndices[20];
 		} PU;
 
 	uchar PU_Raw [sizeof (struct PU_Formatted)];

@@ -112,7 +112,10 @@ struct SaveData
 	union SD_AudioScriptStructure *SD_AS;	ulong SD_AS_Count;
 
 	// Script path
-	union SD_ScriptPath SD_SP;
+	union SD_ScriptPathHeader SD_SPH;
+
+	union SD_ScriptPath SD_SP[SP_PathsCount];
+	union SD_ScriptPathNodes *SD_SPN[SP_PathsCount];
 
 	// Player info
 	union SD_PlayerInfo SD_PL;

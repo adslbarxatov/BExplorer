@@ -1,4 +1,4 @@
-﻿// INCOMPLETED
+﻿// INCOMPLETED //
 
 // Общие параметры массива трасс
 union SD_Paths
@@ -15,7 +15,7 @@ union SD_Paths
 // Массив трасс
 union SD_PathsDescription
 	{
-	uchar PHD_Unknown1[1];
+	uchar PHD_Unknown01[1];
 
 	uchar PHD_Raw[1];
 	};

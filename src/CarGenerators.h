@@ -1,4 +1,6 @@
-﻿// Количество описателей парковок
+﻿// COMPLETED //
+
+// Количество описателей парковок
 #define SD_CG_S_Count	185
 
 // Блок парковок
@@ -15,7 +17,7 @@ union SD_CarGenerators
 		ulong CG_ActiveCarCount;	// Количество активных генераторов
 		uchar CG_GeneratorCounter;	// Состояние счётчика генерации
 		uchar CG_GenerateWhenCounterClosed;
-		uchar CG_Unused1[2];
+		uchar CG_Unused01[2];
 		ulong CG_SubBlock3Size;		// Размер следующей части блока
 
 		// Описатели парковок
@@ -31,14 +33,14 @@ union SD_CarGenerators
 			uchar CG_S_ForceSpawn;		// Обязательная генерация
 			uchar CG_S_Alarm;			// Вероятность срабатывания сигнализации
 			uchar CG_S_Lock;			// Вероятность блокировки
-			uchar CG_S_Unused1;
+			uchar CG_S_Unused01;
 			uint CG_S_MinDelay;			// Диапазон времени генерации
 			uint CG_S_MaxDelay;
 			ulong CG_S_GameTimerWhenGenerated;	// Время игры в момент генерации
 			slong CG_S_CarIndex;
 			sint CG_S_AllowSpawn;		// Доступность (-1 - доступна, 0 - недоступна)
 			uchar CG_S_HasBeenStolen;	// Уже украдена или нет
-			uchar CG_S_Unused2;
+			uchar CG_S_Unused02;
 			} CG_S[SD_CG_S_Count];
 		} CG;
 

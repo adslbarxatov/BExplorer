@@ -33,12 +33,13 @@ union SD_VehicleStructure
 		ulong VS_VehicleType;		// Тип транспорта: 0 - general, 1 - boat, 5 - bike
 		uint VS_VehicleID;			// Объект-транспорт
 		ulong VS_VehicleIndex;		// Индекс объекта
-		uchar VS_Unknown1[42];
+		uchar VS_Unknown01[42];
 		float VS_X;					// Координаты объекта
 		float VS_Y;
 		float VS_Z;
-		uchar VS_Unknown2[30];
-		uchar VS_Unknown3[SD_VS_GVS_Size /* max */ - 94];
+		uchar VS_Unknown02[28];
+		uint VS_ModelNumber;
+		uchar VS_Unknown03[SD_VS_GVS_Size /* max */ - 94];
 		} VS;
 
 	uchar VS_Raw [1];

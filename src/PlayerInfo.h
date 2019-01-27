@@ -9,7 +9,7 @@ union SD_PlayerInfo
 		ulong PL_SubBlockSize;		// Размер субблока (0x0170)
 		ulong PL_CurrentMoney;		// Текущая сумма наличных
 		uchar PL_WastedBustedStatus;		// Состояние флага ареста/гибели
-		uchar PL_Unused1[10];
+		uchar PL_Unknown01[10];
 		ulong PL_CurrentShowedMoney;		// Текущие отображаемые средства
 		ulong PL_CollectedHiddenPackages;	// Найденные спрятанные пакеты
 		ulong PL_HiddenPackagesCount;		// Количество спрятанных пакетов
@@ -21,9 +21,7 @@ union SD_PlayerInfo
 		uchar PL_FreeBusted;		// Позволяет не терять деньги при аресте
 		uchar PL_FreeWasted;		// Позволяет не терять оружие и деньги при гибели
 		uchar PL_DriveByEnabled;	// Включает режим стрельбы из машины
-		uchar PL_Unknown1[73];
-		ulong PL_UF1UnitsCount;		// Число элементов в следующем массиве
-		uchar PL_Unknown2[256];
+		uchar PL_Unknown02[333];
 		} PL;
 
 	uchar PL_Raw [sizeof (struct PL_Formatted)];

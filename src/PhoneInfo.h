@@ -1,4 +1,6 @@
-﻿// Количество описателей телефонов-автоматов
+﻿// COMPLETED //
+
+// Количество описателей телефонов-автоматов
 #define SD_PI_PS_Count	50
 
 // Блок телефонов-автоматов
@@ -26,7 +28,7 @@ union SD_PhoneInfo
 			// 6 = ringing, message repeated, phone was picked up before; 7 = no ringing, finished state of state 4;
 			// 8 = no ringing, finished state of states 5 and 6
 			uchar PI_PS_IsPlayerNearFrom;			// Флаг близости игрока (звонок слышен)
-			uchar PI_PS_Unused1[3];
+			uchar PI_PS_Unused01[3];
 			} PI_PS[SD_PI_PS_Count];
 		} PI;
 

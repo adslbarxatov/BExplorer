@@ -1,4 +1,6 @@
-﻿// Количество описателей портовых кранов
+﻿// COMPLETED //
+
+// Количество описателей портовых кранов
 #define SD_CR_S_Count	8
 
 // Блок портовых кранов
@@ -39,7 +41,7 @@ union SD_Cranes
 			float CR_S_CraneHookCurrentX;		// Текущие координаты крюка крана
 			float CR_S_CraneHookCurrentY;
 			float CR_S_CraneHookCurrentZ;
-			uchar CR_S_Unused1[8];
+			uchar CR_S_Unused01[8];
 			ulong CR_S_TargettedCarPointer;
 			ulong CR_S_GameTimerOnLiftFinish;	// Время игры в момент завершения подъёма
 			uchar CR_S_CraneActivity;			// Действие крана
@@ -50,9 +52,9 @@ union SD_Cranes
 			uchar CR_S_CollectedCarsCount;		// Количество собранный машин
 			uchar CR_S_IsCrusherCrane;			// Флаг прессового крана
 			uchar CR_S_IsMilitaryCrane;			// Флаг военного крана
-			uchar CR_S_Unused2;
+			uchar CR_S_Unused02;
 			uchar CR_S_IsNot_doc_crane_cab0;	// Флаг спецификации крана
-			uchar CR_S_Unused3;
+			uchar CR_S_Unused03;
 			} CR_S[SD_CR_S_Count];
 		} CR;
 

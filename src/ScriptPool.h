@@ -1,4 +1,4 @@
-﻿// INCOMPLETED //
+﻿// COMPLETED //
 
 // Общие параметры массива скриптов
 union SD_ScriptPool
@@ -16,13 +16,13 @@ union SD_ScriptStructure
 	{
 	struct SS_Formatted
 		{
-		ulong SS_PointerToPrevScript;	// Указатель на предыдущий скрипт
-		ulong SS_PointerToNextScript;	// Указатель на следующий скрипт
+		ulong SS_PointerToNextScript;	// Указатель на предыдущий скрипт
+		ulong SS_PointerToPrevScript;	// Указатель на следующий скрипт
 		uchar SS_ScriptName[8];			// Название скрипта
 		ulong SS_CurrentInstructionPointer;	// Указатель на выполняемую команду
-		ulong SS_ReturnStack[4];		// Стэк результатов
-		ulong SS_Unknown1[2];
-		ulong SS_StackCounter;			// Счётчик стека
+		ulong SS_ReturnStack[6];		// Стэк результатов
+		uint SS_StackCounter;			// Счётчик стека
+		uint SS_Unused01;
 		ulong SS_LocalVariables[16];	// Локальные переменные
 		ulong SS_TimerA;				// Таймеры скриптов
 		ulong SS_TimerB;
@@ -36,7 +36,7 @@ union SD_ScriptStructure
 		uchar SS_DeathArrestState;		// Арест или смерть во время миссии
 		uchar SS_DeathArrestExecuted;	// Тест на арест или смерть
 		uchar SS_MissionFlag;			// Флаг миссии
-		uchar SS_Unknown2[2];
+		uint SS_Unused02;
 		} SS;
 
 	uchar SS_Raw[1];

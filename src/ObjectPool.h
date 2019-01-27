@@ -23,7 +23,12 @@ union SD_ObjectStructure
 		float OS_X;				// Координаты объекта
 		float OS_Y;
 		float OS_Z;
-		uchar OS_Unknown1[70];
+		uchar OS_Unknown01[40];
+		uchar OS_ObjectSubtype;
+		uchar OS_PickupFlag;	// Является ли объект собираемым
+		uchar OS_PickupInShopFlag;
+		uchar US_PickupInShopOOSFlag;
+		uchar OS_Unknown02[26];
 		} OS;
 
 	uchar OS_Raw[1];
