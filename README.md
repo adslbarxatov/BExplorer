@@ -17,4 +17,12 @@ WARNING! It is strongly recommended to use EXACTLY THESE header files and EXACTL
 
 #
 
+We've formalized our [Applications development policy (ADP)](https://vk.com/@rdaaow_fupl-adp).
+We're strongly recommend reading it before using our products.
+
+Мы формализовали нашу [Политику разработки приложений (ADP)](https://vk.com/@rdaaow_fupl-adp).
+Настоятельно рекомендуем ознакомиться с ней перед использованием наших продуктов.
+
+#
+
 Information source / Источник информации: http://www.gtamodding.com/wiki/Saves_(GTA_VC)
