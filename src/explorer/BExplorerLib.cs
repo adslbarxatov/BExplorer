@@ -43,7 +43,7 @@ namespace BExplorer
 		/// <returns>Ключ сверки</returns>
 		[DllImport ("B_explorerLib.dll")]
 		private static extern string SaveData_GetLibVersionKeyEx ();
-		private const string AppVersionKey = "\x03\x01|\x18.\x10.\x16";
+		private const string AppVersionKey = "\x19\x02|\x20.\x01.\x06";
 
 		/// <summary>
 		/// Imported from C/C++ DLL
@@ -82,88 +82,365 @@ namespace BExplorer
 			return res;
 			}
 
-		// Коды операций для следующих трёх функций
+		/// <summary>
+		/// Коды операций для следующих трёх функций
+		/// </summary>
 		public enum OpCodes
 			{
+			/// <summary>
+			/// Год
+			/// </summary>
 			SaveYear = 0,
+
+			/// <summary>
+			/// Месяц
+			/// </summary>
 			SaveMonth = 1,
+
+			/// <summary>
+			/// День
+			/// </summary>
 			SaveDay = 2,
+
+			/// <summary>
+			/// Час
+			/// </summary>
 			SaveHour = 3,
+
+			/// <summary>
+			/// Минута
+			/// </summary>
 			SaveMinute = 4,
+
+			/// <summary>
+			/// Секунда
+			/// </summary>
 			SaveSecond = 5,
+
+			/// <summary>
+			/// Длина минуты в игре
+			/// </summary>
 			InGameMinuteLength = 6,
+
+			/// <summary>
+			/// Час внутри игры
+			/// </summary>
 			InGameHour = 7,
+
+			/// <summary>
+			/// Минута внутри игры
+			/// </summary>
 			InGameMinute = 8,
+
+			/// <summary>
+			/// Скорость времени в игре
+			/// </summary>
 			GameSpeed = 9,
+
+			/// <summary>
+			/// Текущая погода
+			/// </summary>
 			CurrentWeather = 10,
+
+			/// <summary>
+			/// Позиция камеры наблюдения
+			/// </summary>
 			CarOverview = 11,
+
+			/// <summary>
+			/// Состояние радиоволны таксистов
+			/// </summary>
 			CabsRadio = 100,
-			PlayerWeapons_Base = 200,	// Этот и следующие [количество определено далее] кодов отвечают за оружие
+
+			/// <summary>
+			/// Базовый код для настроек оружия.
+			/// Этот и следующие (количество определено далее) коды отвечают за оружие
+			/// </summary>
+			PlayerWeapons_Base = 200,
+
+			/// <summary>
+			/// Текущая броня
+			/// </summary>
 			CurrentArmor = 210,
+
+			/// <summary>
+			/// Интерес полиции
+			/// </summary>
 			MaxPoliceStars = 211,
+
+			/// <summary>
+			/// Костюм игрока
+			/// </summary>
 			PlayerSuit = 212,
+
+			/// <summary>
+			/// Базовый код для настроек гаражей
+			/// </summary>
 			Garages_Base = 300,
+
+			/// <summary>
+			/// Базовый код для настроек банд
+			/// </summary>
 			Gangs_Base = 400,
+
+			/// <summary>
+			/// Текущие наличные
+			/// </summary>
 			CurrentMoney = 500,
+
+			/// <summary>
+			/// Флаг бесконечного бега
+			/// </summary>
 			InfiniteRun = 501,
+
+			/// <summary>
+			/// Флаг быстрой перезарядки оружия
+			/// </summary>
 			FastReload = 502,
+
+			/// <summary>
+			/// Флаг несгораемости
+			/// </summary>
 			Fireproof = 503,
+
+			/// <summary>
+			/// Максимальное здоровье
+			/// </summary>
 			MaxHealth = 504,
+
+			/// <summary>
+			/// Максимальная броня
+			/// </summary>
 			MaxArmor = 505,
+
+			/// <summary>
+			/// Флаг бесконечных патронов
+			/// </summary>
 			InfiniteAmmo = 506,
+
+			/// <summary>
+			/// Базовый код для собираемых объектов
+			/// </summary>
 			Pickups_Base = 1000,
+
+			/// <summary>
+			/// Количество доступных парковок
+			/// </summary>
 			ActiveGenerators = 2000,
+
+			/// <summary>
+			/// Базовый код для настроек парковок
+			/// </summary>
 			Generators_Base = 2001
 			}
+
+		/// <summary>
+		/// Количество доступных слотов оружия
+		/// </summary>
 		public const uint WeaponsCount = 10;
+
+		/// <summary>
+		/// Количество доступных гаражей
+		/// </summary>
 		public const uint GaragesCount = 21;
+
+		/// <summary>
+		/// Количество доступных банд
+		/// </summary>
 		public const uint GangsCount = 8;
+
+		/// <summary>
+		/// Максимальное количество собираемых объектов
+		/// </summary>
 		public const uint PickupsCount = 336;
+
+		/// <summary>
+		/// Количество доступных парковок
+		/// </summary>
 		public const uint GeneratorsCount = 185;
+
+		/// <summary>
+		/// Возможные параметры оружия
+		/// </summary>
 		public enum WeaponsParCodes
 			{
+			/// <summary>
+			/// Тип оружия
+			/// </summary>
 			WeaponType = 0,
+
+			/// <summary>
+			/// Количество патронов
+			/// </summary>
 			WeaponAmmo = 1
 			}
+
+		/// <summary>
+		/// Возможные параметры гаража
+		/// </summary>
 		public enum GaragesParCodes
 			{
+			/// <summary>
+			/// Модель авто
+			/// </summary>
 			CarModel = 0,
+
+			/// <summary>
+			/// Флаги защиты
+			/// </summary>
 			Immunity = 1,
+
+			/// <summary>
+			/// Первый цвет
+			/// </summary>
 			PrimaryColor = 2,
+
+			/// <summary>
+			/// Второй цвет
+			/// </summary>
 			SecondaryColor = 3,
+
+			/// <summary>
+			/// Радиостанция
+			/// </summary>
 			RadioStation = 4,
+
+			/// <summary>
+			/// Тип минирования
+			/// </summary>
 			BombType = 5
 			}
+
+		/// <summary>
+		/// Возможные параметры банд
+		/// </summary>
 		public enum GangsParCodes
 			{
+			/// <summary>
+			/// Модел авто
+			/// </summary>
 			CarModel = 0,
+
+			/// <summary>
+			/// Первый скин
+			/// </summary>
 			PrimaryPedModel = 1,
+
+			/// <summary>
+			/// Второй скин
+			/// </summary>
 			SecondaryPedModel = 2,
+
+			/// <summary>
+			/// Первое оружие
+			/// </summary>
 			PrimaryWeapon = 3,
+
+			/// <summary>
+			/// Второе оружие
+			/// </summary>
 			SecondaryWeapon = 4
 			}
+
+		/// <summary>
+		/// Возможные параметры собираемых объектов
+		/// </summary>
 		public enum PickupsParCodes
 			{
+			/// <summary>
+			/// Модель объекта
+			/// </summary>
 			ObjectModel = 0,
+
+			/// <summary>
+			/// Координата X
+			/// </summary>
 			ObjectX = 1,
+
+			/// <summary>
+			/// Координата Y
+			/// </summary>
 			ObjectY = 2,
+
+			/// <summary>
+			/// Координата Z
+			/// </summary>
 			ObjectZ = 3,
+
+			/// <summary>
+			/// Тип объекта
+			/// </summary>
 			ObjectType = 4,
+
+			/// <summary>
+			/// Накопитель объекта
+			/// </summary>
 			ObjectAsset = 5,		// Устанавливать можно только это значение
+
+			/// <summary>
+			/// Флаг состояния "объект собран"
+			/// </summary>
 			HasBeenPickedUp = 6
 			}
+
+		/// <summary>
+		/// Возможные параметры парковок
+		/// </summary>
 		public enum GeneratorsParCodes
 			{
+			/// <summary>
+			/// Модель авто
+			/// </summary>
 			CarModel = 0,
+
+			/// <summary>
+			/// Координата X
+			/// </summary>
 			CarX = 1,
+
+			/// <summary>
+			/// Координата Y
+			/// </summary>
 			CarY = 2,
+
+			/// <summary>
+			/// Координата Z
+			/// </summary>
 			CarZ = 3,
+
+			/// <summary>
+			/// Угол поворота
+			/// </summary>
 			CarAngle = 4,
+
+			/// <summary>
+			/// Разрешение генерации авто
+			/// </summary>
 			AllowSpawn = 5,
+
+			/// <summary>
+			/// Первый цвет
+			/// </summary>
 			PrimaryColor = 6,
+
+			/// <summary>
+			/// Второй цвет
+			/// </summary>
 			SecondaryColor = 7,
+
+			/// <summary>
+			/// Вероятность срабатывания сигнализации
+			/// </summary>
 			AlarmProbability = 8,
+
+			/// <summary>
+			/// Вероятность блокировки
+			/// </summary>
 			LockProbability = 9,
+
+			/// <summary>
+			/// Флаг обязательной генерации
+			/// </summary>
 			ForceSpawn = 10
 			}
 
@@ -188,9 +465,8 @@ namespace BExplorer
 		public static string SaveData_SetParameterValue (UInt16 OpCode, UInt16 ParCode, string NewValue)
 			{
 			if (NewValue == null)
-				{
 				return SaveData_ErrorPromptEx (-1002);	// Код ошибки "значение вне диапазона"
-				}
+
 			return SaveData_CommandInterpreterEx (1, OpCode, ParCode, NewValue.Replace (',', '.'));
 			}
 
@@ -206,16 +482,12 @@ namespace BExplorer
 			// Извлечение значений границ
 			string v = SaveData_CommandInterpreterEx (4, OpCode, ParCode, "");
 			if (!IsResultSuccessful (v))
-				{
 				return 0.0f;
-				}
 
 			char[] splitters = new char[] { ';' };
 			string[] values = v.Split (splitters, StringSplitOptions.RemoveEmptyEntries);
 			if (values.Length != 2)
-				{
 				return 0.0f;
-				}
 
 			float min = 0.0f, max = 0.0f;
 			try
@@ -229,20 +501,29 @@ namespace BExplorer
 
 			// Возврат
 			if (Max)
-				{
 				return max;
-				}
 			else
-				{
 				return min;
-				}
 			}
 
-		// Варианты загружаемых файлов
+		/// <summary>
+		/// Варианты загружаемых файлов
+		/// </summary>
 		public enum LoadableParameters
 			{
+			/// <summary>
+			/// Параметры гаражей
+			/// </summary>
 			Garages = 1,
+
+			/// <summary>
+			/// Статистика
+			/// </summary>
 			Stats = 2,
+
+			/// <summary>
+			/// Параметры парковок
+			/// </summary>
 			Generators = 3
 			}
 
@@ -255,18 +536,34 @@ namespace BExplorer
 		public static string SaveData_LoadParametersFile (LoadableParameters ParametersType, string FileName)
 			{
 			if (FileName == null)
-				{
 				return SaveData_CommandInterpreterEx (2, (UInt16)ParametersType, 0, "<");
-				}
+
 			return SaveData_CommandInterpreterEx (2, (UInt16)ParametersType, 0, FileName);
 			}
 
-		// Варианты загружаемых файлов
+		/// <summary>
+		/// Варианты загружаемых файлов
+		/// </summary>
 		public enum SaveableParameters
 			{
+			/// <summary>
+			/// Файл сохранения
+			/// </summary>
 			SaveFile = 0,
+
+			/// <summary>
+			/// Параметры гаражей
+			/// </summary>
 			Garages = 1,
+
+			/// <summary>
+			/// Статистика
+			/// </summary>
 			Stats = 2,
+
+			/// <summary>
+			/// Параметры парковок
+			/// </summary>
 			Generators = 3
 			}
 
@@ -279,9 +576,8 @@ namespace BExplorer
 		public static string SaveData_SaveParametersFile (SaveableParameters ParametersType, string FileName)
 			{
 			if (FileName == null)
-				{
 				return SaveData_CommandInterpreterEx (3, (UInt16)ParametersType, 0, "<");
-				}
+
 			return SaveData_CommandInterpreterEx (3, (UInt16)ParametersType, 0, FileName);
 			}
 

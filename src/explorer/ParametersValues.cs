@@ -491,6 +491,27 @@ namespace BExplorer
 			}
 		#endregion
 
+		#region Бомбы
+		private static ParameterValue[] bombs = {
+			new ParameterValue (0, "Без бомбы"),
+			new ParameterValue (1, "Часовая (10 секунд)"),
+			new ParameterValue (2, "Разгонная (второй водитель)"),
+			// new ParameterValue (3, "Радиобомба"),				// Работает только при минировании в доках
+			// new ParameterValue (4, "Активная часовая (?)"),		// Не работает
+			new ParameterValue (5, "Активная разгонная") };
+
+		/// <summary>
+		/// Возвращает список вариантов минирования авто
+		/// </summary>
+		public static ParameterValue[] Bombs
+			{
+			get
+				{
+				return bombs;
+				}
+			}
+		#endregion
+
 		#region Банды
 		private static string[] gangsSlots = {
 			"кубинцы",

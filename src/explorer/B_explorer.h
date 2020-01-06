@@ -14,8 +14,8 @@
 #define ulong		unsigned slong
 #define udlong		unsigned sdlong
 
-#define B_VERSION			3,3,0,0
-#define B_VERSION_S			"3.3.0.0"
+#define B_VERSION			3,4,0,0
+#define B_VERSION_S			"3.4.0.0"
 #define B_PRODUCT			"GTA Vice city save file interpretation library"
 #define B_COMPANY			"RD AAOW"
 
@@ -375,7 +375,7 @@ char *SaveData_CommandInterpreter (struct SaveData *SD, uint Mode, uint OpCode, 
 #define SD_LIMIT_plmxh_B	100		// pl-maxhealth
 #define SD_LIMIT_plmxh_T	200
 #define SD_LIMIT_plmxa_B	SD_LIMIT_plmxh_B	// pl-maxarmor
-#define SD_LIMIT_plmxa_T	250
+#define SD_LIMIT_plmxa_T	SD_LIMIT_plmxh_T
 #define SD_LIMIT_cgcmo_B	SD_LIMIT_gdcmo_B	// cg-carmodel (-1, 130 - 236)
 #define SD_LIMIT_cgcmo_T	SD_LIMIT_grcmo_T
 #define SD_LIMIT_cgx_B		-2000.0f		// cg-x

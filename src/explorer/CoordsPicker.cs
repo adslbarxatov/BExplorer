@@ -132,6 +132,9 @@ namespace BExplorer
 		// Указание новой позиции
 		private void PictMap_MouseDown (object sender, MouseEventArgs e)
 			{
+			if (!PickOK.Visible)
+				return;
+
 			PickX.Value = PickX.Minimum + HorPictScroll.Value + e.X;
 			PickY.Value = PickY.Maximum - VertPictScroll.Value - e.Y;
 

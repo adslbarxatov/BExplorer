@@ -17,7 +17,8 @@ namespace BExplorer
 		private Pickups pu;					// Экземпляр-обработчик списка денежных накопителей (пока так)
 		private CoordsPicker cp;			// Форма выбора координат на карте
 		private ToDoStatus tds;				// Экземпляр-обработчик ToDo-статуса
-		private CultureInfo cie = new CultureInfo ("en-us");	// Определение формы отображения дробных чисел с использованием точки вместо запятой
+		private CultureInfo cie = new CultureInfo ("en-us");	// Дробные числа с использованием точки вместо запятой
+		private int error;					// Код ошибки
 
 		/// <summary>
 		/// Метод инициализирует форму
@@ -42,6 +43,7 @@ namespace BExplorer
 					"приложения.\nОбратитесь к автору программы для получения корректной сборки программы",
 					ProgramDescription.AssemblyTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
 
+				error = -1;
 				this.Close ();
 				return;
 				}
@@ -52,12 +54,12 @@ namespace BExplorer
 					"получения корректной сборки программы",
 					ProgramDescription.AssemblyTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
 
+				error = -2;
 				this.Close ();
 				return;
 				}
 
 			// Проверка наличия файла цветовой схемы
-			int error;
 			cc = new CarColors (out error);
 			if (error != 0)
 				{
@@ -146,6 +148,11 @@ namespace BExplorer
 				GR_Radio.Items.Add (ParametersValues.Radios[i].Name);
 				}
 
+			for (int i = 0; i < ParametersValues.Bombs.Length; i++)
+				{
+				GR_Bomb.Items.Add (ParametersValues.Bombs[i].Name);
+				}
+
 			PU_AssetValue.Maximum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)BExplorerLib.OpCodes.Pickups_Base,
 				(UInt16)BExplorerLib.PickupsParCodes.ObjectAsset, true);
 			PU_AssetValue.Minimum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)BExplorerLib.OpCodes.Pickups_Base,
@@ -226,6 +233,15 @@ namespace BExplorer
 			{
 			OFDialog.FileName = "";
 			OFDialog.ShowDialog ();
+			}
+
+		private void DefaultFileButton_Click (object sender, EventArgs e)
+			{
+			// Пробуем открыть файл из стандартного расположения
+			OFDialog.FileName = Environment.GetFolderPath (Environment.SpecialFolder.MyDocuments) +
+				"\\GTA Vice City User Files\\GTAVCsf" + ((uint)OpenFileNumber.Value).ToString () + ".b";
+
+			OFDialog_FileOk (null, null);
 			}
 
 		// Файл выбран
@@ -515,6 +531,15 @@ namespace BExplorer
 			SFDialog.ShowDialog ();
 			}
 
+		private void UpdateDefaultButton_Click (object sender, EventArgs e)
+			{
+			// Пробуем открыть файл из стандартного расположения
+			SFDialog.FileName = Environment.GetFolderPath (Environment.SpecialFolder.MyDocuments) +
+				"\\GTA Vice City User Files\\GTAVCsf" + ((uint)OpenFileNumber.Value).ToString () + ".b";
+
+			SFDialog_FileOk (null, null);
+			}
+
 		// Место выбрано
 		private void SFDialog_FileOk (object sender, System.ComponentModel.CancelEventArgs e)
 			{
@@ -537,82 +562,90 @@ namespace BExplorer
 		// Кнопка выхода
 		private void ExitButton_Click (object sender, System.EventArgs e)
 			{
-			if (MessageBox.Show ("Вы уверены, что сохранили все необходимые изменения?", ProgramDescription.AssemblyTitle,
-				MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
-				{
-				this.Close ();
-				}
+			this.Close ();
+			}
+
+		private void MainForm_FormClosing (object sender, FormClosingEventArgs e)
+			{
+			e.Cancel = (error == 0) && (MessageBox.Show ("Вы уверены, что сохранили все необходимые изменения?",
+				ProgramDescription.AssemblyTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question,
+				MessageBoxDefaultButton.Button2) == DialogResult.No);
 			}
 
 		// Установка всех настроечных контролов в состояние доступен/недоступен
 		private void SetState (bool State)
 			{
-			SaveFileButton.Enabled = State;
-			DangerousReset.Enabled = State;
+			SaveFileButton.Enabled =
+				UpdateDefaultFileButton.Enabled =
 
-			DP_Date.Enabled = State;
-			DP_Time.Enabled = State;
-			DP_IML.Enabled = State;
-			DP_GameTime.Enabled = State;
-			DP_GameSpeed.Enabled = State;
-			DP_Weather.Enabled = State;
-			DP_CameraPos.Enabled = State;
-			SBB_CabsRadio.Enabled = State;
+				RecommendedSettings.Enabled =
+				DangerousReset.Enabled = State;
 
-			PL_MaxHealth.Enabled = State;
-			PL_MaxArmor.Enabled = State;
-			PL_CurArmor.Enabled = State;
-			PL_MWL.Enabled = State;
-			PL_CurMoney.Enabled = State;
-			PL_Suit.Enabled = State;
-			PL_InfRun.Enabled = State;
-			PL_FastReload.Enabled = State;
-			PL_Fireproof.Enabled = State;
-			PL_Bullets.Enabled = State;
-			PL_Weapon.Enabled = State;
-			WeaponsList.Enabled = State;
+			DP_Date.Enabled =
+				DP_Time.Enabled =
+				DP_IML.Enabled =
+				DP_GameTime.Enabled =
+				DP_GameSpeed.Enabled =
+				DP_Weather.Enabled =
+				DP_CameraPos.Enabled =
+				SBB_CabsRadio.Enabled = State;
 
-			GaragesList.Enabled = State;
-			GR_CarModel.Enabled = State;
-			GR_CarColor1.Enabled = State;
-			GR_CarColor2.Enabled = State;
-			GR_Radio.Enabled = State;
-			GR_BulletsProof.Enabled = State;
-			GR_DamageProof.Enabled = State;
-			GR_ExplProof.Enabled = State;
-			GR_FireProof.Enabled = State;
-			LoadGarages.Enabled = State;
-			SaveGarages.Enabled = State;
+			PL_MaxHealth.Enabled =
+				PL_MaxArmor.Enabled =
+				PL_CurArmor.Enabled =
+				PL_MWL.Enabled =
+				PL_CurMoney.Enabled =
+				PL_Suit.Enabled =
+				PL_InfRun.Enabled =
+				PL_FastReload.Enabled =
+				PL_Fireproof.Enabled =
+				PL_Bullets.Enabled =
+				PL_Weapon.Enabled =
+				WeaponsList.Enabled = State;
 
-			GangsList.Enabled = State;
-			GD_CarModel.Enabled = State;
-			GD_PedModel1.Enabled = State;
-			GD_PedModel2.Enabled = State;
-			GD_Weapon1.Enabled = State;
-			GD_Weapon2.Enabled = State;
+			GaragesList.Enabled =
+				GR_CarModel.Enabled =
+				GR_CarColor1.Enabled =
+				GR_CarColor2.Enabled =
+				GR_Radio.Enabled =
+				GR_Bomb.Enabled =
+				GR_BulletsProof.Enabled =
+				GR_DamageProof.Enabled =
+				GR_ExplProof.Enabled =
+				GR_FireProof.Enabled =
+				LoadGarages.Enabled =
+				SaveGarages.Enabled = State;
 
-			SaveStats.Enabled = State;
-			LoadStats.Enabled = State;
-			ToDoStatusView.Enabled = State;
+			GangsList.Enabled =
+				GD_CarModel.Enabled =
+				GD_PedModel1.Enabled =
+				GD_PedModel2.Enabled =
+				GD_Weapon1.Enabled =
+				GD_Weapon2.Enabled =
 
-			CarGenList.Enabled = State;
-			CG_AlarmProb.Enabled = State;
-			CG_AllowSpawn.Enabled = State;
-			CG_CarColor1.Enabled = State;
-			CG_CarColor2.Enabled = State;
-			CG_CarModel.Enabled = State;
-			CG_ForceSpawn.Enabled = State;
-			CG_LockProb.Enabled = State;
-			CG_Rotation.Enabled = State;
-			CG_X.Enabled = State;
-			CG_Y.Enabled = State;
-			CG_Z.Enabled = State;
-			CarGenGetCoords.Enabled = State;
-			LoadCG.Enabled = State;
-			SaveCG.Enabled = State;
-			AbortSorting.Enabled = State;
+				SaveStats.Enabled =
+				LoadStats.Enabled =
+				ToDoStatusView.Enabled = State;
 
-			ST_InfBullets.Enabled = State;
+			CarGenList.Enabled =
+				CG_AlarmProb.Enabled =
+				CG_AllowSpawn.Enabled =
+				CG_CarColor1.Enabled =
+				CG_CarColor2.Enabled =
+				CG_CarModel.Enabled =
+				CG_ForceSpawn.Enabled =
+				CG_LockProb.Enabled =
+				CG_Rotation.Enabled =
+				CG_X.Enabled =
+				CG_Y.Enabled =
+				CG_Z.Enabled = State;
+
+			CarGenGetCoords.Enabled =
+				LoadCG.Enabled =
+				SaveCG.Enabled =
+				AbortSorting.Enabled =
+
+				ST_InfBullets.Enabled = State;
 			}
 
 		// Изменена дата
@@ -919,7 +952,7 @@ namespace BExplorer
 			{
 			loading = true;
 
-			string model, imm, c1, c2, radio;
+			string model, imm, c1, c2, radio, bomb;
 			if (!GetParameterValue ((UInt16)((int)BExplorerLib.OpCodes.Garages_Base + GaragesList.SelectedIndex),
 				(UInt16)BExplorerLib.GaragesParCodes.CarModel, out model) ||
 				!GetParameterValue ((UInt16)((int)BExplorerLib.OpCodes.Garages_Base + GaragesList.SelectedIndex),
@@ -929,7 +962,9 @@ namespace BExplorer
 				!GetParameterValue ((UInt16)((int)BExplorerLib.OpCodes.Garages_Base + GaragesList.SelectedIndex),
 				(UInt16)BExplorerLib.GaragesParCodes.SecondaryColor, out c2) ||
 				!GetParameterValue ((UInt16)((int)BExplorerLib.OpCodes.Garages_Base + GaragesList.SelectedIndex),
-				(UInt16)BExplorerLib.GaragesParCodes.RadioStation, out radio))
+				(UInt16)BExplorerLib.GaragesParCodes.RadioStation, out radio) ||
+				!GetParameterValue ((UInt16)((int)BExplorerLib.OpCodes.Garages_Base + GaragesList.SelectedIndex),
+				(UInt16)BExplorerLib.GaragesParCodes.BombType, out bomb))
 				{
 				loading = false;
 				return;
@@ -952,6 +987,15 @@ namespace BExplorer
 				if (decimal.Parse (radio) == ParametersValues.Radios[i].ID)
 					{
 					GR_Radio.Text = ParametersValues.Radios[i].Name;
+					break;
+					}
+				}
+
+			for (int i = 0; i < ParametersValues.Bombs.Length; i++)
+				{
+				if (decimal.Parse (bomb) == ParametersValues.Bombs[i].ID)
+					{
+					GR_Bomb.Text = ParametersValues.Bombs[i].Name;
 					break;
 					}
 				}
@@ -1007,21 +1051,27 @@ namespace BExplorer
 		private void GR_Radio_SelectedIndexChanged (object sender, System.EventArgs e)
 			{
 			if (loading)
-				{
 				return;
-				}
 
 			SetParameterValue ((UInt16)((int)BExplorerLib.OpCodes.Garages_Base + GaragesList.SelectedIndex),
 				(UInt16)BExplorerLib.GaragesParCodes.RadioStation, ParametersValues.Radios[GR_Radio.SelectedIndex].ID.ToString ());
+			}
+
+		// Изменён вид минирования
+		private void GR_Bomb_SelectedIndexChanged (object sender, EventArgs e)
+			{
+			if (loading)
+				return;
+
+			SetParameterValue ((UInt16)((int)BExplorerLib.OpCodes.Garages_Base + GaragesList.SelectedIndex),
+				(UInt16)BExplorerLib.GaragesParCodes.BombType, ParametersValues.Bombs[GR_Bomb.SelectedIndex].ID.ToString ());
 			}
 
 		// Изменены флаги защиты
 		private void GR_FireProof_CheckedChanged (object sender, System.EventArgs e)
 			{
 			if (loading)
-				{
 				return;
-				}
 
 			int f = 0;
 			if (GR_BulletsProof.Checked)
@@ -1045,21 +1095,6 @@ namespace BExplorer
 				(UInt16)BExplorerLib.GaragesParCodes.Immunity, f.ToString ());
 			}
 
-		private void GR_ExplProof_CheckedChanged (object sender, System.EventArgs e)
-			{
-			GR_FireProof_CheckedChanged (sender, e);
-			}
-
-		private void GR_DamageProof_CheckedChanged (object sender, System.EventArgs e)
-			{
-			GR_FireProof_CheckedChanged (sender, e);
-			}
-
-		private void GR_BulletsProof_CheckedChanged (object sender, System.EventArgs e)
-			{
-			GR_FireProof_CheckedChanged (sender, e);
-			}
-
 		// Выбран денежный накопитель
 		private void AssetList_SelectedIndexChanged (object sender, System.EventArgs e)
 			{
@@ -1077,9 +1112,7 @@ namespace BExplorer
 		private void PU_AssetValue_ValueChanged (object sender, System.EventArgs e)
 			{
 			if (loading)
-				{
 				return;
-				}
 
 			if (AssetList.SelectedIndex >= 0)
 				{
@@ -1162,9 +1195,7 @@ namespace BExplorer
 		private void GD_PedModel1_ValueChanged (object sender, System.EventArgs e)
 			{
 			if (loading)
-				{
 				return;
-				}
 
 			SetParameterValue ((UInt16)((int)BExplorerLib.OpCodes.Gangs_Base + GangsList.SelectedIndex),
 				(UInt16)BExplorerLib.GangsParCodes.PrimaryPedModel, GD_PedModel1.Value.ToString ());
@@ -1173,9 +1204,7 @@ namespace BExplorer
 		private void GD_PedModel2_ValueChanged (object sender, System.EventArgs e)
 			{
 			if (loading)
-				{
 				return;
-				}
 
 			SetParameterValue ((UInt16)((int)BExplorerLib.OpCodes.Gangs_Base + GangsList.SelectedIndex),
 				(UInt16)BExplorerLib.GangsParCodes.SecondaryPedModel, GD_PedModel2.Value.ToString ());
@@ -1185,9 +1214,7 @@ namespace BExplorer
 		private void GD_Weapon1_SelectedIndexChanged (object sender, System.EventArgs e)
 			{
 			if (loading)
-				{
 				return;
-				}
 
 			SetParameterValue ((UInt16)((int)BExplorerLib.OpCodes.Gangs_Base + GangsList.SelectedIndex),
 				(UInt16)BExplorerLib.GangsParCodes.PrimaryWeapon, ParametersValues.Weapons[GD_Weapon1.SelectedIndex].ID.ToString ());
@@ -1196,9 +1223,7 @@ namespace BExplorer
 		private void GD_Weapon2_SelectedIndexChanged (object sender, System.EventArgs e)
 			{
 			if (loading)
-				{
 				return;
-				}
 
 			SetParameterValue ((UInt16)((int)BExplorerLib.OpCodes.Gangs_Base + GangsList.SelectedIndex),
 				(UInt16)BExplorerLib.GangsParCodes.SecondaryWeapon, ParametersValues.Weapons[GD_Weapon2.SelectedIndex].ID.ToString ());
@@ -1240,79 +1265,19 @@ namespace BExplorer
 			CGColorLabel2.ForeColor = (CG_CarColor2.Value >= 0) ? cc.Colors[(int)CG_CarColor2.Value] : Color.FromName ("ControlDark");
 			}
 
-		// Изменена модель авто
+		// Изменены настройки авто
 		private void CG_CarModel_SelectedIndexChanged (object sender, System.EventArgs e)
 			{
 			CGColorLabel1.ForeColor = (CG_CarColor1.Value >= 0) ? cc.Colors[(int)CG_CarColor1.Value] : Color.FromName ("ControlDark");
 			CGColorLabel2.ForeColor = (CG_CarColor2.Value >= 0) ? cc.Colors[(int)CG_CarColor2.Value] : Color.FromName ("ControlDark");
 
 			if (loading)
-				{
 				return;
-				}
 
 			cg.SetGeneratorData ((int)CarGenList.Value, new CarGenerators.CGData ((Int32)ParametersValues.CarsForCG[CG_CarModel.SelectedIndex].ID,
 				(float)CG_X.Value, (float)CG_Y.Value, (float)CG_Z.Value, (float)CG_Rotation.Value, (Int16)(CG_AllowSpawn.Checked ? -1 : 0),
 				(short)CG_CarColor1.Value, (short)CG_CarColor2.Value, (uint)CG_AlarmProb.Value, (uint)CG_LockProb.Value,
 				CG_ForceSpawn.Checked ? 1U : 0U));
-			}
-
-		// Изменены координаты и поворот
-		private void CG_X_ValueChanged (object sender, System.EventArgs e)
-			{
-			CG_CarModel_SelectedIndexChanged (sender, e);
-			}
-
-		private void CG_Y_ValueChanged (object sender, System.EventArgs e)
-			{
-			CG_CarModel_SelectedIndexChanged (sender, e);
-			}
-
-		private void CG_Z_ValueChanged (object sender, System.EventArgs e)
-			{
-			CG_CarModel_SelectedIndexChanged (sender, e);
-			}
-
-		private void CG_Rotation_ValueChanged (object sender, System.EventArgs e)
-			{
-			CG_CarModel_SelectedIndexChanged (sender, e);
-			}
-
-		// Изменены цветаа
-		private void CG_CarColor1_ValueChanged (object sender, System.EventArgs e)
-			{
-			CG_CarModel_SelectedIndexChanged (sender, e);
-			}
-
-		private void CG_CarColor2_ValueChanged (object sender, System.EventArgs e)
-			{
-			CG_CarModel_SelectedIndexChanged (sender, e);
-			}
-
-		// Изменены прочие параметры
-		private void CG_AlarmProb_ValueChanged (object sender, System.EventArgs e)
-			{
-			CG_CarModel_SelectedIndexChanged (sender, e);
-			}
-
-		private void CG_LockProb_ValueChanged (object sender, System.EventArgs e)
-			{
-			CG_CarModel_SelectedIndexChanged (sender, e);
-			}
-
-		private void CG_AllowSpawn_CheckedChanged (object sender, System.EventArgs e)
-			{
-			CG_CarModel_SelectedIndexChanged (sender, e);
-			}
-
-		private void CG_ForceSpawn_CheckedChanged (object sender, System.EventArgs e)
-			{
-			CG_CarModel_SelectedIndexChanged (sender, e);
-			}
-
-		private void CG_Stolen_CheckedChanged (object sender, System.EventArgs e)
-			{
-			CG_CarModel_SelectedIndexChanged (sender, e);
 			}
 
 		// Выбор координат
@@ -1394,9 +1359,7 @@ namespace BExplorer
 		private void ST_InfBullets_CheckedChanged (object sender, System.EventArgs e)
 			{
 			if (loading)
-				{
 				return;
-				}
 
 			SetParameterValue ((UInt16)BExplorerLib.OpCodes.InfiniteAmmo, 0, ST_InfBullets.Checked ? "1" : "0");
 			}
@@ -1485,6 +1448,16 @@ namespace BExplorer
 				MessageBox.Show ("Ошибка сохранения файла параметров гаражей:\n" + msg, ProgramDescription.AssemblyTitle,
 					MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 				}
+			}
+
+		// Применение рекомендуемых настроек
+		private void RecommendedSettings_Click (object sender, EventArgs e)
+			{
+			DP_Date.Value = DP_Time.Value = DateTime.Now;
+			DP_GameTime.Value = new DateTime (2000, 1, 1, 5, 1, 0);
+			DP_Weather.SelectedIndex = 0;
+			PL_CurArmor.Value = PL_CurArmor.Maximum;
+			PL_MWL.SelectedIndex = 0;
 			}
 		}
 	}
