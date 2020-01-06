@@ -1,28 +1,27 @@
-# BExplorer v 3.4
+# BExplorer tool v 2.14
 
-An API for work with GTA Vice City save files (.b) / API для работы с файлами сохранений GTA Vice City
-
-#
-
-Here is a set of header files that represent the structure and parameters of GTA Vice City save file
-(as it is known today) and file loading/saving functions that represent the order and processing
-features of data blocks. It can be useful for developers that want to create an UI for loading,
-editing and saving GTAVCsf.
-
-WARNING! It is strongly recommended to use EXACTLY THESE header files and EXACTLY THESE functions TOGETHER.
-Header definitions use direct handling with memory (unsafe mode) (implicitly defined pointers/arrays,
-structures and unions) and using them without recommended functions may cause unexpected application behaviour
-(of course, if you don't know what you're doing).
+A tool based on BExplorer API for work with GTA Vice City save files (.b) /
+Инструмент для редактирования файлов сохранений GTA Vice City на базе API
 
 #
 
-Здесь располагается набор заголовочных файлов, представляющих структуру и параметры файла сохранения игры GTA Vice City
-(насколько они известны сегодня), а также функции загрузки и сохранения, демонстрирующие алгоритм чтения/записи файла.
-Эта страница может быть полезна разработчикам, планирующим создать UI для работы с файлами сохранений GTA.
+Warning! Tool is not completed yet and may cause unexpected effects in save files.
+If you got some, please, remind us about it. And *backup your save files before using this tool*.
 
-ВНИМАНИЕ! Настоятельно рекомендуется использовать ИМЕННО ЭТИ заголовочные файлы с ИМЕННО ЭТИМИ функциями. Описанные структуры
-работают с памятью напрямую (в небезопасном режиме) (строго заданные указатели, массивы, структуры и объединения). Их использование
-вне рекомендованных функций может вызвать непредвиденное поведение программы (конечно, если вы не знаете, что делаете).
+Внимание! Инструмент ещё разрабатывается и может вызывать непредвиденные эффекты в файлах
+сохранений. Если Вы столкнулись с одним из них, пожалуйста, напишите нам об этом. И обязательно
+*делайте резервные копии файлов перед использованием программы*.
+
+#
+
+**Usage**
+
+You need to download two files – executable and library. Also you need to copy 'carcols.dat' from your
+'GTA Vice City' setup directory to the application folder. You can use attached file, but car colors
+presented in application and in game will differ.
+
+Вам нужны два файла – приложение и библиотека. Также Вам потребуется файл 'carcols.dat' из папки, где установлена игра.
+Вы можете использовать имеющийся здесь файл, но в этом случае цвета авто в игре могут отличаться от отображаемых в программе.
 
 #
 
@@ -34,4 +33,6 @@ We're strongly recommend reading it before using our products.
 
 #
 
-Information source / Источник информации: http://www.gtamodding.com/wiki/Saves_(GTA_VC)
+Needs Windows XP and newer, Framework 2.0 and newer. Interface language: ru_ru
+
+Требуется ОС Windows XP и новее, Framework 2.0 и новее. Язык интерфейса: ru_ru
