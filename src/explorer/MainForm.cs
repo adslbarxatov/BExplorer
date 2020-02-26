@@ -37,17 +37,18 @@ namespace BExplorer
 			{
 			// Контроль корректности связи с библиотекой функций
 			int res = BExplorerLib.Check ();
-			if (res < 0)
+			if (res != 0)
 				{
-				MessageBox.Show ("Версия используемой библиотеки «" + ProgramDescription.CriticalComponents[0] + "» не соответствует версии " +
-					"приложения.\nОбратитесь к автору программы для получения корректной сборки программы",
+				MessageBox.Show ("Версия используемой библиотеки «" + ProgramDescription.CriticalComponents[0] +
+					"» не соответствует текущей версии приложения.\nОбратитесь к разработчику программы для получения " +
+					"корректной сборки программы",
 					ProgramDescription.AssemblyTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
 
 				error = -1;
 				this.Close ();
 				return;
 				}
-			else if (res > 0)
+			/*else if (res > 0)
 				{
 				MessageBox.Show ("Отказ ссылки №" + res.ToString () + " в библиотеке «" + ProgramDescription.CriticalComponents[0] +
 					"». Возможно, библиотека повреждена, или используется недопустимая версия.\nОбратитесь к автору программы для " +
@@ -57,7 +58,7 @@ namespace BExplorer
 				error = -2;
 				this.Close ();
 				return;
-				}
+				}*/
 
 			// Проверка наличия файла цветовой схемы
 			cc = new CarColors (out error);
@@ -516,6 +517,7 @@ namespace BExplorer
 			if (ToDoStatusView.Items.Count == 0)
 				{
 				ToDoStatusView.Items.Add ("(игра пройдена полностью)");
+				DangerousReset.Enabled = AbortSorting.Enabled = ST_InfBullets.Enabled = true;	// Только при полном прохождении
 				}
 			}
 
@@ -533,6 +535,10 @@ namespace BExplorer
 
 		private void UpdateDefaultButton_Click (object sender, EventArgs e)
 			{
+			// Запись данных генераторов авто
+			cg.SaveGenerators (!AbortSorting.Checked);
+			CGCountLabel.Text = "Записано: " + cg.ActiveGeneratorsCount.ToString ();
+
 			// Пробуем открыть файл из стандартного расположения
 			SFDialog.FileName = Environment.GetFolderPath (Environment.SpecialFolder.MyDocuments) +
 				"\\GTA Vice City User Files\\GTAVCsf" + ((uint)OpenFileNumber.Value).ToString () + ".b";
@@ -578,8 +584,7 @@ namespace BExplorer
 			SaveFileButton.Enabled =
 				UpdateDefaultFileButton.Enabled =
 
-				RecommendedSettings.Enabled =
-				DangerousReset.Enabled = State;
+				RecommendedSettings.Enabled = State;
 
 			DP_Date.Enabled =
 				DP_Time.Enabled =
@@ -642,10 +647,13 @@ namespace BExplorer
 
 			CarGenGetCoords.Enabled =
 				LoadCG.Enabled =
-				SaveCG.Enabled =
-				AbortSorting.Enabled =
+				SaveCG.Enabled = State;
 
-				ST_InfBullets.Enabled = State;
+			// Для этих элементов в общем порядке допустима только блокировка
+			if (State == false)
+				{
+				AbortSorting.Enabled = ST_InfBullets.Enabled = DangerousReset.Enabled = State;
+				}
 			}
 
 		// Изменена дата
@@ -1364,24 +1372,11 @@ namespace BExplorer
 			SetParameterValue ((UInt16)BExplorerLib.OpCodes.InfiniteAmmo, 0, ST_InfBullets.Checked ? "1" : "0");
 			}
 
-		// Изменено состояние признака сортировки
-		private void AbortSorting_CheckedChanged (object sender, System.EventArgs e)
-			{
-			if (!AbortSorting.Checked)
-				{
-				AbortSorting.Checked = (MessageBox.Show ("Не рекомендуется выполнять сортировку парковок по типам авто, если не были пройдены " +
-					"все основные миссии. Выполнение сортировки может нарушить порядок добавления авто на карту в рамках миссий. Эти ошибки " +
-					"можно исправить вручную, но проще пока не выполнять сортировку.\nИтак, были ли пройдены все основные миссии?",
-					ProgramDescription.AssemblyTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question) ==
-					System.Windows.Forms.DialogResult.No);
-				}
-			}
-
 		// Сброс потенциально опасных параметров
 		private void DangerousReset_Click (object sender, System.EventArgs e)
 			{
 			// Контроль
-			if (MessageBox.Show ("Это действие удаляет из файла сохранения параметры, вызывающие сбой при изменении " +
+			if (MessageBox.Show ("Это действие удаляет из файла сохранения параметры, вызывающие сбои при изменении " +
 				"карты игры, такие как подвижные краны и «взорванные» объекты. Однако для данного файла это действие " +
 				"необратимо. Продолжить?", ProgramDescription.AssemblyTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question,
 				MessageBoxDefaultButton.Button2) == DialogResult.No)

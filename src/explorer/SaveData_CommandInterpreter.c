@@ -136,13 +136,13 @@ uint SD_PPS_CriminalPoints[] = {
 // • OpCode - код операции
 // • ParCode - код параметра
 // • Value - новое значение
-char *SaveData_CommandInterpreter (struct SaveData *SD, uint Mode, uint OpCode, uint ParCode, char* Value)
+schar *SaveData_CommandInterpreter (struct SaveData *SD, uint Mode, uint OpCode, uint ParCode, schar* Value)
 	{
 	// Возвращаемое сообщение
-	static char msg[SD_MaxStrSize];
+	static schar msg[SD_MaxStrSize];
 
 	// Вспомогательные переменные
-	long i;
+	slong i;
 
 	// Контроль параметров
 	if ((Mode != 4) && (SD->SD_DP.DP.DP_BlockSize == 0))

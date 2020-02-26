@@ -7,11 +7,11 @@
 // Загрузка статистики в структуру
 // • FilePath - путь к файлу
 // • SD - структура сохранения
-int SaveData_LoadGarages (struct SaveData *SD, char *FilePath)
+sint SaveData_LoadGarages (struct SaveData *SD, schar *FilePath)
 	{
 	FILE *FI;
 	struct GarageCars cg[SD_GR_GC_Count];
-	char *cgp, *sdp;
+	schar *cgp, *sdp;
 	
 	// Попытка открытия файла
 	if ((FI = fopen (FilePath, "rb")) == NULL)
@@ -20,7 +20,7 @@ int SaveData_LoadGarages (struct SaveData *SD, char *FilePath)
 		}
 
 	// Попытка считывания файла
-	cgp = (char *)cg;
+	cgp = (schar *)cg;
 	if (fread (cgp, 1, sizeof (struct GarageCars) * SD_GR_GC_Count, FI) != 
 		sizeof (struct GarageCars) * SD_GR_GC_Count)
 		{
@@ -30,7 +30,7 @@ int SaveData_LoadGarages (struct SaveData *SD, char *FilePath)
 	fclose (FI);
 
 	// Перенос данных
-	sdp = (char *)SD->SD_GR.GR.GR_GC;
+	sdp = (schar *)SD->SD_GR.GR.GR_GC;
 	memcpy (sdp, cgp, sizeof (struct GarageCars) * SD_GR_GC_Count);
 
 	return SD_LOAD_SUCCESS;
@@ -39,11 +39,11 @@ int SaveData_LoadGarages (struct SaveData *SD, char *FilePath)
 // Выгрузка статистики из структуры
 // • FilePath - путь к файлу
 // • SD - структура сохранения
-int SaveData_SaveGarages (struct SaveData *SD, char *FilePath)
+sint SaveData_SaveGarages (struct SaveData *SD, schar *FilePath)
 	{
 	FILE *FO;
 	struct GarageCars cg[SD_GR_GC_Count];
-	char *cgp, *sdp;
+	schar *cgp, *sdp;
 
 	// Попытка открытия файлов
 	if ((FO = fopen (FilePath, "wb")) == NULL)
@@ -52,8 +52,8 @@ int SaveData_SaveGarages (struct SaveData *SD, char *FilePath)
 		}
 
 	// Перенос значений
-	cgp = (char *)cg;
-	sdp = (char *)SD->SD_GR.GR.GR_GC;
+	cgp = (schar *)cg;
+	sdp = (schar *)SD->SD_GR.GR.GR_GC;
 	memcpy (cgp, sdp, sizeof (struct GarageCars) * SD_GR_GC_Count);
 
 	// Запись и завершение

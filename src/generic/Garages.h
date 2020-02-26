@@ -41,7 +41,7 @@ union SD_Garages
 				uchar GR_GC_RadioStation;	// Текущая радостанция (0 - 9, 10 - выключено)
 				uchar GR_GC_Variation1;		// Конструктивные особенности
 				uchar GR_GC_Variation2;
-				uchar GR_GC_BombType;		// Тип мины (0 - нет, 1 - часовая, 2 - на разгон, 3 - радиоуправляемая, 4 - активная 1, 5 - активная 2)
+				uchar GR_GC_BombType;		// Тип мины (0 - нет, 1 - часовая, 2 - разгонная, 3 - радиоуправляемая, 4 - часовая включённая, 5 - разгонная включённая)
 				uint GR_GC_Unused01;
 				} GR_GC[SD_GR_GC_Count];
 

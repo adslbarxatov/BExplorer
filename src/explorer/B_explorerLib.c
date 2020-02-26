@@ -8,32 +8,32 @@
 struct SaveData SD;
 
 // Оболочка функции загрузки файла сохранения
-extern __declspec(dllexport) __int16 SaveData_LoadEx (char *FilePath)
+B_API(sint) SaveData_LoadEx (schar *FilePath)
 	{
 	return SaveData_Load (FilePath, &SD);
 	}
 
 // Оболочка функции обработки команд
-extern __declspec(dllexport) char* SaveData_CommandInterpreterEx (uint Mode, uint OpCode, uint ParCode, char* Value)
+B_API(schar*) SaveData_CommandInterpreterEx (uint Mode, uint OpCode, uint ParCode, schar *Value)
 	{
 	return SaveData_CommandInterpreter (&SD, Mode, OpCode, ParCode, Value);
 	}
 
 // Оболочка функции сообщений об ошибках
-extern __declspec(dllexport) char* SaveData_ErrorPromptEx (__int16 ErrorCode)
+B_API(schar*) SaveData_ErrorPromptEx (sint ErrorCode)
 	{
 	return SaveData_ErrorPrompt (ErrorCode);
 	}
 
 // Метод запроса краткого описания сохранения
-extern __declspec(dllexport) char* SaveData_GetSaveInfoEx (void)
+B_API(schar*) SaveData_GetSaveInfoEx (void)
 	{
-	static char info[SD_MaxStrSize];
-	int i;
+	static schar info[SD_MaxStrSize];
+	ulong i;
 
 	for (i = 0; i < sizeof (SD.SD_DP.DP.DP_SaveName) / 2; i++)
 		{
-		info[i] = (char)SD.SD_DP.DP.DP_SaveName[i];
+		info[i] = (schar)SD.SD_DP.DP.DP_SaveName[i];
 		}
 	info[i] = '\0';
 
@@ -44,10 +44,10 @@ extern __declspec(dllexport) char* SaveData_GetSaveInfoEx (void)
 	}
 
 // Метод запроса ToDo-статуса сохранения
-extern __declspec(dllexport) char* SaveData_GetToDoStatusEx (void)
+B_API(schar*) SaveData_GetToDoStatusEx (void)
 	{
-	static char status[SD_MaxStrSize];
-	char flags1[SD_MaxStrSize],
+	static schar status[SD_MaxStrSize];
+	schar flags1[SD_MaxStrSize],
 		outofs1[SD_MaxStrSize],
 		flags2[SD_MaxStrSize];
 
@@ -109,10 +109,8 @@ extern __declspec(dllexport) char* SaveData_GetToDoStatusEx (void)
 	return status;
 	}
 
-// Метод запроса ключа версии библиотеки
-extern __declspec(dllexport) char* SaveData_GetLibVersionKeyEx (void)
+// Метод запроса версии библиотеки
+B_API(schar *) SaveData_GetLibVersionEx (void)
 	{
-	static char key[] = "\x03\x01|\x18.\x10.\x16";
-	
-	return key;
+	return B_VERSION_S;
 	}

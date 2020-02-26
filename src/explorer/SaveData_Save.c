@@ -14,7 +14,7 @@
 // Функция сохранения файла
 // • FilePath - путь к файлу
 // • SD - структура сохранения
-int SaveData_Save (char *FilePath, struct SaveData *SD)
+sint SaveData_Save (schar *FilePath, struct SaveData *SD)
 	{
 	// Переменные
 	FILE *FO;

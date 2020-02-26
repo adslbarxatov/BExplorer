@@ -36,17 +36,14 @@ namespace BExplorer
 		public static extern string SaveData_GetToDoStatusEx ();
 
 		/// <summary>
-		/// Imported from C/C++ DLL
-		/// Метод возвращает ключ сверки версии библиотеки. Позволяет избегать рассогласования
+		/// Метод возвращает версию библиотеки. Позволяет избегать рассогласования
 		/// протоколов взаимодействия библиотеки и приложения
 		/// </summary>
-		/// <returns>Ключ сверки</returns>
+		/// <returns>Версия библиотеки в строковом представлении</returns>
 		[DllImport ("B_explorerLib.dll")]
-		private static extern string SaveData_GetLibVersionKeyEx ();
-		private const string AppVersionKey = "\x19\x02|\x20.\x01.\x06";
+		private static extern string SaveData_GetLibVersionEx ();
 
 		/// <summary>
-		/// Imported from C/C++ DLL
 		/// Метод выполняет загрузку файла сохранения из указанного расположения. Начинает
 		/// сеанс взаимодействия со структурой данных сохранения
 		/// </summary>
@@ -587,10 +584,9 @@ namespace BExplorer
 		/// <returns>Возвращает номер метода, в котором произошёл сбой, или 0 в случае успеха. -1 означает несовпадение версий приложения и библиотеки</returns>
 		public static int Check ()
 			{
-			#region SaveData_GetLibVersionKey
 			try
 				{
-				if (SaveData_GetLibVersionKeyEx () != AppVersionKey)
+				if (SaveData_GetLibVersionEx () != ProgramDescription.AssemblyLibVersion)
 					{
 					return -1;
 					}
@@ -599,10 +595,9 @@ namespace BExplorer
 				{
 				return 1;
 				}
-			#endregion
 
-			#region SaveData_LoadEx
-			try
+			#region Старые методы контроля
+			/*try
 				{
 				int e = SaveData_LoadEx ("<");
 				}
@@ -653,7 +648,7 @@ namespace BExplorer
 			catch
 				{
 				return 6;
-				}
+				}*/
 			#endregion
 
 			return 0;

@@ -29,7 +29,7 @@
 // Функция загрузки файла сохранения и создания структуры
 // • FilePath - путь к файлу
 // • SD - структура сохранения
-int SaveData_Load (char *FilePath, struct SaveData *SD)
+sint SaveData_Load (schar *FilePath, struct SaveData *SD)
 	{
 	// Переменные
 	FILE *FI;					// Дескриптор файла

@@ -283,9 +283,9 @@ namespace BExplorer
 			// Сортировка по убыванию индекса
 			if (Sort)
 				{
-				bool sorted = false;
+				bool sorted;
 
-				while (!sorted)
+				do
 					{
 					sorted = true;
 
@@ -297,7 +297,7 @@ namespace BExplorer
 							sorted = false;
 							}
 						}
-					}
+					} while (!sorted);
 				}
 
 			// Вычисление количества доступных генераторов и разворот последней части массива

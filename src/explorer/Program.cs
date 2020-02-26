@@ -5,13 +5,16 @@ using System.Windows.Forms;
 
 namespace BExplorer
 	{
-	static class Program
+	/// <summary>
+	/// Класс описывает точку входа приложения
+	/// </summary>
+	public static class Program
 		{
 		/// <summary>
 		/// Главная точка входа для приложения
 		/// </summary>
 		[STAThread]
-		static void Main ()
+		public static void Main ()
 			{
 			// Проверка запуска единственной копии
 			bool result;

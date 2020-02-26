@@ -7,11 +7,11 @@
 // Загрузка статистики в структуру
 // • FilePath - путь к файлу
 // • SD - структура сохранения
-int SaveData_LoadCG (struct SaveData *SD, char *FilePath)
+sint SaveData_LoadCG (struct SaveData *SD, schar *FilePath)
 	{
 	FILE *FI;
 	union SD_CarGenerators cg;
-	int i;
+	ulong i;
 
 	// Попытка открытия файла
 	if ((FI = fopen (FilePath, "rb")) == NULL)
@@ -39,11 +39,11 @@ int SaveData_LoadCG (struct SaveData *SD, char *FilePath)
 // Выгрузка статистики из структуры
 // • FilePath - путь к файлу
 // • SD - структура сохранения
-int SaveData_SaveCG (struct SaveData *SD, char *FilePath)
+sint SaveData_SaveCG (struct SaveData *SD, schar *FilePath)
 	{
 	FILE *FO;
 	union SD_CarGenerators cg;
-	int i;
+	ulong i;
 
 	// Попытка открытия файлов
 	if ((FO = fopen (FilePath, "wb")) == NULL)

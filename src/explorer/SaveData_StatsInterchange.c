@@ -13,7 +13,7 @@
 // Загрузка статистики в структуру
 // • FilePath - путь к файлу
 // • SD - структура сохранения
-int SaveData_LoadStats (struct SaveData *SD, char *FilePath)
+sint SaveData_LoadStats (struct SaveData *SD, schar *FilePath)
 	{
 	FILE *FI;
 	union SD_Stats stats;
@@ -131,11 +131,11 @@ int SaveData_LoadStats (struct SaveData *SD, char *FilePath)
 // Выгрузка статистики из структуры
 // • FilePath - путь к файлу
 // • SD - структура сохранения
-int SaveData_SaveStats (struct SaveData *SD, char *FilePath)
+sint SaveData_SaveStats (struct SaveData *SD, schar *FilePath)
 	{
 	FILE *FO, *FTO;
 	union SD_Stats stats;
-	char TextFileName[SD_MaxStrSize],
+	schar TextFileName[SD_MaxStrSize],
 		tmp[SD_MaxStrSize];
 
 	// Попытка открытия файлов
