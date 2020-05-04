@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.Win32;
+using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
-namespace BExplorer
+namespace RD_AAOW
 	{
 	/// <summary>
 	/// Класс обеспечивает доступ к списку цветов транспортных средств
@@ -37,15 +39,37 @@ namespace BExplorer
 			FileStream FS = null;
 			try
 				{
-				FS = new FileStream (Application.StartupPath + "\\" + ColorsFile, FileMode.Open);
+				FS = new FileStream (CarColorsPath, FileMode.Open);
 				}
 			catch
 				{
-				MessageBox.Show ("Файл «" + ColorsFile + "», необходимый для работы программы, недоступен.\n" +
-					"Скопируйте его из места установки GTA VC (папка data) и перенесите в папку с данным приложением",
-					ProgramDescription.AssemblyTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-				Error = -1;
-				return;
+				// Запрос имени файла
+				SupportedLanguages al = Localization.CurrentLanguage;
+
+				OpenFileDialog ofd = new OpenFileDialog ();
+				ofd.Filter = string.Format (Localization.GetText ("CarColorsFilter", al), ColorsFile);
+				ofd.Title = string.Format (Localization.GetText ("CarColorsTitle", al), ColorsFile);
+				if (ofd.ShowDialog () != DialogResult.OK)
+					{
+					Error = -1;
+					return;
+					}
+
+				CarColorsPath = ofd.FileName;
+				ofd.Dispose ();
+
+				// Повторная попытка
+				try
+					{
+					FS = new FileStream (CarColorsPath, FileMode.Open);
+					}
+				catch
+					{
+					MessageBox.Show (string.Format (Localization.GetText ("CarColorsFileUnavailable", al), ColorsFile),
+						ProgramDescription.AssemblyTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+					Error = -1;
+					return;
+					}
 				}
 			StreamReader SR = new StreamReader (FS);
 
@@ -62,7 +86,7 @@ namespace BExplorer
 				{
 				try
 					{
-					string[] rgb = line.Split (splitters, System.StringSplitOptions.RemoveEmptyEntries);
+					string[] rgb = line.Split (splitters, StringSplitOptions.RemoveEmptyEntries);
 					int r = int.Parse (rgb[0]);
 					int g = int.Parse (rgb[1]);
 					int b = int.Parse (rgb[2]);
@@ -77,6 +101,41 @@ namespace BExplorer
 			SR.Close ();
 			FS.Close ();
 			Error = 0;
+			}
+
+		/// <summary>
+		/// Возвращает или задаёт путь к файлу цветов авто
+		/// </summary>
+		private static string CarColorsPath
+			{
+			// Запрос
+			get
+				{
+				string path = "";
+				try
+					{
+					path = Registry.GetValue (ProgramDescription.AssemblySettingsKey,
+						"CarColorsPath", "").ToString ();
+					}
+				catch
+					{
+					}
+
+				return path;
+				}
+
+			// Установка
+			set
+				{
+				try
+					{
+					Registry.SetValue (ProgramDescription.AssemblySettingsKey,
+						"CarColorsPath", value.ToString ());
+					}
+				catch
+					{
+					}
+				}
 			}
 		}
 	}

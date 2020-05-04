@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace BExplorer
+namespace RD_AAOW
 	{
 	/// <summary>
 	/// Класс описывает отдельное значение параметра, объединяя его код и название
@@ -91,13 +91,13 @@ namespace BExplorer
 		{
 		#region Виды погоды
 		private static ParameterValue[] weathers = {
-			new ParameterValue (4, "солнечно"),
-			new ParameterValue (0, "облачно"),
-			new ParameterValue (1, "пасмурно"),
-			new ParameterValue (2, "дождь"),
-			new ParameterValue (5, "дождь, ветрено"),
-			new ParameterValue (3, "туман"),
-			new ParameterValue (-1, "(случайная)")};
+			new ParameterValue (4, "Sunny"),
+			new ParameterValue (0, "Cloudy"),
+			new ParameterValue (1, "Gray"),
+			new ParameterValue (2, "Rainy"),
+			new ParameterValue (5, "Windy"),
+			new ParameterValue (3, "Foggy"),
+			new ParameterValue (-1, "Random")};
 
 		/// <summary>
 		/// Возвращает список видов погоды
@@ -113,12 +113,12 @@ namespace BExplorer
 
 		#region Позиции камеры обзора в транспорте
 		private static ParameterValue[] cameraPositions = {
-			new ParameterValue (0, "на переднем бампере"),
-			new ParameterValue (1, "сразу сзади"),
-			new ParameterValue (2, "на среднем расстоянии"),
-			new ParameterValue (3, "на большом расстоянии"),
-			new ParameterValue (4, "неподвижна"),
-			new ParameterValue (5, "автосмена режимов")};
+			new ParameterValue (0, "Front"),
+			new ParameterValue (1, "MinDistance"),
+			new ParameterValue (2, "MidDistance"),
+			new ParameterValue (3, "MaxDistance"),
+			new ParameterValue (4, "Spectate"),
+			new ParameterValue (5, "Auto")};
 
 		/// <summary>
 		/// Возвращает список возможных положений камеры обзора относительно
@@ -133,7 +133,7 @@ namespace BExplorer
 			}
 		#endregion
 
-		#region Интерьеры
+		/*	#region Интерьеры
 		private static ParameterValue[] interiors = {
 			new ParameterValue (4, "north mall point"),
 			new ParameterValue (13, "printworks exterior"),
@@ -167,36 +167,36 @@ namespace BExplorer
 				return interiors;
 				}
 			}
-		#endregion
+		#endregion*/
 
 		#region Костюмы
 		private static ParameterStringValue[] suits = {
-			new ParameterStringValue ("player", "(стандартный)"),
-			new ParameterStringValue ("player4", "гольфист"),
-			new ParameterStringValue ("player7", "грабитель"),
-			new ParameterStringValue ("player8", "джинсы и футболка"),
-			new ParameterStringValue ("play11", "красный спорткостюм"),
-			new ParameterStringValue ("player5", "кубинец"),
-			new ParameterStringValue ("player2", "летний костюм"),
-			new ParameterStringValue ("player9", "мистер Версетти"),
-			new ParameterStringValue ("player6", "полицейский"),
-			new ParameterStringValue ("player3", "рабочий"),
-			new ParameterStringValue ("igalscb", "скин А. Шраба"),
-			new ParameterStringValue ("igjezz", "скин Джезза (LoveFist)"),
-			new ParameterStringValue ("igdick", "скин Дика (LoveFist)"),
-			new ParameterStringValue ("igmike", "скин К. Джонса"),
-			new ParameterStringValue ("igken", "скин К. Розенберга"),
-			new ParameterStringValue ("igcandy", "скин К. Сакс"),
-			new ParameterStringValue ("igbuddy", "скин Л. Вэнса"),
-			new ParameterStringValue ("igmerc", "скин М. Кортес"),
-			new ParameterStringValue ("igcolon", "скин полковника"),
-			new ParameterStringValue ("igpercy", "скин Перси (LoveFist)"),
-			new ParameterStringValue ("igdiaz", "скин Р. Диаза"),
-			new ParameterStringValue ("igsonny", "скин С. Форелли"),
-			new ParameterStringValue ("igphil", "скин Ф. Кэссиди"),
-			new ParameterStringValue ("ighlary", "скин Х. Кинга"),
-			new ParameterStringValue ("play12", "Фрэнки"),
-			new ParameterStringValue ("play10", "чёрный спорткостюм")};
+			new ParameterStringValue ("player", "Default"),
+			new ParameterStringValue ("player4", "Golf"),
+			new ParameterStringValue ("player7", "Job"),
+			new ParameterStringValue ("player8", "Jeans"),
+			new ParameterStringValue ("play11", "RedSport"),
+			new ParameterStringValue ("player5", "Cuban"),
+			new ParameterStringValue ("player2", "Soierie"),
+			new ParameterStringValue ("player9", "MrVercetti"),
+			new ParameterStringValue ("player6", "Police"),
+			new ParameterStringValue ("player3", "Worker"),
+			new ParameterStringValue ("igalscb", "Shrub"),
+			new ParameterStringValue ("igjezz", "Jezz"),
+			new ParameterStringValue ("igdick", "Dick"),
+			new ParameterStringValue ("igmike", "Cam"),
+			new ParameterStringValue ("igken", "Ken"),
+			new ParameterStringValue ("igcandy", "Candy"),
+			new ParameterStringValue ("igbuddy", "Lance"),
+			new ParameterStringValue ("igmerc", "Mercedes"),
+			new ParameterStringValue ("igcolon", "Coronel"),
+			new ParameterStringValue ("igpercy", "Percy"),
+			new ParameterStringValue ("igdiaz", "Diaz"),
+			new ParameterStringValue ("igsonny", "Sonny"),
+			new ParameterStringValue ("igphil", "Phil"),
+			new ParameterStringValue ("ighlary", "Hilary"),
+			new ParameterStringValue ("play12", "Frankie"),
+			new ParameterStringValue ("play10", "BlackSport")};
 
 		/// <summary>
 		/// Возвращает список костюмов
@@ -210,67 +210,42 @@ namespace BExplorer
 			}
 		#endregion
 
-		#region Слоты оружия
-		private static string[] weaponSlots = {
-			"Оружие 1",
-			"Оружие 2",
-			"Оружие 3",
-			"Оружие 4",
-			"Оружие 5",
-			"Оружие 6",
-			"Оружие 7",
-			"Оружие 8",
-			"Оружие 9",
-			"Оружие 10"};
-
-		/// <summary>
-		/// Возвращает список названий слотов оружия
-		/// </summary>
-		public static string[] WeaponSlots
-			{
-			get
-				{
-				return weaponSlots;
-				}
-			}
-		#endregion
-
 		#region Виды оружия
 		private static ParameterValue[] weapons = {
 			new ParameterValue (26, "M4"),
 			new ParameterValue (32, "M60"),
-			new ParameterValue (24, "Mac"),
-			new ParameterValue (25, "Mp5"),
-			new ParameterValue (18, "Python .357"),
-			new ParameterValue (20, "Spas12"),
-			new ParameterValue (22, "Tec9"),
-			new ParameterValue (6, "Бейсбольная бита"),
-			new ParameterValue (11, "Бензопила"),
-			new ParameterValue (28, "Винтовка снайпера"),
-			new ParameterValue (12, "Граната"),
-			new ParameterValue (4, "Дубинка"),
-			new ParameterValue (10, "Катана"),
-			new ParameterValue (3, "Клюшка"),
-			new ParameterValue (17, "Кольт 45"),
-			new ParameterValue (1, "Костет"),
-			new ParameterValue (27, "Крюгер"),
-			new ParameterValue (0, "Кулак"),
-			new ParameterValue (29, "Лазерная винтовка"),
-			new ParameterValue (9, "Мачете"),
-			new ParameterValue (15, "Молотов"),
-			new ParameterValue (7, "Молоток"),
-			new ParameterValue (5, "Нож"),
-			new ParameterValue (21, "Обрез"),
-			new ParameterValue (31, "Огнемёт"),
-			new ParameterValue (2, "Отвёртка"),
-			new ParameterValue (33, "Пулемёт"),
-			new ParameterValue (30, "РПГ"),
-			new ParameterValue (19, "Ружьё"),
-			new ParameterValue (14, "Слезоточивый газ"),
-			new ParameterValue (8, "Топор"),
-			new ParameterValue (23, "Узи"),
-			new ParameterValue (13, "Управляемая граната"),
-			new ParameterValue (36, "Фотокамера")};
+			new ParameterValue (24, "MAC"),
+			new ParameterValue (25, "MP5"),
+			new ParameterValue (18, "Python357"),
+			new ParameterValue (20, "SPAS12"),
+			new ParameterValue (22, "TEC9"),
+			new ParameterValue (6, "Baseball"),
+			new ParameterValue (11, "Chainsaw"),
+			new ParameterValue (28, "Sniper"),
+			new ParameterValue (12, "Grenade"),
+			new ParameterValue (4, "NightStick"),
+			new ParameterValue (10, "Katana"),
+			new ParameterValue (3, "Golf"),
+			new ParameterValue (17, "Colt45"),
+			new ParameterValue (1, "BrassKnuckle"),
+			new ParameterValue (27, "Ruger"),
+			new ParameterValue (0, "Fist"),
+			new ParameterValue (29, "LaserScope"),
+			new ParameterValue (9, "Machete"),
+			new ParameterValue (15, "Molotov"),
+			new ParameterValue (7, "Hammer"),
+			new ParameterValue (5, "Knife"),
+			new ParameterValue (21, "Stubby"),
+			new ParameterValue (31, "Flamethrower"),
+			new ParameterValue (2, "ScrewDriver"),
+			new ParameterValue (33, "Minigun"),
+			new ParameterValue (30, "Rocket"),
+			new ParameterValue (19, "Shotgun"),
+			new ParameterValue (14, "TearGas"),
+			new ParameterValue (8, "Cleaver"),
+			new ParameterValue (23, "UZI"),
+			new ParameterValue (13, "RadioGrenade"),
+			new ParameterValue (36, "Camera")};
 
 		/// <summary>
 		/// Возвращает список видов оружия
@@ -280,42 +255,6 @@ namespace BExplorer
 			get
 				{
 				return weapons;
-				}
-			}
-		#endregion
-
-		#region Слоты гаражей
-		private static string[] garagesSlots = {
-			"поместье El Swanko Casa",
-			"Human Condo, гараж 1, позиция 1",
-			"Human Condo, гараж 1, позиция 2",
-			"Human Condo, гараж 1, позиция 3",
-			"Human Condo, гараж 1, позиция 4",
-			"Human Condo, гараж 2, позиция 1",
-			"Human Condo, гараж 2, позиция 2",
-			"Human Condo, гараж 3, позиция 1",
-			"Human Condo, гараж 3, позиция 2",
-			"отель Ocean Heights",
-			"отель Links View",
-			"Sunshine auto, гараж 1, позиция 1",
-			"Sunshine auto, гараж 1, позиция 2",
-			"Sunshine auto, гараж 2, позиция 1",
-			"Sunshine auto, гараж 2, позиция 2",
-			"Sunshine auto, гараж 3, позиция 1",
-			"Sunshine auto, гараж 3, позиция 2",
-			"Sunshine auto, гараж 4, позиция 1",
-			"Sunshine auto, гараж 4, позиция 2",
-			"вилла Версетти, позиция 1",
-			"вилла Версетти, позиция 2"};
-
-		/// <summary>
-		/// Возвращает список названий гаражей
-		/// </summary>
-		public static string[] GaragesSlots
-			{
-			get
-				{
-				return garagesSlots;
 				}
 			}
 		#endregion
@@ -426,40 +365,40 @@ namespace BExplorer
 		/// <summary>
 		/// Возвращает список видов транспорта для гаражей
 		/// </summary>
-		public static List<ParameterValue> CarsForGarages
+		public static ParameterValue[] CarsForGarages
 			{
 			get
 				{
 				List<ParameterValue> cfg = new List<ParameterValue> (cars);
-				cfg.Insert (0, new ParameterValue (0, "(нет)"));
-				return cfg;
+				cfg.Insert (0, new ParameterValue (0, Localization.GetText ("Cars_No", Localization.CurrentLanguage)));
+				return cfg.ToArray ();
 				}
 			}
 
 		/// <summary>
 		/// Возвращает список видов транспорта для банд
 		/// </summary>
-		public static List<ParameterValue> CarsForGangs
+		public static ParameterValue[] CarsForGangs
 			{
 			get
 				{
 				List<ParameterValue> cfg = new List<ParameterValue> (cars);
-				cfg.Insert (0, new ParameterValue (-1, "(нет)"));
-				return cfg;
+				cfg.Insert (0, new ParameterValue (-1, Localization.GetText ("Cars_No", Localization.CurrentLanguage)));
+				return cfg.ToArray ();
 				}
 			}
 
 		/// <summary>
 		/// Возвращает список видов транспорта для парковок
 		/// </summary>
-		public static List<ParameterValue> CarsForCG
+		public static ParameterValue[] CarsForCG
 			{
 			get
 				{
 				List<ParameterValue> cfg = new List<ParameterValue> (cars);
-				cfg.Insert (0, new ParameterValue (-1, "(любая)"));
-				cfg.Insert (0, new ParameterValue (0, "(нет)"));
-				return cfg;
+				cfg.Insert (0, new ParameterValue (-1, Localization.GetText ("Cars_Random", Localization.CurrentLanguage)));
+				cfg.Insert (0, new ParameterValue (0, Localization.GetText ("Cars_No", Localization.CurrentLanguage)));
+				return cfg.ToArray ();
 				}
 			}
 		#endregion
@@ -475,9 +414,9 @@ namespace BExplorer
 			new ParameterValue (6, "Espantoso"),
 			new ParameterValue (7, "Emotion 98.3 FM"),
 			new ParameterValue (8, "Wave 103 FM"),
-			new ParameterValue (9, "MP3-плеер"),
-			new ParameterValue (10, "(выключено)"),
-			new ParameterValue (23, "(полицейская волна)")};
+			new ParameterValue (9, "(MP3)"),
+			new ParameterValue (10, "(off)"),
+			new ParameterValue (23, "(police)")};
 
 		/// <summary>
 		/// Возвращает список радиостанций
@@ -493,12 +432,12 @@ namespace BExplorer
 
 		#region Бомбы
 		private static ParameterValue[] bombs = {
-			new ParameterValue (0, "Без бомбы"),
-			new ParameterValue (1, "Часовая (10 секунд)"),
-			new ParameterValue (2, "Разгонная (второй водитель)"),
+			new ParameterValue (0, "No"),
+			new ParameterValue (1, "Timer"),
+			new ParameterValue (2, "Acceleration"),
 			// new ParameterValue (3, "Радиобомба"),				// Работает только при минировании в доках
-			// new ParameterValue (4, "Активная часовая (?)"),		// Не работает
-			new ParameterValue (5, "Активная разгонная") };
+			// new ParameterValue (4, "Активная часовая"),			// Не работает
+			new ParameterValue (5, "AccelerationActive") };
 
 		/// <summary>
 		/// Возвращает список вариантов минирования авто
@@ -508,29 +447,6 @@ namespace BExplorer
 			get
 				{
 				return bombs;
-				}
-			}
-		#endregion
-
-		#region Банды
-		private static string[] gangsSlots = {
-			"кубинцы",
-			"гаитянцы",
-			"наркоторговцы",
-			"Диаза",
-			"патрульные",
-			"байкеры",
-			"Версетти",
-			"гольфисты"};
-
-		/// <summary>
-		/// Возвращает список банд
-		/// </summary>
-		public static string[] GangsSlots
-			{
-			get
-				{
-				return gangsSlots;
 				}
 			}
 		#endregion

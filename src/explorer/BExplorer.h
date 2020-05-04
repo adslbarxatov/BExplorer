@@ -3,19 +3,12 @@
 #include <stdlib.h>
 #include <malloc.h>
 #include <string.h>
+#include "..\..\Generics\CSTypes.h"
 
-// Определение типов и констант
-#define schar		__int8
-#define sint		__int16
-#define slong		__int32
-#define sdlong		__int64
-#define uchar		unsigned schar
-#define uint		unsigned sint
-#define ulong		unsigned slong
-#define udlong		unsigned sdlong
+#define B_API(t)	extern __declspec(dllexport) t
 
-#define B_VERSION			3,4,0,0
-#define B_VERSION_S			"3.4.0.0"
+#define B_VERSION			3,5,2,0
+#define B_VERSION_S			"3.5.2.0"
 #define B_PRODUCT			"GTA Vice city save file interpretation library"
 #define B_COMPANY			"RD AAOW"
 
@@ -197,7 +190,7 @@ struct SaveData
 //
 // • FilePath - путь к файлу
 // • SD - структура сохранения
-int SaveData_Load (char *FilePath, struct SaveData *SD);
+sint SaveData_Load (schar *FilePath, struct SaveData *SD);
 //////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////
@@ -205,7 +198,7 @@ int SaveData_Load (char *FilePath, struct SaveData *SD);
 // Возвращает текст ошибки
 // • Error - любой поддерживаемый код ошибки (любой из описанных в
 // этом файле)
-char *SaveData_ErrorPrompt (int Error);
+schar *SaveData_ErrorPrompt (sint Error);
 //////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////
@@ -302,7 +295,7 @@ char *SaveData_ErrorPrompt (int Error);
 //  OpCode для режима 5
 //   0 - обнуление структуры кранов
 //   1 - обнуление замен объектов
-char *SaveData_CommandInterpreter (struct SaveData *SD, uint Mode, uint OpCode, uint ParCode, char* Value);
+schar *SaveData_CommandInterpreter (struct SaveData *SD, uint Mode, uint OpCode, uint ParCode, schar *Value);
 //////////////////////////////////////////////////////////////////////
 
 // Ограничения значений параметров
@@ -415,15 +408,15 @@ char *SaveData_CommandInterpreter (struct SaveData *SD, uint Mode, uint OpCode, 
 //
 // • FilePath - путь к файлу
 // • SD - структура сохранения
-int SaveData_Save (char *FilePath, struct SaveData *SD);
+sint SaveData_Save (schar *FilePath, struct SaveData *SD);
 //////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////
 // Обработчики дополнительных файлов (см. CommandInterpreter)
-int SaveData_LoadStats (struct SaveData *SD, char *FilePath);
-int SaveData_SaveStats (struct SaveData *SD, char *FilePath);
-int SaveData_LoadCG (struct SaveData *SD, char *FilePath);
-int SaveData_SaveCG (struct SaveData *SD, char *FilePath);
-int SaveData_LoadGarages (struct SaveData *SD, char *FilePath);
-int SaveData_SaveGarages (struct SaveData *SD, char *FilePath);
+sint SaveData_LoadStats (struct SaveData *SD, schar *FilePath);
+sint SaveData_SaveStats (struct SaveData *SD, schar *FilePath);
+sint SaveData_LoadCG (struct SaveData *SD, schar *FilePath);
+sint SaveData_SaveCG (struct SaveData *SD, schar *FilePath);
+sint SaveData_LoadGarages (struct SaveData *SD, schar *FilePath);
+sint SaveData_SaveGarages (struct SaveData *SD, schar *FilePath);
 //////////////////////////////////////////////////////////////////////

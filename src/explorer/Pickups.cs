@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace BExplorer
+namespace RD_AAOW
 	{
 	/// <summary>
 	/// Класс отвечает за обработку массива собираемых объектов

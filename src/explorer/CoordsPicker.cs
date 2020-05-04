@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace BExplorer
+namespace RD_AAOW
 	{
 	/// <summary>
 	/// Класс позволяет указывать координаты объектов
@@ -11,6 +11,8 @@ namespace BExplorer
 		{
 		// Исходные параметры
 		private decimal oldX, oldY, oldZ, oldRot;
+		private Graphics g;
+		private bool active = false;
 
 		/// <summary>
 		/// Выбранная X-координата
@@ -59,7 +61,16 @@ namespace BExplorer
 		/// <summary>
 		/// Конструктор. Инициализирует класс и его ограничения
 		/// </summary>
-		public CoordsPicker (decimal MinX, decimal MaxX, decimal MinY, decimal MaxY, decimal MinZ, decimal MaxZ, decimal MinRot, decimal MaxRot)
+		/// <param name="MaxRot">Максимальный поворот</param>
+		/// <param name="MaxX">Максимальная абсцисса</param>
+		/// <param name="MaxY">Максимальная ордината</param>
+		/// <param name="MaxZ">Максимальная аппликата</param>
+		/// <param name="MinRot">Минимальный поворот</param>
+		/// <param name="MinX">Минимальная абсцисса</param>
+		/// <param name="MinY">Минимальная ордината</param>
+		/// <param name="MinZ">Минимальная аппликата</param>
+		public CoordsPicker (decimal MinX, decimal MaxX, decimal MinY, decimal MaxY, decimal MinZ, decimal MaxZ,
+			decimal MinRot, decimal MaxRot)
 			{
 			InitializeComponent ();
 
@@ -73,14 +84,21 @@ namespace BExplorer
 			PickRot.Maximum = MaxRot;
 			PickRot.Minimum = MinRot;
 
-			VertPictScroll.Maximum = BExplorer.Properties.Resources.DefaultMap.Height - PictMap.Height;
-			HorPictScroll.Maximum = BExplorer.Properties.Resources.DefaultMap.Width - PictMap.Width;
+			VertPictScroll.Maximum = RD_AAOW.Properties.BExplorer.DefaultMap.Height - PictMap.Height;
+			HorPictScroll.Maximum = RD_AAOW.Properties.BExplorer.DefaultMap.Width - PictMap.Width;
 			}
 
 		/// <summary>
 		/// Метод запускает интерфейс выбора координат
 		/// </summary>
-		public void PickCoords (decimal OldX, decimal OldY, decimal OldZ, decimal OldRotation, bool ViewOnly)
+		/// <param name="InterfaceLanguage">Язык интерфейса</param>
+		/// <param name="OldRotation">Исходный поворот</param>
+		/// <param name="OldX">Исходная абсцисса</param>
+		/// <param name="OldY">Исходная ордината</param>
+		/// <param name="OldZ">Исходная аппликата</param>
+		/// <param name="ViewOnly">Флаг режима, запрещающего выбор координат</param>
+		public void PickCoords (decimal OldX, decimal OldY, decimal OldZ, decimal OldRotation, bool ViewOnly,
+			SupportedLanguages InterfaceLanguage)
 			{
 			// Передача параметров
 			oldX = PickX.Value = OldX;
@@ -89,9 +107,13 @@ namespace BExplorer
 			oldRot = PickRot.Value = OldRotation;
 			PickX.Enabled = PickY.Enabled = PickZ.Enabled = PickRot.Enabled = !ViewOnly;
 			PickOK.Visible = !ViewOnly;
-			PickAbort.Text = (ViewOnly ? "&Закрыть" : "&Отмена");
+
+			Localization.SetControlsText (this, InterfaceLanguage);
+			this.Text = Localization.GetText ("CoordsPicker_Title", InterfaceLanguage);
 
 			// Запуск
+			g = Graphics.FromHwnd (PictMap.Handle);
+			active = true;
 			this.ShowDialog ();
 			}
 
@@ -115,16 +137,14 @@ namespace BExplorer
 		// Изменение смещения изображения
 		private void VertPictScroll_ValueChanged (object sender, EventArgs e)
 			{
-			Graphics g = Graphics.FromHwnd (PictMap.Handle);
-			g.DrawImage (BExplorer.Properties.Resources.DefaultMap, new Point (-HorPictScroll.Value, -VertPictScroll.Value));
+			g.DrawImage (RD_AAOW.Properties.BExplorer.DefaultMap, new Point (-HorPictScroll.Value, -VertPictScroll.Value));
 
 			DrawPoint ();
 			}
 
 		private void HorPictScroll_ValueChanged (object sender, EventArgs e)
 			{
-			Graphics g = Graphics.FromHwnd (PictMap.Handle);
-			g.DrawImage (BExplorer.Properties.Resources.DefaultMap, new Point (-HorPictScroll.Value, -VertPictScroll.Value));
+			g.DrawImage (RD_AAOW.Properties.BExplorer.DefaultMap, new Point (-HorPictScroll.Value, -VertPictScroll.Value));
 
 			DrawPoint ();
 			}
@@ -146,14 +166,15 @@ namespace BExplorer
 			{
 			Pen p1 = new Pen (Color.FromArgb (255, 0, 0), 5),
 				p2 = new Pen (Color.FromArgb (255, 0, 0), 1);
-			Graphics g = Graphics.FromHwnd (PictMap.Handle);
 
 			g.DrawEllipse (p1, (int)(PickX.Value - PickX.Minimum - HorPictScroll.Value - 2),
 				(int)(-PickY.Value - PickY.Minimum - VertPictScroll.Value - 2), 4, 4);
 			g.DrawLine (p2, (int)(PickX.Value - PickX.Minimum - HorPictScroll.Value),
 				(int)(-PickY.Value - PickY.Minimum - VertPictScroll.Value),
-				(int)(Math.Cos ((double)(PickRot.Value + 90) / 180.0 * Math.PI) * 20.0 + (double)(PickX.Value - PickX.Minimum - HorPictScroll.Value)),
-				(int)(-Math.Sin ((double)(PickRot.Value + 90) / 180.0 * Math.PI) * 20.0 + (double)(-PickY.Value - PickY.Minimum - VertPictScroll.Value)));
+				(int)(Math.Cos ((double)(PickRot.Value + 90) / 180.0 * Math.PI) * 20.0 +
+				(double)(PickX.Value - PickX.Minimum - HorPictScroll.Value)),
+				(int)(-Math.Sin ((double)(PickRot.Value + 90) / 180.0 * Math.PI) * 20.0 +
+				(double)(-PickY.Value - PickY.Minimum - VertPictScroll.Value)));
 			}
 
 		// Запуск формы
@@ -179,7 +200,15 @@ namespace BExplorer
 		// Таймер перерисовки
 		private void DrawTimer_Tick (object sender, EventArgs e)
 			{
-			HorPictScroll_ValueChanged (null, null);
+			if (active)
+				HorPictScroll_ValueChanged (null, null);
+			}
+
+		// Скрытие формы
+		private void CoordsPicker_FormClosing (object sender, FormClosingEventArgs e)
+			{
+			g.Dispose ();
+			active = false;
 			}
 		}
 	}

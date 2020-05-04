@@ -1,4 +1,4 @@
-# BExplorer tool v 2.15
+# BExplorer tool v 2.16u
 
 A tool based on BExplorer API for work with GTA Vice City save files (.b) /
 Инструмент для редактирования файлов сохранений GTA Vice City на базе API
@@ -33,6 +33,6 @@ We're strongly recommend reading it before using our products.
 
 #
 
-Needs Windows XP and newer, Framework 2.0 and newer. Interface language: ru_ru
+Needs Windows XP and newer, Framework 4.0 or newer. Interface languages: ru_ru, en_us. User manual languages: ru_ru, en_us
 
-Требуется ОС Windows XP и новее, Framework 2.0 и новее. Язык интерфейса: ru_ru
+Требуется ОС Windows XP и новее, Framework 4.0 или новее. Языки интерфейса: ru_ru, en_us. Языки руководства пользователя: ru_ru, en_us

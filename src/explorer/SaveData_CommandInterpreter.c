@@ -2,7 +2,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 
 // Подключение общего заголовка
-#include "Headers/B_explorer.h"
+#include "Headers/BExplorer.h"
 
 // Корректные координаты авто в гаражах
 float GR_GC_NormCoords[][6] = {

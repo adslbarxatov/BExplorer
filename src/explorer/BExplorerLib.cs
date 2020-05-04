@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace BExplorer
+namespace RD_AAOW
 	{
 	/// <summary>
 	/// Класс обеспечивает доступ к методам библиотеки BExplorerLib
@@ -11,28 +11,25 @@ namespace BExplorer
 		#region Импортированные функции
 
 		/// <summary>
-		/// Imported from C/C++ DLL
 		/// Метод формирует сообщение ошибки по её коду
 		/// </summary>
 		/// <param name="ErrorCode">Код ошибки</param>
 		/// <returns>Возвращает сообщение об ошибке</returns>
-		[DllImport ("B_explorerLib.dll")]
+		[DllImport (ProgramDescription.AssemblyLibName)]
 		public static extern string SaveData_ErrorPromptEx (Int16 ErrorCode);
 
 		/// <summary>
-		/// Imported from C/C++ DLL
 		/// Метод получает краткую информацию о файле сохранения
 		/// </summary>
 		/// <returns>Возвращает строку информации</returns>
-		[DllImport ("B_explorerLib.dll")]
+		[DllImport (ProgramDescription.AssemblyLibName)]
 		public static extern string SaveData_GetSaveInfoEx ();
 
 		/// <summary>
-		/// Imported from C/C++ DLL
 		/// Метод получает ToDo-статус сохранения
 		/// </summary>
 		/// <returns>Возвращает строку статуса</returns>
-		[DllImport ("B_explorerLib.dll")]
+		[DllImport (ProgramDescription.AssemblyLibName)]
 		public static extern string SaveData_GetToDoStatusEx ();
 
 		/// <summary>
@@ -40,7 +37,7 @@ namespace BExplorer
 		/// протоколов взаимодействия библиотеки и приложения
 		/// </summary>
 		/// <returns>Версия библиотеки в строковом представлении</returns>
-		[DllImport ("B_explorerLib.dll")]
+		[DllImport (ProgramDescription.AssemblyLibName)]
 		private static extern string SaveData_GetLibVersionEx ();
 
 		/// <summary>
@@ -49,11 +46,10 @@ namespace BExplorer
 		/// </summary>
 		/// <param name="FilePath">Путь к загружаемому файлу</param>
 		/// <returns>Возвращает код ошибки или 0 в случае успеха</returns>
-		[DllImport ("B_explorerLib.dll")]
+		[DllImport (ProgramDescription.AssemblyLibName)]
 		public static extern Int16 SaveData_LoadEx (string FilePath);
 
 		/// <summary>
-		/// Imported from C/C++ DLL
 		/// Командный интерпретатор. Возвращает сообщение с результатом выполнения команды или сообщение об ошибке
 		/// </summary>
 		/// <param name="Mode">Режим интерпретации</param>
@@ -61,7 +57,7 @@ namespace BExplorer
 		/// <param name="ParCode">Код параметра</param>
 		/// <param name="Value">Новое значение параметра</param>
 		/// <returns>Возвращает сообщение с результатом выполнения команды или сообщение об ошибке</returns>
-		[DllImport ("B_explorerLib.dll")]
+		[DllImport (ProgramDescription.AssemblyLibName)]
 		private static extern string SaveData_CommandInterpreterEx (UInt16 Mode, UInt16 OpCode, UInt16 ParCode, string Value);
 
 		#endregion

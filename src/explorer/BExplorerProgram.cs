@@ -3,12 +3,12 @@ using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 
-namespace BExplorer
+namespace RD_AAOW
 	{
 	/// <summary>
 	/// Класс описывает точку входа приложения
 	/// </summary>
-	public static class Program
+	public static class BExplorerProgram
 		{
 		/// <summary>
 		/// Главная точка входа для приложения
@@ -21,27 +21,27 @@ namespace BExplorer
 			Mutex instance = new Mutex (true, ProgramDescription.AssemblyTitle, out result);
 			if (!result)
 				{
-				MessageBox.Show ("Программа «" + ProgramDescription.AssemblyTitle + "» уже запущена",
+				MessageBox.Show (string.Format (Localization.GetText ("AlreadyStarted", Localization.CurrentLanguage),
+					ProgramDescription.AssemblyTitle),
 					ProgramDescription.AssemblyTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 				return;
 				}
 
 			// Проверка наличия компонентов программы
-			for (int i = 0; i < ProgramDescription.CriticalComponents.Length; i++)
+			if (!File.Exists (Application.StartupPath + "\\" + ProgramDescription.AssemblyLibName))
 				{
-				if (!File.Exists (Application.StartupPath + "\\" + ProgramDescription.CriticalComponents[i]))
-					{
-					MessageBox.Show ("Отсутствует необходимый компонент программы: " + ProgramDescription.CriticalComponents[i] +
-						". Возможно, требуется переустановить программу",
-						 ProgramDescription.AssemblyTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-					return;
-					}
+				if (MessageBox.Show (string.Format (Localization.GetText ("ComponentMissing", Localization.CurrentLanguage),
+					ProgramDescription.AssemblyLibName),
+					ProgramDescription.AssemblyTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+					ProgramDescription.ShowProjectWebPage ();
+
+				return;
 				}
 
 			// Запуск
 			Application.EnableVisualStyles ();
 			Application.SetCompatibleTextRenderingDefault (false);
-			Application.Run (new MainForm ());
+			Application.Run (new BExplorerForm ());
 			}
 		}
 	}

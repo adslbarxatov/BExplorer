@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace BExplorer
+namespace RD_AAOW
 	{
 	/// <summary>
 	/// Класс отвечает за обработку массива генераторов авто (парковок)
@@ -252,13 +252,9 @@ namespace BExplorer
 		public CGData GetGeneratorData (int Index)
 			{
 			if ((Index >= 1) && (Index <= generators.Count))
-				{
 				return generators[Index - 1];
-				}
 			else
-				{
 				return null;
-				}
 			}
 
 		/// <summary>
@@ -269,9 +265,7 @@ namespace BExplorer
 		public void SetGeneratorData (int Index, CGData Data)
 			{
 			if ((Index >= 1) && (Index <= generators.Count))
-				{
 				generators[Index - 1] = new CGData (Data);
-				}
 			}
 
 		/// <summary>
@@ -307,19 +301,14 @@ namespace BExplorer
 			for (int i = 0; i < generators.Count; i++)
 				{
 				if (generators[i].CarModel > 0)
-					{
 					revStart = i;
-					}
 
 				if (generators[i].CarModel != 0)
-					{
 					notNull++;
-					}
 				}
+
 			if (Sort)
-				{
 				generators.Reverse (++revStart, generators.Count - revStart);
-				}
 
 			// Запись
 			for (int i = 0; i < BExplorerLib.GeneratorsCount; i++)

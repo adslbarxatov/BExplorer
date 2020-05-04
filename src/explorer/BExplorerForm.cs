@@ -1,29 +1,37 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.Globalization;
 using System.Windows.Forms;
 
-namespace BExplorer
+namespace RD_AAOW
 	{
 	/// <summary>
 	/// Главная форма приложения
 	/// </summary>
-	public partial class MainForm:Form
+	public partial class BExplorerForm:Form
 		{
 		// Переменные
 		private bool loading = false;		// Флаг состояния загрузки данных; блокирует события обновления значений
+		private int error;					// Код ошибки
+
 		private CarColors cc;				// Экземпляр-загрузчик цветов авто
 		private CarGenerators cg;			// Экземпляр-обработчик списка парковок
-		private Pickups pu;					// Экземпляр-обработчик списка денежных накопителей (пока так)
+		private Pickups pu;					// Экземпляр-обработчик списка денежных накопителей
 		private CoordsPicker cp;			// Форма выбора координат на карте
 		private ToDoStatus tds;				// Экземпляр-обработчик ToDo-статуса
+
 		private CultureInfo cie = new CultureInfo ("en-us");	// Дробные числа с использованием точки вместо запятой
-		private int error;					// Код ошибки
+		private SupportedLanguages al = Localization.CurrentLanguage;	// Язык интерфейса
+
+		private string savesDefaultPath = Environment.GetFolderPath (Environment.SpecialFolder.MyDocuments) +
+			"\\GTA Vice City User Files\\GTAVCsf";
+		private const string savesExtension = ".b";
 
 		/// <summary>
 		/// Метод инициализирует форму
 		/// </summary>
-		public MainForm ()
+		public BExplorerForm ()
 			{
 			// Инициализация формы
 			InitializeComponent ();
@@ -33,32 +41,20 @@ namespace BExplorer
 			}
 
 		// Запуск формы
-		private void MainForm_Load (object sender, System.EventArgs e)
+		private void MainForm_Load (object sender, EventArgs e)
 			{
 			// Контроль корректности связи с библиотекой функций
-			int res = BExplorerLib.Check ();
-			if (res != 0)
+			if (BExplorerLib.Check () != 0)
 				{
-				MessageBox.Show ("Версия используемой библиотеки «" + ProgramDescription.CriticalComponents[0] +
-					"» не соответствует текущей версии приложения.\nОбратитесь к разработчику программы для получения " +
-					"корректной сборки программы",
-					ProgramDescription.AssemblyTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+				if (MessageBox.Show (string.Format (Localization.GetText ("IncorrectLibVersion", al),
+					ProgramDescription.AssemblyLibName),
+					ProgramDescription.AssemblyTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+					ProgramDescription.ShowProjectWebPage ();
 
 				error = -1;
 				this.Close ();
 				return;
 				}
-			/*else if (res > 0)
-				{
-				MessageBox.Show ("Отказ ссылки №" + res.ToString () + " в библиотеке «" + ProgramDescription.CriticalComponents[0] +
-					"». Возможно, библиотека повреждена, или используется недопустимая версия.\nОбратитесь к автору программы для " +
-					"получения корректной сборки программы",
-					ProgramDescription.AssemblyTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-				error = -2;
-				this.Close ();
-				return;
-				}*/
 
 			// Проверка наличия файла цветовой схемы
 			cc = new CarColors (out error);
@@ -84,16 +80,6 @@ namespace BExplorer
 			DP_GameSpeed.Maximum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)BExplorerLib.OpCodes.GameSpeed, 0, true);
 			DP_GameSpeed.Minimum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)BExplorerLib.OpCodes.GameSpeed, 0, false);
 
-			for (int i = 0; i < ParametersValues.Weathers.Length; i++)
-				{
-				DP_Weather.Items.Add (ParametersValues.Weathers[i].Name);
-				}
-
-			for (int i = 0; i < ParametersValues.CameraPositions.Length; i++)
-				{
-				DP_CameraPos.Items.Add (ParametersValues.CameraPositions[i].Name);
-				}
-
 			PL_MaxHealth.Maximum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)BExplorerLib.OpCodes.MaxHealth, 0, true);
 			PL_MaxHealth.Minimum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)BExplorerLib.OpCodes.MaxHealth, 0, false);
 
@@ -104,89 +90,43 @@ namespace BExplorer
 			PL_CurArmor.Minimum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)BExplorerLib.OpCodes.CurrentArmor, 0, false);
 
 			for (int i = 0; i <= 6; i++)
-				{
 				PL_MWL.Items.Add (i.ToString ());
-				}
 
 			PL_CurMoney.Maximum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)BExplorerLib.OpCodes.CurrentMoney, 0, true);
 			PL_CurMoney.Minimum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)BExplorerLib.OpCodes.CurrentMoney, 0, false);
-
-			for (int i = 0; i < ParametersValues.Suits.Length; i++)
-				{
-				PL_Suit.Items.Add (ParametersValues.Suits[i].Name);
-				}
-
-			for (int i = 0; i < ParametersValues.WeaponSlots.Length; i++)
-				{
-				WeaponsList.Items.Add (ParametersValues.WeaponSlots[i]);
-				}
-
-			for (int i = 0; i < ParametersValues.Weapons.Length; i++)
-				{
-				PL_Weapon.Items.Add (ParametersValues.Weapons[i].Name);
-				}
 
 			PL_Bullets.Maximum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)BExplorerLib.OpCodes.PlayerWeapons_Base,
 				(UInt16)BExplorerLib.WeaponsParCodes.WeaponAmmo, true);
 			PL_Bullets.Minimum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)BExplorerLib.OpCodes.PlayerWeapons_Base,
 				(UInt16)BExplorerLib.WeaponsParCodes.WeaponAmmo, false);
 
-			for (int i = 0; i < ParametersValues.GaragesSlots.Length; i++)
-				{
-				GaragesList.Items.Add (ParametersValues.GaragesSlots[i]);
-				}
-
-			for (int i = 0; i < ParametersValues.CarsForGarages.Count; i++)
-				{
-				GR_CarModel.Items.Add (ParametersValues.CarsForGarages[i].Name);
-				}
+			GR_CarModel.DataSource = ParametersValues.CarsForGarages;
+			GR_CarModel.DisplayMember = GR_CarModel.ValueMember = "Name";
 
 			GR_CarColor1.Maximum = cc.Colors.Count - 1;
 			GR_CarColor2.Maximum = cc.Colors.Count - 1;
 
-			for (int i = 0; i < ParametersValues.Radios.Length; i++)
-				{
-				GR_Radio.Items.Add (ParametersValues.Radios[i].Name);
-				}
-
-			for (int i = 0; i < ParametersValues.Bombs.Length; i++)
-				{
-				GR_Bomb.Items.Add (ParametersValues.Bombs[i].Name);
-				}
+			GR_Radio.DataSource = ParametersValues.Radios;
+			GR_Radio.DisplayMember = GR_Radio.ValueMember = "Name";
 
 			PU_AssetValue.Maximum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)BExplorerLib.OpCodes.Pickups_Base,
 				(UInt16)BExplorerLib.PickupsParCodes.ObjectAsset, true);
 			PU_AssetValue.Minimum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)BExplorerLib.OpCodes.Pickups_Base,
 				(UInt16)BExplorerLib.PickupsParCodes.ObjectAsset, false);
 
-			for (int i = 0; i < ParametersValues.GangsSlots.Length; i++)
-				{
-				GangsList.Items.Add (ParametersValues.GangsSlots[i]);
-				}
-
-			for (int i = 0; i < ParametersValues.CarsForGangs.Count; i++)
-				{
-				GD_CarModel.Items.Add (ParametersValues.CarsForGangs[i].Name);
-				}
+			GD_CarModel.DataSource = ParametersValues.CarsForGangs;
+			GD_CarModel.DisplayMember = GD_CarModel.ValueMember = "Name";
 
 			GD_PedModel1.Maximum = GD_PedModel2.Maximum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)BExplorerLib.OpCodes.Gangs_Base,
 				(UInt16)BExplorerLib.GangsParCodes.PrimaryPedModel, true);
 			GD_PedModel1.Minimum = GD_PedModel2.Minimum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)BExplorerLib.OpCodes.Gangs_Base,
 				(UInt16)BExplorerLib.GangsParCodes.PrimaryPedModel, false);
 
-			for (int i = 0; i < ParametersValues.Weapons.Length; i++)
-				{
-				GD_Weapon1.Items.Add (ParametersValues.Weapons[i].Name);
-				GD_Weapon2.Items.Add (ParametersValues.Weapons[i].Name);
-				}
-
 			CarGenList.Maximum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)BExplorerLib.OpCodes.ActiveGenerators, 0, true);
 			CarGenList.Minimum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)BExplorerLib.OpCodes.ActiveGenerators, 0, false);
 
-			for (int i = 0; i < ParametersValues.CarsForCG.Count; i++)
-				{
-				CG_CarModel.Items.Add (ParametersValues.CarsForCG[i].Name);
-				}
+			CG_CarModel.DataSource = ParametersValues.CarsForCG;
+			CG_CarModel.DisplayMember = CG_CarModel.ValueMember = "Name";
 
 			CG_X.Maximum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)BExplorerLib.OpCodes.Generators_Base,
 				(UInt16)BExplorerLib.GeneratorsParCodes.CarX, true);
@@ -226,11 +166,24 @@ namespace BExplorer
 			cp = new CoordsPicker (CG_X.Minimum, CG_X.Maximum, CG_Y.Minimum, CG_Y.Maximum, CG_Z.Minimum, CG_Z.Maximum,
 				CG_Rotation.Minimum, CG_Rotation.Maximum);
 
+			// Окончательная настройка
+			SetState (false);	// Начальная блокировка
+
+			LanguageCombo.Items.AddRange (Localization.LanguagesNames);
+			try
+				{
+				LanguageCombo.SelectedIndex = (int)al;
+				}
+			catch
+				{
+				LanguageCombo.SelectedIndex = 0;
+				}
+
 			loading = false;
 			}
 
 		// Выбор файла сохранения для загрузки
-		private void OpenFile_Click (object sender, System.EventArgs e)
+		private void OpenFile_Click (object sender, EventArgs e)
 			{
 			OFDialog.FileName = "";
 			OFDialog.ShowDialog ();
@@ -239,31 +192,30 @@ namespace BExplorer
 		private void DefaultFileButton_Click (object sender, EventArgs e)
 			{
 			// Пробуем открыть файл из стандартного расположения
-			OFDialog.FileName = Environment.GetFolderPath (Environment.SpecialFolder.MyDocuments) +
-				"\\GTA Vice City User Files\\GTAVCsf" + ((uint)OpenFileNumber.Value).ToString () + ".b";
+			OFDialog.FileName = savesDefaultPath + ((uint)OpenFileNumber.Value).ToString () + savesExtension;
 
 			OFDialog_FileOk (null, null);
 			}
 
 		// Файл выбран
-		private void OFDialog_FileOk (object sender, System.ComponentModel.CancelEventArgs e)
+		private void OFDialog_FileOk (object sender, CancelEventArgs e)
 			{
 			// Загрузка файла сохранения
 			Int16 errCode;
 
 			// В случае ошибки вывести сообщение и прекратить исполнение программы
+			SetState (false);	// Блокировать заранее
 			if ((errCode = BExplorerLib.SaveData_LoadEx (OFDialog.FileName)) != 1)
 				{
-				MessageBox.Show ("Ошибка загрузки файла сохранения:\n" + BExplorerLib.SaveData_ErrorPromptEx (errCode),
+				MessageBox.Show (Localization.GetText ("SaveLoadingError", al) + BExplorerLib.SaveData_ErrorPromptEx (errCode),
 					ProgramDescription.AssemblyTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-				SaveInfoLabel.Text = "(сохранение не выбрано)";
-				SetState (false);
+				SaveInfoLabel.Text = Localization.GetText ("SaveNotSpecified", al);
 
 				return;
 				}
 
 			// В случае успеха
-			SaveInfoLabel.Text = "Текущее сохранение: " + BExplorerLib.SaveData_GetSaveInfoEx ();
+			SaveInfoLabel.Text = Localization.GetText ("CurrentSave", al) + BExplorerLib.SaveData_GetSaveInfoEx ();
 			SetState (true);
 
 			// Загрузка начальных параметров в поля формы
@@ -276,7 +228,7 @@ namespace BExplorer
 			Result = BExplorerLib.SaveData_GetParameterValue (OpCode, ParCode);
 			if (!BExplorerLib.IsResultSuccessful (Result))
 				{
-				MessageBox.Show (Result, "Ошибка выполнения команды", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+				MessageBox.Show (Result, ProgramDescription.AssemblyTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 				return false;
 				}
 
@@ -289,9 +241,7 @@ namespace BExplorer
 			string Result = BExplorerLib.SaveData_SetParameterValue (OpCode, ParCode, NewValue);
 
 			if (!BExplorerLib.IsResultSuccessful (Result))
-				{
-				MessageBox.Show (Result, "Ошибка выполнения команды", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-				}
+				MessageBox.Show (Result, ProgramDescription.AssemblyTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 			}
 
 		// Загрузчик параметров
@@ -322,7 +272,7 @@ namespace BExplorer
 				return;
 				}
 
-			DP_Time.Value = new System.DateTime (2000, 1, 1, (int)decimal.Parse (s1), (int)decimal.Parse (s2), (int)decimal.Parse (s3));
+			DP_Time.Value = new DateTime (2000, 1, 1, (int)decimal.Parse (s1), (int)decimal.Parse (s2), (int)decimal.Parse (s3));
 
 			// Получение длины минуты
 			if (!GetParameterValue ((UInt16)BExplorerLib.OpCodes.InGameMinuteLength, 0, out s1))
@@ -360,11 +310,12 @@ namespace BExplorer
 				return;
 				}
 
+			decimal d = decimal.Parse (s1);
 			for (int i = 0; i < ParametersValues.Weathers.Length; i++)
 				{
-				if (decimal.Parse (s1) == ParametersValues.Weathers[i].ID)
+				if (d == ParametersValues.Weathers[i].ID)
 					{
-					DP_Weather.Text = ParametersValues.Weathers[i].Name;
+					DP_Weather.SelectedIndex = i;
 					break;
 					}
 				}
@@ -376,11 +327,12 @@ namespace BExplorer
 				return;
 				}
 
+			float f = float.Parse (s1);
 			for (int i = 0; i < ParametersValues.CameraPositions.Length; i++)
 				{
-				if (float.Parse (s1) == (float)ParametersValues.CameraPositions[i].ID)
+				if (f == (float)ParametersValues.CameraPositions[i].ID)
 					{
-					DP_CameraPos.Text = ParametersValues.CameraPositions[i].Name;
+					DP_CameraPos.SelectedIndex = i;
 					break;
 					}
 				}
@@ -436,7 +388,7 @@ namespace BExplorer
 				{
 				if (s1 == ParametersValues.Suits[i].CodeName)
 					{
-					PL_Suit.Text = ParametersValues.Suits[i].Name;
+					PL_Suit.SelectedIndex = i;
 					break;
 					}
 				}
@@ -467,20 +419,19 @@ namespace BExplorer
 			loading = false;
 
 			// Выбор слота оружия (вызывает событие запроса имени оружия и числа патронов)
-			WeaponsList.Text = ParametersValues.WeaponSlots[0];
+			WeaponsList.SelectedIndex = 0;
 			WeaponsList_SelectedIndexChanged (null, null);
 
 			// Выбор слота гаража (вызывает событие запроса параметров гаража)
-			GaragesList.Text = ParametersValues.GaragesSlots[0];
+			GaragesList.SelectedIndex = 0;
 			GaragesList_SelectedIndexChanged (null, null);
 
 			// Выбор слота накопителя (вызывает событие запроса параметров накопителя)
 			pu = new Pickups ();
 			AssetList.Items.Clear ();
 			for (int i = 0; i < pu.ActiveAssetsCount; i++)
-				{
-				AssetList.Items.Add ("Накопитель №" + (i + 1).ToString ());
-				}
+				AssetList.Items.Add (Localization.GetText ("AssetNumber", al) + (i + 1).ToString ());
+
 			if (pu.ActiveAssetsCount > 0)
 				{
 				AssetList.Text = AssetList.Items[0].ToString ();
@@ -493,12 +444,12 @@ namespace BExplorer
 			AssetList_SelectedIndexChanged (null, null);
 
 			// Выбор слота банды (вызывает событие запроса параметров банды)
-			GangsList.Text = ParametersValues.GangsSlots[0];
+			GangsList.SelectedIndex = 0;
 			GangsList_SelectedIndexChanged (null, null);
 
 			// Загрузка списка парковок и выбор слота
 			cg = new CarGenerators ();
-			CGCountLabel.Text = "Считано: " + cg.ActiveGeneratorsCount.ToString ();
+			CGCountLabel.Text = Localization.GetText ("CGLoaded", al) + cg.ActiveGeneratorsCount.ToString ();
 			CarGenList.Value = 1;
 			CarGenList_ValueChanged (null, null);
 
@@ -516,17 +467,17 @@ namespace BExplorer
 
 			if (ToDoStatusView.Items.Count == 0)
 				{
-				ToDoStatusView.Items.Add ("(игра пройдена полностью)");
+				ToDoStatusView.Items.Add (Localization.GetText ("SaveCompleted", al));
 				DangerousReset.Enabled = AbortSorting.Enabled = ST_InfBullets.Enabled = true;	// Только при полном прохождении
 				}
 			}
 
 		// Выбор места сохранения файла
-		private void SaveFileButton_Click (object sender, System.EventArgs e)
+		private void SaveFileButton_Click (object sender, EventArgs e)
 			{
 			// Запись данных генераторов авто
 			cg.SaveGenerators (!AbortSorting.Checked);
-			CGCountLabel.Text = "Записано: " + cg.ActiveGeneratorsCount.ToString ();
+			CGCountLabel.Text = Localization.GetText ("CGSaved", al) + cg.ActiveGeneratorsCount.ToString ();
 
 			// Отображение диалога
 			SFDialog.FileName = "";
@@ -537,17 +488,16 @@ namespace BExplorer
 			{
 			// Запись данных генераторов авто
 			cg.SaveGenerators (!AbortSorting.Checked);
-			CGCountLabel.Text = "Записано: " + cg.ActiveGeneratorsCount.ToString ();
+			CGCountLabel.Text = Localization.GetText ("CGSaved", al) + cg.ActiveGeneratorsCount.ToString ();
 
-			// Пробуем открыть файл из стандартного расположения
-			SFDialog.FileName = Environment.GetFolderPath (Environment.SpecialFolder.MyDocuments) +
-				"\\GTA Vice City User Files\\GTAVCsf" + ((uint)OpenFileNumber.Value).ToString () + ".b";
+			// Пробуем сохранить файл в стандартном расположении
+			SFDialog.FileName = savesDefaultPath + ((uint)OpenFileNumber.Value).ToString () + savesExtension;
 
 			SFDialog_FileOk (null, null);
 			}
 
 		// Место выбрано
-		private void SFDialog_FileOk (object sender, System.ComponentModel.CancelEventArgs e)
+		private void SFDialog_FileOk (object sender, CancelEventArgs e)
 			{
 			string msg = BExplorerLib.SaveData_SaveParametersFile (BExplorerLib.SaveableParameters.SaveFile, SFDialog.FileName);
 
@@ -560,20 +510,20 @@ namespace BExplorer
 				}
 			else
 				{
-				MessageBox.Show ("Ошибка сохранения файла:\n" + msg, ProgramDescription.AssemblyTitle,
+				MessageBox.Show (Localization.GetText ("SaveSavingError", al) + msg, ProgramDescription.AssemblyTitle,
 					MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 				}
 			}
 
 		// Кнопка выхода
-		private void ExitButton_Click (object sender, System.EventArgs e)
+		private void ExitButton_Click (object sender, EventArgs e)
 			{
 			this.Close ();
 			}
 
 		private void MainForm_FormClosing (object sender, FormClosingEventArgs e)
 			{
-			e.Cancel = (error == 0) && (MessageBox.Show ("Вы уверены, что сохранили все необходимые изменения?",
+			e.Cancel = (error == 0) && (MessageBox.Show (Localization.GetText ("ChangesSaved", al),
 				ProgramDescription.AssemblyTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question,
 				MessageBoxDefaultButton.Button2) == DialogResult.No);
 			}
@@ -583,19 +533,19 @@ namespace BExplorer
 			{
 			SaveFileButton.Enabled =
 				UpdateDefaultFileButton.Enabled =
-
 				RecommendedSettings.Enabled = State;
 
-			DP_Date.Enabled =
+			/*DP_Date.Enabled =
 				DP_Time.Enabled =
 				DP_IML.Enabled =
 				DP_GameTime.Enabled =
 				DP_GameSpeed.Enabled =
 				DP_Weather.Enabled =
 				DP_CameraPos.Enabled =
-				SBB_CabsRadio.Enabled = State;
+				SBB_CabsRadio.Enabled = State;*/
+			DPTab.Enabled = State;
 
-			PL_MaxHealth.Enabled =
+			/*PL_MaxHealth.Enabled =
 				PL_MaxArmor.Enabled =
 				PL_CurArmor.Enabled =
 				PL_MWL.Enabled =
@@ -606,9 +556,10 @@ namespace BExplorer
 				PL_Fireproof.Enabled =
 				PL_Bullets.Enabled =
 				PL_Weapon.Enabled =
-				WeaponsList.Enabled = State;
+				WeaponsList.Enabled = State;*/
+			PLTab.Enabled = State;
 
-			GaragesList.Enabled =
+			/*GaragesList.Enabled =
 				GR_CarModel.Enabled =
 				GR_CarColor1.Enabled =
 				GR_CarColor2.Enabled =
@@ -619,9 +570,12 @@ namespace BExplorer
 				GR_ExplProof.Enabled =
 				GR_FireProof.Enabled =
 				LoadGarages.Enabled =
-				SaveGarages.Enabled = State;
+				SaveGarages.Enabled = State;*/
+			GRTab.Enabled = State;
 
-			GangsList.Enabled =
+			PUTab.Enabled = State;
+
+			/*GangsList.Enabled =
 				GD_CarModel.Enabled =
 				GD_PedModel1.Enabled =
 				GD_PedModel2.Enabled =
@@ -630,9 +584,11 @@ namespace BExplorer
 
 				SaveStats.Enabled =
 				LoadStats.Enabled =
-				ToDoStatusView.Enabled = State;
+				ToDoStatusView.Enabled = State;*/
 
-			CarGenList.Enabled =
+			GDTab.Enabled = STTab.Enabled = State;
+
+			/*CarGenList.Enabled =
 				CG_AlarmProb.Enabled =
 				CG_AllowSpawn.Enabled =
 				CG_CarColor1.Enabled =
@@ -647,22 +603,19 @@ namespace BExplorer
 
 			CarGenGetCoords.Enabled =
 				LoadCG.Enabled =
-				SaveCG.Enabled = State;
+				SaveCG.Enabled = State;*/
+			CGTab.Enabled = State;
 
 			// Для этих элементов в общем порядке допустима только блокировка
 			if (State == false)
-				{
 				AbortSorting.Enabled = ST_InfBullets.Enabled = DangerousReset.Enabled = State;
-				}
 			}
 
 		// Изменена дата
-		private void DP_Date_ValueChanged (object sender, System.EventArgs e)
+		private void DP_Date_ValueChanged (object sender, EventArgs e)
 			{
 			if (loading)
-				{
 				return;
-				}
 
 			SetParameterValue ((UInt16)BExplorerLib.OpCodes.SaveYear, 0, DP_Date.Value.Year.ToString ());
 			SetParameterValue ((UInt16)BExplorerLib.OpCodes.SaveMonth, 0, DP_Date.Value.Month.ToString ());
@@ -670,12 +623,10 @@ namespace BExplorer
 			}
 
 		// Изменено время
-		private void DP_Time_ValueChanged (object sender, System.EventArgs e)
+		private void DP_Time_ValueChanged (object sender, EventArgs e)
 			{
 			if (loading)
-				{
 				return;
-				}
 
 			SetParameterValue ((UInt16)BExplorerLib.OpCodes.SaveHour, 0, DP_Time.Value.Hour.ToString ());
 			SetParameterValue ((UInt16)BExplorerLib.OpCodes.SaveMinute, 0, DP_Time.Value.Minute.ToString ());
@@ -683,175 +634,145 @@ namespace BExplorer
 			}
 
 		// Изменена длительность минуты в игре
-		private void DP_IML_ValueChanged (object sender, System.EventArgs e)
+		private void DP_IML_ValueChanged (object sender, EventArgs e)
 			{
 			if (loading)
-				{
 				return;
-				}
 
 			SetParameterValue ((UInt16)BExplorerLib.OpCodes.InGameMinuteLength, 0, DP_IML.Value.ToString ());
 			}
 
 		// Изменено время в игре
-		private void DP_GameTime_ValueChanged (object sender, System.EventArgs e)
+		private void DP_GameTime_ValueChanged (object sender, EventArgs e)
 			{
 			if (loading)
-				{
 				return;
-				}
 
 			SetParameterValue ((UInt16)BExplorerLib.OpCodes.InGameHour, 0, DP_GameTime.Value.Hour.ToString ());
 			SetParameterValue ((UInt16)BExplorerLib.OpCodes.InGameMinute, 0, DP_GameTime.Value.Minute.ToString ());
 			}
 
 		// Изменена скорость игры
-		private void DP_GameSpeed_ValueChanged (object sender, System.EventArgs e)
+		private void DP_GameSpeed_ValueChanged (object sender, EventArgs e)
 			{
 			if (loading)
-				{
 				return;
-				}
 
 			SetParameterValue ((UInt16)BExplorerLib.OpCodes.GameSpeed, 0, DP_GameSpeed.Value.ToString ());
 			}
 
 		// Изменена текущая погода
-		private void DP_Weather_SelectedIndexChanged (object sender, System.EventArgs e)
+		private void DP_Weather_SelectedIndexChanged (object sender, EventArgs e)
 			{
 			if (loading)
-				{
 				return;
-				}
 
 			SetParameterValue ((UInt16)BExplorerLib.OpCodes.CurrentWeather, 0,
 				ParametersValues.Weathers[DP_Weather.SelectedIndex].ID.ToString ());
 			}
 
 		// Изменено положение камеры
-		private void DP_CameraPos_SelectedIndexChanged (object sender, System.EventArgs e)
+		private void DP_CameraPos_SelectedIndexChanged (object sender, EventArgs e)
 			{
 			if (loading)
-				{
 				return;
-				}
 
 			SetParameterValue ((UInt16)BExplorerLib.OpCodes.CarOverview, 0,
 				ParametersValues.CameraPositions[DP_CameraPos.SelectedIndex].ID.ToString ());
 			}
 
 		// Изменено состояние радио Caufman cabs
-		private void SBB_CabsRadio_CheckedChanged (object sender, System.EventArgs e)
+		private void SBB_CabsRadio_CheckedChanged (object sender, EventArgs e)
 			{
 			if (loading)
-				{
 				return;
-				}
 
 			SetParameterValue ((UInt16)BExplorerLib.OpCodes.CabsRadio, 0, SBB_CabsRadio.Checked ? "1" : "0");
 			}
 
 		// Изменена величина максимального здоровья
-		private void PL_MaxHealth_ValueChanged (object sender, System.EventArgs e)
+		private void PL_MaxHealth_ValueChanged (object sender, EventArgs e)
 			{
 			if (loading)
-				{
 				return;
-				}
 
 			SetParameterValue ((UInt16)BExplorerLib.OpCodes.MaxHealth, 0, PL_MaxHealth.Value.ToString ());
 			}
 
 		// Изменена величина максимальной брони
-		private void PL_MaxArmor_ValueChanged (object sender, System.EventArgs e)
+		private void PL_MaxArmor_ValueChanged (object sender, EventArgs e)
 			{
 			if (loading)
-				{
 				return;
-				}
 
 			SetParameterValue ((UInt16)BExplorerLib.OpCodes.MaxArmor, 0, PL_MaxArmor.Value.ToString ());
 			}
 
 		// Изменена величина текущей брони
-		private void PL_CurArmor_ValueChanged (object sender, System.EventArgs e)
+		private void PL_CurArmor_ValueChanged (object sender, EventArgs e)
 			{
 			if (loading)
-				{
 				return;
-				}
 
 			SetParameterValue ((UInt16)BExplorerLib.OpCodes.CurrentArmor, 0, PL_CurArmor.Value.ToString ());
 			}
 
 		// Изменён максимум звёзд розыска
-		private void PL_MWL_SelectedIndexChanged (object sender, System.EventArgs e)
+		private void PL_MWL_SelectedIndexChanged (object sender, EventArgs e)
 			{
 			if (loading)
-				{
 				return;
-				}
 
 			SetParameterValue ((UInt16)BExplorerLib.OpCodes.MaxPoliceStars, 0, PL_MWL.SelectedIndex.ToString ());
 			}
 
 		// Изменена сумма наличных
-		private void PL_CurMoney_ValueChanged (object sender, System.EventArgs e)
+		private void PL_CurMoney_ValueChanged (object sender, EventArgs e)
 			{
 			if (loading)
-				{
 				return;
-				}
 
 			SetParameterValue ((UInt16)BExplorerLib.OpCodes.CurrentMoney, 0, PL_CurMoney.Value.ToString ());
 			}
 
 		// Изменён костюм
-		private void PL_Suit_SelectedIndexChanged (object sender, System.EventArgs e)
+		private void PL_Suit_SelectedIndexChanged (object sender, EventArgs e)
 			{
 			if (loading)
-				{
 				return;
-				}
 
 			SetParameterValue ((UInt16)BExplorerLib.OpCodes.PlayerSuit, 0, ParametersValues.Suits[PL_Suit.SelectedIndex].CodeName);
 			}
 
 		// Изменён флаг вечного бега
-		private void PL_InfRun_CheckedChanged (object sender, System.EventArgs e)
+		private void PL_InfRun_CheckedChanged (object sender, EventArgs e)
 			{
 			if (loading)
-				{
 				return;
-				}
 
 			SetParameterValue ((UInt16)BExplorerLib.OpCodes.InfiniteRun, 0, PL_InfRun.Checked ? "1" : "0");
 			}
 
 		// Изменён флаг быстрой перезарядки
-		private void PL_FastReload_CheckedChanged (object sender, System.EventArgs e)
+		private void PL_FastReload_CheckedChanged (object sender, EventArgs e)
 			{
 			if (loading)
-				{
 				return;
-				}
 
 			SetParameterValue ((UInt16)BExplorerLib.OpCodes.FastReload, 0, PL_FastReload.Checked ? "1" : "0");
 			}
 
 		// Изменён флаг несгораемости
-		private void PL_Fireproof_CheckedChanged (object sender, System.EventArgs e)
+		private void PL_Fireproof_CheckedChanged (object sender, EventArgs e)
 			{
 			if (loading)
-				{
 				return;
-				}
 
 			SetParameterValue ((UInt16)BExplorerLib.OpCodes.Fireproof, 0, PL_Fireproof.Checked ? "1" : "0");
 			}
 
 		// Выбран слот оружия
-		private void WeaponsList_SelectedIndexChanged (object sender, System.EventArgs e)
+		private void WeaponsList_SelectedIndexChanged (object sender, EventArgs e)
 			{
 			loading = true;
 
@@ -865,11 +786,12 @@ namespace BExplorer
 				return;
 				}
 
+			decimal d = decimal.Parse (s1);
 			for (int i = 0; i < ParametersValues.Weapons.Length; i++)
 				{
-				if (decimal.Parse (s1) == ParametersValues.Weapons[i].ID)
+				if (d == ParametersValues.Weapons[i].ID)
 					{
-					PL_Weapon.Text = ParametersValues.Weapons[i].Name;
+					PL_Weapon.SelectedIndex = i;
 					break;
 					}
 				}
@@ -880,38 +802,34 @@ namespace BExplorer
 			}
 
 		// Изменён тип оружия
-		private void PL_Weapon_SelectedIndexChanged (object sender, System.EventArgs e)
+		private void PL_Weapon_SelectedIndexChanged (object sender, EventArgs e)
 			{
 			if (loading)
-				{
 				return;
-				}
 
 			SetParameterValue ((UInt16)((int)BExplorerLib.OpCodes.PlayerWeapons_Base + WeaponsList.SelectedIndex),
 				(UInt16)BExplorerLib.WeaponsParCodes.WeaponType, ParametersValues.Weapons[PL_Weapon.SelectedIndex].ID.ToString ());
 			}
 
 		// Изменено число патронов
-		private void PL_Bullets_ValueChanged (object sender, System.EventArgs e)
+		private void PL_Bullets_ValueChanged (object sender, EventArgs e)
 			{
 			if (loading)
-				{
 				return;
-				}
 
 			SetParameterValue ((UInt16)((int)BExplorerLib.OpCodes.PlayerWeapons_Base + WeaponsList.SelectedIndex),
 				(UInt16)BExplorerLib.WeaponsParCodes.WeaponAmmo, PL_Bullets.Value.ToString ());
 			}
 
 		// Загрузка статистики
-		private void LoadStats_Click (object sender, System.EventArgs e)
+		private void LoadStats_Click (object sender, EventArgs e)
 			{
 			OStatsDialog.FileName = "";
 			OStatsDialog.ShowDialog ();
 			}
 
 		// Файл выбран
-		private void OStatsDialog_FileOk (object sender, System.ComponentModel.CancelEventArgs e)
+		private void OStatsDialog_FileOk (object sender, CancelEventArgs e)
 			{
 			// Загрузка файла статистики
 			string msg = BExplorerLib.SaveData_LoadParametersFile (BExplorerLib.LoadableParameters.Stats, OStatsDialog.FileName);
@@ -924,20 +842,20 @@ namespace BExplorer
 			// В противном случае
 			else
 				{
-				MessageBox.Show ("Ошибка загрузки файла статистики:\n" + msg, ProgramDescription.AssemblyTitle,
+				MessageBox.Show (Localization.GetText ("StatsLoadingError", al) + msg, ProgramDescription.AssemblyTitle,
 					MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 				}
 			}
 
 		// Выгрузка статистики
-		private void SaveStats_Click (object sender, System.EventArgs e)
+		private void SaveStats_Click (object sender, EventArgs e)
 			{
 			SStatsDialog.FileName = "";
 			SStatsDialog.ShowDialog ();
 			}
 
 		// Файл выбран
-		private void SStatsDialog_FileOk (object sender, System.ComponentModel.CancelEventArgs e)
+		private void SStatsDialog_FileOk (object sender, CancelEventArgs e)
 			{
 			// Загрузка файла статистики
 			string msg = BExplorerLib.SaveData_SaveParametersFile (BExplorerLib.SaveableParameters.Stats, SStatsDialog.FileName);
@@ -950,13 +868,13 @@ namespace BExplorer
 			// В противном случае
 			else
 				{
-				MessageBox.Show ("Ошибка сохранения файла статистики:\n" + msg, ProgramDescription.AssemblyTitle,
+				MessageBox.Show (Localization.GetText ("StatsSavingError", al) + msg, ProgramDescription.AssemblyTitle,
 					MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 				}
 			}
 
 		// Выбран слот гаража
-		private void GaragesList_SelectedIndexChanged (object sender, System.EventArgs e)
+		private void GaragesList_SelectedIndexChanged (object sender, EventArgs e)
 			{
 			loading = true;
 
@@ -978,11 +896,12 @@ namespace BExplorer
 				return;
 				}
 
-			for (int i = 0; i < ParametersValues.CarsForGarages.Count; i++)
+			decimal d = decimal.Parse (model);
+			for (int i = 0; i < ParametersValues.CarsForGarages.Length; i++)
 				{
-				if (decimal.Parse (model) == ParametersValues.CarsForGarages[i].ID)
+				if (d == ParametersValues.CarsForGarages[i].ID)
 					{
-					GR_CarModel.Text = ParametersValues.CarsForGarages[i].Name;
+					GR_CarModel.SelectedIndex = i;
 					break;
 					}
 				}
@@ -990,73 +909,70 @@ namespace BExplorer
 			GR_CarColor1.Value = (decimal.Parse (c1) > GR_CarColor1.Maximum) ? GR_CarColor1.Maximum : decimal.Parse (c1);
 			GR_CarColor2.Value = (decimal.Parse (c2) > GR_CarColor1.Maximum) ? GR_CarColor2.Maximum : decimal.Parse (c2);
 
+			d = decimal.Parse (radio);
 			for (int i = 0; i < ParametersValues.Radios.Length; i++)
 				{
-				if (decimal.Parse (radio) == ParametersValues.Radios[i].ID)
+				if (d == ParametersValues.Radios[i].ID)
 					{
-					GR_Radio.Text = ParametersValues.Radios[i].Name;
+					GR_Radio.SelectedIndex = i;
 					break;
 					}
 				}
 
+			d = decimal.Parse (bomb);
 			for (int i = 0; i < ParametersValues.Bombs.Length; i++)
 				{
-				if (decimal.Parse (bomb) == ParametersValues.Bombs[i].ID)
+				if (d == ParametersValues.Bombs[i].ID)
 					{
-					GR_Bomb.Text = ParametersValues.Bombs[i].Name;
+					GR_Bomb.SelectedIndex = i;
 					break;
 					}
 				}
 
-			GR_BulletsProof.Checked = (((int)decimal.Parse (imm) & 0x1) != 0);
-			GR_FireProof.Checked = (((int)decimal.Parse (imm) & 0x2) != 0);
-			GR_ExplProof.Checked = (((int)decimal.Parse (imm) & 0x4) != 0);
-			GR_DamageProof.Checked = (((int)decimal.Parse (imm) & 0x8) != 0);
+			d = decimal.Parse (imm);
+			GR_BulletsProof.Checked = (((int)d & 0x1) != 0);
+			GR_FireProof.Checked = (((int)d & 0x2) != 0);
+			GR_ExplProof.Checked = (((int)d & 0x4) != 0);
+			GR_DamageProof.Checked = (((int)d & 0x8) != 0);
 
 			loading = false;
 			}
 
 		// Изменена модель авто
-		private void GR_CarModel_SelectedIndexChanged (object sender, System.EventArgs e)
+		private void GR_CarModel_SelectedIndexChanged (object sender, EventArgs e)
 			{
 			if (loading)
-				{
 				return;
-				}
 
 			SetParameterValue ((UInt16)((int)BExplorerLib.OpCodes.Garages_Base + GaragesList.SelectedIndex),
 				(UInt16)BExplorerLib.GaragesParCodes.CarModel, ParametersValues.CarsForGarages[GR_CarModel.SelectedIndex].ID.ToString ());
 			}
 
 		// Изменены цвета авто
-		private void GR_CarColor1_ValueChanged (object sender, System.EventArgs e)
+		private void GR_CarColor1_ValueChanged (object sender, EventArgs e)
 			{
 			GDColorLabel1.ForeColor = cc.Colors[(int)GR_CarColor1.Value];
 
 			if (loading)
-				{
 				return;
-				}
 
 			SetParameterValue ((UInt16)((int)BExplorerLib.OpCodes.Garages_Base + GaragesList.SelectedIndex),
 				(UInt16)BExplorerLib.GaragesParCodes.PrimaryColor, GR_CarColor1.Value.ToString ());
 			}
 
-		private void GR_CarColor2_ValueChanged (object sender, System.EventArgs e)
+		private void GR_CarColor2_ValueChanged (object sender, EventArgs e)
 			{
 			GDColorLabel2.ForeColor = cc.Colors[(int)GR_CarColor2.Value];
 
 			if (loading)
-				{
 				return;
-				}
 
 			SetParameterValue ((UInt16)((int)BExplorerLib.OpCodes.Garages_Base + GaragesList.SelectedIndex),
 				(UInt16)BExplorerLib.GaragesParCodes.SecondaryColor, GR_CarColor2.Value.ToString ());
 			}
 
 		// Изменена радиостанция
-		private void GR_Radio_SelectedIndexChanged (object sender, System.EventArgs e)
+		private void GR_Radio_SelectedIndexChanged (object sender, EventArgs e)
 			{
 			if (loading)
 				return;
@@ -1076,70 +992,59 @@ namespace BExplorer
 			}
 
 		// Изменены флаги защиты
-		private void GR_FireProof_CheckedChanged (object sender, System.EventArgs e)
+		private void GR_FireProof_CheckedChanged (object sender, EventArgs e)
 			{
 			if (loading)
 				return;
 
 			int f = 0;
 			if (GR_BulletsProof.Checked)
-				{
 				f |= 0x1;
-				}
+
 			if (GR_FireProof.Checked)
-				{
 				f |= 0x2;
-				}
+
 			if (GR_ExplProof.Checked)
-				{
 				f |= 0x4;
-				}
+
 			if (GR_DamageProof.Checked)
-				{
 				f |= 0x8;
-				}
 
 			SetParameterValue ((UInt16)((int)BExplorerLib.OpCodes.Garages_Base + GaragesList.SelectedIndex),
 				(UInt16)BExplorerLib.GaragesParCodes.Immunity, f.ToString ());
 			}
 
 		// Выбран денежный накопитель
-		private void AssetList_SelectedIndexChanged (object sender, System.EventArgs e)
+		private void AssetList_SelectedIndexChanged (object sender, EventArgs e)
 			{
 			loading = true;
 
 			if (AssetList.SelectedIndex >= 0)
-				{
 				PU_AssetValue.Value = pu.GetAssetMaximum (AssetList.SelectedIndex);
-				}
 
 			loading = false;
 			}
 
 		// Изменено значение накопителя
-		private void PU_AssetValue_ValueChanged (object sender, System.EventArgs e)
+		private void PU_AssetValue_ValueChanged (object sender, EventArgs e)
 			{
 			if (loading)
 				return;
 
 			if (AssetList.SelectedIndex >= 0)
-				{
 				pu.SetAssetMaximum (AssetList.SelectedIndex, (uint)PU_AssetValue.Value);
-				}
 			}
 
 		// Кнопка позволяет посмотреть, где находится накопитель
 		private void PickupViewCoords_Click (object sender, EventArgs e)
 			{
 			if (AssetList.SelectedIndex >= 0)
-				{
 				cp.PickCoords ((decimal)pu.GetAssetX (AssetList.SelectedIndex), (decimal)pu.GetAssetY (AssetList.SelectedIndex),
-					(decimal)pu.GetAssetZ (AssetList.SelectedIndex), 0, true);
-				}
+					(decimal)pu.GetAssetZ (AssetList.SelectedIndex), 0, true, al);
 			}
 
 		// Выбрана банда для редактирования
-		private void GangsList_SelectedIndexChanged (object sender, System.EventArgs e)
+		private void GangsList_SelectedIndexChanged (object sender, EventArgs e)
 			{
 			loading = true;
 
@@ -1159,11 +1064,12 @@ namespace BExplorer
 				return;
 				}
 
-			for (int i = 0; i < ParametersValues.CarsForGangs.Count; i++)
+			decimal d1 = decimal.Parse (car);
+			for (int i = 0; i < ParametersValues.CarsForGangs.Length; i++)
 				{
-				if (decimal.Parse (car) == ParametersValues.CarsForGangs[i].ID)
+				if (d1 == ParametersValues.CarsForGangs[i].ID)
 					{
-					GD_CarModel.Text = ParametersValues.CarsForGangs[i].Name;
+					GD_CarModel.SelectedIndex = i;
 					break;
 					}
 				}
@@ -1171,36 +1077,32 @@ namespace BExplorer
 			GD_PedModel1.Value = (decimal.Parse (p1) > GD_PedModel1.Maximum) ? GD_PedModel1.Maximum : decimal.Parse (p1);
 			GD_PedModel2.Value = (decimal.Parse (p2) > GD_PedModel2.Maximum) ? GD_PedModel2.Maximum : decimal.Parse (p2);
 
+			d1 = decimal.Parse (w1);
+			decimal d2 = decimal.Parse (w2);
 			for (int i = 0; i < ParametersValues.Weapons.Length; i++)
 				{
-				if (decimal.Parse (w1) == ParametersValues.Weapons[i].ID)
-					{
-					GD_Weapon1.Text = ParametersValues.Weapons[i].Name;
-					}
+				if (d1 == ParametersValues.Weapons[i].ID)
+					GD_Weapon1.SelectedIndex = i;
 
-				if (decimal.Parse (w2) == ParametersValues.Weapons[i].ID)
-					{
-					GD_Weapon2.Text = ParametersValues.Weapons[i].Name;
-					}
+				if (d2 == ParametersValues.Weapons[i].ID)
+					GD_Weapon2.SelectedIndex = i;
 				}
 
 			loading = false;
 			}
 
 		// Выбрана модель авто
-		private void GD_CarModel_SelectedIndexChanged (object sender, System.EventArgs e)
+		private void GD_CarModel_SelectedIndexChanged (object sender, EventArgs e)
 			{
 			if (loading)
-				{
 				return;
-				}
 
 			SetParameterValue ((UInt16)((int)BExplorerLib.OpCodes.Gangs_Base + GangsList.SelectedIndex),
 				(UInt16)BExplorerLib.GangsParCodes.CarModel, ParametersValues.CarsForGangs[GD_CarModel.SelectedIndex].ID.ToString ());
 			}
 
 		// Изменён скин
-		private void GD_PedModel1_ValueChanged (object sender, System.EventArgs e)
+		private void GD_PedModel1_ValueChanged (object sender, EventArgs e)
 			{
 			if (loading)
 				return;
@@ -1209,7 +1111,7 @@ namespace BExplorer
 				(UInt16)BExplorerLib.GangsParCodes.PrimaryPedModel, GD_PedModel1.Value.ToString ());
 			}
 
-		private void GD_PedModel2_ValueChanged (object sender, System.EventArgs e)
+		private void GD_PedModel2_ValueChanged (object sender, EventArgs e)
 			{
 			if (loading)
 				return;
@@ -1219,7 +1121,7 @@ namespace BExplorer
 			}
 
 		// Выбрано оружие
-		private void GD_Weapon1_SelectedIndexChanged (object sender, System.EventArgs e)
+		private void GD_Weapon1_SelectedIndexChanged (object sender, EventArgs e)
 			{
 			if (loading)
 				return;
@@ -1228,7 +1130,7 @@ namespace BExplorer
 				(UInt16)BExplorerLib.GangsParCodes.PrimaryWeapon, ParametersValues.Weapons[GD_Weapon1.SelectedIndex].ID.ToString ());
 			}
 
-		private void GD_Weapon2_SelectedIndexChanged (object sender, System.EventArgs e)
+		private void GD_Weapon2_SelectedIndexChanged (object sender, EventArgs e)
 			{
 			if (loading)
 				return;
@@ -1238,11 +1140,11 @@ namespace BExplorer
 			}
 
 		// Выбор слота парковки
-		private void CarGenList_ValueChanged (object sender, System.EventArgs e)
+		private void CarGenList_ValueChanged (object sender, EventArgs e)
 			{
 			loading = true;
 
-			for (int i = 0; i < ParametersValues.CarsForCG.Count; i++)
+			for (int i = 0; i < ParametersValues.CarsForCG.Length; i++)
 				{
 				if (cg.GetGeneratorData ((int)CarGenList.Value).CarModel == ParametersValues.CarsForCG[i].ID)
 					{
@@ -1274,7 +1176,7 @@ namespace BExplorer
 			}
 
 		// Изменены настройки авто
-		private void CG_CarModel_SelectedIndexChanged (object sender, System.EventArgs e)
+		private void CG_CarModel_SelectedIndexChanged (object sender, EventArgs e)
 			{
 			CGColorLabel1.ForeColor = (CG_CarColor1.Value >= 0) ? cc.Colors[(int)CG_CarColor1.Value] : Color.FromName ("ControlDark");
 			CGColorLabel2.ForeColor = (CG_CarColor2.Value >= 0) ? cc.Colors[(int)CG_CarColor2.Value] : Color.FromName ("ControlDark");
@@ -1289,10 +1191,10 @@ namespace BExplorer
 			}
 
 		// Выбор координат
-		private void CarGenGetCoords_Click (object sender, System.EventArgs e)
+		private void CarGenGetCoords_Click (object sender, EventArgs e)
 			{
 			// Запуск выбора
-			cp.PickCoords (CG_X.Value, CG_Y.Value, CG_Z.Value, CG_Rotation.Value, false);
+			cp.PickCoords (CG_X.Value, CG_Y.Value, CG_Z.Value, CG_Rotation.Value, false, al);
 
 			// Получение результатов
 			loading = true;		// Чтобы не выполнять одно и то же 4 раза
@@ -1304,14 +1206,14 @@ namespace BExplorer
 			}
 
 		// Загрузка параметров парковок
-		private void LoadCG_Click (object sender, System.EventArgs e)
+		private void LoadCG_Click (object sender, EventArgs e)
 			{
 			OCGDialog.FileName = "";
 			OCGDialog.ShowDialog ();
 			}
 
 		// Файл выбран
-		private void OCGDialog_FileOk (object sender, System.ComponentModel.CancelEventArgs e)
+		private void OCGDialog_FileOk (object sender, CancelEventArgs e)
 			{
 			// Загрузка файла статистики
 			string msg = BExplorerLib.SaveData_LoadParametersFile (BExplorerLib.LoadableParameters.Generators, OCGDialog.FileName);
@@ -1324,7 +1226,7 @@ namespace BExplorer
 			// В противном случае
 			else
 				{
-				MessageBox.Show ("Ошибка загрузки файла параметров парковок:\n" + msg, ProgramDescription.AssemblyTitle,
+				MessageBox.Show (Localization.GetText ("CGLoadingError", al) + msg, ProgramDescription.AssemblyTitle,
 					MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 				}
 
@@ -1333,11 +1235,11 @@ namespace BExplorer
 			}
 
 		// Выгрузка параметров парковок
-		private void SaveCG_Click (object sender, System.EventArgs e)
+		private void SaveCG_Click (object sender, EventArgs e)
 			{
 			// Запись параметров
 			cg.SaveGenerators (!AbortSorting.Checked);
-			CGCountLabel.Text = "Записано: " + cg.ActiveGeneratorsCount.ToString ();
+			CGCountLabel.Text = Localization.GetText ("CGSaved", al) + cg.ActiveGeneratorsCount.ToString ();
 
 			// Вызов окна
 			SCGDialog.FileName = "";
@@ -1345,7 +1247,7 @@ namespace BExplorer
 			}
 
 		// Файл выбран
-		private void SCGDialog_FileOk (object sender, System.ComponentModel.CancelEventArgs e)
+		private void SCGDialog_FileOk (object sender, CancelEventArgs e)
 			{
 			// Загрузка файла статистики
 			string msg = BExplorerLib.SaveData_SaveParametersFile (BExplorerLib.SaveableParameters.Generators, SCGDialog.FileName);
@@ -1358,13 +1260,13 @@ namespace BExplorer
 			// В противном случае
 			else
 				{
-				MessageBox.Show ("Ошибка сохранения файла параметров парковок:\n" + msg, ProgramDescription.AssemblyTitle,
+				MessageBox.Show (Localization.GetText ("CGSavingError", al) + msg, ProgramDescription.AssemblyTitle,
 					MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 				}
 			}
 
 		// Установка флага бесконечных патронов
-		private void ST_InfBullets_CheckedChanged (object sender, System.EventArgs e)
+		private void ST_InfBullets_CheckedChanged (object sender, EventArgs e)
 			{
 			if (loading)
 				return;
@@ -1373,16 +1275,12 @@ namespace BExplorer
 			}
 
 		// Сброс потенциально опасных параметров
-		private void DangerousReset_Click (object sender, System.EventArgs e)
+		private void DangerousReset_Click (object sender, EventArgs e)
 			{
 			// Контроль
-			if (MessageBox.Show ("Это действие удаляет из файла сохранения параметры, вызывающие сбои при изменении " +
-				"карты игры, такие как подвижные краны и «взорванные» объекты. Однако для данного файла это действие " +
-				"необратимо. Продолжить?", ProgramDescription.AssemblyTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question,
-				MessageBoxDefaultButton.Button2) == DialogResult.No)
-				{
+			if (MessageBox.Show (Localization.GetText ("DangerousResetMessage", al), ProgramDescription.AssemblyTitle,
+				MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.No)
 				return;
-				}
 
 			// Выполнение
 			string msg = BExplorerLib.SaveData_FixFile ();
@@ -1390,14 +1288,14 @@ namespace BExplorer
 			}
 
 		// Загрузка параметров гаражей
-		private void LoadGarages_Click (object sender, System.EventArgs e)
+		private void LoadGarages_Click (object sender, EventArgs e)
 			{
 			OGDialog.FileName = "";
 			OGDialog.ShowDialog ();
 			}
 
 		// Файл выбран
-		private void OGDialog_FileOk (object sender, System.ComponentModel.CancelEventArgs e)
+		private void OGDialog_FileOk (object sender, CancelEventArgs e)
 			{
 			// Загрузка файла статистики
 			string msg = BExplorerLib.SaveData_LoadParametersFile (BExplorerLib.LoadableParameters.Garages, OGDialog.FileName);
@@ -1410,7 +1308,7 @@ namespace BExplorer
 			// В противном случае
 			else
 				{
-				MessageBox.Show ("Ошибка загрузки файла параметров гаражей:\n" + msg, ProgramDescription.AssemblyTitle,
+				MessageBox.Show (Localization.GetText ("GRLoadingError", al) + msg, ProgramDescription.AssemblyTitle,
 					MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 				}
 
@@ -1419,7 +1317,7 @@ namespace BExplorer
 			}
 
 		// Выгрузка параметров парковок
-		private void SaveGarages_Click (object sender, System.EventArgs e)
+		private void SaveGarages_Click (object sender, EventArgs e)
 			{
 			// Вызов окна
 			SGDialog.FileName = "";
@@ -1427,7 +1325,7 @@ namespace BExplorer
 			}
 
 		// Файл выбран
-		private void SGDialog_FileOk (object sender, System.ComponentModel.CancelEventArgs e)
+		private void SGDialog_FileOk (object sender, CancelEventArgs e)
 			{
 			// Загрузка файла статистики
 			string msg = BExplorerLib.SaveData_SaveParametersFile (BExplorerLib.SaveableParameters.Garages, SGDialog.FileName);
@@ -1440,7 +1338,7 @@ namespace BExplorer
 			// В противном случае
 			else
 				{
-				MessageBox.Show ("Ошибка сохранения файла параметров гаражей:\n" + msg, ProgramDescription.AssemblyTitle,
+				MessageBox.Show (Localization.GetText ("GRSavingError", al) + msg, ProgramDescription.AssemblyTitle,
 					MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 				}
 			}
@@ -1453,6 +1351,146 @@ namespace BExplorer
 			DP_Weather.SelectedIndex = 0;
 			PL_CurArmor.Value = PL_CurArmor.Maximum;
 			PL_MWL.SelectedIndex = 0;
+			}
+
+		// Отображение сведений о программе
+		private void BExplorerForm_HelpButtonClicked (object sender, CancelEventArgs e)
+			{
+			// Отмена обработки события вызова справки
+			e.Cancel = true;
+
+			// О программе
+			ProgramDescription.ShowAbout ();
+
+			// Общая справка
+			ProgramDescription.ShowHelp ();
+			}
+
+		// Выбор языка интерфейса
+		private void LanguageCombo_SelectedIndexChanged (object sender, EventArgs e)
+			{
+			// Сохранение языка
+			Localization.CurrentLanguage = al = (SupportedLanguages)LanguageCombo.SelectedIndex;
+
+			// Настройка списков
+			string s;
+
+			for (int i = 0; i < ParametersValues.Weathers.Length; i++)
+				{
+				s = Localization.GetText ("Weathers_" + ParametersValues.Weathers[i].Name, al);
+				if (DP_Weather.Items.Count < ParametersValues.Weathers.Length)
+					DP_Weather.Items.Add (s);
+				else
+					DP_Weather.Items[i] = s;
+				}
+
+			for (int i = 0; i < ParametersValues.CameraPositions.Length; i++)
+				{
+				s = Localization.GetText ("CameraPositions_" + ParametersValues.CameraPositions[i].Name, al);
+				if (DP_CameraPos.Items.Count < ParametersValues.CameraPositions.Length)
+					DP_CameraPos.Items.Add (s);
+				else
+					DP_CameraPos.Items[i] = s;
+				}
+
+			for (int i = 0; i < ParametersValues.Suits.Length; i++)
+				{
+				s = Localization.GetText ("Suits_" + ParametersValues.Suits[i].Name, al);
+				if (PL_Suit.Items.Count < ParametersValues.Suits.Length)
+					PL_Suit.Items.Add (s);
+				else
+					PL_Suit.Items[i] = s;
+				}
+
+			for (int i = 0; i < BExplorerLib.WeaponsCount; i++)
+				{
+				s = Localization.GetText ("WeaponSlot", al) + (i + 1).ToString ();
+				if (WeaponsList.Items.Count < BExplorerLib.WeaponsCount)
+					WeaponsList.Items.Add (s);
+				else
+					WeaponsList.Items[i] = s;
+				}
+
+			for (int i = 0; i < ParametersValues.Weapons.Length; i++)
+				{
+				s = Localization.GetText ("Weapons_" + ParametersValues.Weapons[i].Name, al);
+				if (PL_Weapon.Items.Count < ParametersValues.Weapons.Length)
+					{
+					PL_Weapon.Items.Add (s);
+					GD_Weapon1.Items.Add (s);
+					GD_Weapon2.Items.Add (s);
+					}
+				else
+					{
+					PL_Weapon.Items[i] = s;
+					GD_Weapon1.Items[i] = s;
+					GD_Weapon2.Items[i] = s;
+					}
+				}
+
+			for (int i = 0; i < BExplorerLib.GaragesCount; i++)
+				{
+				s = Localization.GetText ("Garages_" + (i + 1).ToString (), al);
+				if (GaragesList.Items.Count < BExplorerLib.GaragesCount)
+					GaragesList.Items.Add (s);
+				else
+					GaragesList.Items[i] = s;
+				}
+
+			for (int i = 0; i < ParametersValues.Bombs.Length; i++)
+				{
+				s = Localization.GetText ("Bombs_" + ParametersValues.Bombs[i].Name, al);
+				if (GR_Bomb.Items.Count < ParametersValues.Bombs.Length)
+					GR_Bomb.Items.Add (s);
+				else
+					GR_Bomb.Items[i] = s;
+				}
+
+			for (int i = 0; i < BExplorerLib.GangsCount; i++)
+				{
+				s = Localization.GetText ("Gangs_" + (i + 1).ToString (), al);
+				if (GangsList.Items.Count < BExplorerLib.GangsCount)
+					GangsList.Items.Add (s);
+				else
+					GangsList.Items[i] = s;
+				}
+
+			// Настройка диалогов
+			OFDialog.Filter = SFDialog.Filter = string.Format (Localization.GetText ("OFDialogFilter", al), savesExtension);
+			OStatsDialog.Filter = SStatsDialog.Filter = Localization.GetText ("OStatsDialogFilter", al);
+			OCGDialog.Filter = SCGDialog.Filter = Localization.GetText ("OCGDialogFilter", al);
+			OGDialog.Filter = SGDialog.Filter = Localization.GetText ("OGDialogFilter", al);
+
+			OFDialog.Title = OStatsDialog.Title = OCGDialog.Title = OGDialog.Title = Localization.GetText ("OFDialogTitle", al);
+			SFDialog.Title = SStatsDialog.Title = SCGDialog.Title = SGDialog.Title = Localization.GetText ("SFDialogTitle", al);
+
+			// Настройка контролов
+			Localization.SetControlsText (FileTab, al);
+			Localization.SetControlsText (DPTab, al);
+			Localization.SetControlsText (PLTab, al);
+			Localization.SetControlsText (GRTab, al);
+			LoadGarages.Text = Localization.GetText ("LoadParameters", al);
+			SaveGarages.Text = Localization.GetText ("SaveParameters", al);
+			Localization.SetControlsText (PUTab, al);
+			Localization.SetControlsText (GDTab, al);
+			Localization.SetControlsText (CGTab, al);
+			LoadCG.Text = Localization.GetText ("LoadParameters", al);
+			SaveCG.Text = Localization.GetText ("SaveParameters", al);
+			Localization.SetControlsText (STTab, al);
+
+			FileTab.Text = Localization.GetText ("MainTab_FileTab", al);
+			DPTab.Text = Localization.GetText ("MainTab_DPTab", al);
+			PLTab.Text = Localization.GetText ("MainTab_PLTab", al);
+			GRTab.Text = Localization.GetText ("MainTab_GRTab", al);
+			PUTab.Text = Localization.GetText ("MainTab_PUTab", al);
+			GDTab.Text = Localization.GetText ("MainTab_GDTab", al);
+			CGTab.Text = Localization.GetText ("MainTab_CGTab", al);
+			STTab.Text = Localization.GetText ("MainTab_STTab", al);
+
+			if (DPTab.Enabled)
+				SaveInfoLabel.Text = Localization.GetText ("CurrentSave", al) + BExplorerLib.SaveData_GetSaveInfoEx ();
+			else
+				SaveInfoLabel.Text = Localization.GetText ("SaveNotSpecified", al);
 			}
 		}
 	}

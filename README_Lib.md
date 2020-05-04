@@ -1,4 +1,4 @@
-# BExplorer library / API v 3.5
+# BExplorer library / API v 3.5.2u
 
 An API for work with GTA Vice City save files (.b) / API для работы с файлами сохранений GTA Vice City
 
