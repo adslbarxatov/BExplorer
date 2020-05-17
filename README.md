@@ -16,12 +16,11 @@ If you got some, please, remind us about it. And *backup your save files before 
 
 **Usage**
 
-You need to download two files – executable and library. Also you need to copy 'carcols.dat' from your
-'GTA Vice City' setup directory to the application folder. You can use attached file, but car colors
-presented in application and in game will differ.
+You need to download two files – executable and library. At first start you will also be asked for carcols.dat file.
+Just specify it in GTA Vice city installation directory and have fun!
 
-Вам нужны два файла – приложение и библиотека. Также Вам потребуется файл 'carcols.dat' из папки, где установлена игра.
-Вы можете использовать имеющийся здесь файл, но в этом случае цвета авто в игре могут отличаться от отображаемых в программе.
+Вам нужны два файла – приложение и библиотека. При первом запуске также потребуется указать расположение
+файла carcols.dat. Просто найдите его в папке установки GTA Vice city, и готово!
 
 #
 
