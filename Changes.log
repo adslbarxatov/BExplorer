@@ -1,5 +1,8 @@
 BExplorerLib API / BExplorer changes log
 
+Version 2.16.1h:
+• New application info interface implemented
+
 Version 2.16u:
 • Application namespace, icon and development environment have been unified;
 • Localization system unified;
