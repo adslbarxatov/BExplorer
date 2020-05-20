@@ -2,7 +2,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 
 // Подключение общего заголовка
-#include "Headers/BExplorer.h"
+#include "BExplorer.h"
 
 // Макросы
 #define SD_SAVE_FROM_VAR(ReadFrom,BytesCount)	fwrite (ReadFrom, 1, BytesCount, FO);	\

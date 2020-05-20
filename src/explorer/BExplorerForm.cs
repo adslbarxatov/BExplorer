@@ -49,7 +49,9 @@ namespace RD_AAOW
 				if (MessageBox.Show (string.Format (Localization.GetText ("IncorrectLibVersion", al),
 					ProgramDescription.AssemblyLibName),
 					ProgramDescription.AssemblyTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
-					ProgramDescription.ShowProjectWebPage ();
+					{
+					AboutForm af = new AboutForm (ProgramDescription.AssemblyUpdatesLink);
+					}
 
 				error = -1;
 				this.Close ();
@@ -1356,14 +1358,17 @@ namespace RD_AAOW
 		// Отображение сведений о программе
 		private void BExplorerForm_HelpButtonClicked (object sender, CancelEventArgs e)
 			{
-			// Отмена обработки события вызова справки
 			e.Cancel = true;
 
-			// О программе
-			ProgramDescription.ShowAbout ();
+			AboutForm af = new AboutForm (al, "https://github.com/adslbarxatov/BExplorer",
+				ProgramDescription.AssemblyUpdatesLink,
+				"https://github.com/adslbarxatov/BExplorer/blob/master/User%20manual.pdf",
 
-			// Общая справка
-			ProgramDescription.ShowHelp ();
+				"Warning! Tool is not completed yet and may cause unexpected effects in save files. " +
+				"If you got some, please, remind us about it. And backup your save files before using this tool.\r\n\r\n" +
+				"Внимание! Инструмент ещё разрабатывается и может вызывать непредвиденные эффекты в файлах сохранений. " +
+				"Если Вы столкнулись с одним из них, пожалуйста, напишите нам об этом. И обязательно делайте резервные " +
+				"копии файлов перед использованием программы.");
 			}
 
 		// Выбор языка интерфейса

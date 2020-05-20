@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <malloc.h>
 #include <string.h>
-#include "..\..\Generics\CSTypes.h"
+#include "..\Generics\CSTypes.h"
 
 #define B_API(t)	extern __declspec(dllexport) t
 
@@ -15,32 +15,32 @@
 #define BFileSize	0x31464
 
 // Подключение определений структур
-#include "DefaultParameters.h"
-#include "ScriptBlock.h"
-#include "ScriptPool.h"
-#include "PedPlayer.h"
-#include "Garages.h"
-#include "TaxiShortcuts.h"
-#include "Vehicles.h"
-#include "ObjectPool.h"
-#include "Paths.h"
-#include "Cranes.h"
-#include "Pickups.h"
-#include "PhoneInfo.h"
-#include "RestartLocations.h"
-#include "RadarBlips.h"
-#include "ZonesBuffer.h"
-#include "GangData.h"
-#include "CarGenerators.h"
-#include "Particles.h"
-#include "AudioScripts.h"
-#include "ScriptPaths.h"
-#include "PlayerInfo.h"
-#include "Stats.h"
-#include "TriggerZones.h"
-#include "Streaming.h"
-#include "PedTypes.h"
-#include "CheckSum.h"
+#include "Headers\DefaultParameters.h"
+#include "Headers\ScriptBlock.h"
+#include "Headers\ScriptPool.h"
+#include "Headers\PedPlayer.h"
+#include "Headers\Garages.h"
+#include "Headers\TaxiShortcuts.h"
+#include "Headers\Vehicles.h"
+#include "Headers\ObjectPool.h"
+#include "Headers\Paths.h"
+#include "Headers\Cranes.h"
+#include "Headers\Pickups.h"
+#include "Headers\PhoneInfo.h"
+#include "Headers\RestartLocations.h"
+#include "Headers\RadarBlips.h"
+#include "Headers\ZonesBuffer.h"
+#include "Headers\GangData.h"
+#include "Headers\CarGenerators.h"
+#include "Headers\Particles.h"
+#include "Headers\AudioScripts.h"
+#include "Headers\ScriptPaths.h"
+#include "Headers\PlayerInfo.h"
+#include "Headers\Stats.h"
+#include "Headers\TriggerZones.h"
+#include "Headers\Streaming.h"
+#include "Headers\PedTypes.h"
+#include "Headers\CheckSum.h"
 
 // Главная структура сохранения
 struct SaveData

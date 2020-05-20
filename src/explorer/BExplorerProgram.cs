@@ -33,7 +33,9 @@ namespace RD_AAOW
 				if (MessageBox.Show (string.Format (Localization.GetText ("ComponentMissing", Localization.CurrentLanguage),
 					ProgramDescription.AssemblyLibName),
 					ProgramDescription.AssemblyTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
-					ProgramDescription.ShowProjectWebPage ();
+					{
+					AboutForm af = new AboutForm (ProgramDescription.AssemblyUpdatesLink);
+					}
 
 				return;
 				}

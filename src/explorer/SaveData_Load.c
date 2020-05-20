@@ -2,7 +2,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 
 // Подключение общего заголовка
-#include "Headers/BExplorer.h"
+#include "BExplorer.h"
 
 // Макросы
 #define SD_LOAD_TO_VAR(WriteTo,BytesCount,ErrorNumber)		if (fread (WriteTo, 1, BytesCount, FI) != BytesCount)	\

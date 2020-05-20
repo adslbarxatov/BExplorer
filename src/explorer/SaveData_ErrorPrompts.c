@@ -2,7 +2,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 
 // Подключение общего заголовка
-#include "Headers/BExplorer.h"
+#include "BExplorer.h"
 
 // Функция, отвечающая за вывод сообщений об ошибках. Возвращает код ошибки
 // • Error - любой поддерживаемый код ошибки

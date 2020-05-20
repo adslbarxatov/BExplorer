@@ -2,7 +2,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 
 // Подключение общего заголовка
-#include "Headers/BExplorer.h"
+#include "BExplorer.h"
 
 // Загрузка статистики в структуру
 // • FilePath - путь к файлу

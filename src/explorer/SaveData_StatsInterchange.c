@@ -2,7 +2,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 
 // Подключение общего заголовка
-#include "Headers/BExplorer.h"
+#include "BExplorer.h"
 
 // Макросы
 #define SD_StatsUnitLoad(Unit)	SD->SD_ST.ST.Unit = stats.ST.Unit;
