@@ -26,12 +26,20 @@ structures and unions) and using them without recommended functions may cause un
 
 #
 
-We've formalized our [Applications development policy (ADP)](https://vk.com/@rdaaow_fupl-adp).
-We're strongly recommend reading it before using our products.
-
-Мы формализовали нашу [Политику разработки приложений (ADP)](https://vk.com/@rdaaow_fupl-adp).
-Настоятельно рекомендуем ознакомиться с ней перед использованием наших продуктов.
-
-#
-
 Information source / Источник информации: http://www.gtamodding.com/wiki/Saves_(GTA_VC)
+
+
+
+## Политика разработки приложений и EULA
+
+This [Policy (ADP)](https://vk.com/@rdaaow_fupl-adp), its positions, conclusion, EULA and application methods
+describes general rules that we follow in all of our development processes, released applications and implemented
+ideas.
+**It must be acquainted by participants and users before using any of laboratory's products.
+By downloading them, you agree to this Policy**
+
+Данная [Политика (ADP)](https://vk.com/@rdaaow_fupl-adp), её положения, заключение, EULA и способы применения
+описывают общие правила, которым мы следуем во всех наших процессах разработки, вышедших в релиз приложениях
+и реализованных идеях.
+**Обязательна к ознакомлению всем участникам и пользователям перед использованием любого из продуктов лаборатории.
+Загружая их, вы соглашаетесь с этой Политикой**
