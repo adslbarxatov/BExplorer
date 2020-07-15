@@ -13,6 +13,8 @@ If you got some, please, remind us about it. And *backup your save files before 
 сохранений. Если Вы столкнулись с одним из них, пожалуйста, напишите нам об этом. И обязательно
 *делайте резервные копии файлов перед использованием программы*!
 
+
+
 ## Usage / Применение
 
 You need to download two files – executable and library. At first start you will also be asked for carcols.dat file.
@@ -21,13 +23,17 @@ Just specify it in GTA Vice city installation directory and have fun!
 Вам нужны два файла – приложение и библиотека. При первом запуске также потребуется указать расположение
 файла carcols.dat. Просто найдите его в папке установки GTA Vice city, и готово!
 
-## Требования
+
+
+## Requirements / Требования
 
 Needs Windows XP and newer, Framework 4.0 or newer. Interface languages: ru_ru, en_us. User manual languages: ru_ru, en_us
 
 Требуется ОС Windows XP и новее, Framework 4.0 или новее. Языки интерфейса: ru_ru, en_us. Языки руководства пользователя: ru_ru, en_us
 
-## Политика разработки приложений и EULA
+
+
+## Development policy and EULA / Политика разработки и EULA
 
 This [Policy (ADP)](https://vk.com/@rdaaow_fupl-adp), its positions, conclusion, EULA and application methods
 describes general rules that we follow in all of our development processes, released applications and implemented

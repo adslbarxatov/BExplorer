@@ -30,7 +30,7 @@ Information source / Источник информации: http://www.gtamoddin
 
 
 
-## Политика разработки приложений и EULA
+## Development policy and EULA / Политика разработки и EULA
 
 This [Policy (ADP)](https://vk.com/@rdaaow_fupl-adp), its positions, conclusion, EULA and application methods
 describes general rules that we follow in all of our development processes, released applications and implemented
