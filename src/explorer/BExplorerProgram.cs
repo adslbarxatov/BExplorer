@@ -34,7 +34,7 @@ namespace RD_AAOW
 					ProgramDescription.AssemblyLibName),
 					ProgramDescription.AssemblyTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
 					{
-					AboutForm af = new AboutForm (ProgramDescription.AssemblyUpdatesLink);
+					AboutForm af = new AboutForm (null);
 					}
 
 				return;

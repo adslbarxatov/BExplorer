@@ -1,4 +1,4 @@
-# BExplorer tool v 2.16.1h
+# BExplorer v 2.16.2p
 
 A tool based on BExplorer API for work with GTA Vice City save files (.b)
 

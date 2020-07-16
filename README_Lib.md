@@ -1,6 +1,8 @@
 # BExplorer library / API v 3.5.2u
 
-An API for work with GTA Vice City save files (.b) / API для работы с файлами сохранений GTA Vice City
+An API for work with GTA Vice City save files (.b)
+
+API для работы с файлами сохранений GTA Vice City
 
 #
 
@@ -26,7 +28,7 @@ structures and unions) and using them without recommended functions may cause un
 
 #
 
-Information source / Источник информации: http://www.gtamodding.com/wiki/Saves_(GTA_VC)
+Information source / Источник информации: [http://www.gtamodding.com/wiki/Saves_(GTA_VC)](http://www.gtamodding.com/wiki/Saves_(GTA_VC))
 
 
 

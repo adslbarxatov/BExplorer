@@ -50,7 +50,7 @@ namespace RD_AAOW
 					ProgramDescription.AssemblyLibName),
 					ProgramDescription.AssemblyTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
 					{
-					AboutForm af = new AboutForm (ProgramDescription.AssemblyUpdatesLink);
+					AboutForm af = new AboutForm (null);
 					}
 
 				error = -1;
@@ -1360,8 +1360,7 @@ namespace RD_AAOW
 			{
 			e.Cancel = true;
 
-			AboutForm af = new AboutForm (al, "https://github.com/adslbarxatov/BExplorer",
-				ProgramDescription.AssemblyUpdatesLink,
+			AboutForm af = new AboutForm (al, "*", "*",
 				"https://github.com/adslbarxatov/BExplorer/blob/master/User%20manual.pdf",
 
 				"Warning! Tool is not completed yet and may cause unexpected effects in save files. " +
