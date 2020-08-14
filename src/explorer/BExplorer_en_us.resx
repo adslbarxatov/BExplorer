@@ -870,4 +870,7 @@ Do you want to open project's webpage to download actual version?</value>
   <data name="ToDoStatus40" xml:space="preserve">
     <value>Complete main plot missions</value>
   </data>
+  <data name="HelpText" xml:space="preserve">
+    <value>Warning! Tool is not completed yet and may cause unexpected effects in save files. If you got some, please, remind us about it. And backup your save files before using this tool</value>
+  </data>
 </root>

@@ -1360,14 +1360,7 @@ namespace RD_AAOW
 			{
 			e.Cancel = true;
 
-			AboutForm af = new AboutForm (al, "*", "*",
-				"https://github.com/adslbarxatov/BExplorer/blob/master/User%20manual.pdf",
-
-				"Warning! Tool is not completed yet and may cause unexpected effects in save files. " +
-				"If you got some, please, remind us about it. And backup your save files before using this tool.\r\n\r\n" +
-				"Внимание! Инструмент ещё разрабатывается и может вызывать непредвиденные эффекты в файлах сохранений. " +
-				"Если Вы столкнулись с одним из них, пожалуйста, напишите нам об этом. И обязательно делайте резервные " +
-				"копии файлов перед использованием программы.");
+			ProgramDescription.ShowAbout (false);
 			}
 
 		// Выбор языка интерфейса
