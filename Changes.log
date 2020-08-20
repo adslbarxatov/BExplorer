@@ -1,5 +1,9 @@
 BExplorerLib API / BExplorer changes log
 
+Version 2.16.4i:
+• Windows: found and fixed hidden bug that caused an error when starting the application from local network;
+• Windows: fixed bug that caused the web page request method to fail if server disconnected
+
 Version 2.16.3p:
 • Added ability to accept/decline ADP at first start to the application info interface
 
