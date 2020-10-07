@@ -1,5 +1,8 @@
 BExplorerLib API / BExplorer changes log
 
+Version 2.17 (preparing):
+• Application info interface now able to get last release's changes log
+
 Version 2.16.4i:
 • Found and fixed hidden bug that caused an error when starting the application from local network;
 • Fixed bug that caused the web page request method to fail if server disconnected
