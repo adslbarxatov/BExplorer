@@ -2,11 +2,9 @@
 > PCC: 00170B103D9CF6AF
 
 
-
 A tool based on BExplorer API for work with GTA Vice City save files (.b)
 
 Инструмент для редактирования файлов сохранений GTA Vice City на базе API
-
 
 
 #
@@ -18,6 +16,8 @@ If you got some, please, remind us about it. And *backup your save files before 
 сохранений. Если Вы столкнулись с одним из них, пожалуйста, напишите нам об этом. И обязательно
 *делайте резервные копии файлов перед использованием программы*!
 
+&nbsp;
+
 
 
 ## Usage / Применение
@@ -25,8 +25,12 @@ If you got some, please, remind us about it. And *backup your save files before 
 You need to download two files – executable and library. At first start you will also be asked for carcols.dat file.
 Just specify it in GTA Vice city installation directory and have fun!
 
+#
+
 Вам нужны два файла – приложение и библиотека. При первом запуске также потребуется указать расположение
 файла carcols.dat. Просто найдите его в папке установки GTA Vice city, и готово!
+
+&nbsp;
 
 
 
@@ -35,6 +39,8 @@ Just specify it in GTA Vice city installation directory and have fun!
 Needs Windows XP and newer, Framework 4.0 or newer. Interface languages: ru_ru, en_us. User manual languages: ru_ru, en_us
 
 Требуется ОС Windows XP и новее, Framework 4.0 или новее. Языки интерфейса: ru_ru, en_us. Языки руководства пользователя: ru_ru, en_us
+
+&nbsp;
 
 
 
@@ -45,6 +51,8 @@ describes general rules that we follow in all of our development processes, rele
 ideas.
 **It must be acquainted by participants and users before using any of laboratory's products.
 By downloading them, you agree to this Policy**
+
+#
 
 Данная [Политика (ADP)](https://vk.com/@rdaaow_fupl-adp), её положения, заключение, EULA и способы применения
 описывают общие правила, которым мы следуем во всех наших процессах разработки, вышедших в релиз приложениях

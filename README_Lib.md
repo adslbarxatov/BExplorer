@@ -1,8 +1,10 @@
 # BExplorer library / API v 3.5.2u
 
+
 An API for work with GTA Vice City save files (.b)
 
 API для работы с файлами сохранений GTA Vice City
+
 
 #
 
@@ -30,6 +32,8 @@ structures and unions) and using them without recommended functions may cause un
 
 Information source / Источник информации: [http://www.gtamodding.com/wiki/Saves_(GTA_VC)](http://www.gtamodding.com/wiki/Saves_(GTA_VC))
 
+&nbsp;
+
 
 
 ## Development policy and EULA / Политика разработки и EULA
@@ -39,6 +43,8 @@ describes general rules that we follow in all of our development processes, rele
 ideas.
 **It must be acquainted by participants and users before using any of laboratory's products.
 By downloading them, you agree to this Policy**
+
+#
 
 Данная [Политика (ADP)](https://vk.com/@rdaaow_fupl-adp), её положения, заключение, EULA и способы применения
 описывают общие правила, которым мы следуем во всех наших процессах разработки, вышедших в релиз приложениях
