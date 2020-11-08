@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AlreadyStarted" xml:space="preserve">
-    <value>"{0:S}" is already running</value>
+    <value>{0:S} is already running</value>
   </data>
   <data name="AssetNumber" xml:space="preserve">
     <value>Asset #</value>
@@ -594,7 +594,7 @@ Do you want to open project's webpage to download actual version?</value>
     <value>Allow taxi radiowave</value>
   </data>
   <data name="FileTab_DangerousReset" xml:space="preserve">
-    <value>Reset dan&amp;gerous parameters</value>
+    <value>Reset &amp;dangerous parameters</value>
   </data>
   <data name="FileTab_DefaultFileButton" xml:space="preserve">
     <value>&amp;Load default file</value>
@@ -872,5 +872,20 @@ Do you want to open project's webpage to download actual version?</value>
   </data>
   <data name="HelpText" xml:space="preserve">
     <value>Warning! Tool is not completed yet and may cause unexpected effects in save files. If you got some, please, remind us about it. And backup your save files before using this tool</value>
+  </data>
+  <data name="bcgfile" xml:space="preserve">
+    <value>BExplorer car parks parameters file</value>
+  </data>
+  <data name="bfile" xml:space="preserve">
+    <value>GTA Vice city save file</value>
+  </data>
+  <data name="bgrfile" xml:space="preserve">
+    <value>BExplorer garages parameters file</value>
+  </data>
+  <data name="bstfile" xml:space="preserve">
+    <value>BExplorer stats file</value>
+  </data>
+  <data name="FileTab_RegisterButton" xml:space="preserve">
+    <value>Re&amp;gister file associations</value>
   </data>
 </root>

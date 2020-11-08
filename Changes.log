@@ -1,7 +1,11 @@
 BExplorerLib API / BExplorer changes log
 
+Version 2.17.2:
+• Added ability to register file associations;
+• Added ability to open .b files for editing from command line / by file association
+
 Version 2.17:
-• Application info interface now able to get last release's changes log
+• Application info interface now able to get last release's changes log;
 • Cumulative changes applied
 
 Version 2.16.4i:

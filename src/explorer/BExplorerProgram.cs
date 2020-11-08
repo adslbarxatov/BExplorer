@@ -14,8 +14,12 @@ namespace RD_AAOW
 		/// Главная точка входа для приложения
 		/// </summary>
 		[STAThread]
-		public static void Main ()
+		public static void Main (string[] args)
 			{
+			// Инициализация
+			Application.EnableVisualStyles ();
+			Application.SetCompatibleTextRenderingDefault (false);
+
 			// Проверка запуска единственной копии
 			bool result;
 			Mutex instance = new Mutex (true, ProgramDescription.AssemblyTitle, out result);
@@ -40,17 +44,17 @@ namespace RD_AAOW
 				return;
 				}
 
-			// Инициализация
-			Application.EnableVisualStyles ();
-			Application.SetCompatibleTextRenderingDefault (false);
-
 			// Отображение справки и запроса на принятие Политики
 			if (!ProgramDescription.AcceptEULA ())
 				return;
 			ProgramDescription.ShowAbout (true);
 
 			// Запуск
-			Application.Run (new BExplorerForm ());
+			string fileName = "";
+			if (args.Length > 0)
+				fileName = args[0];
+
+			Application.Run (new BExplorerForm (fileName));
 			}
 		}
 	}

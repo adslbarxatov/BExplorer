@@ -9,20 +9,20 @@ namespace RD_AAOW
 	/// <summary>
 	/// Главная форма приложения
 	/// </summary>
-	public partial class BExplorerForm:Form
+	public partial class BExplorerForm: Form
 		{
 		// Переменные
-		private bool loading = false;		// Флаг состояния загрузки данных; блокирует события обновления значений
-		private int error;					// Код ошибки
+		private bool loading = false;       // Флаг состояния загрузки данных; блокирует события обновления значений
+		private int error;                  // Код ошибки
 
-		private CarColors cc;				// Экземпляр-загрузчик цветов авто
-		private CarGenerators cg;			// Экземпляр-обработчик списка парковок
-		private Pickups pu;					// Экземпляр-обработчик списка денежных накопителей
-		private CoordsPicker cp;			// Форма выбора координат на карте
-		private ToDoStatus tds;				// Экземпляр-обработчик ToDo-статуса
+		private CarColors cc;               // Экземпляр-загрузчик цветов авто
+		private CarGenerators cg;           // Экземпляр-обработчик списка парковок
+		private Pickups pu;                 // Экземпляр-обработчик списка денежных накопителей
+		private CoordsPicker cp;            // Форма выбора координат на карте
+		private ToDoStatus tds;             // Экземпляр-обработчик ToDo-статуса
 
-		private CultureInfo cie = new CultureInfo ("en-us");	// Дробные числа с использованием точки вместо запятой
-		private SupportedLanguages al = Localization.CurrentLanguage;	// Язык интерфейса
+		private CultureInfo cie = new CultureInfo ("en-us");    // Дробные числа с использованием точки вместо запятой
+		private SupportedLanguages al = Localization.CurrentLanguage;   // Язык интерфейса
 
 		private string savesDefaultPath = Environment.GetFolderPath (Environment.SpecialFolder.MyDocuments) +
 			"\\GTA Vice City User Files\\GTAVCsf";
@@ -31,11 +31,13 @@ namespace RD_AAOW
 		/// <summary>
 		/// Метод инициализирует форму
 		/// </summary>
-		public BExplorerForm ()
+		/// <param name="SaveFile">Имя файла сохранения для загрузки при старте</param>
+		public BExplorerForm (string SaveFile)
 			{
 			// Инициализация формы
 			InitializeComponent ();
 
+			OFDialog.FileName = SaveFile;
 			Application.CurrentCulture = cie;
 			this.Text = ProgramDescription.AssemblyTitle;
 			}
@@ -169,7 +171,7 @@ namespace RD_AAOW
 				CG_Rotation.Minimum, CG_Rotation.Maximum);
 
 			// Окончательная настройка
-			SetState (false);	// Начальная блокировка
+			SetState (false);   // Начальная блокировка
 
 			LanguageCombo.Items.AddRange (Localization.LanguagesNames);
 			try
@@ -182,6 +184,10 @@ namespace RD_AAOW
 				}
 
 			loading = false;
+
+			// Загрузка файла, если он представлен
+			if (OFDialog.FileName != "")
+				OFDialog_FileOk (null, null);
 			}
 
 		// Выбор файла сохранения для загрузки
@@ -206,7 +212,7 @@ namespace RD_AAOW
 			Int16 errCode;
 
 			// В случае ошибки вывести сообщение и прекратить исполнение программы
-			SetState (false);	// Блокировать заранее
+			SetState (false);   // Блокировать заранее
 			if ((errCode = BExplorerLib.SaveData_LoadEx (OFDialog.FileName)) != 1)
 				{
 				MessageBox.Show (Localization.GetText ("SaveLoadingError", al) + BExplorerLib.SaveData_ErrorPromptEx (errCode),
@@ -470,7 +476,7 @@ namespace RD_AAOW
 			if (ToDoStatusView.Items.Count == 0)
 				{
 				ToDoStatusView.Items.Add (Localization.GetText ("SaveCompleted", al));
-				DangerousReset.Enabled = AbortSorting.Enabled = ST_InfBullets.Enabled = true;	// Только при полном прохождении
+				DangerousReset.Enabled = AbortSorting.Enabled = ST_InfBullets.Enabled = true;   // Только при полном прохождении
 				}
 			}
 
@@ -537,75 +543,11 @@ namespace RD_AAOW
 				UpdateDefaultFileButton.Enabled =
 				RecommendedSettings.Enabled = State;
 
-			/*DP_Date.Enabled =
-				DP_Time.Enabled =
-				DP_IML.Enabled =
-				DP_GameTime.Enabled =
-				DP_GameSpeed.Enabled =
-				DP_Weather.Enabled =
-				DP_CameraPos.Enabled =
-				SBB_CabsRadio.Enabled = State;*/
 			DPTab.Enabled = State;
-
-			/*PL_MaxHealth.Enabled =
-				PL_MaxArmor.Enabled =
-				PL_CurArmor.Enabled =
-				PL_MWL.Enabled =
-				PL_CurMoney.Enabled =
-				PL_Suit.Enabled =
-				PL_InfRun.Enabled =
-				PL_FastReload.Enabled =
-				PL_Fireproof.Enabled =
-				PL_Bullets.Enabled =
-				PL_Weapon.Enabled =
-				WeaponsList.Enabled = State;*/
 			PLTab.Enabled = State;
-
-			/*GaragesList.Enabled =
-				GR_CarModel.Enabled =
-				GR_CarColor1.Enabled =
-				GR_CarColor2.Enabled =
-				GR_Radio.Enabled =
-				GR_Bomb.Enabled =
-				GR_BulletsProof.Enabled =
-				GR_DamageProof.Enabled =
-				GR_ExplProof.Enabled =
-				GR_FireProof.Enabled =
-				LoadGarages.Enabled =
-				SaveGarages.Enabled = State;*/
 			GRTab.Enabled = State;
-
 			PUTab.Enabled = State;
-
-			/*GangsList.Enabled =
-				GD_CarModel.Enabled =
-				GD_PedModel1.Enabled =
-				GD_PedModel2.Enabled =
-				GD_Weapon1.Enabled =
-				GD_Weapon2.Enabled =
-
-				SaveStats.Enabled =
-				LoadStats.Enabled =
-				ToDoStatusView.Enabled = State;*/
-
 			GDTab.Enabled = STTab.Enabled = State;
-
-			/*CarGenList.Enabled =
-				CG_AlarmProb.Enabled =
-				CG_AllowSpawn.Enabled =
-				CG_CarColor1.Enabled =
-				CG_CarColor2.Enabled =
-				CG_CarModel.Enabled =
-				CG_ForceSpawn.Enabled =
-				CG_LockProb.Enabled =
-				CG_Rotation.Enabled =
-				CG_X.Enabled =
-				CG_Y.Enabled =
-				CG_Z.Enabled = State;
-
-			CarGenGetCoords.Enabled =
-				LoadCG.Enabled =
-				SaveCG.Enabled = State;*/
 			CGTab.Enabled = State;
 
 			// Для этих элементов в общем порядке допустима только блокировка
@@ -810,7 +752,8 @@ namespace RD_AAOW
 				return;
 
 			SetParameterValue ((UInt16)((int)BExplorerLib.OpCodes.PlayerWeapons_Base + WeaponsList.SelectedIndex),
-				(UInt16)BExplorerLib.WeaponsParCodes.WeaponType, ParametersValues.Weapons[PL_Weapon.SelectedIndex].ID.ToString ());
+				(UInt16)BExplorerLib.WeaponsParCodes.WeaponType,
+				ParametersValues.Weapons[PL_Weapon.SelectedIndex].ID.ToString ());
 			}
 
 		// Изменено число патронов
@@ -1180,14 +1123,17 @@ namespace RD_AAOW
 		// Изменены настройки авто
 		private void CG_CarModel_SelectedIndexChanged (object sender, EventArgs e)
 			{
-			CGColorLabel1.ForeColor = (CG_CarColor1.Value >= 0) ? cc.Colors[(int)CG_CarColor1.Value] : Color.FromName ("ControlDark");
-			CGColorLabel2.ForeColor = (CG_CarColor2.Value >= 0) ? cc.Colors[(int)CG_CarColor2.Value] : Color.FromName ("ControlDark");
+			CGColorLabel1.ForeColor = (CG_CarColor1.Value >= 0) ? cc.Colors[(int)CG_CarColor1.Value] :
+				Color.FromName ("ControlDark");
+			CGColorLabel2.ForeColor = (CG_CarColor2.Value >= 0) ? cc.Colors[(int)CG_CarColor2.Value] :
+				Color.FromName ("ControlDark");
 
 			if (loading)
 				return;
 
 			cg.SetGeneratorData ((int)CarGenList.Value, new CarGenerators.CGData ((Int32)ParametersValues.CarsForCG[CG_CarModel.SelectedIndex].ID,
-				(float)CG_X.Value, (float)CG_Y.Value, (float)CG_Z.Value, (float)CG_Rotation.Value, (Int16)(CG_AllowSpawn.Checked ? -1 : 0),
+				(float)CG_X.Value, (float)CG_Y.Value, (float)CG_Z.Value, (float)CG_Rotation.Value,
+				(Int16)(CG_AllowSpawn.Checked ? -1 : 0),
 				(short)CG_CarColor1.Value, (short)CG_CarColor2.Value, (uint)CG_AlarmProb.Value, (uint)CG_LockProb.Value,
 				CG_ForceSpawn.Checked ? 1U : 0U));
 			}
@@ -1199,7 +1145,7 @@ namespace RD_AAOW
 			cp.PickCoords (CG_X.Value, CG_Y.Value, CG_Z.Value, CG_Rotation.Value, false, al);
 
 			// Получение результатов
-			loading = true;		// Чтобы не выполнять одно и то же 4 раза
+			loading = true;     // Чтобы не выполнять одно и то же 4 раза
 			CG_X.Value = cp.PickedX;
 			CG_Y.Value = cp.PickedY;
 			CG_Z.Value = cp.PickedZ;
@@ -1488,6 +1434,12 @@ namespace RD_AAOW
 				SaveInfoLabel.Text = Localization.GetText ("CurrentSave", al) + BExplorerLib.SaveData_GetSaveInfoEx ();
 			else
 				SaveInfoLabel.Text = Localization.GetText ("SaveNotSpecified", al);
+			}
+
+		// Регистрация сопоставлений файлов
+		private void RegisterButton_Click (object sender, EventArgs e)
+			{
+			ProgramDescription.RegisterAppExtensions ();
 			}
 		}
 	}
