@@ -1,5 +1,4 @@
-_Changes for v 2.17.3_:
-- Fixed bug in Policy acception interface that disallowed to accept it in offline mode at first start;
-- Added ability to register file associations;
-- Added ability to open .b files for editing from command line / by file association;
-- Application info interface now able to get last release's changes log
+_Changes for v 2.17.4_:
+- Added ability to 'ask developer' via E-mail for help, or send wish, advice or bug report;
+- Applied new paths processor;
+- Added ability to register file associations
