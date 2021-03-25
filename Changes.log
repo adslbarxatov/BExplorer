@@ -1,5 +1,10 @@
 BExplorerLib API / BExplorer changes log
 
+Version 2.18:
+• New identity applied;
+• New links to RD AAOW FDL added;
+• Added direct lab link
+
 Version 2.17.4:
 • Added ability to 'ask developer' via E-mail for help, or send wish, advice or bug report;
 • Applied new paths processor

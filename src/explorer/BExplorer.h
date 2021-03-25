@@ -7,10 +7,10 @@
 
 #define B_API(t)	extern __declspec(dllexport) t
 
-#define B_VERSION			3,5,2,0
-#define B_VERSION_S			"3.5.2.0"
+#define B_VERSION			3,6,0,0
+#define B_VERSION_S			"3.6.0.0"
 #define B_PRODUCT			"GTA Vice city save file interpretation library"
-#define B_COMPANY			"RD AAOW"
+#define B_COMPANY			"RD AAOW FDL"
 
 #define BFileSize	0x31464
 
