@@ -1,5 +1,5 @@
-# BExplorer v 2.18
-> PCC: 001A74E9CE8395F4
+# BExplorer v 2.18.1
+> PCC: 001A76EB380D8432
 
 
 A tool based on BExplorer API for editing of GTA Vice City save files (.b)
@@ -44,18 +44,17 @@ Needs Windows XP and newer, Framework 4.0 or newer. Interface languages: ru_ru, 
 
 
 
-## Development policy and EULA / Политика разработки и EULA
+## [Development policy and EULA / Политика разработки и EULA](https://github.com/adslbarxatov/adp)
 
-This [Policy (ADP)](https://vk.com/@rd_aaow_fdl-adp), its positions, conclusion, EULA and application methods
-describes general rules that we follow in all of our development processes, released applications and implemented
-ideas.
-**It must be acquainted by participants and users before using any of laboratory's products.
-By downloading them, you agree to this Policy**
+This Policy (ADP), its positions, conclusion, EULA and application methods
+describes general rules that we follow in all of our development processes, released applications and implemented ideas.
+**It must be acquainted by participants and users before using any of laboratory’s products.
+By downloading them, you agree and accept this Policy!**
 
 #
 
-Данная [Политика (ADP)](https://vk.com/@rd_aaow_fdl-adp), её положения, заключение, EULA и способы применения
+Данная Политика (ADP), её положения, заключение, EULA и способы применения
 описывают общие правила, которым мы следуем во всех наших процессах разработки, вышедших в релиз приложениях
 и реализованных идеях.
-**Обязательна к ознакомлению всем участникам и пользователям перед использованием любого из продуктов лаборатории.
-Загружая их, вы соглашаетесь с этой Политикой**
+**Обязательна к ознакомлению для всех участников и пользователей перед использованием любого из продуктов лаборатории.
+Загружая их, вы соглашаетесь и принимаете эту Политику!**
