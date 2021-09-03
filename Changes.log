@@ -1,5 +1,10 @@
 BExplorerLib API / BExplorer changes log
 
+Version 2.18.2:
+• Fixed map displaying;
+• Fixed user manual link;
+• Fixed some tips and texts
+
 Version 2.18.1:
 • Updated link and text presenter for ADP;
 • Applied fixed icons

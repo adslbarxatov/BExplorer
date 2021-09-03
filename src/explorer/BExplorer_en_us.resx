@@ -154,13 +154,13 @@
     <value>spectate</value>
   </data>
   <data name="CarColorsFileUnavailable" xml:space="preserve">
-    <value>File "{0:S}" is unavailable</value>
+    <value>File “{0:S}” is unavailable</value>
   </data>
   <data name="CarColorsFilter" xml:space="preserve">
     <value>Transport colors file ({0:S})|{0:S}</value>
   </data>
   <data name="CarColorsTitle" xml:space="preserve">
-    <value>Select transport colors file ({0:S}). It must be in "GTAViceCity\data" directory</value>
+    <value>Select transport colors file ({0:S}). It must be in “GTAViceCity\data” directory</value>
   </data>
   <data name="Cars_No" xml:space="preserve">
     <value>(no)</value>
@@ -178,7 +178,7 @@
     <value>Are you sure that all needed changes have been saved?</value>
   </data>
   <data name="ComponentMissing" xml:space="preserve">
-    <value>A required application component is missing: "{0:S}"
+    <value>A required application component is missing: “{0:S}”
 
 Do you want to open project's webpage to download actual version?</value>
   </data>
@@ -195,7 +195,7 @@ Do you want to open project's webpage to download actual version?</value>
     <value>drug dillers</value>
   </data>
   <data name="Gangs_4" xml:space="preserve">
-    <value>Diaz's</value>
+    <value>Diaz’s</value>
   </data>
   <data name="Gangs_5" xml:space="preserve">
     <value>patrol</value>
@@ -273,7 +273,7 @@ Do you want to open project's webpage to download actual version?</value>
     <value>Human Condo, garage 3, item 2</value>
   </data>
   <data name="IncorrectLibVersion" xml:space="preserve">
-    <value>Version of "{0:S}" is incompatible with the current version of application.
+    <value>Version of “{0:S}” is incompatible with the current version of application.
 
 Do you want to open project's webpage to download actual version?</value>
   </data>
@@ -307,7 +307,7 @@ Do you want to open project's webpage to download actual version?</value>
 </value>
   </data>
   <data name="SFDialogTitle" xml:space="preserve">
-    <value>Specify new file's name and placement</value>
+    <value>Specify new file’s name and placement</value>
   </data>
   <data name="Suits_BlackSport" xml:space="preserve">
     <value>black sport suit</value>
@@ -763,25 +763,25 @@ Do you want to open project's webpage to download actual version?</value>
     <value>Find all hidden packages (found {0:S} from {1:S})</value>
   </data>
   <data name="ToDoStatus05" xml:space="preserve">
-    <value>Complete "Trial by dirt" mission (track in the north-western part of the city, off-road)</value>
+    <value>Complete “Trial by dirt” mission (track in the north-western part of the city, off-road)</value>
   </data>
   <data name="ToDoStatus06" xml:space="preserve">
-    <value>Complete "Test track" mission (track in the north-western part of the city, bike)</value>
+    <value>Complete “Test track” mission (track in the north-western part of the city, bike)</value>
   </data>
   <data name="ToDoStatus07" xml:space="preserve">
-    <value>Complete "Cone crazy" mission (top level of parking at Ocean beach, car in a corner)</value>
+    <value>Complete “Cone crazy” mission (top level of parking at Ocean beach, car in a corner)</value>
   </data>
   <data name="ToDoStatus08" xml:space="preserve">
-    <value>Complete "Hotring" mission (city stadium, from 8 pm to midnight)</value>
+    <value>Complete “Hotring” mission (city stadium, from 8 pm to midnight)</value>
   </data>
   <data name="ToDoStatus09" xml:space="preserve">
-    <value>Complete "Bloodring" mission (city stadium, from 8 pm to midnight)</value>
+    <value>Complete “Bloodring” mission (city stadium, from 8 pm to midnight)</value>
   </data>
   <data name="ToDoStatus10" xml:space="preserve">
-    <value>Complete "Dirtring" mission (city stadium, from 8 pm to midnight)</value>
+    <value>Complete “Dirtring” mission (city stadium, from 8 pm to midnight)</value>
   </data>
   <data name="ToDoStatus11" xml:space="preserve">
-    <value>Complete "PCJ playground" mission (the bike near from large hotel at the north end of Ocean drive)</value>
+    <value>Complete “PCJ playground” mission (the bike near from large hotel at the north end of Ocean drive)</value>
   </data>
   <data name="ToDoStatus12" xml:space="preserve">
     <value>Complete mission with radio-controlled cars (track in the north of the beach, TopFun van)</value>
@@ -805,28 +805,28 @@ Do you want to open project's webpage to download actual version?</value>
     <value>Complete helicopter mission in the northeast (helicopter in a large backyard)</value>
   </data>
   <data name="ToDoStatus19" xml:space="preserve">
-    <value>Complete "Paramedic" mission (any ambulance van)</value>
+    <value>Complete “Paramedic” mission (any ambulance van)</value>
   </data>
   <data name="ToDoStatus20" xml:space="preserve">
-    <value>Complete "Firefighter" mission (any firetruck)</value>
+    <value>Complete “Firefighter” mission (any firetruck)</value>
   </data>
   <data name="ToDoStatus21" xml:space="preserve">
-    <value>Complete "Vigilante" mission to level 13 or higher (any police transport, including tank and helicopters)</value>
+    <value>Complete “Vigilante” mission to level 13 or higher (any police transport, including tank and helicopters)</value>
   </data>
   <data name="ToDoStatus22" xml:space="preserve">
-    <value>Bring 100 (in total) passengers in "Taxi driver" mission</value>
+    <value>Bring 100 (in total) passengers in “Taxi driver” mission</value>
   </data>
   <data name="ToDoStatus23" xml:space="preserve">
-    <value>Complete "Pizza delivery" mission (any pizza bike)</value>
+    <value>Complete “Pizza delivery” mission (any pizza bike)</value>
   </data>
   <data name="ToDoStatus24" xml:space="preserve">
-    <value>Complete "Checkpoint Charlie" mission (boat station, any boat)</value>
+    <value>Complete “Checkpoint Charlie” mission (boat station, any boat)</value>
   </data>
   <data name="ToDoStatus25" xml:space="preserve">
-    <value>Complete "Shooting range" mission (shooting range; available after "Shootist" mission at Malibu club)</value>
+    <value>Complete “Shooting range” mission (shooting range; available after “Shootist” mission at Malibu club)</value>
   </data>
   <data name="ToDoStatus26" xml:space="preserve">
-    <value>Complete "Distribution" mission (Cherry popper; complete at least 50 transactions at a time)</value>
+    <value>Complete “Distribution” mission (Cherry popper; complete at least 50 transactions at a time)</value>
   </data>
   <data name="ToDoStatus27" xml:space="preserve">
     <value>Spend $300 at the Pole position club</value>
@@ -871,7 +871,9 @@ Do you want to open project's webpage to download actual version?</value>
     <value>Complete main plot missions</value>
   </data>
   <data name="HelpText" xml:space="preserve">
-    <value>Warning! Tool is not completed yet and may cause unexpected effects in save files. If you got some, please, remind us about it. And backup your save files before using this tool</value>
+    <value>A tool for editing of GTA Vice city save files
+
+Warning! Tool is not completed yet and may cause unexpected effects in save files. If you got some, please, remind us about it. And backup your save files before using this tool</value>
   </data>
   <data name="bcgfile" xml:space="preserve">
     <value>BExplorer car parks parameters file</value>
