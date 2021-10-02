@@ -81,7 +81,7 @@ Information source / Источник информации: [http://www.gtamoddi
 
 
 
-## [Development policy and EULA / Политика разработки и EULA](https://github.com/adslbarxatov/adp)
+## [Development policy and EULA / Политика разработки и EULA](https://adslbarxatov.github.io/ADP)
 
 This Policy (ADP), its positions, conclusion, EULA and application methods
 describes general rules that we follow in all of our development processes, released applications and implemented ideas.
