@@ -1,5 +1,5 @@
-# BExplorer v 2.18.2
-> PCC: 001A76EB15F86D9C
+# BExplorer v 2.18.3
+> PCC: 001A76EB2C6FD442
 
 
 A tool based on BExplorer API for editing of GTA Vice City save files (.b)
@@ -61,7 +61,7 @@ editing and saving GTAVCsf.
 WARNING! It is strongly recommended to use EXACTLY THESE header files and EXACTLY THESE functions TOGETHER.
 Header definitions use direct handling with memory (unsafe mode) (implicitly defined pointers/arrays,
 structures and unions) and using them without recommended functions may cause unexpected application behaviour
-(of course, if you don't know what you’re doing).
+(of course, if you don’t know what you’re doing).
 
 &nbsp;
 
