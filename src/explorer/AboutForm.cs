@@ -14,12 +14,13 @@ namespace RD_AAOW
 	/// <summary>
 	/// Класс описывает интерфейс отображения сведений о программе
 	/// </summary>
-	public partial class AboutForm: Form
+	public partial class AboutForm:Form
 		{
 		// Переменные
 		private string projectLink, updatesLink, userManualLink;
 		private SupportedLanguages al;
-		private string updatesMessage = "", description = "", policyLoaderCaption = "";
+		private string updatesMessage = "", description = "", policyLoaderCaption = "",
+			registryFail = "";
 
 		/// <summary>
 		/// Ссылка на Политику разработки приложений
@@ -162,7 +163,13 @@ namespace RD_AAOW
 					MisacceptButton.Text = "О&тклонить";
 					DescriptionBox.Text = AcceptMode ? "Не удалось получить текст Политики. " +
 						"Попробуйте использовать кнопку перехода в браузер" : description;
+
 					policyLoaderCaption = "Подготовка к запуску...";
+					registryFail = ProgramDescription.AssemblyMainName + " не может сохранить настройки в реестре Windows.\n\n" +
+						"Попробуйте выполнить следующие изменения в свойствах исполняемого файла:\n" +
+						"• разблокируйте приложение в общих свойствах (кнопка «Разблокировать»);\n" +
+						"• включите запуск от имени администратора для всех пользователей в настройках совместимости.\n\n" +
+						"После этого перезапустите программу и повторите попытку";
 
 					this.Text = AcceptMode ? "Политика разработки и соглашение пользователя" : "О программе";
 					break;
@@ -177,7 +184,13 @@ namespace RD_AAOW
 					MisacceptButton.Text = "&Decline";
 					DescriptionBox.Text = AcceptMode ? "Failed to get Policy text. Try button to open it in browser" :
 						description;
+
 					policyLoaderCaption = "Preparing for launch...";
+					registryFail = ProgramDescription.AssemblyMainName + " cannot save settings in the Windows registry.\n\n" +
+						"Try the following changes to properties of the executable file:\n" +
+						"• unblock the app in general properties (“Unblock” button);\n" +
+						"• enable running as administrator for all users in compatibility settings.\n\n" +
+						"Then restart the program and try again";
 
 					this.Text = AcceptMode ? "Development policy and user agreement" : "About application";
 					break;
@@ -188,14 +201,14 @@ namespace RD_AAOW
 			HardWorkExecutor hwe;
 			if (!AcceptMode)
 				{
-				hwe = new HardWorkExecutor (UpdatesChecker, null, "");
+				hwe = new HardWorkExecutor (UpdatesChecker, null, null, false, false);
 				UpdatesTimer.Enabled = true;
 				}
 
 			// Получение Политики
 			else
 				{
-				hwe = new HardWorkExecutor (PolicyLoader, null, policyLoaderCaption);
+				hwe = new HardWorkExecutor (PolicyLoader, null, policyLoaderCaption, true, false);
 
 				string html = hwe.Result.ToString ();
 				if (html != "")
@@ -203,7 +216,7 @@ namespace RD_AAOW
 					DescriptionBox.Text = html;
 
 					int left = html.IndexOf ("rev");
-					int right = html.IndexOf ("\r", left);
+					int right = html.IndexOf ("\n", left);
 					if ((left >= 0) && (right >= 0))
 						adpRevision = html.Substring (left, right - left);
 					}
@@ -221,12 +234,23 @@ namespace RD_AAOW
 			try
 				{
 				if (StartupMode)
+					{
 					Registry.SetValue (ProgramDescription.AssemblySettingsKey, LastShownVersionKey,
 						ProgramDescription.AssemblyVersion);
-				if (AcceptMode && accepted)
-					Registry.SetValue (ADPRevisionPath, ADPRevisionKey, adpRevision.Replace ("!", ""));
+
+					// Контроль доступа к реестру
+					if (Registry.GetValue (ProgramDescription.AssemblySettingsKey, LastShownVersionKey, "").ToString () !=
+						ProgramDescription.AssemblyVersion)
+						{
+						MessageBox.Show (registryFail, ProgramDescription.AssemblyTitle, MessageBoxButtons.OK,
+							MessageBoxIcon.Exclamation);
+						}
+					}
+
 				// В случае невозможности загрузки Политики признак необходимости принятия до этого момента
 				// не удаляется из строки версии. Поэтому требуется страховка
+				if (AcceptMode && accepted)
+					Registry.SetValue (ADPRevisionPath, ADPRevisionKey, adpRevision.Replace ("!", ""));
 				}
 			catch { }
 
@@ -512,7 +536,8 @@ htmlError:
 			return;
 			}
 
-#if !SIMPLE_HWE
+#if DPMODULE
+
 		/// <summary>
 		/// Метод-исполнитель загрузки пакета обновлений
 		/// </summary>
@@ -634,6 +659,7 @@ htmlError:
 			e.Result = 0;
 			return;
 			}
+
 #endif
 
 		// Контроль сообщения об обновлении
