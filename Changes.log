@@ -27,7 +27,7 @@ Version 2.18:
 • Added direct lab link
 
 Version 2.17.4:
-• Added ability to 'ask developer' via E-mail for help, or send wish, advice or bug report;
+• Added ability to “ask developer” via E-mail for help, or send wish, advice or bug report;
 • Applied new paths processor
 
 Version 2.17.3:
@@ -38,7 +38,7 @@ Version 2.17.2:
 • Added ability to open .b files for editing from command line / by file association
 
 Version 2.17:
-• Application info interface now able to get last release's changes log;
+• Application info interface now able to get last release’s changes log;
 • Cumulative changes applied
 
 Version 2.16.4i:
@@ -60,7 +60,7 @@ Version 2.16u:
 • Application namespace, icon and development environment have been unified;
 • Localization system unified;
 • English language added for all messages in main executable; DLL awaits translation;
-• Placement of 'carcols.dat' now can be specified manually;
+• Placement of “carcols.dat” now can be specified manually;
 • Application sources have been seriously reviewed and improved;
 • Text tips have been updated
 
@@ -70,7 +70,7 @@ Version 2.15:
 • Some code and API improvements applied
 
 Version 2.14:
-• Added support for 'bomb type' value for cars stored in player's garages;
+• Added support for “bomb type” value for cars stored in player’s garages;
 • Added quick load and quick save for B files stored in default directory (GTA Vice City User Files);
 • Added quick reset for recommended parameters: date and time, police stars, current armor and weather
 
