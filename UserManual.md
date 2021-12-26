@@ -54,7 +54,7 @@ The ammo is limited to 12’000 (anything greater than 10’000 is displayed as 
 In this tab you can configure cars stored in garages purchased by the player along with the property. At the same time, the application orientates them in all garages while saving the file so that their use is as convenient as possible. Settings can be entered or changed even before buying a property: when it is purchased, cars will automatically appear in the specified garages.
 
 Before setting up a garage, you need to select it in the list at the top of the tab. Then you can specify:
-- Auto model (the value «нет» («no») indicates an empty space in the garage; technically it allows putting boats, helicopters and airplane into the garage);
+- Auto model (the value «no» indicates an empty space in the garage; technically it allows putting boats, helicopters and airplane into the garage);
 - Primary and secondary color of the car (tool takes colors from carcols.dat file, so it is important to use the same file that is in the folder where game is installed);
 - Radio wave (allows you to turn the radio on or off in the car; in some cases, you can turn on the police wave);
 - Set fire resistance (it is impossible to set fire or catch fire), protection against bullets (shots will not cause damage), protection against damage (there will be no dents and broken glasses), protection against explosions (the car will not catch fire from an explosion nearby); from coup, unfortunately, there is no protection in principle.
@@ -109,6 +109,10 @@ Header files developed for this application technically supports a lot of manipu
 
 
 #
+#
+#
+
+
 
 # BExplorer 2.19: руководство пользователя
 
