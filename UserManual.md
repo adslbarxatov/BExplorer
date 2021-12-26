@@ -1,5 +1,7 @@
 ﻿# BExplorer 2.19: user manual
 
+[*Русская версия*](https://github.com/adslbarxatov/BExplorer/blob/master/UserManual.md#bexplorer-219-руководство-пользователя)
+
 **BExplorer** – a set of API descriptions and a tool that supports basic operations of reading and editing of save settings of GTA Vice City.
 
 ***The application is under development now. Therefore, some parameters during usage of this application are edited by user at own risk. It is recommended that you back up your save files before using this tool.***
@@ -64,7 +66,7 @@ Parameters can be saved to a file and transferred to another save file if necess
 
 For now this tab only allows you to change the limits of cash accumulators that appear at completion of missions related to purchased property. Accumulators themselves become available as you progress through these missions; at the beginning of the game, none of them can be changed.
 
-To find out which accumulator is currently selected, you can use «Где это» («Where is it») button. The maximum amount is $50’000.
+To find out which accumulator is currently selected, you can use «Where is it» button. The maximum amount is $50’000.
 
 ## 2.5. Gangsters
 
@@ -75,9 +77,9 @@ Having previously selected the necessary gang, on this tab you can change:
 
 ## 2.6. Car parks
 
-This tab allows you to configure cars, boats, helicopters and airplanes placed around the city. These parameters can be replaced with recommended ones (see Crazy cheater’s mod) or chosen independently using the «Загрузить параметры» («Download parameters») and «Сохранить параметры» («Save parameters») buttons.
+This tab allows you to configure cars, boats, helicopters and airplanes placed around the city. These parameters can be replaced with recommended ones (see Crazy cheater’s mod) or chosen independently using the «Download parameters» and «Save parameters» buttons.
 
-It is recommended to uncheck the «Отменить сортировку по типам» («Cancel sorting by type») checkbox only when the program has finished adding vehicles after missions. If the flag is unchecked, cars in the parking list will be sorted by model when saving the file. However, technically nothing prevents you from unchecking it with every save.
+It is recommended to uncheck the «Cancel sorting by type» checkbox only when the program has finished adding vehicles after missions. If the flag is unchecked, cars in the parking list will be sorted by model when saving the file. However, technically nothing prevents you from unchecking it with every save.
 
 After choosing the number of parking place, you can change:
 - Car model (including the option «random»);
