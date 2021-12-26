@@ -1,6 +1,4 @@
-_Changes for v 2.18.17_:
-- Updated internal mechanism of checking for updates (applied compatibility with new GitHub theme);
-- Added the registry access checker: it will show recommended actions for the executable file when Windows doesn’t allow saving settings;
-- Applied new elements in user interface;
-- AboutForm and HardWorkExecutor universal classes have been upgraded and improved;
-- Updated link for ADP
+_Changes for v 2.19_:
+- App got the scalable icons and the digital signature (only self-signed for now);
+- Applied some updates for core assemblies;
+- User guides have been updated
