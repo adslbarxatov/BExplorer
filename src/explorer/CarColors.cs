@@ -92,9 +92,7 @@ namespace RD_AAOW
 					int b = int.Parse (rgb[2]);
 					colors.Add (Color.FromArgb (r, g, b));
 					}
-				catch
-					{
-					}
+				catch { }
 				}
 
 			// Завершение
@@ -114,12 +112,9 @@ namespace RD_AAOW
 				string path = "";
 				try
 					{
-					path = Registry.GetValue (ProgramDescription.AssemblySettingsKey,
-						"CarColorsPath", "").ToString ();
+					path = Registry.GetValue (RDGenerics.AssemblySettingsKey, "CarColorsPath", "").ToString ();
 					}
-				catch
-					{
-					}
+				catch { }
 
 				return path;
 				}
@@ -129,12 +124,9 @@ namespace RD_AAOW
 				{
 				try
 					{
-					Registry.SetValue (ProgramDescription.AssemblySettingsKey,
-						"CarColorsPath", value.ToString ());
+					Registry.SetValue (RDGenerics.AssemblySettingsKey, "CarColorsPath", value.ToString ());
 					}
-				catch
-					{
-					}
+				catch { }
 				}
 			}
 		}

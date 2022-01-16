@@ -32,7 +32,7 @@ namespace RD_AAOW
 				}
 
 			// Проверка наличия компонентов программы
-			if (!File.Exists (AboutForm.AppStartupPath + ProgramDescription.AssemblyLibName))
+			if (!File.Exists (RDGenerics.AppStartupPath + ProgramDescription.AssemblyLibName))
 				{
 				if (MessageBox.Show (string.Format (Localization.GetText ("ComponentMissing", Localization.CurrentLanguage),
 					ProgramDescription.AssemblyLibName),

@@ -7,12 +7,12 @@
 
 #define B_API(t)	extern __declspec(dllexport) t
 
-#define B_VERSION			3,6,1,0
-#define B_VERSION_S			"3.6.1.0"
-#define B_PRODUCT			"Codec library for GTA Vice city save files"
-#define B_COMPANY			"RD AAOW Free development lab"
+#define B_VERSION			3,6,2,0
+#define B_VERSION_S			"3.6.2.0"
+#define B_PRODUCT			"BExplorer core library"
+#define B_COMPANY			FDL_COMPANY
 
-#define BFileSize	0x31464
+#define BFileSize			0x31464
 
 // Подключение определений структур
 #include "Headers\DefaultParameters.h"
