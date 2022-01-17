@@ -1,5 +1,5 @@
-# BExplorer v 2.19.2
-> PCC: 0018C7FB861A2EED
+# BExplorer v 2.19.3
+> PCC: 0018C80BEC46215E
 
 
 A tool based on BExplorer API for editing of GTA Vice City save files (.b)
@@ -46,7 +46,7 @@ Interface languages / языки интерфейса: ru_ru, en_us.
 
 
 
-# BExplorer library / API v 3.6.1
+# BExplorer library / API v 3.6.3
 
 
 An API for work with GTA Vice City save files (.b)
