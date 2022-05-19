@@ -1,5 +1,5 @@
-# BExplorer v 2.19.37
-> PCC: 0016A9F8767C621C
+# BExplorer v 2.20
+> PCC: 0016BC65708CCB6B
 
 
 A tool based on BExplorer API for editing of GTA Vice City save files (.b)
@@ -37,8 +37,8 @@ Just specify it in GTA Vice city installation directory and have fun!
 ## Requirements / Требования
 
 - Windows XP or newer / или новее;
-- [Microsoft .NET Framework 4.0](https://www.microsoft.com/en-us/download/details.aspx?id=17718);
-- [Microsoft VC++ 2010 redistributables](https://www.microsoft.com/en-us/download/details.aspx?id=26999).
+- [Microsoft .NET Framework 4.0](https://microsoft.com/en-us/download/details.aspx?id=17718);
+- [Microsoft VC++ 2010 redistributables](https://microsoft.com/en-us/download/details.aspx?id=26999).
 
 Interface languages / языки интерфейса: ru_ru, en_us.
 
@@ -77,7 +77,7 @@ structures and unions) and using them without recommended functions may cause un
 
 &nbsp;
 
-Information source / Источник информации: [http://www.gtamodding.com/wiki/Saves_(GTA_VC)](http://www.gtamodding.com/wiki/Saves_(GTA_VC))
+Information source / Источник информации: [http://gtamodding.com/wiki/Saves_(GTA_VC)](http://gtamodding.com/wiki/Saves_(GTA_VC))
 
 #
 

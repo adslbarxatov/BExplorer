@@ -7,8 +7,8 @@
 
 #define B_API(t)	extern __declspec(dllexport) t
 
-#define B_VERSION			3,6,37,0
-#define B_VERSION_S			"3.6.37.0"
+#define B_VERSION			3,7,0,0
+#define B_VERSION_S			"3.7.0.0"
 #define B_PRODUCT			"BExplorer core library"
 #define B_COMPANY			FDL_COMPANY
 
