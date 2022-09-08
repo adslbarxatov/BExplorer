@@ -1,5 +1,4 @@
-﻿using Microsoft.Win32;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -109,25 +108,30 @@ namespace RD_AAOW
 			// Запрос
 			get
 				{
-				string path = "";
+				if (string.IsNullOrWhiteSpace (carColorsPath))
+					carColorsPath = RDGenerics.GetAppSettingsValue ("CarColorsPath");
+				/*"";
 				try
 					{
 					path = Registry.GetValue (RDGenerics.AssemblySettingsKey, "CarColorsPath", "").ToString ();
 					}
-				catch { }
+				catch { }*/
 
-				return path;
+				return carColorsPath;
 				}
 
 			// Установка
 			set
 				{
-				try
+				carColorsPath = value;
+				RDGenerics.SetAppSettingsValue ("CarColorsPath", value);
+				/*try
 					{
 					Registry.SetValue (RDGenerics.AssemblySettingsKey, "CarColorsPath", value.ToString ());
 					}
-				catch { }
+				catch { }*/
 				}
 			}
+		private static string carColorsPath;
 		}
 	}

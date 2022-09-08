@@ -1,14 +1,18 @@
-﻿// Подключение заголовков
+﻿// Исправление для MSVC 2019
+#define _CRT_SECURE_NO_WARNINGS
+
+// Подключение заголовков
 #include <stdio.h>
 #include <stdlib.h>
 #include <malloc.h>
 #include <string.h>
+#include <windows.h>
 #include "..\Generics\CSTypes.h"
 
 #define B_API(t)	extern __declspec(dllexport) t
 
-#define B_VERSION			3,7,0,0
-#define B_VERSION_S			"3.7.0.0"
+#define B_VERSION			3,7,142,0
+#define B_VERSION_S			"3.7.142.0"
 #define B_PRODUCT			"BExplorer core library"
 #define B_COMPANY			FDL_COMPANY
 
