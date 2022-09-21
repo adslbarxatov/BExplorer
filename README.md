@@ -2,9 +2,9 @@
 > PCC: 0016E58662C201E2
 
 
-A tool based on BExplorer API for editing of GTA Vice City save files (.b)
+A tool based on BExplorer API for editing of GTA Vice City save files (`.b`)
 
-Инструмент для редактирования файлов сохранений GTA Vice City на базе собственного API
+Инструмент для редактирования файлов сохранений GTA Vice City (`.b`) на базе собственного API
 
 
 #
@@ -22,13 +22,13 @@ If you got some, please, remind us about it. And *backup your save files before 
 
 ## Usage / Применение
 
-You need to download two files – executable and library. At first start you will also be asked for carcols.dat file.
+You need to download two files – executable and library. At first start you will also be asked for `carcols.dat` file.
 Just specify it in GTA Vice city installation directory and have fun!
 
 #
 
 Вам нужны два файла – приложение и библиотека. При первом запуске также потребуется указать расположение
-файла carcols.dat. Просто найдите его в папке установки GTA Vice city, и готово!
+файла `carcols.dat`. Просто найдите его в папке установки GTA Vice city, и готово!
 
 &nbsp;
 
@@ -49,7 +49,7 @@ Interface languages / языки интерфейса: ru_ru, en_us.
 # BExplorer library / API
 
 
-An API for work with GTA Vice City save files (.b)
+An API for work with GTA Vice City save files (`.b`)
 
 API для работы с файлами сохранений GTA Vice City
 
@@ -83,7 +83,7 @@ Information source / Источник информации: [http://gtamodding.c
 
 
 
-## [Development policy and EULA / Политика разработки и EULA](https://adslbarxatov.github.io/ADP)
+## [Development policy and EULA](https://adslbarxatov.github.io/ADP) / [Политика разработки и EULA](https://adslbarxatov.github.io/ADP/ru)
 
 This Policy (ADP), its positions, conclusion, EULA and application methods
 describes general rules that we follow in all of our development processes, released applications and implemented ideas.
