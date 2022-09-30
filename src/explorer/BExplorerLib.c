@@ -32,13 +32,12 @@ B_API(schar*) SaveData_GetSaveInfoEx (void)
 	ulong i;
 
 	for (i = 0; i < sizeof (SD.SD_DP.DP.DP_SaveName) / 2; i++)
-		{
 		info[i] = (schar)SD.SD_DP.DP.DP_SaveName[i];
-		}
+
 	info[i] = '\0';
 
-	sprintf (info, "%s (%u.%02u.%04u; %u:%02u)", info, SD.SD_DP.DP.DP_Day, SD.SD_DP.DP.DP_Month, SD.SD_DP.DP.DP_Year,
-		SD.SD_DP.DP.DP_Hour, SD.SD_DP.DP.DP_Minute);
+	sprintf (info, "%s (%u.%02u.%04u; %u:%02u)", info, SD.SD_DP.DP.DP_Day, SD.SD_DP.DP.DP_Month,
+		SD.SD_DP.DP.DP_Year, SD.SD_DP.DP.DP_Hour, SD.SD_DP.DP.DP_Minute);
 
 	return info;
 	}

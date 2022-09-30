@@ -49,8 +49,8 @@ namespace RD_AAOW
 			if (BExplorerLib.Check () != 0)
 				{
 				if (MessageBox.Show (string.Format (Localization.GetText ("IncorrectLibVersion", al),
-					ProgramDescription.AssemblyLibName),
-					ProgramDescription.AssemblyTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+					ProgramDescription.AssemblyLibName), ProgramDescription.AssemblyTitle, MessageBoxButtons.YesNo,
+					MessageBoxIcon.Exclamation) == DialogResult.Yes)
 					{
 					AboutForm af = new AboutForm (null);
 					}
@@ -71,38 +71,52 @@ namespace RD_AAOW
 			// Загрузка ограничений и списков
 			loading = true;
 
-			DP_Date.MaxDate = new System.DateTime ((int)BExplorerLib.SaveData_GetParameterLimit ((UInt16)BExplorerLib.OpCodes.SaveYear, 0, true),
-				(int)BExplorerLib.SaveData_GetParameterLimit ((UInt16)BExplorerLib.OpCodes.SaveMonth, 0, true),
-				(int)BExplorerLib.SaveData_GetParameterLimit ((UInt16)BExplorerLib.OpCodes.SaveDay, 0, true));
-			DP_Date.MinDate = new System.DateTime ((int)BExplorerLib.SaveData_GetParameterLimit ((UInt16)BExplorerLib.OpCodes.SaveYear, 0, false),
-				(int)BExplorerLib.SaveData_GetParameterLimit ((UInt16)BExplorerLib.OpCodes.SaveMonth, 0, false),
-				(int)BExplorerLib.SaveData_GetParameterLimit ((UInt16)BExplorerLib.OpCodes.SaveDay, 0, false));
+			DP_Date.MaxDate = new DateTime ((int)BExplorerLib.SaveData_GetParameterLimit ((UInt16)OpCodes.SaveYear,
+				0, true),
+				(int)BExplorerLib.SaveData_GetParameterLimit ((UInt16)OpCodes.SaveMonth, 0, true),
+				(int)BExplorerLib.SaveData_GetParameterLimit ((UInt16)OpCodes.SaveDay, 0, true));
+			DP_Date.MinDate = new DateTime ((int)BExplorerLib.SaveData_GetParameterLimit ((UInt16)OpCodes.SaveYear,
+				0, false),
+				(int)BExplorerLib.SaveData_GetParameterLimit ((UInt16)OpCodes.SaveMonth, 0, false),
+				(int)BExplorerLib.SaveData_GetParameterLimit ((UInt16)OpCodes.SaveDay, 0, false));
 
-			DP_IML.Maximum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)BExplorerLib.OpCodes.InGameMinuteLength, 0, true);
-			DP_IML.Minimum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)BExplorerLib.OpCodes.InGameMinuteLength, 0, false);
+			DP_IML.Maximum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)OpCodes.InGameMinuteLength,
+				0, true);
+			DP_IML.Minimum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)OpCodes.InGameMinuteLength,
+				0, false);
 
-			DP_GameSpeed.Maximum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)BExplorerLib.OpCodes.GameSpeed, 0, true);
-			DP_GameSpeed.Minimum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)BExplorerLib.OpCodes.GameSpeed, 0, false);
+			DP_GameSpeed.Maximum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)OpCodes.GameSpeed, 
+				0, true);
+			DP_GameSpeed.Minimum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)OpCodes.GameSpeed,
+				0, false);
 
-			PL_MaxHealth.Maximum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)BExplorerLib.OpCodes.MaxHealth, 0, true);
-			PL_MaxHealth.Minimum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)BExplorerLib.OpCodes.MaxHealth, 0, false);
+			PL_MaxHealth.Maximum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)OpCodes.MaxHealth,
+				0, true);
+			PL_MaxHealth.Minimum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)OpCodes.MaxHealth,
+				0, false);
 
-			PL_MaxArmor.Maximum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)BExplorerLib.OpCodes.MaxArmor, 0, true);
-			PL_MaxArmor.Minimum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)BExplorerLib.OpCodes.MaxArmor, 0, false);
+			PL_MaxArmor.Maximum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)OpCodes.MaxArmor,
+				0, true);
+			PL_MaxArmor.Minimum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)OpCodes.MaxArmor,
+				0, false);
 
-			PL_CurArmor.Maximum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)BExplorerLib.OpCodes.CurrentArmor, 0, true);
-			PL_CurArmor.Minimum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)BExplorerLib.OpCodes.CurrentArmor, 0, false);
+			PL_CurArmor.Maximum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)OpCodes.CurrentArmor,
+				0, true);
+			PL_CurArmor.Minimum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)OpCodes.CurrentArmor,
+				0, false);
 
 			for (int i = 0; i <= 6; i++)
 				PL_MWL.Items.Add (i.ToString ());
 
-			PL_CurMoney.Maximum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)BExplorerLib.OpCodes.CurrentMoney, 0, true);
-			PL_CurMoney.Minimum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)BExplorerLib.OpCodes.CurrentMoney, 0, false);
+			PL_CurMoney.Maximum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)OpCodes.CurrentMoney,
+				0, true);
+			PL_CurMoney.Minimum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)OpCodes.CurrentMoney,
+				0, false);
 
-			PL_Bullets.Maximum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)BExplorerLib.OpCodes.PlayerWeapons_Base,
-				(UInt16)BExplorerLib.WeaponsParCodes.WeaponAmmo, true);
-			PL_Bullets.Minimum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)BExplorerLib.OpCodes.PlayerWeapons_Base,
-				(UInt16)BExplorerLib.WeaponsParCodes.WeaponAmmo, false);
+			PL_Bullets.Maximum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)OpCodes.PlayerWeapons_Base,
+				(UInt16)WeaponsParCodes.WeaponAmmo, true);
+			PL_Bullets.Minimum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)OpCodes.PlayerWeapons_Base,
+				(UInt16)WeaponsParCodes.WeaponAmmo, false);
 
 			GR_CarModel.DataSource = ParametersValues.CarsForGarages;
 			GR_CarModel.DisplayMember = GR_CarModel.ValueMember = "Name";
@@ -113,59 +127,63 @@ namespace RD_AAOW
 			GR_Radio.DataSource = ParametersValues.Radios;
 			GR_Radio.DisplayMember = GR_Radio.ValueMember = "Name";
 
-			PU_AssetValue.Maximum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)BExplorerLib.OpCodes.Pickups_Base,
-				(UInt16)BExplorerLib.PickupsParCodes.ObjectAsset, true);
-			PU_AssetValue.Minimum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)BExplorerLib.OpCodes.Pickups_Base,
-				(UInt16)BExplorerLib.PickupsParCodes.ObjectAsset, false);
+			PU_AssetValue.Maximum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)OpCodes.Pickups_Base,
+				(UInt16)PickupsParCodes.ObjectAsset, true);
+			PU_AssetValue.Minimum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)OpCodes.Pickups_Base,
+				(UInt16)PickupsParCodes.ObjectAsset, false);
 
 			GD_CarModel.DataSource = ParametersValues.CarsForGangs;
 			GD_CarModel.DisplayMember = GD_CarModel.ValueMember = "Name";
 
-			GD_PedModel1.Maximum = GD_PedModel2.Maximum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)BExplorerLib.OpCodes.Gangs_Base,
-				(UInt16)BExplorerLib.GangsParCodes.PrimaryPedModel, true);
-			GD_PedModel1.Minimum = GD_PedModel2.Minimum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)BExplorerLib.OpCodes.Gangs_Base,
-				(UInt16)BExplorerLib.GangsParCodes.PrimaryPedModel, false);
+			GD_PedModel1.Maximum = GD_PedModel2.Maximum = 
+				(decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)OpCodes.Gangs_Base,
+				(UInt16)GangsParCodes.PrimaryPedModel, true);
+			GD_PedModel1.Minimum = GD_PedModel2.Minimum = 
+				(decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)OpCodes.Gangs_Base,
+				(UInt16)GangsParCodes.PrimaryPedModel, false);
 
-			CarGenList.Maximum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)BExplorerLib.OpCodes.ActiveGenerators, 0, true);
-			CarGenList.Minimum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)BExplorerLib.OpCodes.ActiveGenerators, 0, false);
+			CarGenList.Maximum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)OpCodes.ActiveGenerators,
+				0, true);
+			CarGenList.Minimum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)OpCodes.ActiveGenerators,
+				0, false);
 
 			CG_CarModel.DataSource = ParametersValues.CarsForCG;
 			CG_CarModel.DisplayMember = CG_CarModel.ValueMember = "Name";
 
-			CG_X.Maximum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)BExplorerLib.OpCodes.Generators_Base,
-				(UInt16)BExplorerLib.GeneratorsParCodes.CarX, true);
-			CG_X.Minimum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)BExplorerLib.OpCodes.Generators_Base,
-				(UInt16)BExplorerLib.GeneratorsParCodes.CarX, false);
+			CG_X.Maximum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)OpCodes.Generators_Base,
+				(UInt16)GeneratorsParCodes.CarX, true);
+			CG_X.Minimum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)OpCodes.Generators_Base,
+				(UInt16)GeneratorsParCodes.CarX, false);
 
-			CG_Y.Maximum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)BExplorerLib.OpCodes.Generators_Base,
-				(UInt16)BExplorerLib.GeneratorsParCodes.CarY, true);
-			CG_Y.Minimum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)BExplorerLib.OpCodes.Generators_Base,
-				(UInt16)BExplorerLib.GeneratorsParCodes.CarY, false);
+			CG_Y.Maximum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)OpCodes.Generators_Base,
+				(UInt16)GeneratorsParCodes.CarY, true);
+			CG_Y.Minimum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)OpCodes.Generators_Base,
+				(UInt16)GeneratorsParCodes.CarY, false);
 
-			CG_Z.Maximum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)BExplorerLib.OpCodes.Generators_Base,
-				(UInt16)BExplorerLib.GeneratorsParCodes.CarZ, true);
-			CG_Z.Minimum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)BExplorerLib.OpCodes.Generators_Base,
-				(UInt16)BExplorerLib.GeneratorsParCodes.CarZ, false);
+			CG_Z.Maximum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)OpCodes.Generators_Base,
+				(UInt16)GeneratorsParCodes.CarZ, true);
+			CG_Z.Minimum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)OpCodes.Generators_Base,
+				(UInt16)GeneratorsParCodes.CarZ, false);
 
-			CG_Rotation.Maximum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)BExplorerLib.OpCodes.Generators_Base,
-				(UInt16)BExplorerLib.GeneratorsParCodes.CarAngle, true);
-			CG_Rotation.Minimum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)BExplorerLib.OpCodes.Generators_Base,
-				(UInt16)BExplorerLib.GeneratorsParCodes.CarAngle, false);
+			CG_Rotation.Maximum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)OpCodes.Generators_Base,
+				(UInt16)GeneratorsParCodes.CarAngle, true);
+			CG_Rotation.Minimum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)OpCodes.Generators_Base,
+				(UInt16)GeneratorsParCodes.CarAngle, false);
 
 			CG_CarColor1.Maximum = cc.Colors.Count - 1;
 			CG_CarColor1.Minimum = -1;
 			CG_CarColor2.Maximum = cc.Colors.Count - 1;
 			CG_CarColor2.Minimum = -1;
 
-			CG_AlarmProb.Maximum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)BExplorerLib.OpCodes.Generators_Base,
-				(UInt16)BExplorerLib.GeneratorsParCodes.AlarmProbability, true);
-			CG_AlarmProb.Minimum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)BExplorerLib.OpCodes.Generators_Base,
-				(UInt16)BExplorerLib.GeneratorsParCodes.AlarmProbability, false);
+			CG_AlarmProb.Maximum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)OpCodes.Generators_Base,
+				(UInt16)GeneratorsParCodes.AlarmProbability, true);
+			CG_AlarmProb.Minimum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)OpCodes.Generators_Base,
+				(UInt16)GeneratorsParCodes.AlarmProbability, false);
 
-			CG_LockProb.Maximum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)BExplorerLib.OpCodes.Generators_Base,
-				(UInt16)BExplorerLib.GeneratorsParCodes.LockProbability, true);
-			CG_LockProb.Minimum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)BExplorerLib.OpCodes.Generators_Base,
-				(UInt16)BExplorerLib.GeneratorsParCodes.LockProbability, false);
+			CG_LockProb.Maximum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)OpCodes.Generators_Base,
+				(UInt16)GeneratorsParCodes.LockProbability, true);
+			CG_LockProb.Minimum = (decimal)BExplorerLib.SaveData_GetParameterLimit ((UInt16)OpCodes.Generators_Base,
+				(UInt16)GeneratorsParCodes.LockProbability, false);
 
 			cp = new CoordsPicker (CG_X.Minimum, CG_X.Maximum, CG_Y.Minimum, CG_Y.Maximum, CG_Z.Minimum, CG_Z.Maximum,
 				CG_Rotation.Minimum, CG_Rotation.Maximum);
@@ -215,7 +233,8 @@ namespace RD_AAOW
 			SetState (false);   // Блокировать заранее
 			if ((errCode = BExplorerLib.SaveData_LoadEx (OFDialog.FileName)) != 1)
 				{
-				MessageBox.Show (Localization.GetText ("SaveLoadingError", al) + BExplorerLib.SaveData_ErrorPromptEx (errCode),
+				MessageBox.Show (Localization.GetText ("SaveLoadingError", al) +
+					BExplorerLib.SaveData_ErrorPrompt (errCode),
 					ProgramDescription.AssemblyTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 				SaveInfoLabel.Text = Localization.GetText ("SaveNotSpecified", al);
 
@@ -223,7 +242,7 @@ namespace RD_AAOW
 				}
 
 			// В случае успеха
-			SaveInfoLabel.Text = Localization.GetText ("CurrentSave", al) + BExplorerLib.SaveData_GetSaveInfoEx ();
+			SaveInfoLabel.Text = Localization.GetText ("CurrentSave", al) + BExplorerLib.SaveData_SaveInfo;
 			SetState (true);
 
 			// Загрузка начальных параметров в поля формы
@@ -236,7 +255,8 @@ namespace RD_AAOW
 			Result = BExplorerLib.SaveData_GetParameterValue (OpCode, ParCode);
 			if (!BExplorerLib.IsResultSuccessful (Result))
 				{
-				MessageBox.Show (Result, ProgramDescription.AssemblyTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+				MessageBox.Show (Result, ProgramDescription.AssemblyTitle, MessageBoxButtons.OK, 
+					MessageBoxIcon.Exclamation);
 				return false;
 				}
 
@@ -261,29 +281,31 @@ namespace RD_AAOW
 			loading = true;
 
 			// Получение даты
-			if (!GetParameterValue ((UInt16)BExplorerLib.OpCodes.SaveYear, 0, out s1) ||
-				!GetParameterValue ((UInt16)BExplorerLib.OpCodes.SaveMonth, 0, out s2) ||
-				!GetParameterValue ((UInt16)BExplorerLib.OpCodes.SaveDay, 0, out s3))
+			if (!GetParameterValue ((UInt16)OpCodes.SaveYear, 0, out s1) ||
+				!GetParameterValue ((UInt16)OpCodes.SaveMonth, 0, out s2) ||
+				!GetParameterValue ((UInt16)OpCodes.SaveDay, 0, out s3))
 				{
 				loading = false;
 				return;
 				}
 
-			DP_Date.Value = new System.DateTime ((int)decimal.Parse (s1), (int)decimal.Parse (s2), (int)decimal.Parse (s3));
+			DP_Date.Value = new DateTime ((int)decimal.Parse (s1), (int)decimal.Parse (s2),
+				(int)decimal.Parse (s3));
 
 			// Получение времени
-			if (!GetParameterValue ((UInt16)BExplorerLib.OpCodes.SaveHour, 0, out s1) ||
-				!GetParameterValue ((UInt16)BExplorerLib.OpCodes.SaveMinute, 0, out s2) ||
-				!GetParameterValue ((UInt16)BExplorerLib.OpCodes.SaveSecond, 0, out s3))
+			if (!GetParameterValue ((UInt16)OpCodes.SaveHour, 0, out s1) ||
+				!GetParameterValue ((UInt16)OpCodes.SaveMinute, 0, out s2) ||
+				!GetParameterValue ((UInt16)OpCodes.SaveSecond, 0, out s3))
 				{
 				loading = false;
 				return;
 				}
 
-			DP_Time.Value = new DateTime (2000, 1, 1, (int)decimal.Parse (s1), (int)decimal.Parse (s2), (int)decimal.Parse (s3));
+			DP_Time.Value = new DateTime (2000, 1, 1, (int)decimal.Parse (s1), (int)decimal.Parse (s2), 
+				(int)decimal.Parse (s3));
 
 			// Получение длины минуты
-			if (!GetParameterValue ((UInt16)BExplorerLib.OpCodes.InGameMinuteLength, 0, out s1))
+			if (!GetParameterValue ((UInt16)OpCodes.InGameMinuteLength, 0, out s1))
 				{
 				loading = false;
 				return;
@@ -292,8 +314,8 @@ namespace RD_AAOW
 			DP_IML.Value = decimal.Parse (s1);
 
 			// Получение времени внутри игры
-			if (!GetParameterValue ((UInt16)BExplorerLib.OpCodes.InGameHour, 0, out s1) ||
-				!GetParameterValue ((UInt16)BExplorerLib.OpCodes.InGameMinute, 0, out s2))
+			if (!GetParameterValue ((UInt16)OpCodes.InGameHour, 0, out s1) ||
+				!GetParameterValue ((UInt16)OpCodes.InGameMinute, 0, out s2))
 				{
 				loading = false;
 				return;
@@ -303,7 +325,7 @@ namespace RD_AAOW
 				(decimal.Parse (s2) > 59) ? 59 : (int)decimal.Parse (s2), 0);
 
 			// Получение скорости игры
-			if (!GetParameterValue ((UInt16)BExplorerLib.OpCodes.GameSpeed, 0, out s1))
+			if (!GetParameterValue ((UInt16)OpCodes.GameSpeed, 0, out s1))
 				{
 				loading = false;
 				return;
@@ -312,7 +334,7 @@ namespace RD_AAOW
 			DP_GameSpeed.Value = decimal.Parse (s1);
 
 			// Получение погоды
-			if (!GetParameterValue ((UInt16)BExplorerLib.OpCodes.CurrentWeather, 0, out s1))
+			if (!GetParameterValue ((UInt16)OpCodes.CurrentWeather, 0, out s1))
 				{
 				loading = false;
 				return;
@@ -329,7 +351,7 @@ namespace RD_AAOW
 				}
 
 			// Получение положения камеры
-			if (!GetParameterValue ((UInt16)BExplorerLib.OpCodes.CarOverview, 0, out s1))
+			if (!GetParameterValue ((UInt16)OpCodes.CarOverview, 0, out s1))
 				{
 				loading = false;
 				return;
@@ -346,7 +368,7 @@ namespace RD_AAOW
 				}
 
 			// Получение состояния радио Cauffman cabs
-			if (!GetParameterValue ((UInt16)BExplorerLib.OpCodes.CabsRadio, 0, out s1))
+			if (!GetParameterValue ((UInt16)OpCodes.CabsRadio, 0, out s1))
 				{
 				loading = false;
 				return;
@@ -355,9 +377,9 @@ namespace RD_AAOW
 			SBB_CabsRadio.Checked = (decimal.Parse (s1) != 0);
 
 			// Получение величин здоровья и брони
-			if (!GetParameterValue ((UInt16)BExplorerLib.OpCodes.MaxHealth, 0, out s1) ||
-				!GetParameterValue ((UInt16)BExplorerLib.OpCodes.MaxArmor, 0, out s2) ||
-				!GetParameterValue ((UInt16)BExplorerLib.OpCodes.CurrentArmor, 0, out s3))
+			if (!GetParameterValue ((UInt16)OpCodes.MaxHealth, 0, out s1) ||
+				!GetParameterValue ((UInt16)OpCodes.MaxArmor, 0, out s2) ||
+				!GetParameterValue ((UInt16)OpCodes.CurrentArmor, 0, out s3))
 				{
 				loading = false;
 				return;
@@ -368,7 +390,7 @@ namespace RD_AAOW
 			PL_CurArmor.Value = decimal.Parse (s3);
 
 			// Получение максимума звёзд розыска
-			if (!GetParameterValue ((UInt16)BExplorerLib.OpCodes.MaxPoliceStars, 0, out s1))
+			if (!GetParameterValue ((UInt16)OpCodes.MaxPoliceStars, 0, out s1))
 				{
 				loading = false;
 				return;
@@ -377,7 +399,7 @@ namespace RD_AAOW
 			PL_MWL.SelectedIndex = (int)decimal.Parse (s1);
 
 			// Получение наличных
-			if (!GetParameterValue ((UInt16)BExplorerLib.OpCodes.CurrentMoney, 0, out s1))
+			if (!GetParameterValue ((UInt16)OpCodes.CurrentMoney, 0, out s1))
 				{
 				loading = false;
 				return;
@@ -386,7 +408,7 @@ namespace RD_AAOW
 			PL_CurMoney.Value = ((decimal.Parse (s1) > PL_CurMoney.Maximum) ? PL_CurMoney.Maximum : decimal.Parse (s1));
 
 			// Получение костюма
-			if (!GetParameterValue ((UInt16)BExplorerLib.OpCodes.PlayerSuit, 0, out s1))
+			if (!GetParameterValue ((UInt16)OpCodes.PlayerSuit, 0, out s1))
 				{
 				loading = false;
 				return;
@@ -402,9 +424,9 @@ namespace RD_AAOW
 				}
 
 			// Получение флагов несгораемости, вечного бега и быстрой перезарядки
-			if (!GetParameterValue ((UInt16)BExplorerLib.OpCodes.InfiniteRun, 0, out s1) ||
-				!GetParameterValue ((UInt16)BExplorerLib.OpCodes.FastReload, 0, out s2) ||
-				!GetParameterValue ((UInt16)BExplorerLib.OpCodes.Fireproof, 0, out s3))
+			if (!GetParameterValue ((UInt16)OpCodes.InfiniteRun, 0, out s1) ||
+				!GetParameterValue ((UInt16)OpCodes.FastReload, 0, out s2) ||
+				!GetParameterValue ((UInt16)OpCodes.Fireproof, 0, out s3))
 				{
 				loading = false;
 				return;
@@ -415,7 +437,7 @@ namespace RD_AAOW
 			PL_Fireproof.Checked = (decimal.Parse (s3) != 0);
 
 			// Получение флага бесконечных патронов
-			if (!GetParameterValue ((UInt16)BExplorerLib.OpCodes.InfiniteAmmo, 0, out s1))
+			if (!GetParameterValue ((UInt16)OpCodes.InfiniteAmmo, 0, out s1))
 				{
 				loading = false;
 				return;
@@ -468,15 +490,14 @@ namespace RD_AAOW
 			for (int i = 0; i < tds.Elements.Count; i++)
 				{
 				if (!tds.Elements[i].Completed)
-					{
 					ToDoStatusView.Items.Add (tds.Elements[i].ElementDescription);
-					}
 				}
 
 			if (ToDoStatusView.Items.Count == 0)
 				{
 				ToDoStatusView.Items.Add (Localization.GetText ("SaveCompleted", al));
-				DangerousReset.Enabled = AbortSorting.Enabled = ST_InfBullets.Enabled = true;   // Только при полном прохождении
+				DangerousReset.Enabled = AbortSorting.Enabled = ST_InfBullets.Enabled = true;   
+				// Только при полном прохождении
 				}
 			}
 
@@ -507,11 +528,12 @@ namespace RD_AAOW
 		// Место выбрано
 		private void SFDialog_FileOk (object sender, CancelEventArgs e)
 			{
-			string msg = BExplorerLib.SaveData_SaveParametersFile (BExplorerLib.SaveableParameters.SaveFile, SFDialog.FileName);
+			string msg = BExplorerLib.SaveData_SaveParametersFile (SaveableParameters.SaveFile, SFDialog.FileName);
 
 			if (BExplorerLib.IsResultSuccessful (msg))
 				{
-				MessageBox.Show (msg, ProgramDescription.AssemblyTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+				MessageBox.Show (msg, ProgramDescription.AssemblyTitle, MessageBoxButtons.OK, 
+					MessageBoxIcon.Information);
 
 				// Перезагрузка файла
 				LoadParameters ();
@@ -539,8 +561,7 @@ namespace RD_AAOW
 		// Установка всех настроечных контролов в состояние доступен/недоступен
 		private void SetState (bool State)
 			{
-			SaveFileButton.Enabled =
-				UpdateDefaultFileButton.Enabled =
+			SaveFileButton.Enabled = UpdateDefaultFileButton.Enabled =
 				RecommendedSettings.Enabled = State;
 
 			DPTab.Enabled = State;
@@ -561,9 +582,9 @@ namespace RD_AAOW
 			if (loading)
 				return;
 
-			SetParameterValue ((UInt16)BExplorerLib.OpCodes.SaveYear, 0, DP_Date.Value.Year.ToString ());
-			SetParameterValue ((UInt16)BExplorerLib.OpCodes.SaveMonth, 0, DP_Date.Value.Month.ToString ());
-			SetParameterValue ((UInt16)BExplorerLib.OpCodes.SaveDay, 0, DP_Date.Value.Day.ToString ());
+			SetParameterValue ((UInt16)OpCodes.SaveYear, 0, DP_Date.Value.Year.ToString ());
+			SetParameterValue ((UInt16)OpCodes.SaveMonth, 0, DP_Date.Value.Month.ToString ());
+			SetParameterValue ((UInt16)OpCodes.SaveDay, 0, DP_Date.Value.Day.ToString ());
 			}
 
 		// Изменено время
@@ -572,9 +593,9 @@ namespace RD_AAOW
 			if (loading)
 				return;
 
-			SetParameterValue ((UInt16)BExplorerLib.OpCodes.SaveHour, 0, DP_Time.Value.Hour.ToString ());
-			SetParameterValue ((UInt16)BExplorerLib.OpCodes.SaveMinute, 0, DP_Time.Value.Minute.ToString ());
-			SetParameterValue ((UInt16)BExplorerLib.OpCodes.SaveSecond, 0, DP_Time.Value.Second.ToString ());
+			SetParameterValue ((UInt16)OpCodes.SaveHour, 0, DP_Time.Value.Hour.ToString ());
+			SetParameterValue ((UInt16)OpCodes.SaveMinute, 0, DP_Time.Value.Minute.ToString ());
+			SetParameterValue ((UInt16)OpCodes.SaveSecond, 0, DP_Time.Value.Second.ToString ());
 			}
 
 		// Изменена длительность минуты в игре
@@ -583,7 +604,7 @@ namespace RD_AAOW
 			if (loading)
 				return;
 
-			SetParameterValue ((UInt16)BExplorerLib.OpCodes.InGameMinuteLength, 0, DP_IML.Value.ToString ());
+			SetParameterValue ((UInt16)OpCodes.InGameMinuteLength, 0, DP_IML.Value.ToString ());
 			}
 
 		// Изменено время в игре
@@ -592,8 +613,8 @@ namespace RD_AAOW
 			if (loading)
 				return;
 
-			SetParameterValue ((UInt16)BExplorerLib.OpCodes.InGameHour, 0, DP_GameTime.Value.Hour.ToString ());
-			SetParameterValue ((UInt16)BExplorerLib.OpCodes.InGameMinute, 0, DP_GameTime.Value.Minute.ToString ());
+			SetParameterValue ((UInt16)OpCodes.InGameHour, 0, DP_GameTime.Value.Hour.ToString ());
+			SetParameterValue ((UInt16)OpCodes.InGameMinute, 0, DP_GameTime.Value.Minute.ToString ());
 			}
 
 		// Изменена скорость игры
@@ -602,7 +623,7 @@ namespace RD_AAOW
 			if (loading)
 				return;
 
-			SetParameterValue ((UInt16)BExplorerLib.OpCodes.GameSpeed, 0, DP_GameSpeed.Value.ToString ());
+			SetParameterValue ((UInt16)OpCodes.GameSpeed, 0, DP_GameSpeed.Value.ToString ());
 			}
 
 		// Изменена текущая погода
@@ -611,7 +632,7 @@ namespace RD_AAOW
 			if (loading)
 				return;
 
-			SetParameterValue ((UInt16)BExplorerLib.OpCodes.CurrentWeather, 0,
+			SetParameterValue ((UInt16)OpCodes.CurrentWeather, 0,
 				ParametersValues.Weathers[DP_Weather.SelectedIndex].ID.ToString ());
 			}
 
@@ -621,7 +642,7 @@ namespace RD_AAOW
 			if (loading)
 				return;
 
-			SetParameterValue ((UInt16)BExplorerLib.OpCodes.CarOverview, 0,
+			SetParameterValue ((UInt16)OpCodes.CarOverview, 0,
 				ParametersValues.CameraPositions[DP_CameraPos.SelectedIndex].ID.ToString ());
 			}
 
@@ -631,7 +652,7 @@ namespace RD_AAOW
 			if (loading)
 				return;
 
-			SetParameterValue ((UInt16)BExplorerLib.OpCodes.CabsRadio, 0, SBB_CabsRadio.Checked ? "1" : "0");
+			SetParameterValue ((UInt16)OpCodes.CabsRadio, 0, SBB_CabsRadio.Checked ? "1" : "0");
 			}
 
 		// Изменена величина максимального здоровья
@@ -640,7 +661,7 @@ namespace RD_AAOW
 			if (loading)
 				return;
 
-			SetParameterValue ((UInt16)BExplorerLib.OpCodes.MaxHealth, 0, PL_MaxHealth.Value.ToString ());
+			SetParameterValue ((UInt16)OpCodes.MaxHealth, 0, PL_MaxHealth.Value.ToString ());
 			}
 
 		// Изменена величина максимальной брони
@@ -649,7 +670,7 @@ namespace RD_AAOW
 			if (loading)
 				return;
 
-			SetParameterValue ((UInt16)BExplorerLib.OpCodes.MaxArmor, 0, PL_MaxArmor.Value.ToString ());
+			SetParameterValue ((UInt16)OpCodes.MaxArmor, 0, PL_MaxArmor.Value.ToString ());
 			}
 
 		// Изменена величина текущей брони
@@ -658,7 +679,7 @@ namespace RD_AAOW
 			if (loading)
 				return;
 
-			SetParameterValue ((UInt16)BExplorerLib.OpCodes.CurrentArmor, 0, PL_CurArmor.Value.ToString ());
+			SetParameterValue ((UInt16)OpCodes.CurrentArmor, 0, PL_CurArmor.Value.ToString ());
 			}
 
 		// Изменён максимум звёзд розыска
@@ -667,7 +688,7 @@ namespace RD_AAOW
 			if (loading)
 				return;
 
-			SetParameterValue ((UInt16)BExplorerLib.OpCodes.MaxPoliceStars, 0, PL_MWL.SelectedIndex.ToString ());
+			SetParameterValue ((UInt16)OpCodes.MaxPoliceStars, 0, PL_MWL.SelectedIndex.ToString ());
 			}
 
 		// Изменена сумма наличных
@@ -676,7 +697,7 @@ namespace RD_AAOW
 			if (loading)
 				return;
 
-			SetParameterValue ((UInt16)BExplorerLib.OpCodes.CurrentMoney, 0, PL_CurMoney.Value.ToString ());
+			SetParameterValue ((UInt16)OpCodes.CurrentMoney, 0, PL_CurMoney.Value.ToString ());
 			}
 
 		// Изменён костюм
@@ -685,7 +706,7 @@ namespace RD_AAOW
 			if (loading)
 				return;
 
-			SetParameterValue ((UInt16)BExplorerLib.OpCodes.PlayerSuit, 0, ParametersValues.Suits[PL_Suit.SelectedIndex].CodeName);
+			SetParameterValue ((UInt16)OpCodes.PlayerSuit, 0, ParametersValues.Suits[PL_Suit.SelectedIndex].CodeName);
 			}
 
 		// Изменён флаг вечного бега
@@ -694,7 +715,7 @@ namespace RD_AAOW
 			if (loading)
 				return;
 
-			SetParameterValue ((UInt16)BExplorerLib.OpCodes.InfiniteRun, 0, PL_InfRun.Checked ? "1" : "0");
+			SetParameterValue ((UInt16)OpCodes.InfiniteRun, 0, PL_InfRun.Checked ? "1" : "0");
 			}
 
 		// Изменён флаг быстрой перезарядки
@@ -703,7 +724,7 @@ namespace RD_AAOW
 			if (loading)
 				return;
 
-			SetParameterValue ((UInt16)BExplorerLib.OpCodes.FastReload, 0, PL_FastReload.Checked ? "1" : "0");
+			SetParameterValue ((UInt16)OpCodes.FastReload, 0, PL_FastReload.Checked ? "1" : "0");
 			}
 
 		// Изменён флаг несгораемости
@@ -712,7 +733,7 @@ namespace RD_AAOW
 			if (loading)
 				return;
 
-			SetParameterValue ((UInt16)BExplorerLib.OpCodes.Fireproof, 0, PL_Fireproof.Checked ? "1" : "0");
+			SetParameterValue ((UInt16)OpCodes.Fireproof, 0, PL_Fireproof.Checked ? "1" : "0");
 			}
 
 		// Выбран слот оружия
@@ -721,10 +742,10 @@ namespace RD_AAOW
 			loading = true;
 
 			string s1, s2;
-			if (!GetParameterValue ((UInt16)((int)BExplorerLib.OpCodes.PlayerWeapons_Base + WeaponsList.SelectedIndex),
-				(UInt16)BExplorerLib.WeaponsParCodes.WeaponType, out s1) ||
-				!GetParameterValue ((UInt16)((int)BExplorerLib.OpCodes.PlayerWeapons_Base + WeaponsList.SelectedIndex),
-				(UInt16)BExplorerLib.WeaponsParCodes.WeaponAmmo, out s2))
+			if (!GetParameterValue ((UInt16)((int)OpCodes.PlayerWeapons_Base + WeaponsList.SelectedIndex),
+				(UInt16)WeaponsParCodes.WeaponType, out s1) ||
+				!GetParameterValue ((UInt16)((int)OpCodes.PlayerWeapons_Base + WeaponsList.SelectedIndex),
+				(UInt16)WeaponsParCodes.WeaponAmmo, out s2))
 				{
 				loading = false;
 				return;
@@ -751,8 +772,8 @@ namespace RD_AAOW
 			if (loading)
 				return;
 
-			SetParameterValue ((UInt16)((int)BExplorerLib.OpCodes.PlayerWeapons_Base + WeaponsList.SelectedIndex),
-				(UInt16)BExplorerLib.WeaponsParCodes.WeaponType,
+			SetParameterValue ((UInt16)((int)OpCodes.PlayerWeapons_Base + WeaponsList.SelectedIndex),
+				(UInt16)WeaponsParCodes.WeaponType,
 				ParametersValues.Weapons[PL_Weapon.SelectedIndex].ID.ToString ());
 			}
 
@@ -762,8 +783,8 @@ namespace RD_AAOW
 			if (loading)
 				return;
 
-			SetParameterValue ((UInt16)((int)BExplorerLib.OpCodes.PlayerWeapons_Base + WeaponsList.SelectedIndex),
-				(UInt16)BExplorerLib.WeaponsParCodes.WeaponAmmo, PL_Bullets.Value.ToString ());
+			SetParameterValue ((UInt16)((int)OpCodes.PlayerWeapons_Base + WeaponsList.SelectedIndex),
+				(UInt16)WeaponsParCodes.WeaponAmmo, PL_Bullets.Value.ToString ());
 			}
 
 		// Загрузка статистики
@@ -777,12 +798,13 @@ namespace RD_AAOW
 		private void OStatsDialog_FileOk (object sender, CancelEventArgs e)
 			{
 			// Загрузка файла статистики
-			string msg = BExplorerLib.SaveData_LoadParametersFile (BExplorerLib.LoadableParameters.Stats, OStatsDialog.FileName);
+			string msg = BExplorerLib.SaveData_LoadParametersFile (LoadableParameters.Stats, OStatsDialog.FileName);
 
 			// В случае ошибки вывести сообщение
 			if (BExplorerLib.IsResultSuccessful (msg))
 				{
-				MessageBox.Show (msg, ProgramDescription.AssemblyTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+				MessageBox.Show (msg, ProgramDescription.AssemblyTitle, MessageBoxButtons.OK,
+					MessageBoxIcon.Information);
 				}
 			// В противном случае
 			else
@@ -803,12 +825,13 @@ namespace RD_AAOW
 		private void SStatsDialog_FileOk (object sender, CancelEventArgs e)
 			{
 			// Загрузка файла статистики
-			string msg = BExplorerLib.SaveData_SaveParametersFile (BExplorerLib.SaveableParameters.Stats, SStatsDialog.FileName);
+			string msg = BExplorerLib.SaveData_SaveParametersFile (SaveableParameters.Stats, SStatsDialog.FileName);
 
 			// В случае ошибки вывести сообщение
 			if (BExplorerLib.IsResultSuccessful (msg))
 				{
-				MessageBox.Show (msg, ProgramDescription.AssemblyTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+				MessageBox.Show (msg, ProgramDescription.AssemblyTitle, MessageBoxButtons.OK, 
+					MessageBoxIcon.Information);
 				}
 			// В противном случае
 			else
@@ -824,18 +847,18 @@ namespace RD_AAOW
 			loading = true;
 
 			string model, imm, c1, c2, radio, bomb;
-			if (!GetParameterValue ((UInt16)((int)BExplorerLib.OpCodes.Garages_Base + GaragesList.SelectedIndex),
-				(UInt16)BExplorerLib.GaragesParCodes.CarModel, out model) ||
-				!GetParameterValue ((UInt16)((int)BExplorerLib.OpCodes.Garages_Base + GaragesList.SelectedIndex),
-				(UInt16)BExplorerLib.GaragesParCodes.Immunity, out imm) ||
-				!GetParameterValue ((UInt16)((int)BExplorerLib.OpCodes.Garages_Base + GaragesList.SelectedIndex),
-				(UInt16)BExplorerLib.GaragesParCodes.PrimaryColor, out c1) ||
-				!GetParameterValue ((UInt16)((int)BExplorerLib.OpCodes.Garages_Base + GaragesList.SelectedIndex),
-				(UInt16)BExplorerLib.GaragesParCodes.SecondaryColor, out c2) ||
-				!GetParameterValue ((UInt16)((int)BExplorerLib.OpCodes.Garages_Base + GaragesList.SelectedIndex),
-				(UInt16)BExplorerLib.GaragesParCodes.RadioStation, out radio) ||
-				!GetParameterValue ((UInt16)((int)BExplorerLib.OpCodes.Garages_Base + GaragesList.SelectedIndex),
-				(UInt16)BExplorerLib.GaragesParCodes.BombType, out bomb))
+			if (!GetParameterValue ((UInt16)((int)OpCodes.Garages_Base + GaragesList.SelectedIndex),
+				(UInt16)GaragesParCodes.CarModel, out model) ||
+				!GetParameterValue ((UInt16)((int)OpCodes.Garages_Base + GaragesList.SelectedIndex),
+				(UInt16)GaragesParCodes.Immunity, out imm) ||
+				!GetParameterValue ((UInt16)((int)OpCodes.Garages_Base + GaragesList.SelectedIndex),
+				(UInt16)GaragesParCodes.PrimaryColor, out c1) ||
+				!GetParameterValue ((UInt16)((int)OpCodes.Garages_Base + GaragesList.SelectedIndex),
+				(UInt16)GaragesParCodes.SecondaryColor, out c2) ||
+				!GetParameterValue ((UInt16)((int)OpCodes.Garages_Base + GaragesList.SelectedIndex),
+				(UInt16)GaragesParCodes.RadioStation, out radio) ||
+				!GetParameterValue ((UInt16)((int)OpCodes.Garages_Base + GaragesList.SelectedIndex),
+				(UInt16)GaragesParCodes.BombType, out bomb))
 				{
 				loading = false;
 				return;
@@ -889,8 +912,9 @@ namespace RD_AAOW
 			if (loading)
 				return;
 
-			SetParameterValue ((UInt16)((int)BExplorerLib.OpCodes.Garages_Base + GaragesList.SelectedIndex),
-				(UInt16)BExplorerLib.GaragesParCodes.CarModel, ParametersValues.CarsForGarages[GR_CarModel.SelectedIndex].ID.ToString ());
+			SetParameterValue ((UInt16)((int)OpCodes.Garages_Base + GaragesList.SelectedIndex),
+				(UInt16)GaragesParCodes.CarModel, 
+				ParametersValues.CarsForGarages[GR_CarModel.SelectedIndex].ID.ToString ());
 			}
 
 		// Изменены цвета авто
@@ -901,8 +925,8 @@ namespace RD_AAOW
 			if (loading)
 				return;
 
-			SetParameterValue ((UInt16)((int)BExplorerLib.OpCodes.Garages_Base + GaragesList.SelectedIndex),
-				(UInt16)BExplorerLib.GaragesParCodes.PrimaryColor, GR_CarColor1.Value.ToString ());
+			SetParameterValue ((UInt16)((int)OpCodes.Garages_Base + GaragesList.SelectedIndex),
+				(UInt16)GaragesParCodes.PrimaryColor, GR_CarColor1.Value.ToString ());
 			}
 
 		private void GR_CarColor2_ValueChanged (object sender, EventArgs e)
@@ -912,8 +936,8 @@ namespace RD_AAOW
 			if (loading)
 				return;
 
-			SetParameterValue ((UInt16)((int)BExplorerLib.OpCodes.Garages_Base + GaragesList.SelectedIndex),
-				(UInt16)BExplorerLib.GaragesParCodes.SecondaryColor, GR_CarColor2.Value.ToString ());
+			SetParameterValue ((UInt16)((int)OpCodes.Garages_Base + GaragesList.SelectedIndex),
+				(UInt16)GaragesParCodes.SecondaryColor, GR_CarColor2.Value.ToString ());
 			}
 
 		// Изменена радиостанция
@@ -922,8 +946,8 @@ namespace RD_AAOW
 			if (loading)
 				return;
 
-			SetParameterValue ((UInt16)((int)BExplorerLib.OpCodes.Garages_Base + GaragesList.SelectedIndex),
-				(UInt16)BExplorerLib.GaragesParCodes.RadioStation, ParametersValues.Radios[GR_Radio.SelectedIndex].ID.ToString ());
+			SetParameterValue ((UInt16)((int)OpCodes.Garages_Base + GaragesList.SelectedIndex),
+				(UInt16)GaragesParCodes.RadioStation, ParametersValues.Radios[GR_Radio.SelectedIndex].ID.ToString ());
 			}
 
 		// Изменён вид минирования
@@ -932,8 +956,8 @@ namespace RD_AAOW
 			if (loading)
 				return;
 
-			SetParameterValue ((UInt16)((int)BExplorerLib.OpCodes.Garages_Base + GaragesList.SelectedIndex),
-				(UInt16)BExplorerLib.GaragesParCodes.BombType, ParametersValues.Bombs[GR_Bomb.SelectedIndex].ID.ToString ());
+			SetParameterValue ((UInt16)((int)OpCodes.Garages_Base + GaragesList.SelectedIndex),
+				(UInt16)GaragesParCodes.BombType, ParametersValues.Bombs[GR_Bomb.SelectedIndex].ID.ToString ());
 			}
 
 		// Изменены флаги защиты
@@ -955,8 +979,8 @@ namespace RD_AAOW
 			if (GR_DamageProof.Checked)
 				f |= 0x8;
 
-			SetParameterValue ((UInt16)((int)BExplorerLib.OpCodes.Garages_Base + GaragesList.SelectedIndex),
-				(UInt16)BExplorerLib.GaragesParCodes.Immunity, f.ToString ());
+			SetParameterValue ((UInt16)((int)OpCodes.Garages_Base + GaragesList.SelectedIndex),
+				(UInt16)GaragesParCodes.Immunity, f.ToString ());
 			}
 
 		// Выбран денежный накопитель
@@ -994,16 +1018,16 @@ namespace RD_AAOW
 			loading = true;
 
 			string car, p1, p2, w1, w2;
-			if (!GetParameterValue ((UInt16)((int)BExplorerLib.OpCodes.Gangs_Base + GangsList.SelectedIndex),
-				(UInt16)BExplorerLib.GangsParCodes.CarModel, out car) ||
-				!GetParameterValue ((UInt16)((int)BExplorerLib.OpCodes.Gangs_Base + GangsList.SelectedIndex),
-				(UInt16)BExplorerLib.GangsParCodes.PrimaryPedModel, out p1) ||
-				!GetParameterValue ((UInt16)((int)BExplorerLib.OpCodes.Gangs_Base + GangsList.SelectedIndex),
-				(UInt16)BExplorerLib.GangsParCodes.SecondaryPedModel, out p2) ||
-				!GetParameterValue ((UInt16)((int)BExplorerLib.OpCodes.Gangs_Base + GangsList.SelectedIndex),
-				(UInt16)BExplorerLib.GangsParCodes.PrimaryWeapon, out w1) ||
-				!GetParameterValue ((UInt16)((int)BExplorerLib.OpCodes.Gangs_Base + GangsList.SelectedIndex),
-				(UInt16)BExplorerLib.GangsParCodes.SecondaryWeapon, out w2))
+			if (!GetParameterValue ((UInt16)((int)OpCodes.Gangs_Base + GangsList.SelectedIndex),
+				(UInt16)GangsParCodes.CarModel, out car) ||
+				!GetParameterValue ((UInt16)((int)OpCodes.Gangs_Base + GangsList.SelectedIndex),
+				(UInt16)GangsParCodes.PrimaryPedModel, out p1) ||
+				!GetParameterValue ((UInt16)((int)OpCodes.Gangs_Base + GangsList.SelectedIndex),
+				(UInt16)GangsParCodes.SecondaryPedModel, out p2) ||
+				!GetParameterValue ((UInt16)((int)OpCodes.Gangs_Base + GangsList.SelectedIndex),
+				(UInt16)GangsParCodes.PrimaryWeapon, out w1) ||
+				!GetParameterValue ((UInt16)((int)OpCodes.Gangs_Base + GangsList.SelectedIndex),
+				(UInt16)GangsParCodes.SecondaryWeapon, out w2))
 				{
 				loading = false;
 				return;
@@ -1042,8 +1066,9 @@ namespace RD_AAOW
 			if (loading)
 				return;
 
-			SetParameterValue ((UInt16)((int)BExplorerLib.OpCodes.Gangs_Base + GangsList.SelectedIndex),
-				(UInt16)BExplorerLib.GangsParCodes.CarModel, ParametersValues.CarsForGangs[GD_CarModel.SelectedIndex].ID.ToString ());
+			SetParameterValue ((UInt16)((int)OpCodes.Gangs_Base + GangsList.SelectedIndex),
+				(UInt16)GangsParCodes.CarModel, 
+				ParametersValues.CarsForGangs[GD_CarModel.SelectedIndex].ID.ToString ());
 			}
 
 		// Изменён скин
@@ -1052,8 +1077,8 @@ namespace RD_AAOW
 			if (loading)
 				return;
 
-			SetParameterValue ((UInt16)((int)BExplorerLib.OpCodes.Gangs_Base + GangsList.SelectedIndex),
-				(UInt16)BExplorerLib.GangsParCodes.PrimaryPedModel, GD_PedModel1.Value.ToString ());
+			SetParameterValue ((UInt16)((int)OpCodes.Gangs_Base + GangsList.SelectedIndex),
+				(UInt16)GangsParCodes.PrimaryPedModel, GD_PedModel1.Value.ToString ());
 			}
 
 		private void GD_PedModel2_ValueChanged (object sender, EventArgs e)
@@ -1061,8 +1086,8 @@ namespace RD_AAOW
 			if (loading)
 				return;
 
-			SetParameterValue ((UInt16)((int)BExplorerLib.OpCodes.Gangs_Base + GangsList.SelectedIndex),
-				(UInt16)BExplorerLib.GangsParCodes.SecondaryPedModel, GD_PedModel2.Value.ToString ());
+			SetParameterValue ((UInt16)((int)OpCodes.Gangs_Base + GangsList.SelectedIndex),
+				(UInt16)GangsParCodes.SecondaryPedModel, GD_PedModel2.Value.ToString ());
 			}
 
 		// Выбрано оружие
@@ -1071,8 +1096,9 @@ namespace RD_AAOW
 			if (loading)
 				return;
 
-			SetParameterValue ((UInt16)((int)BExplorerLib.OpCodes.Gangs_Base + GangsList.SelectedIndex),
-				(UInt16)BExplorerLib.GangsParCodes.PrimaryWeapon, ParametersValues.Weapons[GD_Weapon1.SelectedIndex].ID.ToString ());
+			SetParameterValue ((UInt16)((int)OpCodes.Gangs_Base + GangsList.SelectedIndex),
+				(UInt16)GangsParCodes.PrimaryWeapon, 
+				ParametersValues.Weapons[GD_Weapon1.SelectedIndex].ID.ToString ());
 			}
 
 		private void GD_Weapon2_SelectedIndexChanged (object sender, EventArgs e)
@@ -1080,8 +1106,9 @@ namespace RD_AAOW
 			if (loading)
 				return;
 
-			SetParameterValue ((UInt16)((int)BExplorerLib.OpCodes.Gangs_Base + GangsList.SelectedIndex),
-				(UInt16)BExplorerLib.GangsParCodes.SecondaryWeapon, ParametersValues.Weapons[GD_Weapon2.SelectedIndex].ID.ToString ());
+			SetParameterValue ((UInt16)((int)OpCodes.Gangs_Base + GangsList.SelectedIndex),
+				(UInt16)GangsParCodes.SecondaryWeapon,
+				ParametersValues.Weapons[GD_Weapon2.SelectedIndex].ID.ToString ());
 			}
 
 		// Выбор слота парковки
@@ -1116,8 +1143,10 @@ namespace RD_AAOW
 
 			loading = false;
 
-			CGColorLabel1.ForeColor = (CG_CarColor1.Value >= 0) ? cc.Colors[(int)CG_CarColor1.Value] : Color.FromName ("ControlDark");
-			CGColorLabel2.ForeColor = (CG_CarColor2.Value >= 0) ? cc.Colors[(int)CG_CarColor2.Value] : Color.FromName ("ControlDark");
+			CGColorLabel1.ForeColor = (CG_CarColor1.Value >= 0) ? cc.Colors[(int)CG_CarColor1.Value] : 
+				Color.FromName ("ControlDark");
+			CGColorLabel2.ForeColor = (CG_CarColor2.Value >= 0) ? cc.Colors[(int)CG_CarColor2.Value] :
+				Color.FromName ("ControlDark");
 			}
 
 		// Изменены настройки авто
@@ -1131,7 +1160,8 @@ namespace RD_AAOW
 			if (loading)
 				return;
 
-			cg.SetGeneratorData ((int)CarGenList.Value, new CarGenerators.CGData ((Int32)ParametersValues.CarsForCG[CG_CarModel.SelectedIndex].ID,
+			cg.SetGeneratorData ((int)CarGenList.Value, 
+				new CarGenerators.CGData ((Int32)ParametersValues.CarsForCG[CG_CarModel.SelectedIndex].ID,
 				(float)CG_X.Value, (float)CG_Y.Value, (float)CG_Z.Value, (float)CG_Rotation.Value,
 				(Int16)(CG_AllowSpawn.Checked ? -1 : 0),
 				(short)CG_CarColor1.Value, (short)CG_CarColor2.Value, (uint)CG_AlarmProb.Value, (uint)CG_LockProb.Value,
@@ -1164,12 +1194,13 @@ namespace RD_AAOW
 		private void OCGDialog_FileOk (object sender, CancelEventArgs e)
 			{
 			// Загрузка файла статистики
-			string msg = BExplorerLib.SaveData_LoadParametersFile (BExplorerLib.LoadableParameters.Generators, OCGDialog.FileName);
+			string msg = BExplorerLib.SaveData_LoadParametersFile (LoadableParameters.Generators, OCGDialog.FileName);
 
 			// В случае ошибки вывести сообщение
 			if (BExplorerLib.IsResultSuccessful (msg))
 				{
-				MessageBox.Show (msg, ProgramDescription.AssemblyTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+				MessageBox.Show (msg, ProgramDescription.AssemblyTitle, MessageBoxButtons.OK, 
+					MessageBoxIcon.Information);
 				}
 			// В противном случае
 			else
@@ -1198,7 +1229,7 @@ namespace RD_AAOW
 		private void SCGDialog_FileOk (object sender, CancelEventArgs e)
 			{
 			// Загрузка файла статистики
-			string msg = BExplorerLib.SaveData_SaveParametersFile (BExplorerLib.SaveableParameters.Generators, SCGDialog.FileName);
+			string msg = BExplorerLib.SaveData_SaveParametersFile (SaveableParameters.Generators, SCGDialog.FileName);
 
 			// В случае ошибки вывести сообщение
 			if (BExplorerLib.IsResultSuccessful (msg))
@@ -1219,7 +1250,7 @@ namespace RD_AAOW
 			if (loading)
 				return;
 
-			SetParameterValue ((UInt16)BExplorerLib.OpCodes.InfiniteAmmo, 0, ST_InfBullets.Checked ? "1" : "0");
+			SetParameterValue ((UInt16)OpCodes.InfiniteAmmo, 0, ST_InfBullets.Checked ? "1" : "0");
 			}
 
 		// Сброс потенциально опасных параметров
@@ -1246,7 +1277,7 @@ namespace RD_AAOW
 		private void OGDialog_FileOk (object sender, CancelEventArgs e)
 			{
 			// Загрузка файла статистики
-			string msg = BExplorerLib.SaveData_LoadParametersFile (BExplorerLib.LoadableParameters.Garages, OGDialog.FileName);
+			string msg = BExplorerLib.SaveData_LoadParametersFile (LoadableParameters.Garages, OGDialog.FileName);
 
 			// В случае ошибки вывести сообщение
 			if (BExplorerLib.IsResultSuccessful (msg))
@@ -1276,7 +1307,7 @@ namespace RD_AAOW
 		private void SGDialog_FileOk (object sender, CancelEventArgs e)
 			{
 			// Загрузка файла статистики
-			string msg = BExplorerLib.SaveData_SaveParametersFile (BExplorerLib.SaveableParameters.Garages, SGDialog.FileName);
+			string msg = BExplorerLib.SaveData_SaveParametersFile (SaveableParameters.Garages, SGDialog.FileName);
 
 			// В случае ошибки вывести сообщение
 			if (BExplorerLib.IsResultSuccessful (msg))
@@ -1399,13 +1430,16 @@ namespace RD_AAOW
 				}
 
 			// Настройка диалогов
-			OFDialog.Filter = SFDialog.Filter = string.Format (Localization.GetText ("OFDialogFilter", al), savesExtension);
+			OFDialog.Filter = SFDialog.Filter = string.Format (Localization.GetText ("OFDialogFilter", al),
+				savesExtension);
 			OStatsDialog.Filter = SStatsDialog.Filter = Localization.GetText ("OStatsDialogFilter", al);
 			OCGDialog.Filter = SCGDialog.Filter = Localization.GetText ("OCGDialogFilter", al);
 			OGDialog.Filter = SGDialog.Filter = Localization.GetText ("OGDialogFilter", al);
 
-			OFDialog.Title = OStatsDialog.Title = OCGDialog.Title = OGDialog.Title = Localization.GetText ("OFDialogTitle", al);
-			SFDialog.Title = SStatsDialog.Title = SCGDialog.Title = SGDialog.Title = Localization.GetText ("SFDialogTitle", al);
+			OFDialog.Title = OStatsDialog.Title = OCGDialog.Title = OGDialog.Title = 
+				Localization.GetText ("OFDialogTitle", al);
+			SFDialog.Title = SStatsDialog.Title = SCGDialog.Title = SGDialog.Title = 
+				Localization.GetText ("SFDialogTitle", al);
 
 			// Настройка контролов
 			Localization.SetControlsText (FileTab, al);
@@ -1431,7 +1465,7 @@ namespace RD_AAOW
 			STTab.Text = Localization.GetText ("MainTab_STTab", al);
 
 			if (DPTab.Enabled)
-				SaveInfoLabel.Text = Localization.GetText ("CurrentSave", al) + BExplorerLib.SaveData_GetSaveInfoEx ();
+				SaveInfoLabel.Text = Localization.GetText ("CurrentSave", al) + BExplorerLib.SaveData_SaveInfo;
 			else
 				SaveInfoLabel.Text = Localization.GetText ("SaveNotSpecified", al);
 			}

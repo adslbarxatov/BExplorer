@@ -1,5 +1,5 @@
 ﻿// Отключение предупреждений
-//#define _CRT_SECURE_NO_WARNINGS
+#define _CRT_SECURE_NO_WARNINGS
 
 // Подключение общего заголовка
 #include "BExplorer.h"

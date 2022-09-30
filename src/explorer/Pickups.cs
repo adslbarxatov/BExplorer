@@ -128,7 +128,8 @@ namespace RD_AAOW
 			/// <summary>
 			/// Конструктор. Инициализирует собираемый объект
 			/// </summary>
-			public Pickup (uint Number, UInt16 Model, float X, float Y, float Z, UInt16 Type, UInt32 Asset, UInt16 PickedUp)
+			public Pickup (uint Number, UInt16 Model, float X, float Y, float Z, UInt16 Type, UInt32 Asset, 
+				UInt16 PickedUp)
 				{
 				pickupNumber = Number;
 				objectModel = Model;
@@ -153,24 +154,24 @@ namespace RD_AAOW
 			// Загрузка только денежных накопителей
 			for (int i = 0; i < PickupsCount; i++)
 				{
-				if (decimal.Parse (BExplorerLib.SaveData_GetParameterValue ((UInt16)((int)BExplorerLib.OpCodes.Pickups_Base + i),
-						(UInt16)BExplorerLib.PickupsParCodes.ObjectType)) == 16)
+				if (decimal.Parse (BExplorerLib.SaveData_GetParameterValue ((UInt16)((int)OpCodes.Pickups_Base + i),
+						(UInt16)PickupsParCodes.ObjectType)) == 16)
 					{
 					pickups.Add (new Pickup ((uint)i,
-						(UInt16)decimal.Parse (BExplorerLib.SaveData_GetParameterValue ((UInt16)((int)BExplorerLib.OpCodes.Pickups_Base + i),
-						(UInt16)BExplorerLib.PickupsParCodes.ObjectModel)),
-						float.Parse (BExplorerLib.SaveData_GetParameterValue ((UInt16)((int)BExplorerLib.OpCodes.Pickups_Base + i),
-						(UInt16)BExplorerLib.PickupsParCodes.ObjectX)),
-						float.Parse (BExplorerLib.SaveData_GetParameterValue ((UInt16)((int)BExplorerLib.OpCodes.Pickups_Base + i),
-						(UInt16)BExplorerLib.PickupsParCodes.ObjectY)),
-						float.Parse (BExplorerLib.SaveData_GetParameterValue ((UInt16)((int)BExplorerLib.OpCodes.Pickups_Base + i),
-						(UInt16)BExplorerLib.PickupsParCodes.ObjectZ)),
-						(UInt16)decimal.Parse (BExplorerLib.SaveData_GetParameterValue ((UInt16)((int)BExplorerLib.OpCodes.Pickups_Base + i),
-						(UInt16)BExplorerLib.PickupsParCodes.ObjectType)),
-						(UInt32)decimal.Parse (BExplorerLib.SaveData_GetParameterValue ((UInt16)((int)BExplorerLib.OpCodes.Pickups_Base + i),
-						(UInt16)BExplorerLib.PickupsParCodes.ObjectAsset)),
-						(UInt16)decimal.Parse (BExplorerLib.SaveData_GetParameterValue ((UInt16)((int)BExplorerLib.OpCodes.Pickups_Base + i),
-						(UInt16)BExplorerLib.PickupsParCodes.HasBeenPickedUp))));
+						(UInt16)decimal.Parse (BExplorerLib.SaveData_GetParameterValue ((UInt16)((int)OpCodes.Pickups_Base + i),
+						(UInt16)PickupsParCodes.ObjectModel)),
+						float.Parse (BExplorerLib.SaveData_GetParameterValue ((UInt16)((int)OpCodes.Pickups_Base + i),
+						(UInt16)PickupsParCodes.ObjectX)),
+						float.Parse (BExplorerLib.SaveData_GetParameterValue ((UInt16)((int)OpCodes.Pickups_Base + i),
+						(UInt16)PickupsParCodes.ObjectY)),
+						float.Parse (BExplorerLib.SaveData_GetParameterValue ((UInt16)((int)OpCodes.Pickups_Base + i),
+						(UInt16)PickupsParCodes.ObjectZ)),
+						(UInt16)decimal.Parse (BExplorerLib.SaveData_GetParameterValue ((UInt16)((int)OpCodes.Pickups_Base + i),
+						(UInt16)PickupsParCodes.ObjectType)),
+						(UInt32)decimal.Parse (BExplorerLib.SaveData_GetParameterValue ((UInt16)((int)OpCodes.Pickups_Base + i),
+						(UInt16)PickupsParCodes.ObjectAsset)),
+						(UInt16)decimal.Parse (BExplorerLib.SaveData_GetParameterValue ((UInt16)((int)OpCodes.Pickups_Base + i),
+						(UInt16)PickupsParCodes.HasBeenPickedUp))));
 					}
 				}
 			}
@@ -183,13 +184,9 @@ namespace RD_AAOW
 		public UInt32 GetAssetMaximum (int Index)
 			{
 			if (Index < pickups.Count)
-				{
 				return pickups[Index].ObjectAsset;
-				}
-			else
-				{
-				return 0;
-				}
+
+			return 0;
 			}
 
 		/// <summary>
@@ -200,13 +197,9 @@ namespace RD_AAOW
 		public float GetAssetX (int Index)
 			{
 			if (Index < pickups.Count)
-				{
 				return pickups[Index].ObjectX;
-				}
-			else
-				{
-				return float.NaN;
-				}
+
+			return float.NaN;
 			}
 
 		/// <summary>
@@ -217,13 +210,9 @@ namespace RD_AAOW
 		public float GetAssetY (int Index)
 			{
 			if (Index < pickups.Count)
-				{
 				return pickups[Index].ObjectY;
-				}
-			else
-				{
-				return float.NaN;
-				}
+
+			return float.NaN;
 			}
 
 		/// <summary>
@@ -234,13 +223,9 @@ namespace RD_AAOW
 		public float GetAssetZ (int Index)
 			{
 			if (Index < pickups.Count)
-				{
 				return pickups[Index].ObjectZ;
-				}
-			else
-				{
-				return float.NaN;
-				}
+
+			return float.NaN;
 			}
 
 		/// <summary>
@@ -253,8 +238,9 @@ namespace RD_AAOW
 			if (Index < pickups.Count)
 				{
 				pickups[Index].ObjectAsset = NewValue;
-				BExplorerLib.SaveData_SetParameterValue ((UInt16)((int)BExplorerLib.OpCodes.Pickups_Base + pickups[Index].PickupNumber),
-					(UInt16)BExplorerLib.PickupsParCodes.ObjectAsset, NewValue.ToString ());
+				BExplorerLib.SaveData_SetParameterValue ((UInt16)((int)OpCodes.Pickups_Base +
+					pickups[Index].PickupNumber),
+					(UInt16)PickupsParCodes.ObjectAsset, NewValue.ToString ());
 				}
 			}
 		}
