@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Threading;
 using System.Windows.Forms;
 
 namespace RD_AAOW
@@ -20,23 +19,22 @@ namespace RD_AAOW
 			Application.EnableVisualStyles ();
 			Application.SetCompatibleTextRenderingDefault (false);
 
-			// Проверка запуска единственной копии
-			bool result;
-			Mutex instance = new Mutex (true, ProgramDescription.AssemblyTitle, out result);
-			if (!result)
-				{
-				MessageBox.Show (string.Format (Localization.GetText ("AlreadyStarted", Localization.CurrentLanguage),
-					ProgramDescription.AssemblyTitle),
-					ProgramDescription.AssemblyTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+			// Язык интерфейса и контроль XPR
+			SupportedLanguages al = Localization.CurrentLanguage;
+			if (!Localization.IsXPRClassAcceptable)
 				return;
-				}
+
+			// Проверка запуска единственной копии
+			if (!RDGenerics.IsThisInstanceUnique (al == SupportedLanguages.ru_ru))
+				return;
 
 			// Проверка наличия компонентов программы
 			if (!File.Exists (RDGenerics.AppStartupPath + ProgramDescription.AssemblyLibName))
 				{
-				if (MessageBox.Show (string.Format (Localization.GetText ("ComponentMissing", Localization.CurrentLanguage),
-					ProgramDescription.AssemblyLibName),
-					ProgramDescription.AssemblyTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+				if (MessageBox.Show (string.Format (Localization.GetText ("ComponentMissing",
+					Localization.CurrentLanguage), ProgramDescription.AssemblyLibName),
+					ProgramDescription.AssemblyTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) ==
+					DialogResult.Yes)
 					{
 					AboutForm af = new AboutForm (null);
 					}

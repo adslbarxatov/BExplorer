@@ -117,9 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AlreadyStarted" xml:space="preserve">
-    <value>Программа {0:S} уже запущена</value>
-  </data>
   <data name="AssetNumber" xml:space="preserve">
     <value>Накопитель №</value>
   </data>
@@ -178,9 +175,9 @@
     <value>Вы уверены, что сохранили все необходимые изменения?</value>
   </data>
   <data name="ComponentMissing" xml:space="preserve">
-    <value>Отсутствует необходимый компонент программы: «{0:S}»
+    <value>Отсутствует необходимый компонент программы: «{0:S}».
 
-Перейти на веб-страницу проекта для загрузки актуальной версии?</value>
+Перейти на веб-страницу проекта, чтобы загрузить его вручную?</value>
   </data>
   <data name="CurrentSave" xml:space="preserve">
     <value>Текущее сохранение: </value>

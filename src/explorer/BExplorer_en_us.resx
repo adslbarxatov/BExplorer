@@ -117,9 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AlreadyStarted" xml:space="preserve">
-    <value>{0:S} is already running</value>
-  </data>
   <data name="AssetNumber" xml:space="preserve">
     <value>Asset #</value>
   </data>
@@ -178,9 +175,9 @@
     <value>Are you sure that all needed changes have been saved?</value>
   </data>
   <data name="ComponentMissing" xml:space="preserve">
-    <value>A required application component is missing: “{0:S}”
+    <value>A required app component is missing: “{0:S}”.
 
-Do you want to open project's webpage to download actual version?</value>
+Do you want to open project’s webpage to download it manually?</value>
   </data>
   <data name="CurrentSave" xml:space="preserve">
     <value>Current save: </value>
