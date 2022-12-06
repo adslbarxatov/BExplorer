@@ -31,10 +31,16 @@ namespace RD_AAOW
 			// Проверка наличия компонентов программы
 			if (!File.Exists (RDGenerics.AppStartupPath + ProgramDescription.AssemblyLibName))
 				{
-				if (MessageBox.Show (string.Format (Localization.GetText ("ComponentMissing",
+				/*if (MessageBox.Shw (string.Format (Localization.GetText ("ComponentMissing",
 					Localization.CurrentLanguage), ProgramDescription.AssemblyLibName),
 					ProgramDescription.AssemblyTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) ==
-					DialogResult.Yes)
+					DialogResult.Yes)*/
+				if (RDGenerics.MessageBox (RDMessageTypes.Question,
+					string.Format (Localization.GetText ("ComponentMissing",
+					Localization.CurrentLanguage), ProgramDescription.AssemblyLibName),
+					Localization.GetDefaultButtonName (Localization.DefaultButtons.Yes),
+					Localization.GetDefaultButtonName (Localization.DefaultButtons.No)) ==
+					RDMessageButtons.ButtonOne)
 					{
 					AboutForm af = new AboutForm (null);
 					}
@@ -43,9 +49,9 @@ namespace RD_AAOW
 				}
 
 			// Отображение справки и запроса на принятие Политики
-			if (!ProgramDescription.AcceptEULA ())
+			if (!RDGenerics.AcceptEULA ())
 				return;
-			ProgramDescription.ShowAbout (true);
+			RDGenerics.ShowAbout (true);
 
 			// Запуск
 			string fileName = "";

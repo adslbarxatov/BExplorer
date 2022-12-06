@@ -64,8 +64,10 @@ namespace RD_AAOW
 					}
 				catch
 					{
-					MessageBox.Show (string.Format (Localization.GetText ("CarColorsFileUnavailable", al), ColorsFile),
-						ProgramDescription.AssemblyTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+					/*MessageBox.Shw (string.Format (Localization.GetText ("CarColorsFileUnavailable", al), ColorsFile),
+						ProgramDescription.AssemblyTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);*/
+					RDGenerics.MessageBox (RDMessageTypes.Warning,
+						string.Format (Localization.GetText ("CarColorsFileUnavailable", al), ColorsFile));
 					Error = -1;
 					return;
 					}

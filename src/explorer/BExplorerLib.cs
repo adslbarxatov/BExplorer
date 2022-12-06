@@ -490,7 +490,7 @@ namespace RD_AAOW
 		public static string SaveData_FixFile ()
 			{
 			string res = Marshal.PtrToStringAnsi (SaveData_CommandInterpreterEx (5, 0, 0, "0"));
-			res += ("\r\n" + SaveData_CommandInterpreterEx (5, 1, 0, "0"));
+			res += ("\r\n" + Marshal.PtrToStringAnsi (SaveData_CommandInterpreterEx (5, 1, 0, "0")));
 			return res;
 			}
 
@@ -635,7 +635,7 @@ namespace RD_AAOW
 		/// Метод проверяет успешность выполнения команды интерпретатором
 		/// </summary>
 		/// <param name="InterpreterReturnedResult">Ответ командного интерпретатора</param>
-		/// <returns>Успешно/неуспешно выполнена команда</returns>
+		/// <returns>Возвращает true, если команда выполнена успешно</returns>
 		public static bool IsResultSuccessful (string InterpreterReturnedResult)
 			{
 			return (InterpreterReturnedResult.IndexOf ("\x13") == -1);
