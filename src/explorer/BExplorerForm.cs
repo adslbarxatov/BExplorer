@@ -48,9 +48,6 @@ namespace RD_AAOW
 			// Контроль корректности связи с библиотекой функций
 			if (BExplorerLib.Check () != 0)
 				{
-				/*if (MessageBox.Shw (string.Format (Localization.GetText ("IncorrectLibVersion", al),
-					ProgramDescription.AssemblyLibName), ProgramDescription.AssemblyTitle, MessageBoxButtons.YesNo,
-					MessageBoxIcon.Exclamation) == DialogResult.Yes)*/
 				if (RDGenerics.MessageBox (RDMessageTypes.Question,
 					string.Format (Localization.GetText ("IncorrectLibVersion", al),
 					ProgramDescription.AssemblyLibName),
@@ -208,6 +205,7 @@ namespace RD_AAOW
 				}
 
 			loading = false;
+			RDGenerics.LoadWindowDimensions (this);
 
 			// Загрузка файла, если он представлен
 			if (OFDialog.FileName != "")
@@ -239,9 +237,6 @@ namespace RD_AAOW
 			SetState (false);   // Блокировать заранее
 			if ((errCode = BExplorerLib.SaveData_LoadEx (OFDialog.FileName)) != 1)
 				{
-				/*MessageBox.Shw (Localization.GetText ("SaveLoadingError", al) +
-					BExplorerLib.SaveData_ErrorPrompt (errCode),
-					ProgramDescription.AssemblyTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);*/
 				RDGenerics.MessageBox (RDMessageTypes.Warning, Localization.GetText ("SaveLoadingError", al) +
 					BExplorerLib.SaveData_ErrorPrompt (errCode));
 				SaveInfoLabel.Text = Localization.GetText ("SaveNotSpecified", al);
@@ -263,8 +258,6 @@ namespace RD_AAOW
 			Result = BExplorerLib.SaveData_GetParameterValue (OpCode, ParCode);
 			if (!BExplorerLib.IsResultSuccessful (Result))
 				{
-				/*MessageBox.Shw (Result, ProgramDescription.AssemblyTitle, MessageBoxButtons.OK, 
-					MessageBoxIcon.Exclamation);*/
 				RDGenerics.MessageBox (RDMessageTypes.Warning, Result);
 				return false;
 				}
@@ -279,9 +272,6 @@ namespace RD_AAOW
 
 			if (!BExplorerLib.IsResultSuccessful (Result))
 				RDGenerics.MessageBox (RDMessageTypes.Warning, Result);
-
-			/*MessageBox.Shw (Result, ProgramDescription.AssemblyTitle, MessageBoxButtons.OK,
-				MessageBoxIcon.Exclamation);*/
 			}
 
 		// Загрузчик параметров
@@ -544,17 +534,11 @@ namespace RD_AAOW
 
 			if (BExplorerLib.IsResultSuccessful (msg))
 				{
-				/*MessageBox.Shw (msg, ProgramDescription.AssemblyTitle, MessageBoxButtons.OK, 
-					MessageBoxIcon.Information);*/
 				RDGenerics.MessageBox (RDMessageTypes.Success, msg);
-
-				// Перезагрузка файла
 				LoadParameters ();
 				}
 			else
 				{
-				/*MessageBox.Shw (Localization.GetText ("SaveSavingError", al) + msg, ProgramDescription.AssemblyTitle,
-					MessageBoxButtons.OK, MessageBoxIcon.Exclamation);*/
 				RDGenerics.MessageBox (RDMessageTypes.Warning, Localization.GetText ("SaveSavingError", al) + msg);
 				}
 			}
@@ -571,10 +555,8 @@ namespace RD_AAOW
 				Localization.GetText ("ChangesSaved", al),
 				Localization.GetDefaultButtonName (Localization.DefaultButtons.Yes),
 				Localization.GetDefaultButtonName (Localization.DefaultButtons.No)) ==
-				RDMessageButtons.ButtonTwo
-				/*MessageBox.Shw (Localization.GetText ("ChangesSaved", al),
-				ProgramDescription.AssemblyTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question,
-				MessageBoxDefaultButton.Button2) == DialogResult.No*/);
+				RDMessageButtons.ButtonTwo);
+			RDGenerics.SaveWindowDimensions (this);
 			}
 
 		// Установка всех настроечных контролов в состояние доступен/недоступен
@@ -821,18 +803,11 @@ namespace RD_AAOW
 
 			// В случае ошибки вывести сообщение
 			if (BExplorerLib.IsResultSuccessful (msg))
-				{
-				/*MessageBox.Shw (msg, ProgramDescription.AssemblyTitle, MessageBoxButtons.OK,
-					MessageBoxIcon.Information);*/
 				RDGenerics.MessageBox (RDMessageTypes.Success, msg);
-				}
+
 			// В противном случае
 			else
-				{
-				/*MessageBox.Shw (Localization.GetText ("StatsLoadingError", al) + msg, ProgramDescription.AssemblyTitle,
-					MessageBoxButtons.OK, MessageBoxIcon.Exclamation);*/
 				RDGenerics.MessageBox (RDMessageTypes.Warning, Localization.GetText ("StatsLoadingError", al) + msg);
-				}
 			}
 
 		// Выгрузка статистики
@@ -850,18 +825,11 @@ namespace RD_AAOW
 
 			// В случае ошибки вывести сообщение
 			if (BExplorerLib.IsResultSuccessful (msg))
-				{
-				/*MessageBox.Shw (msg, ProgramDescription.AssemblyTitle, MessageBoxButtons.OK, 
-					MessageBoxIcon.Information);*/
 				RDGenerics.MessageBox (RDMessageTypes.Success, msg);
-				}
+
 			// В противном случае
 			else
-				{
-				/*MessageBox.Shw (Localization.GetText ("StatsSavingError", al) + msg, ProgramDescription.AssemblyTitle,
-					MessageBoxButtons.OK, MessageBoxIcon.Exclamation);*/
 				RDGenerics.MessageBox (RDMessageTypes.Warning, Localization.GetText ("StatsSavingError", al) + msg);
-				}
 			}
 
 		// Выбран слот гаража
@@ -1221,18 +1189,11 @@ namespace RD_AAOW
 
 			// В случае ошибки вывести сообщение
 			if (BExplorerLib.IsResultSuccessful (msg))
-				{
-				/*MessageBox.Shw (msg, ProgramDescription.AssemblyTitle, MessageBoxButtons.OK, 
-					MessageBoxIcon.Information);*/
 				RDGenerics.MessageBox (RDMessageTypes.Success, msg);
-				}
+
 			// В противном случае
 			else
-				{
-				/*MessageBox.Shw (Localization.GetText ("CGLoadingError", al) + msg, ProgramDescription.AssemblyTitle,
-					MessageBoxButtons.OK, MessageBoxIcon.Exclamation);*/
 				RDGenerics.MessageBox (RDMessageTypes.Warning, Localization.GetText ("CGLoadingError", al) + msg);
-				}
 
 			// Обновление загруженных данных сохранения
 			LoadParameters ();
@@ -1258,18 +1219,11 @@ namespace RD_AAOW
 
 			// В случае ошибки вывести сообщение
 			if (BExplorerLib.IsResultSuccessful (msg))
-				{
-				/*MessageBox.Shw (msg, ProgramDescription.AssemblyTitle, MessageBoxButtons.OK,
-					MessageBoxIcon.Information);*/
 				RDGenerics.MessageBox (RDMessageTypes.Success, msg);
-				}
+
 			// В противном случае
 			else
-				{
-				/*MessageBox.Shw (Localization.GetText ("CGSavingError", al) + msg, ProgramDescription.AssemblyTitle,
-					MessageBoxButtons.OK, MessageBoxIcon.Exclamation);*/
 				RDGenerics.MessageBox (RDMessageTypes.Warning, Localization.GetText ("CGSavingError", al) + msg);
-				}
 			}
 
 		// Установка флага бесконечных патронов
@@ -1285,9 +1239,6 @@ namespace RD_AAOW
 		private void DangerousReset_Click (object sender, EventArgs e)
 			{
 			// Контроль
-			/*if (MessageBox.Shw (Localization.GetText ("DangerousResetMessage", al), ProgramDescription.AssemblyTitle,
-				MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.No)
-				return;*/
 			if (RDGenerics.MessageBox (RDMessageTypes.Warning,
 				Localization.GetText ("DangerousResetMessage", al),
 				Localization.GetDefaultButtonName (Localization.DefaultButtons.YesNoFocus),
@@ -1296,10 +1247,7 @@ namespace RD_AAOW
 				return;
 
 			// Выполнение
-			string msg = BExplorerLib.SaveData_FixFile ();
-			/*MessageBox.Shw (msg, ProgramDescription.AssemblyTitle, MessageBoxButtons.OK, 
-				MessageBoxIcon.Information);*/
-			RDGenerics.MessageBox (RDMessageTypes.Information, msg);
+			RDGenerics.MessageBox (RDMessageTypes.Information, BExplorerLib.SaveData_FixFile ());
 			}
 
 		// Загрузка параметров гаражей
@@ -1317,18 +1265,11 @@ namespace RD_AAOW
 
 			// В случае ошибки вывести сообщение
 			if (BExplorerLib.IsResultSuccessful (msg))
-				{
-				/*MessageBox.Shw (msg, ProgramDescription.AssemblyTitle, MessageBoxButtons.OK,
-					MessageBoxIcon.Information);*/
 				RDGenerics.MessageBox (RDMessageTypes.Success, msg);
-				}
+
 			// В противном случае
 			else
-				{
-				/*MessageBox.Shw (Localization.GetText ("GRLoadingError", al) + msg, ProgramDescription.AssemblyTitle,
-					MessageBoxButtons.OK, MessageBoxIcon.Exclamation);*/
 				RDGenerics.MessageBox (RDMessageTypes.Warning, Localization.GetText ("GRLoadingError", al) + msg);
-				}
 
 			// Обновление загруженных данных сохранения
 			LoadParameters ();
@@ -1350,18 +1291,11 @@ namespace RD_AAOW
 
 			// В случае ошибки вывести сообщение
 			if (BExplorerLib.IsResultSuccessful (msg))
-				{
-				/*MessageBox.Shw (msg, ProgramDescription.AssemblyTitle, MessageBoxButtons.OK,
-					MessageBoxIcon.Information);*/
 				RDGenerics.MessageBox (RDMessageTypes.Success, msg);
-				}
+
 			// В противном случае
 			else
-				{
-				/*MessageBox.Shw (Localization.GetText ("GRSavingError", al) + msg, ProgramDescription.AssemblyTitle,
-					MessageBoxButtons.OK, MessageBoxIcon.Exclamation);*/
 				RDGenerics.MessageBox (RDMessageTypes.Warning, Localization.GetText ("GRSavingError", al) + msg);
-				}
 			}
 
 		// Применение рекомендуемых настроек
