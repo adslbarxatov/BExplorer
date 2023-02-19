@@ -22,7 +22,7 @@ namespace RD_AAOW
 		private ToDoStatus tds;             // Экземпляр-обработчик ToDo-статуса
 
 		private CultureInfo cie = new CultureInfo ("en-us");    // Дробные числа с использованием точки вместо запятой
-		private SupportedLanguages al = Localization.CurrentLanguage;   // Язык интерфейса
+		/*private SupportedLanguages al = Localization.CurrentLanguage;   // Язык интерфейса*/
 
 		private string savesDefaultPath = Environment.GetFolderPath (Environment.SpecialFolder.MyDocuments) +
 			"\\GTA Vice City User Files\\GTAVCsf";
@@ -49,7 +49,7 @@ namespace RD_AAOW
 			if (BExplorerLib.Check () != 0)
 				{
 				if (RDGenerics.MessageBox (RDMessageTypes.Question,
-					string.Format (Localization.GetText ("IncorrectLibVersion", al),
+					string.Format (Localization.GetText ("IncorrectLibVersion"),
 					ProgramDescription.AssemblyLibName),
 					Localization.GetDefaultButtonName (Localization.DefaultButtons.Yes),
 					Localization.GetDefaultButtonName (Localization.DefaultButtons.No)) ==
@@ -197,7 +197,7 @@ namespace RD_AAOW
 			LanguageCombo.Items.AddRange (Localization.LanguagesNames);
 			try
 				{
-				LanguageCombo.SelectedIndex = (int)al;
+				LanguageCombo.SelectedIndex = (int)Localization.CurrentLanguage;
 				}
 			catch
 				{
@@ -237,15 +237,15 @@ namespace RD_AAOW
 			SetState (false);   // Блокировать заранее
 			if ((errCode = BExplorerLib.SaveData_LoadEx (OFDialog.FileName)) != 1)
 				{
-				RDGenerics.MessageBox (RDMessageTypes.Warning, Localization.GetText ("SaveLoadingError", al) +
+				RDGenerics.MessageBox (RDMessageTypes.Warning, Localization.GetText ("SaveLoadingError") +
 					BExplorerLib.SaveData_ErrorPrompt (errCode));
-				SaveInfoLabel.Text = Localization.GetText ("SaveNotSpecified", al);
+				SaveInfoLabel.Text = Localization.GetText ("SaveNotSpecified");
 
 				return;
 				}
 
 			// В случае успеха
-			SaveInfoLabel.Text = Localization.GetText ("CurrentSave", al) + BExplorerLib.SaveData_SaveInfo;
+			SaveInfoLabel.Text = Localization.GetText ("CurrentSave") + BExplorerLib.SaveData_SaveInfo;
 			SetState (true);
 
 			// Загрузка начальных параметров в поля формы
@@ -462,7 +462,7 @@ namespace RD_AAOW
 			pu = new Pickups ();
 			AssetList.Items.Clear ();
 			for (int i = 0; i < pu.ActiveAssetsCount; i++)
-				AssetList.Items.Add (Localization.GetText ("AssetNumber", al) + (i + 1).ToString ());
+				AssetList.Items.Add (Localization.GetText ("AssetNumber") + (i + 1).ToString ());
 
 			if (pu.ActiveAssetsCount > 0)
 				{
@@ -481,7 +481,7 @@ namespace RD_AAOW
 
 			// Загрузка списка парковок и выбор слота
 			cg = new CarGenerators ();
-			CGCountLabel.Text = Localization.GetText ("CGLoaded", al) + cg.ActiveGeneratorsCount.ToString ();
+			CGCountLabel.Text = Localization.GetText ("CGLoaded") + cg.ActiveGeneratorsCount.ToString ();
 			CarGenList.Value = 1;
 			CarGenList_ValueChanged (null, null);
 
@@ -497,7 +497,7 @@ namespace RD_AAOW
 
 			if (ToDoStatusView.Items.Count == 0)
 				{
-				ToDoStatusView.Items.Add (Localization.GetText ("SaveCompleted", al));
+				ToDoStatusView.Items.Add (Localization.GetText ("SaveCompleted"));
 				DangerousReset.Enabled = AbortSorting.Enabled = ST_InfBullets.Enabled = true;
 				// Только при полном прохождении
 				}
@@ -508,7 +508,7 @@ namespace RD_AAOW
 			{
 			// Запись данных генераторов авто
 			cg.SaveGenerators (!AbortSorting.Checked);
-			CGCountLabel.Text = Localization.GetText ("CGSaved", al) + cg.ActiveGeneratorsCount.ToString ();
+			CGCountLabel.Text = Localization.GetText ("CGSaved") + cg.ActiveGeneratorsCount.ToString ();
 
 			// Отображение диалога
 			SFDialog.FileName = "";
@@ -519,7 +519,7 @@ namespace RD_AAOW
 			{
 			// Запись данных генераторов авто
 			cg.SaveGenerators (!AbortSorting.Checked);
-			CGCountLabel.Text = Localization.GetText ("CGSaved", al) + cg.ActiveGeneratorsCount.ToString ();
+			CGCountLabel.Text = Localization.GetText ("CGSaved") + cg.ActiveGeneratorsCount.ToString ();
 
 			// Пробуем сохранить файл в стандартном расположении
 			SFDialog.FileName = savesDefaultPath + ((uint)OpenFileNumber.Value).ToString () + savesExtension;
@@ -539,7 +539,7 @@ namespace RD_AAOW
 				}
 			else
 				{
-				RDGenerics.MessageBox (RDMessageTypes.Warning, Localization.GetText ("SaveSavingError", al) + msg);
+				RDGenerics.MessageBox (RDMessageTypes.Warning, Localization.GetText ("SaveSavingError") + msg);
 				}
 			}
 
@@ -551,10 +551,10 @@ namespace RD_AAOW
 
 		private void MainForm_FormClosing (object sender, FormClosingEventArgs e)
 			{
-			e.Cancel = (error == 0) && (RDGenerics.MessageBox (RDMessageTypes.Warning,
-				Localization.GetText ("ChangesSaved", al),
-				Localization.GetDefaultButtonName (Localization.DefaultButtons.Yes),
-				Localization.GetDefaultButtonName (Localization.DefaultButtons.No)) ==
+			e.Cancel = (error == 0) && (RDGenerics.LocalizedMessageBox (RDMessageTypes.Warning,
+				/*Localization.GetText (*/"ChangesSaved"/*, al)*/,
+				/*Localization.GetDefaultButtonName (*/Localization.DefaultButtons.Yes/*)*/,
+				/*Localization.GetDefaultButtonName (*/Localization.DefaultButtons.No/*)*/) ==
 				RDMessageButtons.ButtonTwo);
 			RDGenerics.SaveWindowDimensions (this);
 			}
@@ -807,7 +807,7 @@ namespace RD_AAOW
 
 			// В противном случае
 			else
-				RDGenerics.MessageBox (RDMessageTypes.Warning, Localization.GetText ("StatsLoadingError", al) + msg);
+				RDGenerics.MessageBox (RDMessageTypes.Warning, Localization.GetText ("StatsLoadingError") + msg);
 			}
 
 		// Выгрузка статистики
@@ -829,7 +829,7 @@ namespace RD_AAOW
 
 			// В противном случае
 			else
-				RDGenerics.MessageBox (RDMessageTypes.Warning, Localization.GetText ("StatsSavingError", al) + msg);
+				RDGenerics.MessageBox (RDMessageTypes.Warning, Localization.GetText ("StatsSavingError") + msg);
 			}
 
 		// Выбран слот гаража
@@ -999,8 +999,9 @@ namespace RD_AAOW
 		private void PickupViewCoords_Click (object sender, EventArgs e)
 			{
 			if (AssetList.SelectedIndex >= 0)
-				cp.PickCoords ((decimal)pu.GetAssetX (AssetList.SelectedIndex), (decimal)pu.GetAssetY (AssetList.SelectedIndex),
-					(decimal)pu.GetAssetZ (AssetList.SelectedIndex), 0, true, al);
+				cp.PickCoords ((decimal)pu.GetAssetX (AssetList.SelectedIndex),
+					(decimal)pu.GetAssetY (AssetList.SelectedIndex),
+					(decimal)pu.GetAssetZ (AssetList.SelectedIndex), 0, true/*, al*/);
 			}
 
 		// Выбрана банда для редактирования
@@ -1163,7 +1164,7 @@ namespace RD_AAOW
 		private void CarGenGetCoords_Click (object sender, EventArgs e)
 			{
 			// Запуск выбора
-			cp.PickCoords (CG_X.Value, CG_Y.Value, CG_Z.Value, CG_Rotation.Value, false, al);
+			cp.PickCoords (CG_X.Value, CG_Y.Value, CG_Z.Value, CG_Rotation.Value, false/*, al*/);
 
 			// Получение результатов
 			loading = true;     // Чтобы не выполнять одно и то же 4 раза
@@ -1193,7 +1194,7 @@ namespace RD_AAOW
 
 			// В противном случае
 			else
-				RDGenerics.MessageBox (RDMessageTypes.Warning, Localization.GetText ("CGLoadingError", al) + msg);
+				RDGenerics.MessageBox (RDMessageTypes.Warning, Localization.GetText ("CGLoadingError") + msg);
 
 			// Обновление загруженных данных сохранения
 			LoadParameters ();
@@ -1204,7 +1205,7 @@ namespace RD_AAOW
 			{
 			// Запись параметров
 			cg.SaveGenerators (!AbortSorting.Checked);
-			CGCountLabel.Text = Localization.GetText ("CGSaved", al) + cg.ActiveGeneratorsCount.ToString ();
+			CGCountLabel.Text = Localization.GetText ("CGSaved") + cg.ActiveGeneratorsCount.ToString ();
 
 			// Вызов окна
 			SCGDialog.FileName = "";
@@ -1223,7 +1224,7 @@ namespace RD_AAOW
 
 			// В противном случае
 			else
-				RDGenerics.MessageBox (RDMessageTypes.Warning, Localization.GetText ("CGSavingError", al) + msg);
+				RDGenerics.MessageBox (RDMessageTypes.Warning, Localization.GetText ("CGSavingError") + msg);
 			}
 
 		// Установка флага бесконечных патронов
@@ -1239,10 +1240,10 @@ namespace RD_AAOW
 		private void DangerousReset_Click (object sender, EventArgs e)
 			{
 			// Контроль
-			if (RDGenerics.MessageBox (RDMessageTypes.Warning,
-				Localization.GetText ("DangerousResetMessage", al),
-				Localization.GetDefaultButtonName (Localization.DefaultButtons.YesNoFocus),
-				Localization.GetDefaultButtonName (Localization.DefaultButtons.No)) ==
+			if (RDGenerics.LocalizedMessageBox (RDMessageTypes.Warning,
+				/*Localization.GetText (*/"DangerousResetMessage"/*, al)*/,
+				/*Localization.GetDefaultButtonName (*/Localization.DefaultButtons.YesNoFocus/*)*/,
+				/*Localization.GetDefaultButtonName (*/Localization.DefaultButtons.No/*)*/) ==
 				RDMessageButtons.ButtonTwo)
 				return;
 
@@ -1269,7 +1270,7 @@ namespace RD_AAOW
 
 			// В противном случае
 			else
-				RDGenerics.MessageBox (RDMessageTypes.Warning, Localization.GetText ("GRLoadingError", al) + msg);
+				RDGenerics.MessageBox (RDMessageTypes.Warning, Localization.GetText ("GRLoadingError") + msg);
 
 			// Обновление загруженных данных сохранения
 			LoadParameters ();
@@ -1295,7 +1296,7 @@ namespace RD_AAOW
 
 			// В противном случае
 			else
-				RDGenerics.MessageBox (RDMessageTypes.Warning, Localization.GetText ("GRSavingError", al) + msg);
+				RDGenerics.MessageBox (RDMessageTypes.Warning, Localization.GetText ("GRSavingError") + msg);
 			}
 
 		// Применение рекомендуемых настроек
@@ -1320,14 +1321,14 @@ namespace RD_AAOW
 		private void LanguageCombo_SelectedIndexChanged (object sender, EventArgs e)
 			{
 			// Сохранение языка
-			Localization.CurrentLanguage = al = (SupportedLanguages)LanguageCombo.SelectedIndex;
+			Localization.CurrentLanguage = /*al = */(SupportedLanguages)LanguageCombo.SelectedIndex;
 
 			// Настройка списков
 			string s;
 
 			for (int i = 0; i < ParametersValues.Weathers.Length; i++)
 				{
-				s = Localization.GetText ("Weathers_" + ParametersValues.Weathers[i].Name, al);
+				s = Localization.GetText ("Weathers_" + ParametersValues.Weathers[i].Name);
 				if (DP_Weather.Items.Count < ParametersValues.Weathers.Length)
 					DP_Weather.Items.Add (s);
 				else
@@ -1336,7 +1337,7 @@ namespace RD_AAOW
 
 			for (int i = 0; i < ParametersValues.CameraPositions.Length; i++)
 				{
-				s = Localization.GetText ("CameraPositions_" + ParametersValues.CameraPositions[i].Name, al);
+				s = Localization.GetText ("CameraPositions_" + ParametersValues.CameraPositions[i].Name);
 				if (DP_CameraPos.Items.Count < ParametersValues.CameraPositions.Length)
 					DP_CameraPos.Items.Add (s);
 				else
@@ -1345,7 +1346,7 @@ namespace RD_AAOW
 
 			for (int i = 0; i < ParametersValues.Suits.Length; i++)
 				{
-				s = Localization.GetText ("Suits_" + ParametersValues.Suits[i].Name, al);
+				s = Localization.GetText ("Suits_" + ParametersValues.Suits[i].Name);
 				if (PL_Suit.Items.Count < ParametersValues.Suits.Length)
 					PL_Suit.Items.Add (s);
 				else
@@ -1354,7 +1355,7 @@ namespace RD_AAOW
 
 			for (int i = 0; i < BExplorerLib.WeaponsCount; i++)
 				{
-				s = Localization.GetText ("WeaponSlot", al) + (i + 1).ToString ();
+				s = Localization.GetText ("WeaponSlot") + (i + 1).ToString ();
 				if (WeaponsList.Items.Count < BExplorerLib.WeaponsCount)
 					WeaponsList.Items.Add (s);
 				else
@@ -1363,7 +1364,7 @@ namespace RD_AAOW
 
 			for (int i = 0; i < ParametersValues.Weapons.Length; i++)
 				{
-				s = Localization.GetText ("Weapons_" + ParametersValues.Weapons[i].Name, al);
+				s = Localization.GetText ("Weapons_" + ParametersValues.Weapons[i].Name);
 				if (PL_Weapon.Items.Count < ParametersValues.Weapons.Length)
 					{
 					PL_Weapon.Items.Add (s);
@@ -1380,7 +1381,7 @@ namespace RD_AAOW
 
 			for (int i = 0; i < BExplorerLib.GaragesCount; i++)
 				{
-				s = Localization.GetText ("Garages_" + (i + 1).ToString (), al);
+				s = Localization.GetText ("Garages_" + (i + 1).ToString ());
 				if (GaragesList.Items.Count < BExplorerLib.GaragesCount)
 					GaragesList.Items.Add (s);
 				else
@@ -1389,7 +1390,7 @@ namespace RD_AAOW
 
 			for (int i = 0; i < ParametersValues.Bombs.Length; i++)
 				{
-				s = Localization.GetText ("Bombs_" + ParametersValues.Bombs[i].Name, al);
+				s = Localization.GetText ("Bombs_" + ParametersValues.Bombs[i].Name);
 				if (GR_Bomb.Items.Count < ParametersValues.Bombs.Length)
 					GR_Bomb.Items.Add (s);
 				else
@@ -1398,7 +1399,7 @@ namespace RD_AAOW
 
 			for (int i = 0; i < BExplorerLib.GangsCount; i++)
 				{
-				s = Localization.GetText ("Gangs_" + (i + 1).ToString (), al);
+				s = Localization.GetText ("Gangs_" + (i + 1).ToString ());
 				if (GangsList.Items.Count < BExplorerLib.GangsCount)
 					GangsList.Items.Add (s);
 				else
@@ -1406,44 +1407,44 @@ namespace RD_AAOW
 				}
 
 			// Настройка диалогов
-			OFDialog.Filter = SFDialog.Filter = string.Format (Localization.GetText ("OFDialogFilter", al),
+			OFDialog.Filter = SFDialog.Filter = string.Format (Localization.GetText ("OFDialogFilter"),
 				savesExtension);
-			OStatsDialog.Filter = SStatsDialog.Filter = Localization.GetText ("OStatsDialogFilter", al);
-			OCGDialog.Filter = SCGDialog.Filter = Localization.GetText ("OCGDialogFilter", al);
-			OGDialog.Filter = SGDialog.Filter = Localization.GetText ("OGDialogFilter", al);
+			OStatsDialog.Filter = SStatsDialog.Filter = Localization.GetText ("OStatsDialogFilter");
+			OCGDialog.Filter = SCGDialog.Filter = Localization.GetText ("OCGDialogFilter");
+			OGDialog.Filter = SGDialog.Filter = Localization.GetText ("OGDialogFilter");
 
 			OFDialog.Title = OStatsDialog.Title = OCGDialog.Title = OGDialog.Title =
-				Localization.GetText ("OFDialogTitle", al);
+				Localization.GetText ("OFDialogTitle");
 			SFDialog.Title = SStatsDialog.Title = SCGDialog.Title = SGDialog.Title =
-				Localization.GetText ("SFDialogTitle", al);
+				Localization.GetText ("SFDialogTitle");
 
 			// Настройка контролов
-			Localization.SetControlsText (FileTab, al);
-			Localization.SetControlsText (DPTab, al);
-			Localization.SetControlsText (PLTab, al);
-			Localization.SetControlsText (GRTab, al);
-			LoadGarages.Text = Localization.GetText ("LoadParameters", al);
-			SaveGarages.Text = Localization.GetText ("SaveParameters", al);
-			Localization.SetControlsText (PUTab, al);
-			Localization.SetControlsText (GDTab, al);
-			Localization.SetControlsText (CGTab, al);
-			LoadCG.Text = Localization.GetText ("LoadParameters", al);
-			SaveCG.Text = Localization.GetText ("SaveParameters", al);
-			Localization.SetControlsText (STTab, al);
+			Localization.SetControlsText (FileTab);
+			Localization.SetControlsText (DPTab);
+			Localization.SetControlsText (PLTab);
+			Localization.SetControlsText (GRTab);
+			LoadGarages.Text = Localization.GetText ("LoadParameters");
+			SaveGarages.Text = Localization.GetText ("SaveParameters");
+			Localization.SetControlsText (PUTab);
+			Localization.SetControlsText (GDTab);
+			Localization.SetControlsText (CGTab);
+			LoadCG.Text = Localization.GetText ("LoadParameters");
+			SaveCG.Text = Localization.GetText ("SaveParameters");
+			Localization.SetControlsText (STTab);
 
-			FileTab.Text = Localization.GetText ("MainTab_FileTab", al);
-			DPTab.Text = Localization.GetText ("MainTab_DPTab", al);
-			PLTab.Text = Localization.GetText ("MainTab_PLTab", al);
-			GRTab.Text = Localization.GetText ("MainTab_GRTab", al);
-			PUTab.Text = Localization.GetText ("MainTab_PUTab", al);
-			GDTab.Text = Localization.GetText ("MainTab_GDTab", al);
-			CGTab.Text = Localization.GetText ("MainTab_CGTab", al);
-			STTab.Text = Localization.GetText ("MainTab_STTab", al);
+			FileTab.Text = Localization.GetText ("MainTab_FileTab");
+			DPTab.Text = Localization.GetText ("MainTab_DPTab");
+			PLTab.Text = Localization.GetText ("MainTab_PLTab");
+			GRTab.Text = Localization.GetText ("MainTab_GRTab");
+			PUTab.Text = Localization.GetText ("MainTab_PUTab");
+			GDTab.Text = Localization.GetText ("MainTab_GDTab");
+			CGTab.Text = Localization.GetText ("MainTab_CGTab");
+			STTab.Text = Localization.GetText ("MainTab_STTab");
 
 			if (DPTab.Enabled)
-				SaveInfoLabel.Text = Localization.GetText ("CurrentSave", al) + BExplorerLib.SaveData_SaveInfo;
+				SaveInfoLabel.Text = Localization.GetText ("CurrentSave") + BExplorerLib.SaveData_SaveInfo;
 			else
-				SaveInfoLabel.Text = Localization.GetText ("SaveNotSpecified", al);
+				SaveInfoLabel.Text = Localization.GetText ("SaveNotSpecified");
 			}
 
 		// Регистрация сопоставлений файлов

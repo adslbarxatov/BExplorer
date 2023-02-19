@@ -7,7 +7,7 @@ namespace RD_AAOW
 	/// <summary>
 	/// Класс позволяет указывать координаты объектов
 	/// </summary>
-	public partial class CoordsPicker:Form
+	public partial class CoordsPicker: Form
 		{
 		// Исходные параметры
 		private decimal oldX, oldY, oldZ, oldRot;
@@ -91,14 +91,13 @@ namespace RD_AAOW
 		/// <summary>
 		/// Метод запускает интерфейс выбора координат
 		/// </summary>
-		/// <param name="InterfaceLanguage">Язык интерфейса</param>
 		/// <param name="OldRotation">Исходный поворот</param>
 		/// <param name="OldX">Исходная абсцисса</param>
 		/// <param name="OldY">Исходная ордината</param>
 		/// <param name="OldZ">Исходная аппликата</param>
 		/// <param name="ViewOnly">Флаг режима, запрещающего выбор координат</param>
-		public void PickCoords (decimal OldX, decimal OldY, decimal OldZ, decimal OldRotation, bool ViewOnly,
-			SupportedLanguages InterfaceLanguage)
+		public void PickCoords (decimal OldX, decimal OldY, decimal OldZ, decimal OldRotation, bool ViewOnly/*,
+			SupportedLanguages InterfaceLanguage*/)
 			{
 			// Передача параметров
 			oldX = PickX.Value = OldX;
@@ -108,8 +107,8 @@ namespace RD_AAOW
 			PickX.Enabled = PickY.Enabled = PickZ.Enabled = PickRot.Enabled = !ViewOnly;
 			PickOK.Visible = !ViewOnly;
 
-			Localization.SetControlsText (this, InterfaceLanguage);
-			this.Text = Localization.GetText ("CoordsPicker_Title", InterfaceLanguage);
+			Localization.SetControlsText (this/*, Localization.CurrentLanguage*/);
+			this.Text = Localization.GetText ("CoordsPicker_Title"/*, Localization.CurrentLanguage*/);
 
 			// Запуск
 			g = Graphics.FromHwnd (PictMap.Handle);
@@ -118,7 +117,7 @@ namespace RD_AAOW
 			}
 
 		// Выбор координат
-		private void PickOK_Click (object sender, System.EventArgs e)
+		private void PickOK_Click (object sender, EventArgs e)
 			{
 			oldX = PickX.Value;
 			oldY = PickY.Value;
@@ -129,7 +128,7 @@ namespace RD_AAOW
 			}
 
 		// Отмена
-		private void PickAbort_Click (object sender, System.EventArgs e)
+		private void PickAbort_Click (object sender, EventArgs e)
 			{
 			this.Close ();
 			}
@@ -137,14 +136,16 @@ namespace RD_AAOW
 		// Изменение смещения изображения
 		private void VertPictScroll_ValueChanged (object sender, EventArgs e)
 			{
-			g.DrawImage (RD_AAOW.Properties.BExplorer.DefaultMap, new Point (-HorPictScroll.Value, -VertPictScroll.Value));
+			g.DrawImage (RD_AAOW.Properties.BExplorer.DefaultMap, new Point (-HorPictScroll.Value,
+				-VertPictScroll.Value));
 
 			DrawPoint ();
 			}
 
 		private void HorPictScroll_ValueChanged (object sender, EventArgs e)
 			{
-			g.DrawImage (RD_AAOW.Properties.BExplorer.DefaultMap, new Point (-HorPictScroll.Value, -VertPictScroll.Value));
+			g.DrawImage (RD_AAOW.Properties.BExplorer.DefaultMap, new Point (-HorPictScroll.Value,
+				-VertPictScroll.Value));
 
 			DrawPoint ();
 			}

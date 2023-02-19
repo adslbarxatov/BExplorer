@@ -1,5 +1,5 @@
-# BExplorer v 3.1.2
-> PCC: 00175771C2A43940
+# BExplorer v 3.1.7
+> PCC: 00175768868F6DA0
 
 
 A tool based on BExplorer API for editing of GTA Vice City save files (`.b`)

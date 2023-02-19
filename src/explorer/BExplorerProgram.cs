@@ -20,21 +20,17 @@ namespace RD_AAOW
 			Application.SetCompatibleTextRenderingDefault (false);
 
 			// Язык интерфейса и контроль XPR
-			SupportedLanguages al = Localization.CurrentLanguage;
-			if (!Localization.IsXPRClassAcceptable)
+			/*SupportedLanguages al = Localization.CurrentLanguage;*/
+			if (!Localization.IsXPUNClassAcceptable)
 				return;
 
 			// Проверка запуска единственной копии
-			if (!RDGenerics.IsThisInstanceUnique (al == SupportedLanguages.ru_ru))
+			if (!RDGenerics.IsThisInstanceUnique (Localization.IsCurrentLanguageRuRu))
 				return;
 
 			// Проверка наличия компонентов программы
 			if (!File.Exists (RDGenerics.AppStartupPath + ProgramDescription.AssemblyLibName))
 				{
-				/*if (MessageBox.Shw (string.Format (Localization.GetText ("ComponentMissing",
-					Localization.CurrentLanguage), ProgramDescription.AssemblyLibName),
-					ProgramDescription.AssemblyTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) ==
-					DialogResult.Yes)*/
 				if (RDGenerics.MessageBox (RDMessageTypes.Question,
 					string.Format (Localization.GetText ("ComponentMissing",
 					Localization.CurrentLanguage), ProgramDescription.AssemblyLibName),
