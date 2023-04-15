@@ -1,5 +1,5 @@
 # BExplorer: user guide
-> **ƒ** &nbsp;RD AAOW FDL; 15.04.2023; 15:48
+> **ƒ** &nbsp;RD AAOW FDL; 15.04.2023; 17:21
 
 
 
@@ -16,7 +16,7 @@
 - [2.6. Car parks](#car-parks)
 - [2.7. Stats](#stats)
 - [3. Resetting of potentially hazardous parameters](#resetting-of-potentially-hazardous-parameters)
-- [4. Other functions and abilities](#other-functions-and-abilities)
+- [4. BExplorer library / API](#bexplorer-library--api)
 - [Download links](https://adslbarxatov.github.io/DPArray#bexplorer)
 - [Русская версия](https://adslbarxatov.github.io/BExplorer/ru)
 

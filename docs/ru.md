@@ -1,5 +1,5 @@
 # BExplorer: руководство пользователя
-> **ƒ** &nbsp;RD AAOW FDL; 15.04.2023; 15:51
+> **ƒ** &nbsp;RD AAOW FDL; 15.04.2023; 17:21
 
 
 
@@ -16,7 +16,7 @@
 - [2.6. Парковки](#section-9)
 - [2.7. Статистика](#section-10)
 - [3. Сброс потенциально опасных параметров](#section-11)
-- [4. Прочие функции и возможности](#section-12)
+- [4. BExplorer library / API](#bexplorer-library--api)
 - [Ссылки для загрузки](https://adslbarxatov.github.io/DPArray/ru#bexplorer)
 - [English version](https://adslbarxatov.github.io/BExplorer)
 
