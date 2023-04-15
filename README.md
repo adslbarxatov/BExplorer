@@ -2,19 +2,13 @@
 > PCC: 00175F5EB875A1C5
 
 
-A tool based on BExplorer API for editing of GTA Vice City save files (`.b`)
+A tool based on BExplorer API for editing of GTA Vice City save files (`.b`).
+A detailed description of the app is now available on [its own page](https://adslbarxatov.github.io/BExplorer)
 
-Инструмент для редактирования файлов сохранений GTA Vice City (`.b`) на базе собственного API
+---
 
-
-#
-
-Warning! Tool is not completed yet and may cause unexpected effects in save files.
-If you got some, please, remind us about it. And *backup your save files before using this tool*!
-
-Внимание! Инструмент ещё разрабатывается и может вызывать непредвиденные эффекты в файлах
-сохранений. Если Вы столкнулись с одним из них, пожалуйста, напишите нам об этом. И обязательно
-*делайте резервные копии файлов перед использованием программы*!
+Инструмент для редактирования файлов сохранений GTA Vice City (`.b`) на базе собственного API.
+Подробное описание приложения теперь доступно на [отдельной странице](https://adslbarxatov.github.io/BExplorer/ru)
 
 &nbsp;
 
@@ -29,43 +23,6 @@ If you got some, please, remind us about it. And *backup your save files before 
 Interface languages / языки интерфейса: ru_ru, en_us.
 
 &nbsp;
-
-
-
-# BExplorer library / API
-
-
-An API for work with GTA Vice City save files (`.b`)
-
-API для работы с файлами сохранений GTA Vice City
-
-#
-
-Here is a set of header files that represent the structure and parameters of GTA Vice City save file
-(as it is known today) and file loading/saving functions that represent the order and processing
-features of data blocks. It can be useful for developers that want to create an UI for loading,
-editing and saving GTAVCsf.
-
-WARNING! It is strongly recommended to use EXACTLY THESE header files and EXACTLY THESE functions TOGETHER.
-Header definitions use direct handling with memory (unsafe mode) (implicitly defined pointers/arrays,
-structures and unions) and using them without recommended functions may cause unexpected application behaviour
-(of course, if you don’t know what you’re doing).
-
-&nbsp;
-
-Здесь располагается набор заголовочных файлов, представляющих структуру и параметры файла сохранения игры GTA Vice City
-(насколько они известны сегодня), а также функции загрузки и сохранения, демонстрирующие алгоритм чтения/записи файла.
-Эта страница может быть полезна разработчикам, планирующим создать UI для работы с файлами сохранений GTA.
-
-ВНИМАНИЕ! Настоятельно рекомендуется использовать ИМЕННО ЭТИ заголовочные файлы с ИМЕННО ЭТИМИ функциями. Описанные структуры
-работают с памятью напрямую (в небезопасном режиме) (строго заданные указатели, массивы, структуры и объединения). Их использование
-вне рекомендованных функций может вызвать непредвиденное поведение программы (конечно, если вы не знаете, что делаете).
-
-&nbsp;
-
-Information source / Источник информации: [gtamodding.com](http://gtamodding.com/wiki/Saves_(GTA_VC))
-
-#
 
 
 
