@@ -1,5 +1,5 @@
-# BExplorer v 3.1.7
-> PCC: 00175768868F6DA0
+# BExplorer v 3.2
+> PCC: 00175F5EB875A1C5
 
 
 A tool based on BExplorer API for editing of GTA Vice City save files (`.b`)
@@ -15,20 +15,6 @@ If you got some, please, remind us about it. And *backup your save files before 
 Внимание! Инструмент ещё разрабатывается и может вызывать непредвиденные эффекты в файлах
 сохранений. Если Вы столкнулись с одним из них, пожалуйста, напишите нам об этом. И обязательно
 *делайте резервные копии файлов перед использованием программы*!
-
-&nbsp;
-
-
-
-## Usage / Применение
-
-You need to download two files – executable and library. At first start you will also be asked for `carcols.dat` file.
-Just specify it in GTA Vice city installation directory and have fun!
-
-#
-
-Вам нужны два файла – приложение и библиотека. При первом запуске также потребуется указать расположение
-файла `carcols.dat`. Просто найдите его в папке установки GTA Vice city, и готово!
 
 &nbsp;
 

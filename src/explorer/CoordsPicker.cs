@@ -96,8 +96,7 @@ namespace RD_AAOW
 		/// <param name="OldY">Исходная ордината</param>
 		/// <param name="OldZ">Исходная аппликата</param>
 		/// <param name="ViewOnly">Флаг режима, запрещающего выбор координат</param>
-		public void PickCoords (decimal OldX, decimal OldY, decimal OldZ, decimal OldRotation, bool ViewOnly/*,
-			SupportedLanguages InterfaceLanguage*/)
+		public void PickCoords (decimal OldX, decimal OldY, decimal OldZ, decimal OldRotation, bool ViewOnly)
 			{
 			// Передача параметров
 			oldX = PickX.Value = OldX;
@@ -107,8 +106,8 @@ namespace RD_AAOW
 			PickX.Enabled = PickY.Enabled = PickZ.Enabled = PickRot.Enabled = !ViewOnly;
 			PickOK.Visible = !ViewOnly;
 
-			Localization.SetControlsText (this/*, Localization.CurrentLanguage*/);
-			this.Text = Localization.GetText ("CoordsPicker_Title"/*, Localization.CurrentLanguage*/);
+			Localization.SetControlsText (this);
+			this.Text = Localization.GetText ("CoordsPicker_Title");
 
 			// Запуск
 			g = Graphics.FromHwnd (PictMap.Handle);

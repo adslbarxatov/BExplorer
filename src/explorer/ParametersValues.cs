@@ -133,7 +133,7 @@ namespace RD_AAOW
 			}
 		#endregion
 
-		/*	#region Интерьеры
+		#region Интерьеры
 		private static ParameterValue[] interiors = {
 			new ParameterValue (4, "north mall point"),
 			new ParameterValue (13, "printworks exterior"),
@@ -167,7 +167,7 @@ namespace RD_AAOW
 				return interiors;
 				}
 			}
-		#endregion*/
+		#endregion
 
 		#region Костюмы
 		private static ParameterStringValue[] suits = {
@@ -370,7 +370,7 @@ namespace RD_AAOW
 			get
 				{
 				List<ParameterValue> cfg = new List<ParameterValue> (cars);
-				cfg.Insert (0, new ParameterValue (0, Localization.GetText ("Cars_No", Localization.CurrentLanguage)));
+				cfg.Insert (0, new ParameterValue (0, Localization.GetText ("Cars_No")));
 				return cfg.ToArray ();
 				}
 			}
@@ -383,7 +383,7 @@ namespace RD_AAOW
 			get
 				{
 				List<ParameterValue> cfg = new List<ParameterValue> (cars);
-				cfg.Insert (0, new ParameterValue (-1, Localization.GetText ("Cars_No", Localization.CurrentLanguage)));
+				cfg.Insert (0, new ParameterValue (-1, Localization.GetText ("Cars_No")));
 				return cfg.ToArray ();
 				}
 			}
@@ -396,8 +396,8 @@ namespace RD_AAOW
 			get
 				{
 				List<ParameterValue> cfg = new List<ParameterValue> (cars);
-				cfg.Insert (0, new ParameterValue (-1, Localization.GetText ("Cars_Random", Localization.CurrentLanguage)));
-				cfg.Insert (0, new ParameterValue (0, Localization.GetText ("Cars_No", Localization.CurrentLanguage)));
+				cfg.Insert (0, new ParameterValue (-1, Localization.GetText ("Cars_Random")));
+				cfg.Insert (0, new ParameterValue (0, Localization.GetText ("Cars_No")));
 				return cfg.ToArray ();
 				}
 			}

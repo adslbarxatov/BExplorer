@@ -1,3 +1,4 @@
-_Changes for v 3.1.7_:
-- Updated the HypeHelp mechanics;
-- The app now uses a new, secure method for setting the size and position of windows
+_Changes for v 3.2_:
+- The text tips processing code has been refactored, some methods have been unified and simplified;
+- Removed some redundant code;
+- Updated the HypeHelp mechanics

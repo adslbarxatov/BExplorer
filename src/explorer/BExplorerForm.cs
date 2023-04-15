@@ -22,7 +22,6 @@ namespace RD_AAOW
 		private ToDoStatus tds;             // Экземпляр-обработчик ToDo-статуса
 
 		private CultureInfo cie = new CultureInfo ("en-us");    // Дробные числа с использованием точки вместо запятой
-		/*private SupportedLanguages al = Localization.CurrentLanguage;   // Язык интерфейса*/
 
 		private string savesDefaultPath = Environment.GetFolderPath (Environment.SpecialFolder.MyDocuments) +
 			"\\GTA Vice City User Files\\GTAVCsf";
@@ -51,8 +50,8 @@ namespace RD_AAOW
 				if (RDGenerics.MessageBox (RDMessageTypes.Question,
 					string.Format (Localization.GetText ("IncorrectLibVersion"),
 					ProgramDescription.AssemblyLibName),
-					Localization.GetDefaultButtonName (Localization.DefaultButtons.Yes),
-					Localization.GetDefaultButtonName (Localization.DefaultButtons.No)) ==
+					Localization.GetDefaultText (LzDefaultTextValues.Button_Yes),
+					Localization.GetDefaultText (LzDefaultTextValues.Button_No)) ==
 					RDMessageButtons.ButtonOne)
 					{
 					AboutForm af = new AboutForm (null);
@@ -552,9 +551,7 @@ namespace RD_AAOW
 		private void MainForm_FormClosing (object sender, FormClosingEventArgs e)
 			{
 			e.Cancel = (error == 0) && (RDGenerics.LocalizedMessageBox (RDMessageTypes.Warning,
-				/*Localization.GetText (*/"ChangesSaved"/*, al)*/,
-				/*Localization.GetDefaultButtonName (*/Localization.DefaultButtons.Yes/*)*/,
-				/*Localization.GetDefaultButtonName (*/Localization.DefaultButtons.No/*)*/) ==
+				"ChangesSaved", LzDefaultTextValues.Button_Yes, LzDefaultTextValues.Button_No) ==
 				RDMessageButtons.ButtonTwo);
 			RDGenerics.SaveWindowDimensions (this);
 			}
@@ -1001,7 +998,7 @@ namespace RD_AAOW
 			if (AssetList.SelectedIndex >= 0)
 				cp.PickCoords ((decimal)pu.GetAssetX (AssetList.SelectedIndex),
 					(decimal)pu.GetAssetY (AssetList.SelectedIndex),
-					(decimal)pu.GetAssetZ (AssetList.SelectedIndex), 0, true/*, al*/);
+					(decimal)pu.GetAssetZ (AssetList.SelectedIndex), 0, true);
 			}
 
 		// Выбрана банда для редактирования
@@ -1164,7 +1161,7 @@ namespace RD_AAOW
 		private void CarGenGetCoords_Click (object sender, EventArgs e)
 			{
 			// Запуск выбора
-			cp.PickCoords (CG_X.Value, CG_Y.Value, CG_Z.Value, CG_Rotation.Value, false/*, al*/);
+			cp.PickCoords (CG_X.Value, CG_Y.Value, CG_Z.Value, CG_Rotation.Value, false);
 
 			// Получение результатов
 			loading = true;     // Чтобы не выполнять одно и то же 4 раза
@@ -1240,10 +1237,8 @@ namespace RD_AAOW
 		private void DangerousReset_Click (object sender, EventArgs e)
 			{
 			// Контроль
-			if (RDGenerics.LocalizedMessageBox (RDMessageTypes.Warning,
-				/*Localization.GetText (*/"DangerousResetMessage"/*, al)*/,
-				/*Localization.GetDefaultButtonName (*/Localization.DefaultButtons.YesNoFocus/*)*/,
-				/*Localization.GetDefaultButtonName (*/Localization.DefaultButtons.No/*)*/) ==
+			if (RDGenerics.LocalizedMessageBox (RDMessageTypes.Warning, "DangerousResetMessage",
+				LzDefaultTextValues.Button_YesNoFocus, LzDefaultTextValues.Button_No) ==
 				RDMessageButtons.ButtonTwo)
 				return;
 
@@ -1321,7 +1316,7 @@ namespace RD_AAOW
 		private void LanguageCombo_SelectedIndexChanged (object sender, EventArgs e)
 			{
 			// Сохранение языка
-			Localization.CurrentLanguage = /*al = */(SupportedLanguages)LanguageCombo.SelectedIndex;
+			Localization.CurrentLanguage = (SupportedLanguages)LanguageCombo.SelectedIndex;
 
 			// Настройка списков
 			string s;

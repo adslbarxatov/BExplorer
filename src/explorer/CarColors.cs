@@ -43,11 +43,9 @@ namespace RD_AAOW
 			catch
 				{
 				// Запрос имени файла
-				SupportedLanguages al = Localization.CurrentLanguage;
-
 				OpenFileDialog ofd = new OpenFileDialog ();
-				ofd.Filter = string.Format (Localization.GetText ("CarColorsFilter", al), ColorsFile);
-				ofd.Title = string.Format (Localization.GetText ("CarColorsTitle", al), ColorsFile);
+				ofd.Filter = string.Format (Localization.GetText ("CarColorsFilter"), ColorsFile);
+				ofd.Title = string.Format (Localization.GetText ("CarColorsTitle"), ColorsFile);
 				if (ofd.ShowDialog () != DialogResult.OK)
 					{
 					Error = -1;
@@ -64,10 +62,8 @@ namespace RD_AAOW
 					}
 				catch
 					{
-					/*MessageBox.Shw (string.Format (Localization.GetText ("CarColorsFileUnavailable", al), ColorsFile),
-						ProgramDescription.AssemblyTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);*/
 					RDGenerics.MessageBox (RDMessageTypes.Warning,
-						string.Format (Localization.GetText ("CarColorsFileUnavailable", al), ColorsFile));
+						string.Format (Localization.GetText ("CarColorsFileUnavailable"), ColorsFile));
 					Error = -1;
 					return;
 					}
@@ -112,12 +108,6 @@ namespace RD_AAOW
 				{
 				if (string.IsNullOrWhiteSpace (carColorsPath))
 					carColorsPath = RDGenerics.GetAppSettingsValue ("CarColorsPath");
-				/*"";
-				try
-					{
-					path = Registry.GetValue (RDGenerics.AssemblySettingsKey, "CarColorsPath", "").ToString ();
-					}
-				catch { }*/
 
 				return carColorsPath;
 				}
@@ -127,11 +117,6 @@ namespace RD_AAOW
 				{
 				carColorsPath = value;
 				RDGenerics.SetAppSettingsValue ("CarColorsPath", value);
-				/*try
-					{
-					Registry.SetValue (RDGenerics.AssemblySettingsKey, "CarColorsPath", value.ToString ());
-					}
-				catch { }*/
 				}
 			}
 		private static string carColorsPath;
