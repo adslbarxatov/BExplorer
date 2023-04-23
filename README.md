@@ -3,24 +3,16 @@
 
 
 A tool based on BExplorer API for editing of GTA Vice City save files (`.b`).
-A detailed description of the app is now available on [its own page](https://adslbarxatov.github.io/BExplorer)
+
+:warning: ***This project is now a part of the [Vice city toolset](https://adslbarxatov.github.io/ViceCityToolset) app.
+This repository is no longer updated***
 
 ---
 
 Инструмент для редактирования файлов сохранений GTA Vice City (`.b`) на базе собственного API.
-Подробное описание приложения теперь доступно на [отдельной странице](https://adslbarxatov.github.io/BExplorer/ru)
 
-&nbsp;
-
-
-
-## Requirements / Требования
-
-- Windows 7 or newer / или новее;
-- [Microsoft .NET Framework 4.8](https://go.microsoft.com/fwlink/?linkid=2088631).
-- [Microsoft Visual C++ 2015 – 2022 redistributable](https://aka.ms/vs/17/release/vc_redist.x86.exe).
-
-Interface languages / языки интерфейса: ru_ru, en_us.
+:warning: ***Проект теперь является частью приложения [Vice city toolset](https://adslbarxatov.github.io/ViceCityToolset/ru).
+Данный репозиторий более не обновляется***
 
 &nbsp;
 
